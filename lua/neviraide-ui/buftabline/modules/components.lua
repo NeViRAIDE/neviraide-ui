@@ -44,8 +44,8 @@ M.tablist = function()
 
   if number_of_tabs > 1 then
     for i = 1, number_of_tabs, 1 do
-      local tab_hl = ((i == fn.tabpagenr()) and '%#TbLineTabOn# ')
-        or '%#TbLineTabOff# '
+      local tab_hl = ((i == fn.tabpagenr()) and '%#IncSearch# ')
+        or '%#Comment# '
       result = result .. ('%' .. i .. '@TbGotoTab@' .. tab_hl .. i .. ' ')
       result = (
         i == fn.tabpagenr()

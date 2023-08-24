@@ -85,7 +85,7 @@ M.close_buffer = function(bufnr)
       vim.cmd('b' .. tmpbufnr .. ' | bw' .. bufnr)
       return
     else
-      vim.cmd('enew')
+      vim.cmd('Dashboard')
     end
 
     if not (bufhidden == 'delete') then vim.cmd('confirm bd' .. bufnr) end

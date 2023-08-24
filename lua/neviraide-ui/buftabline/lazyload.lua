@@ -1,3 +1,5 @@
+local autocmd = require('neviraide.utils').autocmd
+
 -- store listed buffers in tab local var
 vim.t.bufs = vim.api.nvim_list_bufs()
 
@@ -11,7 +13,7 @@ vim.t.bufs = listed_bufs
 
 -- autocmds for tabufline -> store bufnrs on bufadd, bufenter events
 -- thx to https://github.com/ii14 & stores buffer per tab -> table
-vim.api.nvim_create_autocmd({ 'BufAdd', 'BufEnter', 'tabnew' }, {
+autocmd('NEVIRAIDE_newbuftab', { 'BufAdd', 'BufEnter', 'tabnew' }, {
   callback = function(args)
     local bufs = vim.t.bufs
 
@@ -46,7 +48,7 @@ vim.api.nvim_create_autocmd({ 'BufAdd', 'BufEnter', 'tabnew' }, {
   end,
 })
 
-vim.api.nvim_create_autocmd('BufDelete', {
+autocmd('NEVIRAIDE_bufdel', 'BufDelete', {
   callback = function(args)
     for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
       local bufs = vim.t[tab].bufs
@@ -63,27 +65,20 @@ vim.api.nvim_create_autocmd('BufDelete', {
   end,
 })
 
--- require('core.utils').load_mappings('tabufline')
-
-if NEVIRAIDE().buftabline_more_than_one then
-  vim.api.nvim_create_autocmd(
-    { 'BufNew', 'BufNewFile', 'BufRead', 'TabEnter', 'TermOpen' },
-    {
-      pattern = '*',
-      group = vim.api.nvim_create_augroup('TabuflineLazyLoad', {}),
-      callback = function()
-        if
-          #vim.fn.getbufinfo({ buflisted = 1 }) >= 2
-          or #vim.api.nvim_list_tabpages() >= 2
-        then
-          vim.opt.showtabline = 2
-          vim.opt.tabline = "%!v:lua.require('neviraide-ui.buftabline.modules')()"
-          vim.api.nvim_del_augroup_by_name('TabuflineLazyLoad')
-        end
-      end,
-    }
-  )
-else
-  vim.opt.showtabline = 2
-  vim.opt.tabline = "%!v:lua.require('neviraide-ui.buftabline.modules')()"
-end
+autocmd(
+  'NEVIRAIDE_buftabline',
+  { 'BufNew', 'BufNewFile', 'BufRead', 'TabEnter', 'TermOpen' },
+  {
+    pattern = '*',
+    callback = function()
+      if
+        #vim.fn.getbufinfo({ buflisted = 1 }) >= 2
+        or #vim.api.nvim_list_tabpages() >= 2
+      then
+        vim.opt.showtabline = 2
+        vim.opt.tabline = "%!v:lua.require('neviraide-ui.buftabline.modules')()"
+        vim.api.nvim_del_augroup_by_name('NEVIRAIDE_buftabline')
+      end
+    end,
+  }
+)

@@ -1,3 +1,4 @@
+local autocmd = require('neviraide.utils').autocmd
 local M = {}
 local api = vim.api
 local fn = vim.fn
@@ -16,7 +17,7 @@ table.insert(headerAscii, 2, emmptyLine)
 headerAscii[#headerAscii + 1] = emmptyLine
 headerAscii[#headerAscii + 1] = emmptyLine
 
-api.nvim_create_autocmd('BufLeave', {
+autocmd('NEVIRAIDE_dashbufleave', 'BufLeave', {
   callback = function()
     if vim.bo.ft == 'neviraide_dashboard' then
       vim.g.neviraide_dashboard_displayed = false
@@ -108,6 +109,7 @@ M.open = function()
 
   api.nvim_buf_set_lines(buf, 0, -1, false, result)
 
+  -- TODO: separate as possible
   -- highlights ---------------------------------------------------------------------------
   local neviraideDashboard = api.nvim_create_namespace('neviraideDashboard')
   local horiz_pad_index = math.floor(
