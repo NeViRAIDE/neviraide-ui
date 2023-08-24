@@ -26,7 +26,7 @@ new_cmd('Dashboard', function()
   if vim.g.nvdash_displayed then
     require('neviraide-ui.buftabline.buftabline').close_buffer()
   else
-    require('neviraide-dashboard').open()
+    require('neviraide-ui.dashboard.dashboard').open()
   end
 end, {})
 
