@@ -1,8 +1,5 @@
 local M = {}
 
----@return string
-M.indent = function() return '%#Comment#%=' end
-
 local icons = require('neviraide-ui.icons.mappings')
 
 ---@param name string
@@ -46,24 +43,43 @@ local icons_colors = {
   ['Rvc'] = { icon('vim-insert-mode') .. '-  (Rvc)', 'Substitute' },
   ['Rvx'] = { icon('vim-insert-mode') .. '-  (Rvx)', 'Substitute' },
 
-  ['s'] = { '󰒅 ', 'Substitute' },
-  ['S'] = { '󰒅 -LINE', 'Substitute' },
-  [''] = { '󰒅 -BLOCK', 'Substitute' },
-  ['c'] = { ' ', 'WarningMsg' },
-  ['cv'] = { ' ', 'WarningMsg' },
-  ['ce'] = { ' ', 'WarningMsg' },
+  ['s'] = { icon('vim-select-mode'), 'Substitute' },
+  ['S'] = { icon('vim-select-mode') .. '-LINE', 'Substitute' },
+  [''] = { icon('vim-select-mode') .. '-BLOCK', 'Substitute' },
+  ['c'] = { icon('vim-command-mode'), 'WarningMsg' },
+  ['cv'] = { icon('vim-command-mode'), 'WarningMsg' },
+  ['ce'] = { icon('vim-command-mode'), 'WarningMsg' },
   ['r'] = { 'PROMPT', 'St_ConfirmMode' },
   ['rm'] = { 'MORE', 'St_ConfirmMode' },
   ['r?'] = { 'CONFIRM', 'St_ConfirmMode' },
   ['x'] = { 'CONFIRM', 'St_ConfirmMode' },
-  ['!'] = { ' ', 'WarningMsg' },
+  ['!'] = { icon('vim-terminal-mode'), 'WarningMsg' },
 }
+
+---@param separator string
+---@param size integer
+---@return string
+M.separator = function(separator, size)
+  local m = vim.api.nvim_get_mode().mode
+  return string.rep(
+    ' ',
+    size,
+    '%#' .. icons_colors[m][2] .. '#' .. separator .. '%#Comment#'
+  )
+end
+
+---@return string
+M.indent = function() return '%#Comment#%=' end
 
 ---@return string
 M.mode = function()
   local m = vim.api.nvim_get_mode().mode
-  local current_mode = '%#' .. icons_colors[m][2] .. '# ' .. icons_colors[m][1]
-  return current_mode .. '%#Normal# '
+  local current_mode = '%#'
+    .. icons_colors[m][2]
+    .. '#'
+    .. icons_colors[m][1]
+    .. '%#Comment#'
+  return current_mode
 end
 
 ---Filetype with version of the interpreter.
@@ -72,20 +88,20 @@ end
 M.interpreter = function(highlight)
   local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
   if buf_ft == 'lua' then
-    return ' %#' .. highlight .. '#' .. _VERSION
+    return '%#' .. highlight .. '#' .. _VERSION
   elseif buf_ft == 'go' then
     local go_version = vim.fn.execute(':!go version')
-    return ' %#' .. highlight .. '#' .. 'Go ' .. go_version:match('%d[^ ]*')
+    return '%#' .. highlight .. '#' .. 'Go ' .. go_version:match('%d[^ ]*')
   elseif buf_ft == 'python' then
     local python_version =
       vim.fn.execute(':python import sys; print(sys.version)')
-    return ' %#'
+    return '%#'
       .. highlight
       .. '#'
       .. 'Python '
       .. python_version:match('%d[^ ]*')
   end
-  return ' %#' .. highlight .. '#' .. buf_ft:gsub('^%l', string.upper)
+  return '%#' .. highlight .. '#' .. buf_ft:gsub('^%l', string.upper)
 end
 
 ---@return string
@@ -96,17 +112,12 @@ M.LSP_status = function()
         client.attached_buffers[vim.api.nvim_get_current_buf()]
         and client.name ~= 'null-ls'
       then
-        local long = '%#Comment# '
-          .. icon('server')
-          .. ' '
-          .. client.name
-          .. ' '
-        local short = ' ' .. icon('server') .. ' LSP '
+        local long = '%#Comment# ' .. icon('server') .. ' ' .. client.name
+        local short = ' ' .. icon('server') .. ' LSP'
         return (vim.o.columns > 100 and long) or short
       end
     end
   end
-
   return '%#Comment#'
 end
 
@@ -136,7 +147,11 @@ M.LSP_Diagnostics = function()
       and ('%#DiagnosticInfo#' .. ' ' .. info .. ' ')
     or ''
 
-  return ' ' .. err .. war .. inf .. hin .. ' '
+  if err ~= '' or war ~= '' or inf ~= '' or hin ~= '' then
+    return M.separator('|', 2) .. err .. war .. inf .. hin
+  else
+    return ''
+  end
 end
 
 ---@return string
@@ -146,32 +161,37 @@ M.git = function()
   local git_status = vim.b.gitsigns_status_dict
 
   local added = (git_status.added and git_status.added ~= 0)
-      and ('  ' .. git_status.added)
+      and (' ' .. icon('diff-added') .. git_status.added)
     or ''
   local changed = (git_status.changed and git_status.changed ~= 0)
-      and ('  ' .. git_status.changed)
+      and (' ' .. icon('diff-modified') .. git_status.changed)
     or ''
   local removed = (git_status.removed and git_status.removed ~= 0)
-      and ('  ' .. git_status.removed)
+      and (' ' .. icon('diff-removed') .. git_status.removed)
     or ''
-  local branch_name = '   ' .. git_status.head .. ' '
+  local branch_name = '  ' .. icon('git-branch') .. git_status.head .. ' '
 
-  return '%#GitSignsAdd#'
-    .. added
-    .. '%#GitSignsChange#'
-    .. changed
-    .. '%#GitSignsDelete#'
-    .. removed
-    .. '%#NeogitBranch#'
-    .. branch_name
-    .. '%#Comment#'
+  if added ~= '' or changed ~= '' or removed ~= '' then
+    return '%#GitSignsAdd#'
+      .. added
+      .. '%#GitSignsChange#'
+      .. changed
+      .. '%#GitSignsDelete#'
+      .. removed
+      .. M.separator('|', 2)
+      .. '%#NeogitBranch#'
+      .. branch_name
+      .. '%#Comment#'
+  else
+    return '%#NeogitBranch#' .. branch_name .. '%#Comment#'
+  end
 end
 
 ---@return string
 M.location = function()
   local lines = vim.api.nvim_buf_line_count(0)
   local r, c = unpack(vim.api.nvim_win_get_cursor(0))
-  return ' %#Normal# ' .. c .. ':' .. r .. '/' .. lines .. '%#Normal# '
+  return '%#Comment# ' .. c .. ':' .. r .. '/' .. lines
 end
 
 ---@return string
@@ -190,7 +210,7 @@ M.filesize = function()
   end
 
   local format = i == 1 and '%d%s' or '%.1f%s'
-  return ' %#Comment#' .. string.format(format, size, suffixes[i]) .. ' '
+  return '%#Comment#' .. string.format(format, size, suffixes[i])
 end
 
 ---@return string
@@ -200,23 +220,23 @@ M.fileformat = function()
     dos = 'CRLF ',
     mac = 'CR ',
   }
-  return ' %#Comment#' .. symbols[vim.bo.fileformat] .. ' '
+  return '%#Comment#' .. symbols[vim.bo.fileformat]
 end
 
 ---@return string
 M.encoding = function()
-  return ' %#Comment#' .. string.upper(vim.opt.fileencoding:get()) .. ' '
+  return '%#Comment#' .. string.upper(vim.opt.fileencoding:get())
 end
 
 ---@return string
-M.spaces = function() return ' %#Comment#' .. vim.o.tabstop .. ' spaces ' end
+M.spaces = function() return '%#Comment#' .. vim.o.tabstop .. ' spaces' end
 
 ---@return string
 M.lazy = function()
   local ok, lazy = pcall(require, 'lazy.status')
   if ok then
     local count = lazy.updates()
-    if count ~= false then return ' %#Boolean#' .. count .. ' ' end
+    if count ~= false then return '%#Boolean#' .. count end
   end
   return ''
 end
