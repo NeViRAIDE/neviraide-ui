@@ -44,8 +44,8 @@ M.add_fileInfo = function(name, bufnr)
 
     icon = (
       api.nvim_get_current_buf() == bufnr
-        and M.new_hl(icon_hl, 'Normal') .. ' ' .. icon
-      or M.new_hl(icon_hl, 'TabLine') .. ' ' .. icon
+        and M.new_hl(icon_hl, 'TbLineBufOn') .. ' ' .. icon
+      or M.new_hl(icon_hl, 'TbLineBufOff') .. ' ' .. icon
     )
 
     -- check for same buffer names under different dirs
@@ -98,8 +98,8 @@ M.add_fileInfo = function(name, bufnr)
     local maxname_len = 16
 
     name = (#name > maxname_len and string.sub(name, 1, 14) .. '..') or name
-    name = (api.nvim_get_current_buf() == bufnr and '%#Normal# ' .. name)
-      or ('%#TabLine# ' .. name)
+    name = (api.nvim_get_current_buf() == bufnr and '%#TbLineBufOn# ' .. name)
+      or ('%#TbLineBufOff# ' .. name)
 
     return string.rep(' ', padding) .. icon .. name .. string.rep(' ', padding)
   end
@@ -116,15 +116,15 @@ M.styleBufferTab = function(nr)
   if nr == api.nvim_get_current_buf() then
     close_btn = (
       vim.bo[0].modified
-      and '%' .. nr .. '@TbKillBuf@%#BufferCurrentTarget#  '
-    ) or ('%#BufferCurrent#' .. close_btn)
-    name = '%#BufferCurrent#' .. name .. close_btn
+      and '%' .. nr .. '@TbKillBuf@%#TbLineBufOnModified#  '
+    ) or ('%#TbLineBufOnClose#' .. close_btn)
+    name = '%#TbLineBufOn#' .. name .. close_btn
   else
     close_btn = (
       vim.bo[nr].modified
-      and '%' .. nr .. '@TbKillBuf@%#BufferCurrentTarget#  '
-    ) or ('%#TabLine#' .. close_btn)
-    name = '%#TabLine#' .. name .. close_btn
+      and '%' .. nr .. '@TbKillBuf@%#TbLineBufOffModified#  '
+    ) or ('%#TbLineBufOffClose#' .. close_btn)
+    name = '%#TbLineBufOff#' .. name .. close_btn
   end
 
   return name

@@ -44,8 +44,8 @@ M.tablist = function()
 
   if number_of_tabs > 1 then
     for i = 1, number_of_tabs, 1 do
-      local tab_hl = ((i == fn.tabpagenr()) and '%#IncSearch# ')
-        or '%#Comment# '
+      local tab_hl = ((i == fn.tabpagenr()) and '%#TbLineTabOn# ')
+        or '%#TbLineTabOff# '
       result = result .. ('%' .. i .. '@TbGotoTab@' .. tab_hl .. i .. ' ')
       result = (
         i == fn.tabpagenr()
@@ -66,8 +66,7 @@ end
 
 M.buttons = function()
   local toggle_themeBtn = '%@TbToggle_theme@%#TbLineThemeToggleBtn#'
-    -- .. vim.g.toggle_theme_icon
-    .. ' toggle icon'
+    .. vim.g.toggle_theme_icon
     .. '%X'
   local CloseAllBufsBtn = '%@TbCloseAllBufs@%#TbLineCloseAllBufsBtn#'
     .. ' 󰅖 '

@@ -3,6 +3,8 @@ local M = {}
 local api = vim.api
 local fn = vim.fn
 
+dofile(vim.g.neviraide_themes_cache .. 'dashboard')
+
 local raw_height = 1
 local pointer = ' '
 

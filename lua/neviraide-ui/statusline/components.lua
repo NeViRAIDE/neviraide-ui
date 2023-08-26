@@ -7,8 +7,8 @@ local icons = require('neviraide-ui.icons.mappings')
 local function icon(name) return vim.fn.nr2char(icons[name]) .. ' ' end
 
 local icons_colors = {
-  ['n'] = { icon('vim-normal-mode'), 'Directory' },
-  ['no'] = { icon('vim-normal-mode') .. ' (no)', 'Directory' },
+  ['n'] = { icon('vim-normal-mode'), 'St_NormalMode' },
+  ['no'] = { icon('vim-normal-mode') .. ' (no)', 'St_NormalMode' },
   ['nov'] = { icon('vim-normal-mode') .. ' (nov)', 'Directory' },
   ['noV'] = { icon('vim-normal-mode') .. ' (noV)', 'Directory' },
   ['noCTRL-V'] = { icon('vim-normal-mode'), 'Directory' },
@@ -112,7 +112,7 @@ M.LSP_status = function()
         client.attached_buffers[vim.api.nvim_get_current_buf()]
         and client.name ~= 'null-ls'
       then
-        local long = '%#Comment# ' .. icon('server') .. ' ' .. client.name
+        local long = '%#St_LspStatus# ' .. icon('server') .. ' ' .. client.name
         local short = ' ' .. icon('server') .. ' LSP'
         return (vim.o.columns > 100 and long) or short
       end
@@ -141,7 +141,7 @@ M.LSP_Diagnostics = function()
       and ('%#DiagnosticWarn#' .. ' ' .. warnings .. ' ')
     or ''
   local hin = (hints and hints > 0)
-      and ('%#DiagnosticHint#' .. '󰌵 ' .. hints .. ' ')
+      and ('%#DiagnosticHint#' .. '󰌵 ' .. hints)
     or ''
   local inf = (info and info > 0)
       and ('%#DiagnosticInfo#' .. ' ' .. info .. ' ')
@@ -169,7 +169,7 @@ M.git = function()
   local removed = (git_status.removed and git_status.removed ~= 0)
       and (' ' .. icon('diff-removed') .. git_status.removed)
     or ''
-  local branch_name = '  ' .. icon('git-branch') .. git_status.head .. ' '
+  local branch_name = icon('git-branch') .. git_status.head .. ' '
 
   if added ~= '' or changed ~= '' or removed ~= '' then
     return '%#GitSignsAdd#'
@@ -179,7 +179,7 @@ M.git = function()
       .. '%#GitSignsDelete#'
       .. removed
       .. M.separator('|', 2)
-      .. '%#NeogitBranch#'
+      .. '%#Character#'
       .. branch_name
       .. '%#Comment#'
   else
@@ -236,7 +236,17 @@ M.lazy = function()
   local ok, lazy = pcall(require, 'lazy.status')
   if ok then
     local count = lazy.updates()
-    if count ~= false then return '%#Boolean#' .. count end
+    if count ~= false then
+      for _, client in ipairs(vim.lsp.get_clients()) do
+        if
+          client.attached_buffers[vim.api.nvim_get_current_buf()]
+          and client.name ~= 'null-ls'
+        then
+          return M.separator('|', 2) .. '%#Boolean#' .. count
+        end
+      end
+      return ' %#Boolean#' .. count
+    end
   end
   return ''
 end

@@ -1,5 +1,5 @@
 local component = require('neviraide-ui.buftabline.modules.components')
--- dofile(vim.g.base46_cache .. 'tbline')
+
 require('neviraide-ui.buftabline.modules.onclick')
 
 ---@return string

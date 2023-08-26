@@ -1,6 +1,8 @@
 local M = {}
 local api = vim.api
 
+dofile(vim.g.neviraide_themes_cache .. 'buftabline')
+
 M.bufilter = function()
   local bufs = vim.t.bufs or nil
 
@@ -104,7 +106,8 @@ M.closeAllBufs = function(action)
     M.close_buffer(buf)
   end
 
-  if action ~= 'closeTab' then vim.cmd('enew') end
+  -- TODO: catch error on cancel
+  if action ~= 'closeTab' then vim.cmd('Dashboard') end
 end
 
 -- closes all bufs except current one
