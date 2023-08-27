@@ -1,10 +1,11 @@
-# User Interface for NEVIRAIDE
+# User Interface for [NEVIRAIDE](https://github.com/RAprogramm/NEVIRAIDE)
 
 Lightweight &amp; performant ui plugin for NEVIRAIDE providing the following :
 
-- Dashboard
+- Colorschemes
+- Dashboard (startup screen)
 - Statusline
-- Buftabline
+- Buffers and tabs line
 - Icons
 
 ## Dependencies

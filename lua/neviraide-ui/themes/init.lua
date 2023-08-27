@@ -65,25 +65,15 @@ M.extend_default_hl = function(highlights)
   end
 
   -- transparency
-  -- if vim.g.transparency then
-  --   local glassy = require('base46.glassy')
-  --
-  --   for key, value in pairs(glassy) do
-  --     if highlights[key] then
-  --       highlights[key] = M.merge_tb(highlights[key], value)
-  --     end
-  --   end
-  -- end
+  if vim.g.transparency then
+    local glassy = require('neviraide-ui.themes.transparent')
 
-  -- if config.ui.hl_override then
-  --   local overriden_hl = M.turn_str_to_color(config.ui.hl_override)
-  --
-  --   for key, value in pairs(overriden_hl) do
-  --     if highlights[key] then
-  --       highlights[key] = M.merge_tb(highlights[key], value)
-  --     end
-  --   end
-  -- end
+    for key, value in pairs(glassy) do
+      if highlights[key] then
+        highlights[key] = M.merge_tb(highlights[key], value)
+      end
+    end
+  end
 end
 
 ---@return table
@@ -189,7 +179,7 @@ M.toggle_theme = function()
 
   if g.neviraide_theme ~= theme1 and g.neviraide_theme ~= theme2 then
     vim.notify(
-      'Set your current theme to one of those mentioned in the theme_toggle table (chadrc)'
+      'Set your current theme to one of those mentioned in the theme_toggle table (NEVIRAIDE)'
     )
     return
   end
@@ -198,15 +188,15 @@ M.toggle_theme = function()
     g.toggle_theme_icon = '   '
     vim.g.neviraide_theme = theme2
     require('neviraide.utils').replace_word(
-      'theme = "' .. theme1,
-      'theme = "' .. theme2
+      "theme = '" .. theme1,
+      "theme = '" .. theme2
     )
   else
     vim.g.neviraide_theme = theme1
     g.toggle_theme_icon = '   '
     require('neviraide.utils').replace_word(
-      'theme = "' .. theme2,
-      'theme = "' .. theme1
+      "theme = '" .. theme2,
+      "theme = '" .. theme1
     )
   end
 

@@ -18,7 +18,7 @@ vim.cmd(
   "function! TbCloseAllBufs(a,b,c,d) \n lua require('neviraide-ui.buftabline').closeAllBufs() \n endfunction"
 )
 vim.cmd(
-  "function! TbToggle_theme(a,b,c,d) \n lua require('base46').toggle_theme() \n endfunction"
+  "function! TbToggle_theme(a,b,c,d) \n lua require('neviraide-ui.themes').toggle_theme() \n endfunction"
 )
 vim.cmd(
   'function! TbToggleTabs(a,b,c,d) \n let g:TbTabsToggled = !g:TbTabsToggled | redrawtabline \n endfunction'

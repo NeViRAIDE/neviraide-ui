@@ -1,3 +1,5 @@
+dofile(vim.g.neviraide_themes_cache .. 'buftabline')
+
 local autocmd = require('neviraide.utils').autocmd
 
 -- store listed buffers in tab local var

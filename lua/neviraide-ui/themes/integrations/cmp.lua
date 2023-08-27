@@ -43,88 +43,19 @@ local item_kinds = {
   CmpItemKindCopilot = { fg = colors.green },
 }
 
-local cmp_ui = NEVIRAIDE().cmp
-
--- custom highlights per style!
-local styles = {
-
-  default = {
-    CmpBorder = { fg = colors[cmp_ui.border_color] },
-  },
-
-  atom = {
-    CmpItemMenu = { fg = colors.light_grey, italic = true },
-    CmpPmenu = {
-      bg = colors.black2,
-    },
-
-    CmpDoc = { bg = colors.darker_black },
-    CmpDocBorder = { fg = colors.darker_black, bg = colors.darker_black },
-  },
-
-  atom_colored = {
-    CmpItemMenu = { fg = colors.light_grey, italic = true },
-    CmpPmenu = {
-      bg = colors.black2,
-    },
-
-    CmpDoc = { bg = colors.darker_black },
-    CmpDocBorder = { fg = colors.darker_black, bg = colors.darker_black },
-  },
-
-  flat_light = {
-    CmpPmenu = {
-      bg = colors.black2,
-    },
-
-    CmpBorder = { fg = colors.black2, bg = colors.black2 },
-    CmpDocBorder = { fg = colors.darker_black, bg = colors.darker_black },
-  },
-
-  flat_dark = {
-    CmpPmenu = {
-      bg = colors.darker_black,
-    },
-
-    CmpBorder = { fg = colors.darker_black, bg = colors.darker_black },
-    CmpDocBorder = { fg = colors.black2, bg = colors.black2 },
-    CmpDoc = { bg = colors.black2 },
-  },
-}
-
-local generate_color =
-  require('neviraide-ui.themes.colors').change_hex_lightness
-
--- override item_kind highlights for atom style
-if cmp_ui.style == 'atom' then
-  for key, value in pairs(item_kinds) do
-    item_kinds[key] = vim.tbl_deep_extend('force', value, {
-      bg = vim.o.bg == 'dark' and generate_color(colors.black2, 6)
-        or generate_color(colors.black2, -6),
-    })
-  end
-end
-
--- override item_kind highlights for atom_colored style
-if cmp_ui.style == 'atom_colored' then
-  for key, value in pairs(item_kinds) do
-    item_kinds[key] =
-      { fg = colors.black, bg = generate_color(value.fg, -3), bold = true }
-  end
-end
-
-highlights =
-  vim.tbl_deep_extend('force', highlights, styles[cmp_ui.style] or {})
+highlights = vim.tbl_deep_extend(
+  'force',
+  highlights,
+  { CmpBorder = { fg = colors['gray_fg'] } } or {}
+)
 highlights = vim.tbl_deep_extend('force', highlights, item_kinds)
 
-if cmp_ui.selected_item_bg == 'simple' then
-  highlights.CmpSel = {
-    fg = colors.white,
-    bg = (
-      highlights.CmpPmenu.bg == colors.black2 and colors.grey or colors.one_bg3
-    ),
-    bold = true,
-  }
-end
+highlights.CmpSel = {
+  fg = colors.white,
+  bg = (
+    highlights.CmpPmenu.bg == colors.black2 and colors.grey or colors.one_bg3
+  ),
+  bold = true,
+}
 
 return highlights
