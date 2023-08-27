@@ -72,6 +72,4 @@ M.polish_hl = {
 
 M.type = 'light'
 
-M = require('neviraide-ui.themes').override_theme(M, 'everforest_light')
-
 return M

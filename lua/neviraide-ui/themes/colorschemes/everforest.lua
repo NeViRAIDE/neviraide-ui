@@ -62,6 +62,4 @@ M.polish_hl = {
   ['@tag.delimiter'] = { fg = M.base_30.green },
 }
 
-M = require('neviraide-ui.themes').override_theme(M, 'everforest')
-
 return M

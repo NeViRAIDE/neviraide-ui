@@ -116,9 +116,8 @@ local syntax = {
 }
 
 local merge_tb = require('neviraide-ui.themes').merge_tb
-local lsp_semantic_tokens = NEVIRAIDE().lsp_semantic_tokens
 
-if vim.version().minor >= 9 and lsp_semantic_tokens then
+if vim.version().minor >= 9 then
   local semantic_hls = {
     ['@lsp.type.class'] = { link = 'Structure' },
     ['@lsp.type.decorator'] = { link = 'Function' },
@@ -136,9 +135,9 @@ if vim.version().minor >= 9 and lsp_semantic_tokens then
     ['@lsp.type.typeParamater'] = { link = 'TypeDef' },
     ['@lsp.type.variable'] = { link = '@variable' },
 
-    -- ["@event"] = { fg = theme.base08 },
-    -- ["@modifier"] = { fg = theme.base08 },
-    -- ["@regexp"] = { fg = theme.base0F },
+    ['@event'] = { fg = theme.base08 },
+    ['@modifier'] = { fg = theme.base08 },
+    ['@regexp'] = { fg = theme.base0F },
   }
 
   syntax = merge_tb(syntax, semantic_hls)

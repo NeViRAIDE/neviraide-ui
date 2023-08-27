@@ -2,6 +2,12 @@ local api = vim.api
 local fn = vim.fn
 local utils = require('neviraide-ui.buftabline.modules.utils')
 -- TODO: add time and date
+local icons = require('neviraide-ui.icons.mappings')
+
+---@param name string
+---@return string
+local function icon(name) return ' ' .. vim.fn.nr2char(icons[name]) .. '  ' end
+
 local M = {}
 
 M.NeoTreeOverlay = function()
@@ -65,8 +71,15 @@ M.tablist = function()
 end
 
 M.buttons = function()
+  local toggle_icon
+  if vim.o.background == 'dark' then
+    toggle_icon = icon('sun')
+  else
+    toggle_icon = icon('moon')
+  end
+
   local toggle_themeBtn = '%@TbToggle_theme@%#TbLineThemeToggleBtn#'
-    .. vim.g.toggle_theme_icon
+    .. toggle_icon
     .. '%X'
   local CloseAllBufsBtn = '%@TbCloseAllBufs@%#TbLineCloseAllBufsBtn#'
     .. ' 󰅖 '

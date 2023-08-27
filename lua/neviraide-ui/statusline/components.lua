@@ -58,14 +58,18 @@ local icons_colors = {
 
 ---@param separator string
 ---@param size integer
+---@param condition? boolean
 ---@return string
-M.separator = function(separator, size)
+M.separator = function(separator, size, condition)
   local m = vim.api.nvim_get_mode().mode
-  return string.rep(
-    ' ',
-    size,
-    '%#' .. icons_colors[m][2] .. '#' .. separator .. '%#Comment#'
-  )
+  if condition then
+    return string.rep(
+      ' ',
+      size,
+      '%#' .. icons_colors[m][2] .. '#' .. separator .. '%#Comment#'
+    )
+  end
+  return ''
 end
 
 ---@return string
@@ -148,7 +152,7 @@ M.LSP_Diagnostics = function()
     or ''
 
   if err ~= '' or war ~= '' or inf ~= '' or hin ~= '' then
-    return M.separator('|', 2) .. err .. war .. inf .. hin
+    return M.separator('|', 2, true) .. err .. war .. inf .. hin
   else
     return ''
   end
@@ -178,7 +182,7 @@ M.git = function()
       .. changed
       .. '%#GitSignsDelete#'
       .. removed
-      .. M.separator('|', 2)
+      .. M.separator('|', 2, true)
       .. '%#Character#'
       .. branch_name
       .. '%#Comment#'
@@ -191,7 +195,8 @@ end
 M.location = function()
   local lines = vim.api.nvim_buf_line_count(0)
   local r, c = unpack(vim.api.nvim_win_get_cursor(0))
-  return '%#Comment# ' .. c .. ':' .. r .. '/' .. lines
+  -- return '%#Comment# ' .. c .. ':' .. r .. '/' .. lines
+  return '%#Comment#Col ' .. c .. ', Ln ' .. r .. '/' .. lines
 end
 
 ---@return string
@@ -213,23 +218,33 @@ M.filesize = function()
   return '%#Comment#' .. string.format(format, size, suffixes[i])
 end
 
+---@param condition? boolean
 ---@return string
-M.fileformat = function()
+M.fileformat = function(condition)
   local symbols = {
     unix = 'LF ',
     dos = 'CRLF ',
     mac = 'CR ',
   }
-  return '%#Comment#' .. symbols[vim.bo.fileformat]
+  if condition then return '%#Comment#' .. symbols[vim.bo.fileformat] end
+  return ''
 end
 
+---@param condition? boolean
 ---@return string
-M.encoding = function()
-  return '%#Comment#' .. string.upper(vim.opt.fileencoding:get())
+M.encoding = function(condition)
+  if condition then
+    return '%#Comment#' .. string.upper(vim.opt.fileencoding:get())
+  end
+  return ''
 end
 
+---@param condition? boolean
 ---@return string
-M.spaces = function() return '%#Comment#' .. vim.o.tabstop .. ' spaces' end
+M.spaces = function(condition)
+  if condition then return '%#Comment#' .. vim.o.tabstop .. ' spaces' end
+  return ''
+end
 
 ---@return string
 M.lazy = function()
@@ -242,7 +257,7 @@ M.lazy = function()
           client.attached_buffers[vim.api.nvim_get_current_buf()]
           and client.name ~= 'null-ls'
         then
-          return M.separator('|', 2) .. '%#Boolean#' .. count
+          return M.separator('|', 2, true) .. '%#Boolean#' .. count
         end
       end
       return ' %#Boolean#' .. count

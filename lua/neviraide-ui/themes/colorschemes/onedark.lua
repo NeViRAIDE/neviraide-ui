@@ -54,6 +54,4 @@ M.base_16 = {
 
 M.type = 'dark'
 
-M = require('neviraide-ui.themes').override_theme(M, 'onedark')
-
 return M

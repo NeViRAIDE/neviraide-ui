@@ -1,8 +1,6 @@
 local M = {}
 
----@return boolean
-M.ignored_filetypes = function()
-  -- TODO: hide statusline for filetypes
+M.ignored = function()
   local list = {
     'help',
     'TelescopePrompt',
@@ -19,11 +17,14 @@ M.ignored_filetypes = function()
     'nofile',
     'neo-tree',
   }
-  local filetype = vim.bo.filetype
-  for _, value in pairs(list) do
-    if filetype == list[value] then return true end
-    return false
+  for type in pairs(list) do
+    if vim.bo.filetype == list[type] then return false end
   end
+  return true
 end
+
+---If buffer not empty.
+---@return boolean
+M.buffer_not_empty = function() return vim.fn.empty(vim.fn.expand('%:t')) ~= 1 end
 
 return M

@@ -1,11 +1,7 @@
 local component = require('neviraide-ui.statusline.components')
+local util = require('neviraide-ui.statusline.utils')
 
 local M = {}
-local filetypes = {
-  'nui_themes',
-  'TelescopePrompt',
-  'neviraideDashboard',
-}
 
 M.run = function()
   local modules = {
@@ -15,18 +11,18 @@ M.run = function()
 
     component.indent(),
     component.location(),
-    component.separator('|', 2),
-    component.fileformat(),
-    component.separator('|', 2),
+    component.separator('|', 2, util.ignored()),
+    component.fileformat(util.ignored()),
+    component.separator('|', 2, util.buffer_not_empty()),
     component.filesize(),
-    component.separator('', 2),
+    component.separator('', 2,true),
     component.mode(),
-    component.separator('', 2),
-    component.spaces(),
-    component.separator('|', 2),
+    component.separator('', 2, true),
+    component.spaces(util.ignored()),
+    component.separator('|', 2, util.ignored()),
     component.interpreter('Comment'),
-    component.separator('|', 2),
-    component.encoding(),
+    component.separator('|', 2, util.ignored()),
+    component.encoding(util.ignored()),
     component.indent(),
 
     component.git(),

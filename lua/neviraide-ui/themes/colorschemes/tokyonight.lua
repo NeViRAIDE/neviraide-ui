@@ -66,6 +66,4 @@ M.polish_hl = {
 
 M.type = 'dark'
 
-M = require('neviraide-ui.themes').override_theme(M, 'tokyonight')
-
 return M

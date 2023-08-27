@@ -10,6 +10,9 @@ local defaults = {
     fg = colors.white,
   },
 
+  LspCodeLens = { fg = 'Grey' },
+  LspCodeLensSeparator = { link = 'Boolean' },
+
   Pmenu = { bg = colors.one_bg },
   PmenuSbar = { bg = colors.one_bg },
   PmenuSel = { bg = colors.pmenu_bg, fg = colors.black },
@@ -249,7 +252,4 @@ defaults = merge_tb(
   require('neviraide-ui.themes').load_highlight('statusline')
 )
 
-local hexify_ColorStrs = require('neviraide-ui.themes').turn_str_to_color
-local user_new_highlights = NEVIRAIDE().hl_add
-
-return merge_tb(defaults, hexify_ColorStrs(user_new_highlights))
+return defaults

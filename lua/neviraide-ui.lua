@@ -1,9 +1,8 @@
-require('neviraide-ui.themes').load_all_highlights()
-
 local api = vim.api
 local autocmd = require('neviraide.utils').autocmd
 
--- TODO: hide for filetypes (dashboard, etc...)
+-- require('neviraide-ui.themes').load_all_highlights()
+
 vim.opt.statusline = '%!v:lua.require("neviraide-ui.statusline").run()'
 
 require('neviraide-ui.buftabline.lazyload')
