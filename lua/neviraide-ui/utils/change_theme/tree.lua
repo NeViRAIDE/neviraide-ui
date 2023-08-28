@@ -4,7 +4,7 @@ return function(popup)
 
   return NuiTree({
     winid = popup.winid,
-    nodes = require('neviraide-ui.utils.change_theme.nodes')(),
+    nodes = require('neviraide-ui.utils.change_theme.nodes'),
     prepare_node = function(node)
       local line = NuiLine()
       line:append(string.rep('  ', node:get_depth() - 1))

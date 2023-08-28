@@ -1,29 +1,22 @@
-local themes = {
-  'everforest',
-  'everforest_light',
-  'nordic',
-  'onedark',
-  'tokyonight',
-}
+local count = require('neviraide-ui.utils').dirLookup
 
 return function()
   local Popup = require('nui.popup')
-  ---@type integer number of themes installed
-  local theme_count = #themes
 
   local utils = require('neviraide-ui.override_vim_ui.utils')
-
   local border = require('neviraide-ui.utils.nui_float_border')
 
   local text = {
     top = ' Colorschemes ',
     top_align = 'right',
-    bottom = ' ' .. NEVIRAIDE().theme:gsub('^%l', string.upper) .. ' ',
+    bottom = ' '
+      .. NEVIRAIDE().theme:gsub('./', ''):gsub('^%l', string.upper)
+      .. ' ',
   }
 
   return Popup({
     position = { row = 3, col = '97%' },
-    size = { width = 20, height = theme_count },
+    size = { width = 20, height = #count() },
     enter = true,
     focusable = true,
     zindex = 999,
@@ -33,7 +26,7 @@ return function()
     buf_options = {
       modifiable = false,
       readonly = true,
-      filetype = 'nui_themes',
+      filetype = 'colorschemes',
     },
   })
 end
