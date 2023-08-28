@@ -11,6 +11,7 @@ local syntax = {
 
   Conditional = {
     fg = theme.base0E,
+    italic = true,
   },
 
   Constant = {
@@ -49,6 +50,8 @@ local syntax = {
 
   Keyword = {
     fg = theme.base0E,
+    italic = true,
+    bold = true,
   },
 
   Label = {
@@ -70,6 +73,7 @@ local syntax = {
 
   Repeat = {
     fg = theme.base0A,
+    italic = true
   },
 
   Special = {

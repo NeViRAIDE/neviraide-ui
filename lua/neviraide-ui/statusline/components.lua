@@ -199,8 +199,9 @@ M.location = function()
   return '%#Comment#Col ' .. c .. ', Ln ' .. r .. '/' .. lines
 end
 
+---@param condition boolean
 ---@return string
-M.filesize = function()
+M.filesize = function(condition)
   local file = tostring(vim.fn.expand('%:p'))
   if file == nil or #file == 0 then return '' end
   local size = vim.fn.getfsize(file)
@@ -215,7 +216,10 @@ M.filesize = function()
   end
 
   local format = i == 1 and '%d%s' or '%.1f%s'
-  return '%#Comment#' .. string.format(format, size, suffixes[i])
+  if condition then
+    return '%#Comment#' .. string.format(format, size, suffixes[i])
+  end
+  return ''
 end
 
 ---@param condition? boolean

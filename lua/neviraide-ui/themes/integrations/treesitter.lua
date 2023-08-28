@@ -44,14 +44,20 @@ return {
 
   ['@keyword'] = {
     fg = theme.base0E,
+    italic = true,
+    bold = true,
   },
 
   ['@keyword.function'] = {
     fg = theme.base0E,
+    italic = true,
+    bold = true,
   },
 
   ['@keyword.return'] = {
     fg = theme.base0E,
+    italic = true,
+    bold = true,
   },
 
   ['@function'] = {

@@ -20,6 +20,7 @@ local hl_groups = {
   'NeoTreeNormal',
   'NeoTreeNormalNC',
   'NeoTreeEndOfBuffer',
+  'NeoTreeWinSeparator',
   'NeoTreeStatusLine',
   'TelescopeNormal',
   'TelescopePrompt',
@@ -29,6 +30,7 @@ local hl_groups = {
   'CursorLine',
   'Pmenu',
   'CmpPmenu',
+  'NeviraideDashboardAscii',
 }
 
 for _, groups in ipairs(hl_groups) do

@@ -2,7 +2,7 @@ return {
   {
     'Create new file',
     '',
-    'lua require("neviraide.utils.new_file")()',
+    'lua require("neviraide-ui.utils.new_file")()',
   },
   { 'Find file', '', 'Telescope find_files' },
   { 'Recent files', '', 'Telescope oldfiles' },

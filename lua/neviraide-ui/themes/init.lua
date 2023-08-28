@@ -1,5 +1,3 @@
--- FIX: not apply highlights for todo-comments
--- FIX: not load treesitter
 local M = {}
 local g = vim.g
 
@@ -137,14 +135,14 @@ M.toggle_theme = function()
   if g.neviraide_theme == theme1 then
     g.toggle_theme_icon = ' ' .. icon('moon') .. ' '
     vim.g.neviraide_theme = theme2
-    require('neviraide.utils').replace_word(
+    require('neviraide-ui.utils').replace_word(
       "theme = '" .. theme1,
       "theme = '" .. theme2
     )
   else
     vim.g.neviraide_theme = theme1
     g.toggle_theme_icon = ' ' .. icon('sun') .. ' '
-    require('neviraide.utils').replace_word(
+    require('neviraide-ui.utils').replace_word(
       "theme = '" .. theme2,
       "theme = '" .. theme1
     )
@@ -161,7 +159,8 @@ M.toggle_transparency = function()
   local old_data = 'transparency = ' .. tostring(NEVIRAIDE().transparency)
   local new_data = 'transparency = ' .. tostring(g.transparency)
 
-  require('neviraide.utils').replace_word(old_data, new_data)
+  require('neviraide-ui.utils').replace_word(old_data, new_data)
+  require('plenary.reload').reload_module('NEVIRAIDE')
 end
 
 return M

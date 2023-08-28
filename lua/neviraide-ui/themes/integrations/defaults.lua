@@ -10,9 +10,6 @@ local defaults = {
     fg = colors.white,
   },
 
-  LspCodeLens = { fg = 'Grey' },
-  LspCodeLensSeparator = { link = 'Boolean' },
-
   Pmenu = { bg = colors.one_bg },
   PmenuSbar = { bg = colors.one_bg },
   PmenuSel = { bg = colors.pmenu_bg, fg = colors.black },
@@ -20,7 +17,7 @@ local defaults = {
 
   MatchParen = { link = 'MatchWord' },
 
-  Comment = { fg = colors.grey_fg },
+  Comment = { fg = colors.grey_fg, italic = true },
 
   CursorLineNr = { fg = colors.white },
   LineNr = { fg = colors.grey },
@@ -172,7 +169,7 @@ local defaults = {
   },
 
   CursorLine = {
-    bg = 'none',
+    bg = theme.base01,
     sp = 'none',
   },
 

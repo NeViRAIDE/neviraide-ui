@@ -111,14 +111,12 @@ M.open = function()
 
   api.nvim_buf_set_lines(buf, 0, -1, false, result)
 
-  -- TODO: separate as possible
-  -- highlights ---------------------------------------------------------------------------
   local neviraideDashboard = api.nvim_create_namespace('neviraideDashboard')
   local horiz_pad_index = math.floor(
     (api.nvim_win_get_width(win) / 2) - (neviraideDashboardWidth / 2)
   ) - 2
 
-  for i = abc, abc + #header do
+  for i = abc, abc + #header - 2 do
     api.nvim_buf_add_highlight(
       buf,
       neviraideDashboard,
@@ -129,7 +127,7 @@ M.open = function()
     )
   end
 
-  for i = abc + #header - 2, abc + #dashboard do
+  for i = abc + #header, abc + #dashboard do
     api.nvim_buf_add_highlight(
       buf,
       neviraideDashboard,
@@ -150,7 +148,6 @@ M.open = function()
       -1
     )
   end
-  --------------------------------------------------------------------------
 
   api.nvim_win_set_cursor(
     win,

@@ -1,8 +1,6 @@
 local api = vim.api
 local autocmd = require('neviraide.utils').autocmd
 
--- require('neviraide-ui.themes').load_all_highlights()
-
 vim.opt.statusline = '%!v:lua.require("neviraide-ui.statusline").run()'
 
 require('neviraide-ui.buftabline.lazyload')
@@ -30,18 +28,15 @@ api.nvim_create_user_command('Dashboard', function()
   end
 end, {})
 
--- if config.dashboard_on_startup then
 vim.defer_fn(function()
   local bufs = api.nvim_list_bufs()
 
   if #vim.fn.argv() == 0 and (#bufs == 1 and bufs[1] == 1) then
     require('neviraide-ui.dashboard').open()
-    api.nvim_exec(':bd#', true)
+    api.nvim_exec2(':bd#', { output = true })
   end
 end, 0)
--- end
 
--- redraw dashboard on VimResized event
 autocmd('NEVIRAIDE_dashresized', 'VimResized', {
   callback = function()
     if vim.bo.filetype == 'neviraideDashboard' then
@@ -52,8 +47,10 @@ autocmd('NEVIRAIDE_dashresized', 'VimResized', {
   end,
 })
 
--- redraw statusline on LspProgressUpdate event & fixes #145
 autocmd('NEVIRAIDE_lspprog', 'User', {
   pattern = 'LspProgressUpdate',
   callback = function() vim.cmd('redrawstatus') end,
 })
+
+require('neviraide-ui.override_vim_ui.input')
+require('neviraide-ui.override_vim_ui.select')

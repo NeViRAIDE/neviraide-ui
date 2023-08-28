@@ -16,6 +16,7 @@ M.ignored = function()
     'nui_sm',
     'nofile',
     'neo-tree',
+    'terminal',
   }
   for type in pairs(list) do
     if vim.bo.filetype == list[type] then return false end
