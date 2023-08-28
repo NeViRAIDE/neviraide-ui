@@ -29,8 +29,7 @@ M.dirLookup = function()
   local fn = vim.fn
   -- return default_themes
   local default_themes = vim.fn.readdir(
-    vim.fn.stdpath('data')
-      .. '/lazy/neviraide-ui/lua/neviraide-ui/colorschemes/themes'
+    vim.fn.stdpath('data') .. '/lazy/UI/lua/neviraide-ui/themes/colorschemes'
   )
 
   local custom_themes = vim.loop.fs_stat(
