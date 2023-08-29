@@ -24,7 +24,7 @@ M.getNeoTreeWidth = function()
   return 0
 end
 
-M.getBtnsWidth = function() -- close, theme toggle btn etc
+M.getBtnsWidth = function()
   local width = 6
   if fn.tabpagenr('$') ~= 1 then
     width = width + ((3 * fn.tabpagenr('$')) + 2) + 10

@@ -71,20 +71,11 @@ M.tablist = function()
 end
 
 M.buttons = function()
-  local toggle_icon
-  if vim.o.background == 'dark' then
-    toggle_icon = icon('sun')
-  else
-    toggle_icon = icon('moon')
-  end
-
-  local toggle_themeBtn = '%@TbToggle_theme@%#TbLineThemeToggleBtn#'
-    .. toggle_icon
-    .. '%X'
   local CloseAllBufsBtn = '%@TbCloseAllBufs@%#TbLineCloseAllBufsBtn#'
     .. ' 󰅖 '
     .. '%X'
-  return toggle_themeBtn .. CloseAllBufsBtn
+
+  return CloseAllBufsBtn
 end
 
 return M

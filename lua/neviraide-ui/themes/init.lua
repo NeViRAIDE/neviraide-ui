@@ -114,43 +114,6 @@ M.load_all_highlights = function()
   end
 end
 
-local icons = require('neviraide-ui.icons.mappings')
-
----@param name string
----@return string
-local function icon(name) return vim.fn.nr2char(icons[name]) .. ' ' end
-
-M.toggle_theme = function()
-  local themes = NEVIRAIDE().theme_toggle
-  local theme1 = themes[1]
-  local theme2 = themes[2]
-
-  if g.neviraide_theme ~= theme1 and g.neviraide_theme ~= theme2 then
-    vim.notify(
-      'Set your current theme to one of those mentioned in the theme_toggle table (NEVIRAIDE)'
-    )
-    return
-  end
-
-  if g.neviraide_theme == theme1 then
-    g.toggle_theme_icon = ' ' .. icon('moon') .. ' '
-    vim.g.neviraide_theme = theme2
-    require('neviraide-ui.utils').replace_word(
-      "theme = '" .. theme1,
-      "theme = '" .. theme2
-    )
-  else
-    vim.g.neviraide_theme = theme1
-    g.toggle_theme_icon = ' ' .. icon('sun') .. ' '
-    require('neviraide-ui.utils').replace_word(
-      "theme = '" .. theme2,
-      "theme = '" .. theme1
-    )
-  end
-
-  M.load_all_highlights()
-end
-
 M.toggle_transparency = function()
   g.transparency = not g.transparency
   M.load_all_highlights()
