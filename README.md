@@ -1,3 +1,5 @@
+<!-- TODO:  --> make readme
+
 # User Interface for [NEVIRAIDE](https://github.com/RAprogramm/NEVIRAIDE)
 
 Lightweight &amp; performant ui plugin for NEVIRAIDE providing the following :
@@ -7,8 +9,14 @@ Lightweight &amp; performant ui plugin for NEVIRAIDE providing the following :
 - Statusline
 - Buffers and tabs line
 - Icons
+- Settings Changer Util
 
-## Dependencies
+## Requirements
+
+- [plenary](https://github.com/nvim-lua/plenary.nvim)
+- [nui](https://github.com/MunifTanjim/nui.nvim)
+
+## Icons
 
 I use [ArchLinux](https://archlinux.org/download) and [Kitty](https://sw.kovidgoyal.net/kitty).
 

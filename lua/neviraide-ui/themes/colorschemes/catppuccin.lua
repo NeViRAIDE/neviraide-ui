@@ -1,3 +1,4 @@
+-- TODO: change colorsto frappe
 local M = {}
 local dd = {
   localosewater = '#f2d5cf',

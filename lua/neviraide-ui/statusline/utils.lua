@@ -11,7 +11,7 @@ M.ignored = function()
     'noice',
     'nui',
     'colorschemes',
-    'nui_new',
+    'create',
     'nui_input',
     'nui_sm',
     'nofile',

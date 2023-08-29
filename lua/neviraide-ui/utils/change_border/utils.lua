@@ -1,3 +1,4 @@
+-- TODO: reload config on change
 local M = {}
 
 local list = {
@@ -9,7 +10,7 @@ local list = {
   none = '{ " ", " ", " ", " ", " ", " ", " ", " " }',
 }
 
----@param border string
+---@param border 'none'|'single'|'double'|'rounded'|'solid'|'shadow'
 M.set_borders = function(border)
   vim.g.border = border
 
@@ -37,6 +38,6 @@ M.set_borders = function(border)
   require('neviraide-ui.utils').replace_word(old_data_chars, new_data_chars)
   require('plenary.reload').reload_module('NEVIRAIDE')
 end
-M.set_borders('rounded')
+-- M.set_borders('rounded')
 
 return M

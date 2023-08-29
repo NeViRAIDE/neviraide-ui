@@ -7,19 +7,6 @@ require('neviraide-ui.buftabline.lazyload')
 
 local highlight = require('neviraide.utils').hi
 
-highlight('NeviraideDashboardAscii', { link = 'DashboardHeader' })
-highlight('NeviraideDashboardButtons', { link = 'DashboardCenter' })
-highlight('NeviraideDashboardVimver', { link = 'Comment' })
-
-autocmd('NEVIRAIDE_dashcolor', 'Colorscheme', {
-  pattern = '*',
-  callback = function()
-    highlight('NeviraideDashboardAscii', { link = 'DashboardHeader' })
-    highlight('NeviraideDashboardButtons', { link = 'DashboardCenter' })
-    highlight('NeviraideDashboardVimver', { link = 'Comment' })
-  end,
-})
-
 api.nvim_create_user_command('Dashboard', function()
   if vim.g.nvdash_displayed then
     require('neviraide-ui.buftabline').close_buffer()

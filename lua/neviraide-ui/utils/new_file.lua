@@ -1,9 +1,7 @@
 return function()
   local Input = require('nui.input')
   local event = require('nui.utils.autocmd').event
-
   local utils = require('neviraide-ui.override_vim_ui.utils')
-
   local border = require('neviraide-ui.utils.nui_float_border')
 
   local text = {
@@ -12,7 +10,7 @@ return function()
   }
 
   local input = Input({
-    position = { row = '30%', col = '50%' },
+    position = { row = '90%', col = '50%' },
     size = {
       width = 40,
     },
@@ -20,7 +18,7 @@ return function()
     win_options = utils.popup_bg(border),
     relative = 'editor',
     buf_options = {
-      filetype = 'nui_new',
+      filetype = 'create',
     },
   }, {
     prompt = '',

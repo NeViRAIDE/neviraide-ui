@@ -88,6 +88,7 @@ M.open = function()
 
   table.insert(dashboard, '')
   table.insert(dashboard, '')
+  table.insert(dashboard, '')
   table.insert(dashboard, nvim_version())
 
   local result = {}
@@ -127,7 +128,7 @@ M.open = function()
     )
   end
 
-  for i = abc + #header, abc + #dashboard do
+  for i = abc + #header - 1, abc + #dashboard do
     api.nvim_buf_add_highlight(
       buf,
       neviraideDashboard,
