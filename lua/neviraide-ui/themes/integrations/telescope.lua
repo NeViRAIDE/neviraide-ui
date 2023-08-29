@@ -2,11 +2,10 @@ local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
 
 ---@return string
 local function telescope_style()
-  if NEVIRAIDE().border == 'none' or NEVIRAIDE().border == 'shadow' then
+  if vim.g.borders == 'none' or vim.g.borders == 'shadow' then
     return 'borderless'
-  else
-    return 'bordered'
   end
+  return 'bordered'
 end
 
 local hlgroups = {

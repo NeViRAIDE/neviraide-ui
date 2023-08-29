@@ -24,36 +24,36 @@ local icons_colors = {
     'St_NTerminalMode',
   },
 
-  ['v'] = { icon('vim-visual-mode'), 'Statement' },
-  ['vs'] = { icon('vim-visual-mode') .. '-CHAR (Ctrl O)', 'Statement' },
-  ['V'] = { icon('vim-visual-mode') .. '-LINE', 'Statement' },
-  ['Vs'] = { icon('vim-visual-mode') .. '-LINE', 'Statement' },
-  [''] = { icon('vim-visual-mode') .. '-BLOCK', 'Statement' },
+  ['v'] = { icon('vim-visual-mode'), 'St_VisualMode' },
+  ['vs'] = { icon('vim-visual-mode') .. '-CHAR (Ctrl O)', 'St_VisualMode' },
+  ['V'] = { icon('vim-visual-mode') .. '-LINE', 'St_VisualMode' },
+  ['Vs'] = { icon('vim-visual-mode') .. '-LINE', 'St_VisualMode' },
+  [''] = { icon('vim-visual-mode') .. '-BLOCK', 'St_VisualMode' },
 
-  ['i'] = { icon('vim-insert-mode'), 'String' },
-  ['ic'] = { icon('vim-insert-mode') .. ' (completion)', 'String' },
-  ['ix'] = { icon('vim-insert-mode') .. ' completion', 'String' },
+  ['i'] = { icon('vim-insert-mode'), 'St_InsertMode' },
+  ['ic'] = { icon('vim-insert-mode') .. ' (completion)', 'St_InsertMode' },
+  ['ix'] = { icon('vim-insert-mode') .. ' completion', 'St_InsertMode' },
 
-  ['t'] = { icon('vim-terminal-mode'), 'WarningMsg' },
+  ['t'] = { icon('vim-terminal-mode'), 'St_TerminalMode' },
 
-  ['R'] = { icon('vim-replace-mode'), 'Substitute' },
-  ['Rc'] = { icon('vim-replace-mode') .. ' (Rc)', 'Substitute' },
-  ['Rx'] = { icon('vim-replace-mode') .. 'a (Rx)', 'Substitute' },
-  ['Rv'] = { icon('vim-insert-mode') .. '- ', 'Substitute' },
-  ['Rvc'] = { icon('vim-insert-mode') .. '-  (Rvc)', 'Substitute' },
-  ['Rvx'] = { icon('vim-insert-mode') .. '-  (Rvx)', 'Substitute' },
+  ['R'] = { icon('vim-replace-mode'), 'St_ReplaceMode' },
+  ['Rc'] = { icon('vim-replace-mode') .. ' (Rc)', 'St_ReplaceModeSubstitute' },
+  ['Rx'] = { icon('vim-replace-mode') .. 'a (Rx)', 'St_ReplaceMode' },
+  ['Rv'] = { icon('vim-insert-mode') .. '- ', 'St_ReplaceMode' },
+  ['Rvc'] = { icon('vim-insert-mode') .. '-  (Rvc)', 'St_ReplaceMode' },
+  ['Rvx'] = { icon('vim-insert-mode') .. '-  (Rvx)', 'St_ReplaceMode' },
 
-  ['s'] = { icon('vim-select-mode'), 'Substitute' },
-  ['S'] = { icon('vim-select-mode') .. '-LINE', 'Substitute' },
-  [''] = { icon('vim-select-mode') .. '-BLOCK', 'Substitute' },
-  ['c'] = { icon('vim-command-mode'), 'WarningMsg' },
-  ['cv'] = { icon('vim-command-mode'), 'WarningMsg' },
-  ['ce'] = { icon('vim-command-mode'), 'WarningMsg' },
+  ['s'] = { icon('vim-select-mode'), 'St_SelectMode' },
+  ['S'] = { icon('vim-select-mode') .. '-LINE', 'St_SelectMode' },
+  [''] = { icon('vim-select-mode') .. '-BLOCK', 'St_SelectMode' },
+  ['c'] = { icon('vim-command-mode'), 'St_CommandMode' },
+  ['cv'] = { icon('vim-command-mode'), 'St_CommandMode' },
+  ['ce'] = { icon('vim-command-mode'), 'St_CommandMode' },
   ['r'] = { 'PROMPT', 'St_ConfirmMode' },
   ['rm'] = { 'MORE', 'St_ConfirmMode' },
   ['r?'] = { 'CONFIRM', 'St_ConfirmMode' },
   ['x'] = { 'CONFIRM', 'St_ConfirmMode' },
-  ['!'] = { icon('vim-terminal-mode'), 'WarningMsg' },
+  ['!'] = { icon('vim-terminal-mode'), 'St_TerminalMode' },
 }
 
 ---@param separator string
@@ -139,16 +139,14 @@ M.LSP_Diagnostics = function()
     #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
 
   local err = (errors and errors > 0)
-      and ('%#DiagnosticError#' .. ' ' .. errors .. ' ')
+      and ('%#St_lspError#' .. ' ' .. errors .. ' ')
     or ''
   local war = (warnings and warnings > 0)
-      and ('%#DiagnosticWarn#' .. ' ' .. warnings .. ' ')
+      and ('%#St_lspWarning#' .. ' ' .. warnings .. ' ')
     or ''
-  local hin = (hints and hints > 0)
-      and ('%#DiagnosticHint#' .. '󰌵 ' .. hints)
+  local hin = (hints and hints > 0) and ('%#St_LspHints#' .. '󰌵 ' .. hints)
     or ''
-  local inf = (info and info > 0)
-      and ('%#DiagnosticInfo#' .. ' ' .. info .. ' ')
+  local inf = (info and info > 0) and ('%#St_LspInfo#' .. ' ' .. info .. ' ')
     or ''
 
   if err ~= '' or war ~= '' or inf ~= '' or hin ~= '' then
@@ -176,18 +174,18 @@ M.git = function()
   local branch_name = icon('git-branch') .. git_status.head .. ' '
 
   if added ~= '' or changed ~= '' or removed ~= '' then
-    return '%#GitSignsAdd#'
+    return '%#DiffAdded#'
       .. added
-      .. '%#GitSignsChange#'
+      .. '%#DiffModified#'
       .. changed
-      .. '%#GitSignsDelete#'
+      .. '%#DiffRemoved#'
       .. removed
       .. M.separator('|', 2, true)
-      .. '%#Character#'
+      .. '%#gitcommitBranch#'
       .. branch_name
       .. '%#Comment#'
   else
-    return '%#NeogitBranch#' .. branch_name .. '%#Comment#'
+    return '%#gitcommitBranch#' .. branch_name .. '%#Comment#'
   end
 end
 

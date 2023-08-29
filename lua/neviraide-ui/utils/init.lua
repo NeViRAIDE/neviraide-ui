@@ -1,3 +1,6 @@
+--------------l
+---time
+
 local M = {}
 
 function M.replace_word(old, new)
@@ -17,34 +20,32 @@ function M.replace_word(old, new)
   end
 end
 
-M.dirLookup = function()
-  local path = '/lazy/UI/lua/neviraide-ui/themes/colorschemes'
-  local default_themes = vim.fn.readdir(vim.fn.stdpath('data') .. path)
-
-  for index, theme in ipairs(default_themes) do
-    default_themes[index] = theme:match('(.+)%..+')
-  end
-
-  return default_themes
-end
+-- M.dirLookup = function()
+--   local path = '/lazy/UI/lua/neviraide-ui/themes/colorschemes'
+--   local default_themes = vim.fn.readdir(vim.fn.stdpath('data') .. path)
+--   for index, theme in ipairs(default_themes) do
+--     default_themes[index] = theme:match('(.+)%..+')
+--   end
+--   return default_themes
+-- end
 
 -- for local working with plugin
--- M.dirLookup1 = function()
---   local themes_dir =
---     '$HOME/Study/nvim_plugins/neviraide-ui.nvim/lua/neviraide-ui/themes/colorschemes'
---   local list = {}
---   local p = io.popen(
---     'find "'
---       .. themes_dir
---       .. [[" -type f -iname "*.lua" -execdir sh -c 'printf "%s\n" "${0%.*}"' {} ';']]
---   )
---   if p ~= nil then
---     for file in p:lines() do
---       table.insert(list, file)
---     end
---     p:close()
---   end
---   return list
--- end
+M.dirLookup = function()
+  local themes_dir =
+    '$HOME/Study/nvim_plugins/neviraide-ui.nvim/lua/neviraide-ui/themes/colorschemes'
+  local list = {}
+  local p = io.popen(
+    'find "'
+      .. themes_dir
+      .. [[" -type f -iname "*.lua" -execdir sh -c 'printf "%s\n" "${0%.*}"' {} ';']]
+  )
+  if p ~= nil then
+    for file in p:lines() do
+      table.insert(list, file)
+    end
+    p:close()
+  end
+  return list
+end
 
 return M

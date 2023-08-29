@@ -8,7 +8,8 @@ local M = {
 
   TelescopeResultsTitle = {
     fg = colors.black,
-    bg = colors.blue,
+    -- bg = colors.blue,
+    bg = 'NONE',
   },
 }
 
@@ -31,6 +32,7 @@ local hl_groups = {
   'Pmenu',
   'CmpPmenu',
   'NeviraideDashboardAscii',
+  'WhichKeyFloat',
 }
 
 for _, groups in ipairs(hl_groups) do

@@ -11,22 +11,22 @@ if NEVIRAIDE().transparency then statusline_bg = 'NONE' end
 local Lsp_highlights = {
   St_lspError = {
     fg = colors.red,
-    bg = statusline_bg,
+    bg = 'none',
   },
 
   St_lspWarning = {
     fg = colors.yellow,
-    bg = statusline_bg,
+    bg = 'none',
   },
 
   St_LspHints = {
     fg = colors.purple,
-    bg = statusline_bg,
+    bg = 'none',
   },
 
   St_LspInfo = {
     fg = colors.green,
-    bg = statusline_bg,
+    bg = 'none',
   },
 }
 
@@ -45,7 +45,7 @@ M.default = {
 
   St_LspStatus = {
     fg = colors.nord_blue,
-    bg = statusline_bg,
+    bg = 'none',
   },
 
   St_LspProgress = {
@@ -55,7 +55,7 @@ M.default = {
 
   St_LspStatus_Icon = {
     fg = colors.nord_blue,
-    bg = statusline_bg,
+    bg = 'none',
   },
 
   St_EmptySpace = {

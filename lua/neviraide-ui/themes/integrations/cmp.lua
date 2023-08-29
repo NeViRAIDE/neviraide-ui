@@ -50,12 +50,12 @@ highlights = vim.tbl_deep_extend(
 )
 highlights = vim.tbl_deep_extend('force', highlights, item_kinds)
 
-highlights.CmpSel = {
-  fg = colors.white,
-  bg = (
-    highlights.CmpPmenu.bg == colors.black2 and colors.grey or colors.one_bg3
-  ),
-  bold = true,
-}
+-- highlights.CmpSel = {
+--   fg = colors.white,
+--   bg = (
+--     highlights.CmpPmenu.bg == colors.black2 and colors.grey or colors.one_bg3
+--   ),
+--   bold = true,
+-- }
 
 return highlights

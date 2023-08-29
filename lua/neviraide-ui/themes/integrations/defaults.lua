@@ -24,7 +24,7 @@ local defaults = {
 
   -- floating windows
   FloatBorder = { fg = colors.blue },
-  NormalFloat = { bg = colors.darker_black },
+  NormalFloat = { bg = 'none' },
 
   NvimInternalError = { fg = colors.red },
   WinSeparator = { fg = colors.line },
@@ -242,11 +242,15 @@ local defaults = {
   LazyProgressDone = { fg = colors.green },
 }
 
--- merge statusilne & hl_add tables!
 local merge_tb = require('neviraide-ui.themes').merge_tb
 defaults = merge_tb(
   defaults,
   require('neviraide-ui.themes').load_highlight('statusline')
 )
+
+if vim.g.borders == 'none' or vim.g.borders == 'shadow' then
+  defaults.FloatBorder = { bg = colors.one_bg }
+  defaults.NormalFloat = { bg = colors.one_bg }
+end
 
 return defaults

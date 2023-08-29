@@ -11,36 +11,12 @@ return {
   NeoTreeNormalNC = { bg = colors.darker_black },
   NeoTreeOpenedDirectoryName = { fg = colors.folder_bg },
   NeoTreeGitIgnored = { fg = colors.light_grey },
-
-  NeoTreeWinSeparator = {
-    fg = colors.darker_black,
-    bg = colors.darker_black,
-  },
-
-  NeoTreeWindowPicker = {
-    fg = colors.red,
-    bg = colors.black2,
-  },
-
-  NeoTreeCursorLine = {
-    bg = colors.black2,
-  },
-
-  NeoTreeGitNew = {
-    fg = colors.yellow,
-  },
-
-  NeoTreeGitDeleted = {
-    fg = colors.red,
-  },
-
-  NeoTreeSpecialFile = {
-    fg = colors.yellow,
-    bold = true,
-  },
-
-  NeoTreeRootDirectory = {
-    fg = colors.red,
-    bold = true,
-  },
+  NeoTreeWinSeparator = { fg = colors.darker_black, bg = colors.darker_black },
+  NeoTreeWindowPicker = { fg = colors.red, bg = colors.black2 },
+  NeoTreeCursorLine = { bg = colors.black2 },
+  NeoTreeGitNew = { link = 'diffNewFile' },
+  NeoTreeGitModified = { link = 'DiffModified' },
+  NeoTreeGitDeleted = { link = 'DiffRemoved' },
+  NeoTreeSpecialFile = { fg = colors.yellow, bold = true },
+  NeoTreeRootDirectory = { fg = colors.red, bold = true },
 }

@@ -10,13 +10,14 @@ M.ignored = function()
     'lspinfo',
     'noice',
     'nui',
-    'nui_themes',
+    'colorschemes',
     'nui_new',
     'nui_input',
     'nui_sm',
     'nofile',
     'neo-tree',
     'terminal',
+    'notify',
   }
   for type in pairs(list) do
     if vim.bo.filetype == list[type] then return false end
