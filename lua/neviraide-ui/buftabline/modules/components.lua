@@ -1,6 +1,8 @@
 local api = vim.api
 local fn = vim.fn
 local utils = require('neviraide-ui.buftabline.modules.utils')
+local icon = require('neviraide-ui.icons.utils').icon
+
 -- TODO: add time and date
 
 local M = {}
@@ -58,7 +60,7 @@ M.tablist = function()
     local tabstoggleBtn = '%@TbToggleTabs@ %#TBTabTitle# TABS %X'
 
     return vim.g.TbTabsToggled == 1
-        and tabstoggleBtn:gsub('()', { [36] = ' ' })
+        and tabstoggleBtn:gsub('()', { [36] = icon('󱎼', 'pin', 0, 1) })
       or new_tabtn .. tabstoggleBtn .. result
   end
 
@@ -67,7 +69,7 @@ end
 
 M.buttons = function()
   local CloseAllBufsBtn = '%@TbCloseAllBufs@%#TbLineCloseAllBufsBtn#'
-    .. ' 󰅖 '
+    .. icon('', 'x', 1, 2)
     .. '%X'
 
   return CloseAllBufsBtn

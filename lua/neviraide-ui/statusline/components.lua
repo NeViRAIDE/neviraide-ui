@@ -1,81 +1,105 @@
 local M = {}
-
 local icon = require('neviraide-ui.icons.utils').icon
 
 local icons_colors = {
-  ['n'] = { icon('vim-normal-mode', false, true), 'St_NormalMode' },
-  ['no'] = { icon('vim-normal-mode', false, true) .. ' (no)', 'St_NormalMode' },
-  ['nov'] = { icon('vim-normal-mode', false, true) .. ' (nov)', 'Directory' },
-  ['noV'] = { icon('vim-normal-mode', false, true) .. ' (noV)', 'Directory' },
-  ['noCTRL-V'] = { icon('vim-normal-mode', false, true), 'Directory' },
-  ['niI'] = { icon('vim-normal-mode', false, true) .. ' i', 'Directory' },
-  ['niR'] = { icon('vim-normal-mode', false, true) .. ' r', 'Directory' },
-  ['niV'] = { icon('vim-normal-mode', false, true) .. ' v', 'Directory' },
+  ['n'] = { icon('NORMAL', 'vim-normal-mode', 0, 1), 'St_NormalMode' },
+  ['no'] = {
+    icon('NORMAL', 'vim-normal-mode', 0, 1) .. ' (no)',
+    'St_NormalMode',
+  },
+  ['nov'] = { icon('NORMAL', 'vim-normal-mode', 0, 1) .. ' (nov)', 'Directory' },
+  ['noV'] = { icon('NORMAL', 'vim-normal-mode', 0, 1) .. ' (noV)', 'Directory' },
+  ['noCTRL-V'] = { icon('NORMAL', 'vim-normal-mode', 0, 1), 'Directory' },
+  ['niI'] = { icon('NORMAL', 'vim-normal-mode', 0, 1) .. ' i', 'Directory' },
+  ['niR'] = { icon('NORMAL', 'vim-normal-mode', 0, 1) .. ' r', 'Directory' },
+  ['niV'] = { icon('NORMAL', 'vim-normal-mode', 0, 1) .. ' v', 'Directory' },
   ['nt'] = {
-    icon('vim-normal-mode', false, true)
+    icon('NORMAL', 'vim-normal-mode', 0, 1)
       .. '-'
-      .. icon('vim-terminal-mode', false, true),
+      .. icon('TERMINAL', 'vim-terminal-mode', 0, 1),
     'St_NTerminalMode',
   },
   ['ntT'] = {
-    icon('vim-normal-mode', false, true)
+    icon('NORMAL', 'vim-normal-mode', 0, 1)
       .. '-'
-      .. icon('vim-terminal-mode', false, true)
+      .. icon('TERMINAL', 'vim-terminal-mode', 0, 1)
       .. ' (ntT)',
     'St_NTerminalMode',
   },
 
-  ['v'] = { icon('vim-visual-mode', false, true), 'St_VisualMode' },
+  ['v'] = { icon('VISUAL', 'vim-visual-mode', 0, 1), 'St_VisualMode' },
   ['vs'] = {
-    icon('vim-visual-mode', false, true) .. '-CHAR (Ctrl O)',
+    icon('VISUAL', 'vim-visual-mode', 0, 1) .. '-CHAR (Ctrl O)',
     'St_VisualMode',
   },
-  ['V'] = { icon('vim-visual-mode', false, true) .. '-LINE', 'St_VisualMode' },
-  ['Vs'] = { icon('vim-visual-mode', false, true) .. '-LINE', 'St_VisualMode' },
-  [''] = { icon('vim-visual-mode', false, true) .. '-BLOCK', 'St_VisualMode' },
+  ['V'] = {
+    icon('VISUAL', 'vim-visual-mode', 0, 1) .. '-LINE',
+    'St_VisualMode',
+  },
+  ['Vs'] = {
+    icon('VISUAL', 'vim-visual-mode', 0, 1) .. '-LINE',
+    'St_VisualMode',
+  },
+  [''] = {
+    icon('VISUAL', 'vim-visual-mode', 0, 1) .. '-BLOCK',
+    'St_VisualMode',
+  },
 
-  ['i'] = { icon('vim-insert-mode', false, true), 'St_InsertMode' },
+  ['i'] = { icon('INSERT', 'vim-insert-mode', 0, 1), 'St_InsertMode' },
   ['ic'] = {
-    icon('vim-insert-mode', false, true) .. ' (completion)',
+    icon('INSERT', 'vim-insert-mode', 0, 1) .. ' (completion)',
     'St_InsertMode',
   },
   ['ix'] = {
-    icon('vim-insert-mode', false, true) .. ' completion',
+    icon('INSERT', 'vim-insert-mode', 0, 1) .. ' completion',
     'St_InsertMode',
   },
 
-  ['t'] = { icon('vim-terminal-mode', false, true), 'St_TerminalMode' },
+  ['t'] = { icon('TERMINAL', 'vim-terminal-mode', 0, 1), 'St_TerminalMode' },
 
-  ['R'] = { icon('vim-replace-mode', false, true), 'St_ReplaceMode' },
+  ['R'] = { icon('REPLACE', 'vim-replace-mode', 0, 1), 'St_ReplaceMode' },
   ['Rc'] = {
-    icon('vim-replace-mode', false, true) .. ' (Rc)',
+    icon('REPLACE', 'vim-replace-mode', 0, 1) .. ' (Rc)',
     'St_ReplaceModeSubstitute',
   },
   ['Rx'] = {
-    icon('vim-replace-mode', false, true) .. 'a (Rx)',
+    icon('REPLACE', 'vim-replace-mode', 0, 1) .. 'a (Rx)',
     'St_ReplaceMode',
   },
-  ['Rv'] = { icon('vim-insert-mode', false, true) .. '- ', 'St_ReplaceMode' },
+  ['Rv'] = {
+    icon('INSERT', 'vim-insert-mode', 0, 1) .. '- ',
+    'St_ReplaceMode',
+  },
   ['Rvc'] = {
-    icon('vim-insert-mode', false, true) .. '-  (Rvc)',
+    icon('INSERT', 'vim-insert-mode', 0, 1) .. '-  (Rvc)',
     'St_ReplaceMode',
   },
   ['Rvx'] = {
-    icon('vim-insert-mode', false, true) .. '-  (Rvx)',
+    icon('INSERT', 'vim-insert-mode', 0, 1) .. '-  (Rvx)',
     'St_ReplaceMode',
   },
 
-  ['s'] = { icon('vim-select-mode', false, true), 'St_SelectMode' },
-  ['S'] = { icon('vim-select-mode', false, true) .. '-LINE', 'St_SelectMode' },
-  [''] = { icon('vim-select-mode', false, true) .. '-BLOCK', 'St_SelectMode' },
-  ['c'] = { icon('vim-command-mode', false, true), 'St_CommandMode' },
-  ['cv'] = { icon('vim-command-mode', false, true), 'St_CommandMode' },
-  ['ce'] = { icon('vim-command-mode', false, true), 'St_CommandMode' },
+  ['s'] = { icon('SELECT', 'vim-select-mode', 0, 1), 'St_SelectMode' },
+  ['S'] = {
+    icon('SELECT', 'vim-select-mode', 0, 1) .. '-LINE',
+    'St_SelectMode',
+  },
+  [''] = {
+    icon('SELECT', 'vim-select-mode', 0, 1) .. '-BLOCK',
+    'St_SelectMode',
+  },
+
+  ['c'] = { icon('COMMAND', 'vim-command-mode', 0, 1), 'St_CommandMode' },
+  ['cv'] = { icon('COMMAND', 'vim-command-mode', 0, 1), 'St_CommandMode' },
+  ['ce'] = { icon('COMMAND', 'vim-command-mode', 0, 1), 'St_CommandMode' },
   ['r'] = { 'PROMPT', 'St_ConfirmMode' },
   ['rm'] = { 'MORE', 'St_ConfirmMode' },
   ['r?'] = { 'CONFIRM', 'St_ConfirmMode' },
   ['x'] = { 'CONFIRM', 'St_ConfirmMode' },
-  ['!'] = { icon('vim-terminal-mode', false, true), 'St_TerminalMode' },
+  ['!'] = {
+    icon('TERMINAL', 'vim-terminal-mode', 0, 1),
+    'St_TerminalMode',
+  },
 }
 
 ---@param separator string
@@ -138,11 +162,10 @@ M.LSP_status = function()
         client.attached_buffers[vim.api.nvim_get_current_buf()]
         and client.name ~= 'null-ls'
       then
-        local long = '%#St_LspStatus# '
-          .. icon('server', false, true)
-          .. ' '
+        local long = '%#St_LspStatus#'
+          .. icon('', 'server', 1, 2)
           .. client.name
-        local short = ' ' .. icon('server', false, true) .. ' LSP'
+        local short = icon('', 'server', 1, 2) .. 'LSP'
         return (vim.o.columns > 100 and long) or short
       end
     end
@@ -164,14 +187,16 @@ M.LSP_Diagnostics = function()
     #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
 
   local err = (errors and errors > 0)
-      and ('%#St_lspError#' .. ' ' .. errors .. ' ')
+      and ('%#St_lspError#' .. icon('', 'x-circle', 0, 1) .. errors .. ' ')
     or ''
   local war = (warnings and warnings > 0)
-      and ('%#St_lspWarning#' .. ' ' .. warnings .. ' ')
+      and ('%#St_lspWarning#' .. icon('', 'alert', 0, 1) .. warnings .. ' ')
     or ''
-  local hin = (hints and hints > 0) and ('%#St_LspHints#' .. '󰌵 ' .. hints)
+  local hin = (hints and hints > 0)
+      and ('%#St_LspHints#' .. icon('', 'light-bulb', 0, 1) .. hints)
     or ''
-  local inf = (info and info > 0) and ('%#St_LspInfo#' .. ' ' .. info .. ' ')
+  local inf = (info and info > 0)
+      and ('%#St_LspInfo#' .. icon('', 'info', 0, 1) .. info .. ' ')
     or ''
 
   if err ~= '' or war ~= '' or inf ~= '' or hin ~= '' then
@@ -188,15 +213,15 @@ M.git = function()
   local git_status = vim.b.gitsigns_status_dict
 
   local added = (git_status.added and git_status.added ~= 0)
-      and (' ' .. icon('diff-added', false, true) .. git_status.added)
+      and (icon('', 'diff-added', 1, 1) .. git_status.added)
     or ''
   local changed = (git_status.changed and git_status.changed ~= 0)
-      and (' ' .. icon('diff-modified', false, true) .. git_status.changed)
+      and (icon('', 'diff-modified', 1, 1) .. git_status.changed)
     or ''
   local removed = (git_status.removed and git_status.removed ~= 0)
-      and (' ' .. icon('diff-removed', false, true) .. git_status.removed)
+      and (icon('', 'diff-removed', 1, 1) .. git_status.removed)
     or ''
-  local branch_name = icon('git-branch', false, true) .. git_status.head .. ' '
+  local branch_name = icon('', 'git-branch', 0, 1) .. git_status.head .. ' '
 
   if added ~= '' or changed ~= '' or removed ~= '' then
     return '%#DiffAdded#'

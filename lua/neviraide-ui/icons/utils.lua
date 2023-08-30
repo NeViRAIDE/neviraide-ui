@@ -1,50 +1,31 @@
 local M = {}
 
+---@param spaces integer
+---@return string
+local space = function(spaces) return string.rep(' ', spaces) end
+
 ---@param icon_code integer
 ---@return string
 M.icon_decoder = function(icon_code) return vim.fn.nr2char(tostring(icon_code)) end
 
----Nonicons is required
----@param name string
----@param space_before? boolean
----@param space_after? boolean
----@return string
-M.nonicon = function(name, space_before, space_after)
-  local nonicon = require('neviraide-ui.icons.nonicons.mappings')
-  if space_before then
-    return ' ' .. vim.fn.nr2char(nonicon[name])
-  elseif space_after then
-    return vim.fn.nr2char(nonicon[name]) .. ' '
-  elseif space_after and space_before then
-    return ' ' .. vim.fn.nr2char(nonicon[name]) .. ' '
-  else
-    return vim.fn.nr2char(nonicon[name])
-  end
-end
+---@param handle_icon string
+---@param nonicon_name string
+---@param space_before? integer
+---@param space_after? integer
+M.icon = function(handle_icon, nonicon_name, space_before, space_after)
+  local nonicon = require('neviraide-ui.icons.nonicons')
 
----@param name string
----@param space_before? boolean
----@param space_after? boolean
----@return string
-M.devicon = function(name, space_before, space_after)
-  local devicon = require('neviraide-ui.icons.devicons')
-  if space_before then
-    return ' ' .. devicon[name]['icon']
-  elseif space_after then
-    return devicon[name]['icon'] .. ' '
-  elseif space_after and space_before then
-    return ' ' .. devicon[name]['icon'] .. ' '
-  else
-    return devicon[name]['icon']
+  if space_before == nil or space_after == nil then
+    space_before = 0
+    space_after = 0
   end
-end
 
----@param name string
----@param space_before? boolean
----@param space_after? boolean
-M.icon = function(name, space_before, space_after)
-  if vim.g.nonicons then return M.nonicon(name, space_before, space_after) end
-  -- return M.devicon(name, space_before, space_after)
+  if vim.g.nonicons then
+    return space(space_before)
+      .. nonicon[nonicon_name].icon
+      .. space(space_after)
+  end
+  return space(space_before) .. handle_icon .. space(space_after)
 end
 
 M.palette = {

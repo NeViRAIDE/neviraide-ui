@@ -1,10 +1,12 @@
+local icon = require('neviraide-ui.icons.utils').icon
+
 return {
   {
     'Create new file',
     '',
     'lua require("neviraide-ui.utils.new_file")()',
   },
-  { 'Find file', '', 'Telescope find_files' },
+  { 'Find file', icon('','search',0,0), 'Telescope find_files' },
   { 'Recent files', '', 'Telescope oldfiles' },
   { 'Find word', '', 'Telescope live_grep' },
   {

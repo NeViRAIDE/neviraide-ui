@@ -1,6 +1,7 @@
 local api = vim.api
 local devicons_present, devicons = pcall(require, 'nvim-web-devicons')
 local fn = vim.fn
+local icon_plug = require('neviraide-ui.icons.utils').icon
 
 local M = {}
 
@@ -38,7 +39,7 @@ M.add_fileInfo = function(name, bufnr)
     local icon, icon_hl = devicons.get_icon(name, string.match(name, '%a+$'))
 
     if not icon then
-      icon = '󰈚'
+      icon = icon_plug('', 'file', 0, 0)
       icon_hl = 'DevIconDefault'
     end
 
