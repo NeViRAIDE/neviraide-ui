@@ -57,7 +57,7 @@ return {
   Snippet = i(61957),
   Color = '󰏘 ',
   Reference = '󰈇 ',
-  Folder = i(62011),
+  Folder = '',
   Constant = i(61953),
   Struct = i(61958),
   TypeParameter = '󰆩 ',
