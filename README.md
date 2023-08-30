@@ -11,19 +11,17 @@ Lightweight &amp; performant ui plugin for NEVIRAIDE providing the following :
 - Icons
 - Settings Changer Util
 
-## Requirements
+## Dependencies
 
 - [plenary](https://github.com/nvim-lua/plenary.nvim)
 - [nui](https://github.com/MunifTanjim/nui.nvim)
 
-## Icons
+### Optional dependencies
 
-I use [ArchLinux](https://archlinux.org/download) and [Kitty](https://sw.kovidgoyal.net/kitty).
+- #### Icons
 
-- For the correct display of icons you will have to install [nonicons](https://github.com/yamatsum/nonicons) font:
+For  display [nonicons](https://github.com/yamatsum/nonicons) instead of [devicons](https://github.com/vorillaz/devicons) run in your terminal:
 
 ```sh
 yay -S nonicons-git
 ```
-
-after install add `symbol_map U+F101-U+F208 nonicons` to you Kitty configuration file (usually it ~/.config/kitty/kitty.conf)

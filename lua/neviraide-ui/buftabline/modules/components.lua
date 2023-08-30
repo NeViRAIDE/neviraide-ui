@@ -2,11 +2,6 @@ local api = vim.api
 local fn = vim.fn
 local utils = require('neviraide-ui.buftabline.modules.utils')
 -- TODO: add time and date
-local icons = require('neviraide-ui.icons.mappings')
-
----@param name string
----@return string
-local function icon(name) return ' ' .. vim.fn.nr2char(icons[name]) .. '  ' end
 
 local M = {}
 

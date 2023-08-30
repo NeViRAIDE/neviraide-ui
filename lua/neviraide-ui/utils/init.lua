@@ -1,7 +1,14 @@
---------------l
----time
-
 local M = {}
+
+-- TODO: Add SEPARATE plugin (neovim-kitty-font-changer)
+-- with dynamicly getting config file path
+-- ---@param font string
+-- ---@return boolean
+-- M.check_font = function(font)
+--   local has_font = vim.fn.system('fc-list | grep -i ' .. font)
+--   if has_font ~= '' then return true end
+--   return false
+-- end
 
 function M.replace_word(old, new)
   local neviraide_conf = vim.fn.stdpath('config') .. '/lua/' .. 'NEVIRAIDE.lua'

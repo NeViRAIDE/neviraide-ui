@@ -1,11 +1,53 @@
-local icons = require('neviraide-ui.icons.mappings')
+local M = {}
+
+---@param icon_code integer
+---@return string
+M.icon_decoder = function(icon_code) return vim.fn.nr2char(tostring(icon_code)) end
 
 ---Nonicons is required
 ---@param name string
+---@param space_before? boolean
+---@param space_after? boolean
 ---@return string
-local function icon(name) return vim.fn.nr2char(icons[name]) end
+M.nonicon = function(name, space_before, space_after)
+  local nonicon = require('neviraide-ui.icons.nonicons.mappings')
+  if space_before then
+    return ' ' .. vim.fn.nr2char(nonicon[name])
+  elseif space_after then
+    return vim.fn.nr2char(nonicon[name]) .. ' '
+  elseif space_after and space_before then
+    return ' ' .. vim.fn.nr2char(nonicon[name]) .. ' '
+  else
+    return vim.fn.nr2char(nonicon[name])
+  end
+end
 
-local palette = {
+---@param name string
+---@param space_before? boolean
+---@param space_after? boolean
+---@return string
+M.devicon = function(name, space_before, space_after)
+  local devicon = require('neviraide-ui.icons.devicons')
+  if space_before then
+    return ' ' .. devicon[name]['icon']
+  elseif space_after then
+    return devicon[name]['icon'] .. ' '
+  elseif space_after and space_before then
+    return ' ' .. devicon[name]['icon'] .. ' '
+  else
+    return devicon[name]['icon']
+  end
+end
+
+---@param name string
+---@param space_before? boolean
+---@param space_after? boolean
+M.icon = function(name, space_before, space_after)
+  if vim.g.nonicons then return M.nonicon(name, space_before, space_after) end
+  -- return M.devicon(name, space_before, space_after)
+end
+
+M.palette = {
   orange = '#d18616',
   black = '#586069',
   bright_black = '#959da5',
@@ -25,4 +67,4 @@ local palette = {
   bright_cyan = '#56d4dd',
 }
 
-return { icon = icon, palette = palette }
+return M
