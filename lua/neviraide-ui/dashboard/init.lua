@@ -115,7 +115,7 @@ M.open = function()
   local neviraideDashboard = api.nvim_create_namespace('neviraideDashboard')
   local horiz_pad_index = math.floor(
     (api.nvim_win_get_width(win) / 2) - (neviraideDashboardWidth / 2)
-  ) - 2
+  ) - 3
 
   for i = abc, abc + #header - 2 do
     api.nvim_buf_add_highlight(
@@ -152,7 +152,7 @@ M.open = function()
 
   api.nvim_win_set_cursor(
     win,
-    { abc + #header, math.floor(vim.o.columns / 2) - 13 }
+    { abc + #header, math.floor(vim.o.columns / 2) - 12 }
   )
 
   local first_btn_line = abc + #header + raw_height
@@ -177,7 +177,7 @@ M.open = function()
       or cur - raw_height
     api.nvim_win_set_cursor(
       win,
-      { target_line, math.floor(vim.o.columns / 2) - 13 }
+      { target_line, math.floor(vim.o.columns / 2) - 12 }
     )
   end, { buffer = true })
 
@@ -188,7 +188,7 @@ M.open = function()
       or cur + raw_height
     api.nvim_win_set_cursor(
       win,
-      { target_line, math.floor(vim.o.columns / 2) - 13 }
+      { target_line, math.floor(vim.o.columns / 2) - 12 }
     )
   end, { buffer = true })
 
