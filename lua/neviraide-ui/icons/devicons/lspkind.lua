@@ -7,7 +7,7 @@ return {
   Interface = '',
   Keyword = '󰌋',
   Snippet = '',
-  Folder = '󰉋',
+  Folder = '',
   Constant = '󰏿',
   Struct = '󰙅',
   Table = '',

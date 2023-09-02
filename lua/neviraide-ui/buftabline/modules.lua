@@ -7,6 +7,7 @@ return function()
   local modules = {
     component.NeoTreeOverlay(),
     component.bufferlist(),
+    component.datetime(),
     component.tablist(),
     component.buttons(),
   }

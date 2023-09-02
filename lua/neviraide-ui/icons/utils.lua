@@ -15,10 +15,8 @@ M.icon_decoder = function(icon_code) return vim.fn.nr2char(tostring(icon_code)) 
 M.icon = function(handle_icon, nonicon_name, space_before, space_after)
   local nonicon = require('neviraide-ui.icons.nonicons')
 
-  if space_before == nil or space_after == nil then
-    space_before = 0
-    space_after = 0
-  end
+  if not space_before then space_before = 0 end
+  if not space_after then space_after = 0 end
 
   if vim.g.nonicons then
     return space(space_before)

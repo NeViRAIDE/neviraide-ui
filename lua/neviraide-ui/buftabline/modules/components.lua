@@ -3,9 +3,29 @@ local fn = vim.fn
 local utils = require('neviraide-ui.buftabline.modules.utils')
 local icon = require('neviraide-ui.icons.utils').icon
 
--- TODO: add time and date
-
 local M = {}
+
+vim.g.TbDatetimeToggled = 0
+
+-- Define a function to display the date and time in the status line
+---@return string
+M.datetime = function()
+  local current_time = os.date('%H:%M')
+  local current_date = os.date('%A, %d %B %Y')
+
+  return vim.g.TbDatetimeToggled == 1
+      and '%#BufTabDate#' .. '%@ToggleDatetime@' .. icon('', 'clock', 1, 2) .. current_time .. ',' .. icon(
+        '',
+        'calendar',
+        1,
+        2
+      ) .. current_date .. ' %X'
+    or '%#BufTabDate#'
+      .. '%@ToggleDatetime@'
+      .. icon('', 'clock', 1, 2)
+      .. current_time
+      .. ' %X'
+end
 
 M.NeoTreeOverlay = function()
   return '%#NeoTreeNormal#'
@@ -20,6 +40,7 @@ M.bufferlist = function()
   local available_space = vim.o.columns
     - utils.getNeoTreeWidth()
     - utils.getBtnsWidth()
+    - utils.getDatetimeWidth()
   local current_buf = api.nvim_get_current_buf()
   local has_current = false -- have we seen current buffer yet?
 

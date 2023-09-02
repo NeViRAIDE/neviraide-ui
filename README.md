@@ -20,8 +20,10 @@ Lightweight &amp; performant ui plugin for NEVIRAIDE providing the following :
 
 - #### Icons
 
-For  display [nonicons](https://github.com/yamatsum/nonicons) instead of [devicons](https://github.com/vorillaz/devicons) run in your terminal:
+For display [nonicons](https://github.com/yamatsum/nonicons) instead of [devicons](https://github.com/vorillaz/devicons) run in your terminal:
 
 ```sh
 yay -S nonicons-git
 ```
+
+add this `symbol_map U+f101-U+f25c nonicons` to your kitty config.

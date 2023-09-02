@@ -10,104 +10,28 @@ local light_grey = colors.light_grey
 if NEVIRAIDE().transparency then statusline_bg = 'NONE' end
 
 local Lsp_highlights = {
-  St_lspError = {
-    fg = colors.red,
-    bg = 'none',
-  },
-
-  St_lspWarning = {
-    fg = colors.yellow,
-    bg = 'none',
-  },
-
-  St_LspHints = {
-    fg = colors.purple,
-    bg = 'none',
-  },
-
-  St_LspInfo = {
-    fg = colors.green,
-    bg = 'none',
-  },
+  St_lspError = { fg = colors.red, bg = 'none' },
+  St_lspWarning = { fg = colors.yellow, bg = 'none' },
+  St_LspHints = { fg = colors.purple, bg = 'none' },
+  St_LspInfo = { fg = colors.green, bg = 'none' },
 }
 
 local M = {}
 
 M.default = {
-  StatusLine = {
-    bg = statusline_bg,
-  },
-
-  St_gitIcons = {
-    fg = light_grey,
-    bg = statusline_bg,
-    bold = true,
-  },
-
-  St_LspStatus = {
-    fg = colors.nord_blue,
-    bg = 'none',
-  },
-
-  St_LspProgress = {
-    fg = colors.green,
-    bg = statusline_bg,
-  },
-
-  St_LspStatus_Icon = {
-    fg = colors.nord_blue,
-    bg = 'none',
-  },
-
-  St_EmptySpace = {
-    fg = colors.grey,
-    bg = colors.lightbg,
-  },
-
-  St_EmptySpace2 = {
-    fg = colors.grey,
-    bg = statusline_bg,
-  },
-
-  St_file_info = {
-    bg = colors.lightbg,
-    fg = colors.white,
-  },
-
-  St_file_sep = {
-    bg = statusline_bg,
-    fg = colors.lightbg,
-  },
-
-  St_cwd_icon = {
-    fg = colors.one_bg,
-    bg = colors.red,
-  },
-
-  St_cwd_text = {
-    fg = colors.white,
-    bg = colors.lightbg,
-  },
-
-  St_cwd_sep = {
-    fg = colors.red,
-    bg = statusline_bg,
-  },
-
-  St_pos_sep = {
-    fg = colors.green,
-    bg = colors.lightbg,
-  },
-
-  St_pos_icon = {
-    fg = colors.black,
-    bg = colors.green,
-  },
-
-  St_pos_text = {
-    fg = colors.green,
-    bg = colors.lightbg,
-  },
+  StatusLine = { bg = statusline_bg },
+  St_gitIcons = { fg = light_grey, bg = statusline_bg, bold = true },
+  St_LspStatus = { fg = colors.grey_fg, bg = 'none' },
+  St_LspProgress = { fg = colors.green, bg = statusline_bg },
+  St_LspStatus_Icon = { fg = colors.nord_blue, bg = 'none' },
+  St_EmptySpace = { fg = colors.grey, bg = colors.lightbg },
+  St_EmptySpace2 = { fg = colors.grey, bg = statusline_bg },
+  St_location = { fg = colors.grey_fg, bg = 'none', bold = true },
+  St_spaces = { fg = colors.grey_fg, bg = 'none' },
+  St_encoding = { fg = colors.grey_fg, bg = 'none' },
+  St_fileformat = { fg = colors.grey_fg, bg = 'none' },
+  St_filesize = { fg = colors.grey_fg, bg = 'none' },
+  St_interpreter = { fg = colors.grey_fg, bg = 'none' },
 }
 
 -- add common lsp highlights

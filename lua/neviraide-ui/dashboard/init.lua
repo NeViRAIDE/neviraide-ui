@@ -2,11 +2,12 @@ local autocmd = require('neviraide.utils').autocmd
 local M = {}
 local api = vim.api
 local fn = vim.fn
+local icon = require('neviraide-ui.icons.utils').icon
 
 dofile(vim.g.neviraide_themes_cache .. 'dashboard')
 
 local raw_height = 1
-local pointer = ' '
+local pointer = icon('', 'dot-fill', 0, 1)
 
 local buttons = require('neviraide-ui.dashboard.buttons')
 local headerAscii = require('neviraide-ui.dashboard.ascii')

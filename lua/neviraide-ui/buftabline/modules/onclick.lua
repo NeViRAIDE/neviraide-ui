@@ -20,3 +20,9 @@ vim.cmd(
 vim.cmd(
   'function! TbToggleTabs(a,b,c,d) \n let g:TbTabsToggled = !g:TbTabsToggled | redrawtabline \n endfunction'
 )
+vim.cmd([[
+  function! ToggleDatetime(a,b,c,d) 
+    let g:TbDatetimeToggled = !g:TbDatetimeToggled 
+    redrawtabline
+  endfunction
+]])

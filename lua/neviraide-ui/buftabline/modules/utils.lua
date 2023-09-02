@@ -34,6 +34,30 @@ M.getBtnsWidth = function()
   return width
 end
 
+M.getDatetimeWidth = function(full)
+  local width = 0
+
+  -- Check if full date and time are displayed
+  if full == nil then full = true end
+
+  if full then
+    -- Calculate the width when full date and time are displayed
+    width = width + string.len('') -- Icon for clock
+    width = width + string.len(os.date('%H:%M')) -- Current time
+    width = width + 2 -- Comma and space
+    width = width + string.len('') -- Icon for calendar
+    width = width + string.len(os.date('%A, %d %B %Y')) -- Current date
+    width = width + 1 -- Space at the end
+  else
+    -- Calculate the width when only time is displayed
+    width = width + string.len('') -- Icon for clock
+    width = width + string.len(os.date('%H:%M')) -- Current time
+    width = width + 1 -- Space at the end
+  end
+
+  return width
+end
+
 M.add_fileInfo = function(name, bufnr)
   if devicons_present then
     local icon, icon_hl = devicons.get_icon(name, string.match(name, '%a+$'))
@@ -102,7 +126,11 @@ M.add_fileInfo = function(name, bufnr)
     name = (api.nvim_get_current_buf() == bufnr and '%#TbLineBufOn# ' .. name)
       or ('%#TbLineBufOff# ' .. name)
 
-    return string.rep(' ', padding) .. icon .. name .. string.rep(' ', padding)
+    return string.rep(' ', padding)
+      .. icon
+      .. ' '
+      .. name
+      .. string.rep(' ', padding)
   end
 end
 

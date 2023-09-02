@@ -133,25 +133,35 @@ M.mode = function()
 end
 
 ---Filetype with version of the interpreter.
----@param highlight string highlight group
+---@param condition boolean
 ---@return string
-M.interpreter = function(highlight)
+M.interpreter = function(condition)
+  local highlight = 'St_interpreter'
   local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
   if buf_ft == 'lua' then
-    return '%#' .. highlight .. '#' .. _VERSION
+    return '%#' .. highlight .. '#' .. icon('', 'lua', 0, 2) .. _VERSION
   elseif buf_ft == 'go' then
     local go_version = vim.fn.execute(':!go version')
-    return '%#' .. highlight .. '#' .. 'Go ' .. go_version:match('%d[^ ]*')
+    return '%#'
+      .. highlight
+      .. '#'
+      .. icon('', 'go', 0, 2)
+      .. 'Go '
+      .. go_version:match('%d[^ ]*')
   elseif buf_ft == 'python' then
     local python_version =
       vim.fn.execute(':python import sys; print(sys.version)')
     return '%#'
       .. highlight
       .. '#'
+      .. icon('', 'python', 0, 2)
       .. 'Python '
       .. python_version:match('%d[^ ]*')
   end
-  return '%#' .. highlight .. '#' .. buf_ft:gsub('^%l', string.upper)
+  if condition then
+    return '%#' .. highlight .. '#' .. buf_ft:gsub('^%l', string.upper)
+  end
+  return ''
 end
 
 ---@return string
@@ -163,9 +173,9 @@ M.LSP_status = function()
         and client.name ~= 'null-ls'
       then
         local long = '%#St_LspStatus#'
-          .. icon('', 'server', 1, 2)
+          .. icon('', 'server', 1, 2)
           .. client.name
-        local short = icon('', 'server', 1, 2) .. 'LSP'
+        local short = '%#St_LspStatus#' .. icon('', 'server', 1, 2) .. 'LSP'
         return (vim.o.columns > 100 and long) or short
       end
     end
@@ -243,8 +253,21 @@ end
 M.location = function()
   local lines = vim.api.nvim_buf_line_count(0)
   local r, c = unpack(vim.api.nvim_win_get_cursor(0))
-  -- return '%#Comment# ' .. c .. ':' .. r .. '/' .. lines
-  return '%#Comment#Col ' .. c .. ', Ln ' .. r .. '/' .. lines
+  if
+    c <= 1
+    or vim.bo.filetype == 'neviraideDashboard'
+    or vim.bo.filetype == 'TelescopePrompt'
+  then
+    return '%#St_Location#' .. icon('Ln', 'rows', 1, 2) .. r .. '/' .. lines
+  end
+  return '%#St_Location#'
+    .. icon('Col', 'columns', 0, 2)
+    .. c
+    .. ','
+    .. icon('Ln', 'rows', 1, 2)
+    .. r
+    .. '/'
+    .. lines
 end
 
 ---@param condition boolean
@@ -265,7 +288,7 @@ M.filesize = function(condition)
 
   local format = i == 1 and '%d%s' or '%.1f%s'
   if condition then
-    return '%#Comment#' .. string.format(format, size, suffixes[i])
+    return '%#St_filesize#' .. string.format(format, size, suffixes[i])
   end
   return ''
 end
@@ -278,7 +301,7 @@ M.fileformat = function(condition)
     dos = 'CRLF ',
     mac = 'CR ',
   }
-  if condition then return '%#Comment#' .. symbols[vim.bo.fileformat] end
+  if condition then return '%#St_fileformat#' .. symbols[vim.bo.fileformat] end
   return ''
 end
 
@@ -286,7 +309,7 @@ end
 ---@return string
 M.encoding = function(condition)
   if condition then
-    return '%#Comment#' .. string.upper(vim.opt.fileencoding:get())
+    return '%#St_encoding#' .. string.upper(vim.opt.fileencoding:get())
   end
   return ''
 end
@@ -294,7 +317,7 @@ end
 ---@param condition? boolean
 ---@return string
 M.spaces = function(condition)
-  if condition then return '%#Comment#' .. vim.o.tabstop .. ' spaces' end
+  if condition then return '%#St_spaces#' .. vim.o.tabstop .. ' spaces' end
   return ''
 end
 
