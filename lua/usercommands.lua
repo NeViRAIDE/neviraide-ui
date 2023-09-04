@@ -100,7 +100,7 @@ end, {
           'relative_numbers',
           'cursor_line',
           'cursor_column',
-            'transparency'
+          'transparency',
         }
       end
     end

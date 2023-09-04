@@ -17,39 +17,39 @@ function M.replace_word(old, new)
   end
 end
 
--- M.dirLookup = function()
---   local path = '/lazy/UI/lua/neviraide-ui/themes/colorschemes'
---   local default_themes = vim.fn.readdir(vim.fn.stdpath('data') .. path)
---   for index, theme in ipairs(default_themes) do
---     default_themes[index] = theme:match('(.+)%..+')
---   end
---   return default_themes
--- end
-
 -- for local working with plugin
 ---@return table
 M.dirLookup = function()
-  local themes_dir =
-    '$HOME/GitHub/nvim_plugins/neviraide-ui.nvim/lua/neviraide-ui/themes/colorschemes'
+  local default_themes = {}
+
+  local path = vim.fn.stdpath('data')
+    .. '/lazy/UI/lua/neviraide-ui/themes/colorschemes'
+  if vim.fn.isdirectory(path) then
+    default_themes = vim.fn.readdir(path)
+    for index, theme in ipairs(default_themes) do
+      default_themes[index] = theme:match('(.+)%..+')
+    end
+
+    if #default_themes > 0 then return default_themes end
+  end
+
+  local themes_dir = os.getenv('HOME')
+    .. '/GitHub/nvim_plugins/neviraide-ui.nvim/lua/neviraide-ui/themes/colorschemes'
   local list = {}
   local p = io.popen(
     'find "'
       .. themes_dir
-      .. [[" -type f -iname "*.lua" -execdir sh -c 'printf "%s\n" "${0%.*}"' {} ';']]
+      .. '" -type f -iname "*.lua" -execdir sh -c \'printf "%s\n" "${0%.*}"\' {} \';\''
   )
+
   if p ~= nil then
     for file in p:lines() do
       table.insert(list, file)
     end
     p:close()
   end
-  return list
-end
 
----@param set string
----@return function
-M.settings = function(set)
-  return require('neviraide-ui.utils.change_settings.' .. set)
+  return list
 end
 
 return M

@@ -7,7 +7,7 @@ return function(text)
 
   local border_line = { 'rounded', 'single', 'double', 'solid' }
 
-  -- TODO: make it pretty (ont if if if if)
+  -- TODO: make it pretty (not if if if if)
   for _, line in pairs(border_line) do
     if border_in_config == line then
       if text then
