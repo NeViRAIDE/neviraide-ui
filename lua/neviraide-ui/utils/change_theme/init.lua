@@ -1,6 +1,4 @@
--- one
---two
--- idlskfjslkdjfl
+local M = {}
 local autocmd = require('nui.utils.autocmd')
 local event = require('nui.utils.autocmd').event
 
@@ -10,7 +8,17 @@ local function reload_theme(name)
   vim.api.nvim_exec_autocmds('User', { pattern = 'NeviraideThemeReload' })
 end
 
-return function()
+---@param theme string
+M.change_theme = function(theme)
+  reload_theme(theme)
+  require('neviraide-ui.utils').replace_word(
+    "theme = '" .. NEVIRAIDE().theme .. "'",
+    "theme = '" .. theme .. "'"
+  )
+  require('plenary.reload').reload_module('NEVIRAIDE')
+end
+
+M.nui_change_theme = function()
   local popup = require('neviraide-ui.utils.change_theme.popup')()
 
   popup:on(require('nui.utils.autocmd').event.BufLeave, function()
@@ -84,3 +92,5 @@ return function()
 
   tree:render()
 end
+
+return M

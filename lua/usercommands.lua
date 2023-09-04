@@ -58,7 +58,9 @@ usrcmd('UI', function(opts)
       util.settings('transparency').disable()
     end
   elseif opts.fargs[1] == 'theme' then
-    -- require('neviraide-ui.utils.change_border.utils').set_borders(opts.fargs[2])
+    require('neviraide-ui.utils.change_theme').change_theme(opts.fargs[2])
+  elseif opts.fargs[1] == 'indents' then
+    util.settings('indents').set_indents(tonumber(opts.fargs[2]))
   end
 end, {
   nargs = '*',
@@ -85,6 +87,8 @@ end, {
         return { 'toggle', 'enable', 'disable' }
       elseif current_arg == 'transparency' then
         return { 'toggle', 'enable', 'disable' }
+      elseif current_arg == 'indents' then
+        return {}
       elseif current_arg == 'theme' then
         local themes = {}
         for _, theme in pairs(util.dirLookup()) do
@@ -97,6 +101,7 @@ end, {
           'borders',
           'theme',
           'numbers',
+          'indents',
           'relative_numbers',
           'cursor_line',
           'cursor_column',
