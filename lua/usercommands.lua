@@ -1,7 +1,6 @@
 local api = vim.api
 local usrcmd = api.nvim_create_user_command
 local util = require('neviraide-ui.utils')
--- local settings = require('neviraide-ui.utils.settings')
 
 usrcmd('Dashboard', function()
   if vim.g.nvdash_displayed then
@@ -19,9 +18,37 @@ usrcmd('UI', function(opts)
   if opts.fargs[1] == 'borders' then
     require('neviraide-ui.utils.change_border.utils').set_borders(opts.fargs[2])
   elseif opts.fargs[1] == 'numbers' then
-    -- settings.toggle_numbers()
+    if opts.fargs[2] == 'toggle' then
+      util.settings('numbers').toggle()
+    elseif opts.fargs[2] == 'enable' then
+      util.settings('numbers').enable()
+    elseif opts.fargs[2] == 'disable' then
+      util.settings('numbers').disable()
+    end
   elseif opts.fargs[1] == 'relative_numbers' then
-    -- settings.toggle_relative_numbers()
+    if opts.fargs[2] == 'toggle' then
+      util.settings('relativenumbers').toggle()
+    elseif opts.fargs[2] == 'enable' then
+      util.settings('relativenumbers').enable()
+    elseif opts.fargs[2] == 'disable' then
+      util.settings('relativenumbers').disable()
+    end
+  elseif opts.fargs[1] == 'cursor_line' then
+    if opts.fargs[2] == 'toggle' then
+      util.settings('cursorline').toggle()
+    elseif opts.fargs[2] == 'enable' then
+      util.settings('cursorline').enable()
+    elseif opts.fargs[2] == 'disable' then
+      util.settings('cursorline').disable()
+    end
+  elseif opts.fargs[1] == 'cursor_column' then
+    if opts.fargs[2] == 'toggle' then
+      util.settings('cursorcolumn').toggle()
+    elseif opts.fargs[2] == 'enable' then
+      util.settings('cursorcolumn').enable()
+    elseif opts.fargs[2] == 'disable' then
+      util.settings('cursorcolumn').disable()
+    end
   elseif opts.fargs[1] == 'theme' then
     -- require('neviraide-ui.utils.change_border.utils').set_borders(opts.fargs[2])
   end
@@ -40,6 +67,10 @@ end, {
         return {}
       elseif current_arg == 'borders' then
         return { 'none', 'rounded', 'single', 'double', 'shadow', 'solid' }
+      elseif current_arg == 'cursor_line' then
+        return { 'toggle', 'enable', 'disable' }
+      elseif current_arg == 'cursor_column' then
+        return { 'toggle', 'enable', 'disable' }
       elseif current_arg == 'numbers' then
         return { 'toggle', 'enable', 'disable' }
       elseif current_arg == 'relative_numbers' then
@@ -57,6 +88,8 @@ end, {
           'theme',
           'numbers',
           'relative_numbers',
+          'cursor_line',
+          'cursor_column',
         }
       end
     end

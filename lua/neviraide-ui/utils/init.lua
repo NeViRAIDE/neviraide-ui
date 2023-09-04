@@ -46,4 +46,10 @@ M.dirLookup = function()
   return list
 end
 
+---@param set string
+---@return function
+M.settings = function(set)
+  return require('neviraide-ui.utils.change_settings.' .. set)
+end
+
 return M
