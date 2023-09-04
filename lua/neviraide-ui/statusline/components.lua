@@ -308,6 +308,7 @@ end
 ---@param condition? boolean
 ---@return string
 M.encoding = function(condition)
+  -- FIX: emty on .txt
   if condition then
     return '%#St_encoding#' .. string.upper(vim.opt.fileencoding:get())
   end

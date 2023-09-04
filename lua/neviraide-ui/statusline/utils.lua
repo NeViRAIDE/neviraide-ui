@@ -16,6 +16,7 @@ M.ignored = function()
     'nui_sm',
     'nofile',
     'neo-tree',
+    'neo-tree-popup',
     'terminal',
     'notify',
   }

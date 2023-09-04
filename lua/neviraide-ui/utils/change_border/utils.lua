@@ -1,11 +1,10 @@
--- TODO: reload config on change
 local M = {}
 
 local list = {
-  -- TODO: add double
   bordered = {
     rounded = '{ "─", "│", "─", "│", "╭", "╮", "╯", "╰" }',
     single = '{ "─", "│", "─", "│", "┌", "┐", "┘", "└" }',
+    double = '{ "═", "║", "═", "║", "╔", "╗", "╝", "╚" }',
   },
   none = '{ " ", " ", " ", " ", " ", " ", " ", " " }',
 }
@@ -38,6 +37,5 @@ M.set_borders = function(border)
   require('neviraide-ui.utils').replace_word(old_data_chars, new_data_chars)
   require('plenary.reload').reload_module('NEVIRAIDE')
 end
--- M.set_borders('rounded')
 
 return M

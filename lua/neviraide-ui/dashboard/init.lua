@@ -10,7 +10,9 @@ local raw_height = 1
 local pointer = icon('', 'dot-fill', 0, 1)
 
 local buttons = require('neviraide-ui.dashboard.buttons')
-local headerAscii = require('neviraide-ui.dashboard.ascii')
+local headers = require('neviraide-ui.dashboard.ascii')
+
+local headerAscii = headers.long
 
 local emmptyLine = string.rep(' ', vim.fn.strwidth(headerAscii[1]))
 
@@ -48,12 +50,12 @@ M.open = function()
   local buf = vim.api.nvim_create_buf(false, true)
   local win = api.nvim_get_current_win()
 
-  -- FIX: invalid column out of range if small current window
-
-  -- switch to larger win if cur win is small
   if neviraideDashboardWidth + 6 > api.nvim_win_get_width(0) then
-    vim.api.nvim_set_current_win(api.nvim_list_wins()[2])
-    win = api.nvim_get_current_win()
+    local wins = api.nvim_list_wins()
+    if #wins > 1 then
+      vim.api.nvim_set_current_win(wins[2])
+      win = api.nvim_get_current_win()
+    end
   end
 
   api.nvim_win_set_buf(win, buf)
@@ -62,6 +64,25 @@ M.open = function()
   vim.g.neviraide_dashboard_displayed = true
 
   local header = headerAscii
+
+  local win_width = api.nvim_win_get_width(win)
+
+  local function getMaxWidthOfLong()
+    local max_len = 0
+    for _, val in ipairs(headers.long) do
+      local len = vim.fn.strwidth(val)
+      if len > max_len then max_len = len end
+    end
+    return max_len
+  end
+
+  local SOME_THRESHOLD = getMaxWidthOfLong()
+
+  if win_width < SOME_THRESHOLD then
+    header = headers.short
+  else
+    header = headers.long
+  end
 
   local function addSpacing_toBtns(txt1, txt2)
     local btn_len = fn.strwidth(txt1) + fn.strwidth(txt2)
@@ -118,43 +139,58 @@ M.open = function()
     (api.nvim_win_get_width(win) / 2) - (neviraideDashboardWidth / 2)
   ) - 3
 
+  horiz_pad_index = math.max(horiz_pad_index, 0)
+
   for i = abc, abc + #header - 2 do
-    api.nvim_buf_add_highlight(
-      buf,
-      neviraideDashboard,
-      'NeviraideDashboardAscii',
-      i,
-      horiz_pad_index,
-      -1
-    )
+    local max_col = api.nvim_buf_get_lines(buf, i, i + 1, false)[1]:len()
+    if horiz_pad_index < max_col and horiz_pad_index >= 0 then
+      api.nvim_buf_add_highlight(
+        buf,
+        neviraideDashboard,
+        'NeviraideDashboardAscii',
+        i,
+        horiz_pad_index,
+        -1
+      )
+    end
   end
 
   for i = abc + #header - 1, abc + #dashboard do
-    api.nvim_buf_add_highlight(
-      buf,
-      neviraideDashboard,
-      'NeviraideDashboardButtons',
-      i,
-      horiz_pad_index,
-      -1
-    )
+    local max_col = api.nvim_buf_get_lines(buf, i, i + 1, false)[1]:len()
+    if horiz_pad_index < max_col and horiz_pad_index >= 0 then
+      api.nvim_buf_add_highlight(
+        buf,
+        neviraideDashboard,
+        'NeviraideDashboardButtons',
+        i,
+        horiz_pad_index,
+        -1
+      )
+    end
   end
 
   for i = abc + #dashboard - 2, abc + #dashboard do
-    api.nvim_buf_add_highlight(
-      buf,
-      neviraideDashboard,
-      'NeviraideDashboardVimver',
-      i,
-      horiz_pad_index,
-      -1
-    )
+    local max_col = api.nvim_buf_get_lines(buf, i, i + 1, false)[1]:len()
+    if horiz_pad_index < max_col and horiz_pad_index >= 0 then
+      api.nvim_buf_add_highlight(
+        buf,
+        neviraideDashboard,
+        'NeviraideDashboardVimver',
+        i,
+        horiz_pad_index,
+        -1
+      )
+    end
   end
 
-  api.nvim_win_set_cursor(
-    win,
-    { abc + #header, math.floor(vim.o.columns / 2) - 12 }
-  )
+  local target_line = abc + #header
+  local max_line = api.nvim_buf_line_count(buf)
+  if target_line <= max_line then
+    api.nvim_win_set_cursor(
+      win,
+      { target_line, math.floor(vim.o.columns / 2) - 12 }
+    )
+  end
 
   local first_btn_line = abc + #header + raw_height
   local keybind_lineNrs = {}
@@ -173,7 +209,7 @@ M.open = function()
 
   vim.keymap.set('n', 'k', function()
     local cur = fn.line('.')
-    local target_line = cur == keybind_lineNrs[1]
+    target_line = cur == keybind_lineNrs[1]
         and keybind_lineNrs[#keybind_lineNrs]
       or cur - raw_height
     api.nvim_win_set_cursor(
@@ -184,7 +220,7 @@ M.open = function()
 
   vim.keymap.set('n', 'j', function()
     local cur = fn.line('.')
-    local target_line = cur == keybind_lineNrs[#keybind_lineNrs]
+    target_line = cur == keybind_lineNrs[#keybind_lineNrs]
         and keybind_lineNrs[1]
       or cur + raw_height
     api.nvim_win_set_cursor(

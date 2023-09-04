@@ -12,8 +12,9 @@ end
 
 function M.toggle_numbers()
   vim.o.number = not vim.o.number
+  -- FIX: same names with relativenumber
   local old = 'numbers = ' .. tostring(NEVIRAIDE().numbers)
-  local new = 'numbers = ' .. tostring(vim.o.numbers)
+  local new = 'numbers = ' .. tostring(vim.o.number)
   write(old, new)
   require('plenary.reload').reload_module('NEVIRAIDE')
 end

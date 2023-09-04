@@ -27,9 +27,10 @@ end
 -- end
 
 -- for local working with plugin
+---@return table
 M.dirLookup = function()
   local themes_dir =
-    '$HOME/Study/nvim_plugins/neviraide-ui.nvim/lua/neviraide-ui/themes/colorschemes'
+    '$HOME/GitHub/nvim_plugins/neviraide-ui.nvim/lua/neviraide-ui/themes/colorschemes'
   local list = {}
   local p = io.popen(
     'find "'

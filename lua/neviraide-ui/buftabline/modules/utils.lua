@@ -10,6 +10,7 @@ M.isBufValid = function(bufnr)
 end
 
 M.new_hl = function(group1, group2)
+  if group1 == nil then group1 = '' end
   local fg = fn.synIDattr(fn.synIDtrans(fn.hlID(group1)), 'fg#')
   local bg = fn.synIDattr(fn.synIDtrans(fn.hlID(group2)), 'bg#')
   api.nvim_set_hl(0, 'Tbline' .. group1 .. group2, { fg = fg, bg = bg })
