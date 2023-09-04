@@ -1,4 +1,3 @@
--- TODO: add different highlights to components
 local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
 local merge_tb = vim.tbl_deep_extend
 
