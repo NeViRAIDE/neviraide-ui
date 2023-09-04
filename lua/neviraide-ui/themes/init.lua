@@ -114,16 +114,4 @@ M.load_all_highlights = function()
   end
 end
 
-M.toggle_transparency = function()
-  g.transparency = not g.transparency
-  M.load_all_highlights()
-
-  -- write transparency value to NEVIRAIDE
-  local old_data = 'transparency = ' .. tostring(NEVIRAIDE().transparency)
-  local new_data = 'transparency = ' .. tostring(g.transparency)
-
-  require('neviraide-ui.utils').replace_word(old_data, new_data)
-  require('plenary.reload').reload_module('NEVIRAIDE')
-end
-
 return M

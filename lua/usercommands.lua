@@ -49,6 +49,14 @@ usrcmd('UI', function(opts)
     elseif opts.fargs[2] == 'disable' then
       util.settings('cursorcolumn').disable()
     end
+  elseif opts.fargs[1] == 'transparency' then
+    if opts.fargs[2] == 'toggle' then
+      util.settings('transparency').toggle()
+    elseif opts.fargs[2] == 'enable' then
+      util.settings('transparency').enable()
+    elseif opts.fargs[2] == 'disable' then
+      util.settings('transparency').disable()
+    end
   elseif opts.fargs[1] == 'theme' then
     -- require('neviraide-ui.utils.change_border.utils').set_borders(opts.fargs[2])
   end
@@ -75,6 +83,8 @@ end, {
         return { 'toggle', 'enable', 'disable' }
       elseif current_arg == 'relative_numbers' then
         return { 'toggle', 'enable', 'disable' }
+      elseif current_arg == 'transparency' then
+        return { 'toggle', 'enable', 'disable' }
       elseif current_arg == 'theme' then
         local themes = {}
         for _, theme in pairs(util.dirLookup()) do
@@ -90,6 +100,7 @@ end, {
           'relative_numbers',
           'cursor_line',
           'cursor_column',
+            'transparency'
         }
       end
     end
