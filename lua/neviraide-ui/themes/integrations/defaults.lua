@@ -248,7 +248,11 @@ defaults = merge_tb(
   require('neviraide-ui.themes').load_highlight('statusline')
 )
 
-if vim.g.borders == 'none' or vim.g.borders == 'shadow' then
+if
+  vim.g.borders == 'none'
+  or vim.g.borders == 'shadow'
+  or vim.g.borders == 'solid'
+then
   defaults.FloatBorder = { bg = colors.one_bg }
   defaults.NormalFloat = { bg = colors.one_bg }
 end

@@ -1,12 +1,11 @@
 local M = {}
 
 local list = {
-  bordered = {
-    rounded = '{ "─", "│", "─", "│", "╭", "╮", "╯", "╰" }',
-    single = '{ "─", "│", "─", "│", "┌", "┐", "┘", "└" }',
-    double = '{ "═", "║", "═", "║", "╔", "╗", "╝", "╚" }',
-  },
-  none = '{ " ", " ", " ", " ", " ", " ", " ", " " }',
+  rounded = '{ "─", "│", "─", "│", "╭", "╮", "╯", "╰" }',
+  single = '{ "─", "│", "─", "│", "┌", "┐", "┘", "└" }',
+  double = '{ "═", "║", "═", "║", "╔", "╗", "╝", "╚" }',
+  solid = '{ " ", " ", " ", " ", " ", " ", " ", " " }',
+  none = '{ "", "", "", "", "", "", "", "" }',
 }
 
 ---@param border 'none'|'single'|'double'|'rounded'|'solid'|'shadow'
@@ -16,12 +15,11 @@ M.set_borders = function(border)
   ---@type string
   local chars
 
-  for key in pairs(list.bordered) do
+  for key in pairs(list) do
     if border == key then
-      chars = list.bordered[border]
-      break
+      chars = list[border]
     else
-      chars = list.none
+      chars = list['solid']
     end
   end
 
