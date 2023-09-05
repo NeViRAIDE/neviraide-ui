@@ -17,6 +17,7 @@ usrcmd('UI', function(opts)
   end
   if opts.fargs[1] == 'borders' then
     require('neviraide-ui.utils.change_border.utils').set_borders(opts.fargs[2])
+    require('neviraide.utils.reload_config').reload_borders()
   elseif opts.fargs[1] == 'numbers' then
     if opts.fargs[2] == 'toggle' then
       util.settings('numbers').toggle()

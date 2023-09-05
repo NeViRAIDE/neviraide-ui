@@ -1,6 +1,6 @@
 local M = {}
 
-local list = {
+local border_chars_list = {
   rounded = '{ "─", "│", "─", "│", "╭", "╮", "╯", "╰" }',
   single = '{ "─", "│", "─", "│", "┌", "┐", "┘", "└" }',
   double = '{ "═", "║", "═", "║", "╔", "╗", "╝", "╚" }',
@@ -15,11 +15,11 @@ M.set_borders = function(border)
   ---@type string
   local chars
 
-  for key in pairs(list) do
-    if border == key then
-      chars = list[border]
+  for _ in pairs(border_chars_list) do
+    if border == 'shadow' then
+      chars = border_chars_list.solid
     else
-      chars = list['solid']
+      chars = border_chars_list[border]
     end
   end
 

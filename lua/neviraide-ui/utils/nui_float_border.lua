@@ -5,7 +5,7 @@ return function(text)
   ---@type string
   local border_in_config = NEVIRAIDE().border
 
-  local border_line = { 'rounded', 'single', 'double', 'solid' }
+  local border_line = { 'rounded', 'single', 'double' }
 
   -- TODO: make it pretty (not if if if if)
   for _, line in pairs(border_line) do
