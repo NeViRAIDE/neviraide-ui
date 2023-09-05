@@ -61,8 +61,12 @@ usrcmd('UI', function(opts)
     require('neviraide.utils.reload_config').reload_transparency()
   elseif opts.fargs[1] == 'theme' then
     require('neviraide-ui.utils.change_theme').change_theme(opts.fargs[2])
+    require('neviraide.utils.reload_config').reload_config()
   elseif opts.fargs[1] == 'indents' then
     util.settings('indents').set_indents(tonumber(opts.fargs[2]))
+  elseif opts.fargs[1] == 'icons' then
+    util.settings('icons').set_icons(opts.fargs[2])
+    require('neviraide.utils.reload_config').reload_icons()
   end
 end, {
   nargs = '*',
@@ -91,6 +95,8 @@ end, {
         return { 'toggle', 'enable', 'disable' }
       elseif current_arg == 'indents' then
         return {}
+      elseif current_arg == 'icons' then
+        return { 'nonicons', 'devicons' }
       elseif current_arg == 'theme' then
         local themes = {}
         for _, theme in pairs(util.dirLookup()) do
@@ -103,6 +109,7 @@ end, {
           'borders',
           'theme',
           'numbers',
+          'icons',
           'indents',
           'relative_numbers',
           'cursor_line',

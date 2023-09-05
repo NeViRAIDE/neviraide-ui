@@ -1,3 +1,4 @@
+-- TODO: do config for ui or not
 local api = vim.api
 
 vim.opt.statusline = '%!v:lua.require("neviraide-ui.statusline").run()'
