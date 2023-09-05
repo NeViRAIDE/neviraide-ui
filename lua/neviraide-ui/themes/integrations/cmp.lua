@@ -50,6 +50,7 @@ highlights = vim.tbl_deep_extend(
 )
 highlights = vim.tbl_deep_extend('force', highlights, item_kinds)
 
+-- FIX: highlight cmp
 -- highlights.CmpSel = {
 --   fg = colors.white,
 --   bg = (

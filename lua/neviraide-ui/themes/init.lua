@@ -32,9 +32,9 @@ M.extend_default_hl = function(highlights)
 
   -- transparency
   if vim.g.transparency then
-    local glassy = require('neviraide-ui.themes.transparent')
+    local transparent = require('neviraide-ui.themes.transparent')
 
-    for key, value in pairs(glassy) do
+    for key, value in pairs(transparent) do
       if highlights[key] then
         highlights[key] = M.merge_tb(highlights[key], value)
       end

@@ -33,6 +33,8 @@ local hl_groups = {
   'CmpPmenu',
   'NeviraideDashboardAscii',
   'WhichKeyFloat',
+  'CmpDoc',
+  'CmpDocBorder',
 }
 
 for _, groups in ipairs(hl_groups) do

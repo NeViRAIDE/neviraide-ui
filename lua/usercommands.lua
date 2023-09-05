@@ -58,6 +58,7 @@ usrcmd('UI', function(opts)
     elseif opts.fargs[2] == 'disable' then
       util.settings('transparency').disable()
     end
+    require('neviraide.utils.reload_config').reload_transparency()
   elseif opts.fargs[1] == 'theme' then
     require('neviraide-ui.utils.change_theme').change_theme(opts.fargs[2])
   elseif opts.fargs[1] == 'indents' then
