@@ -44,15 +44,15 @@ M.getDatetimeWidth = function(full)
   if full then
     -- Calculate the width when full date and time are displayed
     width = width + string.len('') -- Icon for clock
-    width = width + string.len(os.date('%H:%M')) -- Current time
+    width = width + string.len(tostring(os.date('%H:%M'))) -- Current time
     width = width + 2 -- Comma and space
     width = width + string.len('') -- Icon for calendar
-    width = width + string.len(os.date('%A, %d %B %Y')) -- Current date
+    width = width + string.len(tostring(os.date('%A, %d %B %Y'))) -- Current date
     width = width + 1 -- Space at the end
   else
     -- Calculate the width when only time is displayed
     width = width + string.len('') -- Icon for clock
-    width = width + string.len(os.date('%H:%M')) -- Current time
+    width = width + string.len(tostring(os.date('%H:%M'))) -- Current time
     width = width + 1 -- Space at the end
   end
 
@@ -124,8 +124,13 @@ M.add_fileInfo = function(name, bufnr)
     local maxname_len = 16
 
     name = (#name > maxname_len and string.sub(name, 1, 14) .. '..') or name
-    name = (api.nvim_get_current_buf() == bufnr and '%#TbLineBufOn# ' .. name)
-      or ('%#TbLineBufOff# ' .. name)
+    if bufnr == api.nvim_get_current_buf() then
+      name = (vim.bo[0].modified and '%#TbLineBufOnModified# ' .. name)
+        or ('%#TbLineBufOn# ' .. name)
+    else
+      name = (vim.bo[bufnr].modified and '%#TbLineBufOffModified# ' .. name)
+        or ('%#TbLineBufOff# ' .. name)
+    end
 
     return string.rep(' ', padding)
       .. icon

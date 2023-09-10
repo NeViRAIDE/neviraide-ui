@@ -5,17 +5,9 @@ local M = {
     fg = colors.one_bg2,
     bg = 'NONE',
   },
-
-  TelescopeResultsTitle = {
-    fg = colors.black,
-    -- bg = colors.blue,
-    bg = 'NONE',
-  },
 }
 
--- for hl groups which need bg = "NONE" only!
 local hl_groups = {
-  'NormalFloat',
   'Normal',
   'Folded',
   'NeoTreeNormal',
@@ -23,18 +15,23 @@ local hl_groups = {
   'NeoTreeEndOfBuffer',
   'NeoTreeWinSeparator',
   'NeoTreeStatusLine',
+  'NeviraideDashboardAscii',
+}
+
+local hl_borderless = {
+  'NormalFloat',
   'TelescopeNormal',
   'TelescopePrompt',
   'TelescopeResults',
+  'TelescopeResultsTitle',
   'TelescopePromptNormal',
   'TelescopePromptPrefix',
   'CursorLine',
   'Pmenu',
   'CmpPmenu',
-  'NeviraideDashboardAscii',
-  'WhichKeyFloat',
   'CmpDoc',
   'CmpDocBorder',
+  'WhichKeyFloat',
 }
 
 for _, groups in ipairs(hl_groups) do
@@ -43,19 +40,23 @@ for _, groups in ipairs(hl_groups) do
   }
 end
 
-M.TelescopeBorder = {
-  fg = colors.grey,
-  bg = 'NONE',
-}
-
-M.TelescopePromptBorder = {
-  fg = colors.grey,
-  bg = 'NONE',
-}
-
-M.CmpDocBorder = {
-  bg = 'none',
-  fg = colors.grey,
-}
+if
+  vim.g.borders == 'rounded'
+  or vim.g.borders == 'single'
+  or vim.g.borders == 'double'
+then
+  for _, groups in ipairs(hl_borderless) do
+    M[groups] = {
+      bg = 'none',
+    }
+  end
+  M.TelescopeBorder = { fg = colors.grey, bg = 'NONE' }
+  M.TelescopePromptBorder = { fg = colors.grey, bg = 'NONE' }
+  M.CmpDocBorder = { bg = 'none', fg = colors.grey }
+  M.TelescopeResultsTitle = {
+    fg = colors.black,
+    bg = colors.blue,
+  }
+end
 
 return M

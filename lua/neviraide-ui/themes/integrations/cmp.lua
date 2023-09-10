@@ -6,8 +6,8 @@ local highlights = {
   CmpItemAbbrMatch = { fg = colors.blue, bold = true },
   CmpDoc = { bg = colors.darker_black },
   CmpDocBorder = { fg = colors.darker_black, bg = colors.darker_black },
-  CmpPmenu = { bg = colors.black },
-  CmpSel = { link = 'PmenuSel', bold = true },
+  CmpPmenu = { link = 'Pmenu' },
+  CmpSel = { link = 'PmenuSel' },
 }
 
 local item_kinds = {
@@ -50,13 +50,12 @@ highlights = vim.tbl_deep_extend(
 )
 highlights = vim.tbl_deep_extend('force', highlights, item_kinds)
 
--- FIX: highlight cmp
--- highlights.CmpSel = {
---   fg = colors.white,
---   bg = (
---     highlights.CmpPmenu.bg == colors.black2 and colors.grey or colors.one_bg3
---   ),
---   bold = true,
--- }
+if
+  vim.g.borders == 'rounded'
+  or vim.g.borders == 'single'
+  or vim.g.borders == 'double'
+then
+  highlights.CmpPmenu = { bg = 'none' }
+end
 
 return highlights

@@ -2,8 +2,6 @@ local Input = require('nui.input')
 local event = require('nui.utils.autocmd').event
 local utils = require('neviraide-ui.override_vim_ui.utils')
 
-local border = require('neviraide-ui.utils.nui_float_border')
-
 local function override_ui_input()
   local UIInput = Input:extend('UIInput')
 
@@ -16,8 +14,8 @@ local function override_ui_input()
       relative = 'cursor',
       position = { row = 1, col = 0 },
       size = { width = math.max(20, vim.api.nvim_strwidth(default_value)) },
-      border = border(text).border,
-      win_options = utils.popup_bg(border),
+      border = utils.nui_border(text),
+      win_options = utils.popup_bg(),
       buf_options = { filetype = 'nui_input' },
     }, {
       default_value = default_value,

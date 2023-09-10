@@ -12,7 +12,7 @@ local defaults = {
 
   Pmenu = { bg = colors.one_bg },
   PmenuSbar = { bg = colors.one_bg },
-  PmenuSel = { bg = colors.pmenu_bg, fg = colors.black },
+  PmenuSel = { bg = colors.pmenu_bg, fg = colors.black, bold = true },
   PmenuThumb = { bg = colors.grey },
 
   MatchParen = { link = 'MatchWord' },
@@ -253,8 +253,9 @@ if
   or vim.g.borders == 'shadow'
   or vim.g.borders == 'solid'
 then
-  defaults.FloatBorder = { bg = colors.one_bg }
+  defaults.FloatBorder = { bg = colors.one_bg, fg = colors.one_bg }
   defaults.NormalFloat = { bg = colors.one_bg }
+  defaults.NuiTitle = { bg = colors.green, fg = colors.black }
 end
 
 return defaults

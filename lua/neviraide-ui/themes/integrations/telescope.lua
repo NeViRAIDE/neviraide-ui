@@ -27,6 +27,7 @@ local hlgroups = {
   },
 
   TelescopeSelection = { bg = colors.black2, fg = colors.white },
+  TelescopeSelectionCaret = { bg = colors.black2, fg = colors.red },
   TelescopeResultsDiffAdd = { fg = colors.green },
   TelescopeResultsDiffChange = { fg = colors.yellow },
   TelescopeResultsDiffDelete = { fg = colors.red },

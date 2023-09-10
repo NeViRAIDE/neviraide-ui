@@ -4,7 +4,7 @@ return function()
   local Popup = require('nui.popup')
 
   local utils = require('neviraide-ui.override_vim_ui.utils')
-  local border = require('neviraide-ui.utils.nui_float_border')
+  local border = require('neviraide-ui.override_vim_ui.nui_float_border')
 
   local text = {
     top = ' Colorschemes ',

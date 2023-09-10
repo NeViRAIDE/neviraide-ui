@@ -2,7 +2,6 @@ return function()
   local Input = require('nui.input')
   local event = require('nui.utils.autocmd').event
   local utils = require('neviraide-ui.override_vim_ui.utils')
-  local border = require('neviraide-ui.utils.nui_float_border')
 
   local text = {
     top = ' Create a new file ',
@@ -11,11 +10,9 @@ return function()
 
   local input = Input({
     position = { row = '90%', col = '50%' },
-    size = {
-      width = 40,
-    },
-    border = border(text).border,
-    win_options = utils.popup_bg(border),
+    size = { width = 40 },
+    border = utils.nui_border(text),
+    win_options = utils.popup_bg(),
     relative = 'editor',
     buf_options = {
       filetype = 'create',

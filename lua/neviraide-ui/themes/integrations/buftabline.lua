@@ -4,10 +4,10 @@ local highlights = {
 
   TblineFill = { bg = colors.black2 },
   BufTabDate = { fg = colors.grey_fg, bg = colors.black2, italic = true },
-  TbLineBufOn = { fg = colors.white, bg = colors.black },
+  TbLineBufOn = { fg = colors.white, bg = colors.black, bold = true },
   TbLineBufOff = { fg = colors.light_grey, bg = colors.black2 },
-  TbLineBufOnModified = { fg = colors.green, bg = colors.black },
-  TbLineBufOffModified = { fg = colors.red, bg = colors.black2 },
+  TbLineBufOnModified = { fg = colors.green, bg = colors.black, italic = true },
+  TbLineBufOffModified = { fg = colors.red, bg = colors.black2, italic = true },
   TbLineBufOnClose = { fg = colors.red, bg = colors.black },
   TbLineBufOffClose = { fg = colors.light_grey, bg = colors.black2 },
   TblineTabNewBtn = { fg = colors.white, bg = colors.one_bg3, bold = true },
@@ -20,6 +20,7 @@ local highlights = {
 }
 
 local hlgroups_glassy = {
+  'BufTabDate',
   'TblineFill',
   'TbLineBufOn',
   'TbLineBufOff',
@@ -29,7 +30,7 @@ local hlgroups_glassy = {
   'TbLineBufOffModified',
 }
 
-if NEVIRAIDE().transparency then
+if vim.g.transparency then
   for _, val in ipairs(hlgroups_glassy) do
     highlights[val].bg = 'NONE'
   end

@@ -46,22 +46,27 @@ local styles = {
     NotifyERRORBorder = { fg = colors.red },
     NotifyERRORIcon = { fg = colors.red },
     NotifyERRORTitle = { fg = colors.red },
+    NotifyERRORBody = { bg = 'none' },
 
     NotifyWARNBorder = { fg = colors.orange },
     NotifyWARNIcon = { fg = colors.orange },
     NotifyWARNTitle = { fg = colors.orange },
+    NotifyWARNBody = { bg = 'none' },
 
     NotifyINFOBorder = { fg = colors.green },
     NotifyINFOIcon = { fg = colors.green },
     NotifyINFOTitle = { fg = colors.green },
+    NotifyINFOBody = { bg = 'none' },
 
     NotifyDEBUGBorder = { fg = colors.grey },
     NotifyDEBUGIcon = { fg = colors.grey },
     NotifyDEBUGTitle = { fg = colors.grey },
+    NotifyDEBUGBody = { bg = 'none' },
 
     NotifyTRACEBorder = { fg = colors.purple },
     NotifyTRACEIcon = { fg = colors.purple },
     NotifyTRACETitle = { fg = colors.purple },
+    NotifyTRACEBody = { bg = 'none' },
   },
 }
 

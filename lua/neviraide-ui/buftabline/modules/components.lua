@@ -35,8 +35,6 @@ M.NeoTreeOverlay = function()
     )
 end
 
--- FIX: error on close button buffer
-
 M.bufferlist = function()
   local buffers = {} -- buffersults
   local available_space = vim.o.columns
