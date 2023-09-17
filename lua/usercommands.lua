@@ -61,6 +61,7 @@ usrcmd('UI', function(opts)
     require('neviraide.utils.reload_config').reload_transparency()
   elseif opts.fargs[1] == 'theme' then
     require('neviraide-ui.utils.change_theme').change_theme(opts.fargs[2])
+    -- FIX: not changing buftabline icons on refresh
     require('neviraide.utils.reload_config').reload_config()
   elseif opts.fargs[1] == 'indents' then
     util.settings('indents').set_indents(tonumber(opts.fargs[2]))

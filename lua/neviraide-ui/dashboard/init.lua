@@ -201,8 +201,8 @@ M.open = function()
   end
 
   vim.keymap.set('n', 'h', '', { buffer = true })
-  vim.keymap.set('n', '<Left>', '', { buffer = true })
   vim.keymap.set('n', 'l', '', { buffer = true })
+  vim.keymap.set('n', '<Left>', '', { buffer = true })
   vim.keymap.set('n', '<Right>', '', { buffer = true })
   vim.keymap.set('n', '<Up>', '', { buffer = true })
   vim.keymap.set('n', '<Down>', '', { buffer = true })
