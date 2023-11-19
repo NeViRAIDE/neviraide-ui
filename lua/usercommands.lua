@@ -104,6 +104,7 @@ end, {
           theme = theme:gsub('./', '')
           table.insert(themes, theme)
         end
+        table.sort(themes)
         return themes
       else
         return {

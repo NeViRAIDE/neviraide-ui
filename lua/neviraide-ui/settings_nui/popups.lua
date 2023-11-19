@@ -8,16 +8,7 @@ return {
     }),
     position = '50%',
     size = '50%',
-    -- size = {
-    --   width = popup_conf.main_width,
-    --   height = popup_conf.main_height,
-    -- },
     relative = 'editor',
-    buf_options = {
-      modifiable = false,
-      readonly = true,
-      filetype = 'settings',
-    },
   }),
   tree = Popup({
     enter = true,

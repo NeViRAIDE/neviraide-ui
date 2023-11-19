@@ -1,6 +1,8 @@
-local map_options = { noremap = true, nowait = true }
-
-return function(popups, tree)
+return function()
+  local map_options = { noremap = true, nowait = true }
+  local layout = require('neviraide-ui.settings_nui.layout')
+  local popups = require('neviraide-ui.settings_nui.popups')
+  local tree = require('neviraide-ui.settings_nui.tree')()
   for _, popup in pairs(popups) do
     popup:on('BufLeave', function()
       vim.schedule(function()
@@ -13,24 +15,30 @@ return function(popups, tree)
     end, { once = true })
   end
 
-  popups.tree:map('n', 'q', function() popups.tree:unmount() end, map_options)
-
   for _, popup in pairs(popups) do
     popup:on('BufLeave', function()
       popups.main:unmount()
       popup:unmount()
+      layout:unmount()
     end, { once = true })
   end
-  popups.tree:map('n', 'q', function() popups.tree:unmount() end, map_options)
 
-  popups.tree:map('n', '<CR>', function()
-    local node = tree:get_node()
-    print(tostring(node.text))
+  popups.tree:map('n', 'q', function()
+    layout:unmount()
+    popups.main:unmount()
+    popups.tree:unmount()
   end, map_options)
 
-  -- print current node
+  -- popups.tree:map('n', '<CR>', function()
+  --   local node = tree:get_node()
+  --   print(tostring(node.text))
+  -- end, map_options)
   popups.tree:map('n', '<CR>', function()
     local node = tree:get_node()
+    if node == nil then
+      print('Node is nil!')
+      return
+    end
     print(tostring(node.text))
   end, map_options)
 
@@ -55,6 +63,7 @@ return function(popups, tree)
   -- expand current node
   popups.tree:map('n', 'l', function()
     local node = tree:get_node()
+    print(node)
 
     if node:expand() then tree:render() end
   end, map_options)

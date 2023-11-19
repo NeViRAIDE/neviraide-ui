@@ -13,7 +13,7 @@ local function getDisplayValue(key, value)
 end
 
 M.formatMenuItem = function(label, value)
-  local totalWidth = vim.api.nvim_win_get_width(popups.main.winid) / 2 - 2
+  local totalWidth = vim.api.nvim_win_get_width(popups.main.winid) / 2 - 4
   local displayValue = getDisplayValue(label, value)
   local displayValueWidth = vim.fn.strwidth(displayValue)
   local paddingSize = totalWidth - #label - displayValueWidth
@@ -22,7 +22,7 @@ M.formatMenuItem = function(label, value)
 end
 
 M.formatCategoryTitle = function(title)
-  local totalWidth = vim.api.nvim_win_get_width(popups.main.winid) / 2 - 2
+  local totalWidth = vim.api.nvim_win_get_width(popups.main.winid) / 2 - 4
   local textWidth = vim.fn.strwidth(title)
   local paddingSize = (totalWidth - textWidth) / 2
   local padding = string.rep(' ', paddingSize)

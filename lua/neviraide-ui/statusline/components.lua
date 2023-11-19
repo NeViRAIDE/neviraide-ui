@@ -149,17 +149,14 @@ M.interpreter = function(condition)
       .. 'Go '
       .. go_version:match('%d[^ ]*')
   elseif buf_ft == 'python' then
-    local python_version =
-      vim.fn.execute(':python import sys; print(sys.version)')
+    local python_version = vim.fn.system('python -V')
+    python_version = python_version:match('%d+%.%d+%.%d+')
     return '%#'
       .. highlight
       .. '#'
       .. icon('', 'python', 0, 2)
       .. 'Python '
-      .. python_version:match('%d[^ ]*')
-  end
-  if condition then
-    return '%#' .. highlight .. '#' .. buf_ft:gsub('^%l', string.upper)
+      .. python_version
   end
   return ''
 end

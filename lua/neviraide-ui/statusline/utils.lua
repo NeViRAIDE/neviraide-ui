@@ -19,6 +19,8 @@ M.ignored = function()
     'neo-tree-popup',
     'terminal',
     'notify',
+    'neotest-output',
+    'neotest-summary',
   }
   for type in pairs(list) do
     if vim.bo.filetype == list[type] then return false end
