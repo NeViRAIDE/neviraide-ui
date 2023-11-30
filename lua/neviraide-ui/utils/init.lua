@@ -21,9 +21,15 @@ end
 ---@return table
 M.dirLookup = function()
   local default_themes = {}
+  local hyprTheme_enabled = require('neviraide-ui').config.hyprTheme
 
   local path = vim.fn.stdpath('data')
     .. '/lazy/UI/lua/neviraide-ui/themes/colorschemes'
+
+  if hyprTheme_enabled then
+    path = vim.fn.stdpath('data') .. '/lazy/UI/lua/neviraide-ui/hyprland/themes'
+  end
+
   if vim.fn.isdirectory(path) then
     default_themes = vim.fn.readdir(path)
     for index, theme in ipairs(default_themes) do
@@ -35,6 +41,12 @@ M.dirLookup = function()
 
   local themes_dir = os.getenv('HOME')
     .. '/GitHub/nvim_plugins/neviraide-ui.nvim/lua/neviraide-ui/themes/colorschemes'
+
+  if hyprTheme_enabled then
+    themes_dir = vim.fn.stdpath('data')
+      .. '/lazy/UI/lua/neviraide-ui/hyprland/themes'
+  end
+
   local list = {}
   local p = io.popen(
     'find "'
@@ -56,6 +68,12 @@ end
 ---@return function
 M.settings = function(set)
   return require('neviraide-ui.utils.change_settings.' .. set)
+end
+
+---@param str string
+---@return string
+M.capitalizeFirstLetter = function(str)
+  return str:sub(1, 1):upper() .. str:sub(2)
 end
 
 return M

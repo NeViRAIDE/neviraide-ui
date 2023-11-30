@@ -1,6 +1,3 @@
--- Credits to original https://github.com/decaycs/decay.nvim
--- This is modified version of it
-
 local M = {}
 
 M.base_30 = {

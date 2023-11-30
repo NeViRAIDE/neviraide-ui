@@ -5,7 +5,12 @@ local neviraide_themes_path =
   vim.fn.fnamemodify(debug.getinfo(1, 'S').source:sub(2), ':p:h')
 
 M.get_theme_tb = function(type)
-  local default_path = 'neviraide-ui.themes.colorschemes.' .. g.neviraide_theme
+  local default_dir = 'neviraide-ui.themes.colorschemes.'
+  local hyprTheme_enabled = require('neviraide-ui').config.hyprTheme
+
+  local default_path = default_dir .. g.neviraide_theme
+
+  if hyprTheme_enabled then default_dir = 'neviraide-ui.hyprland.themes' end
 
   local ok, default_theme = pcall(require, default_path)
 

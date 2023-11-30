@@ -1,5 +1,6 @@
 local M = {}
 local icon = require('neviraide-ui.icons.utils').icon
+local utils = require('neviraide-ui.utils')
 
 local icons_colors = {
   ['n'] = { icon('NORMAL', 'vim-normal-mode', 0, 1), 'St_NormalMode' },
@@ -137,7 +138,10 @@ end
 ---@return string
 M.interpreter = function(condition)
   local highlight = 'St_interpreter'
-  local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+  -- local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+  local buf_number = vim.api.nvim_get_current_buf()
+  local buf_ft = vim.api.nvim_get_option_value('filetype', { buf = buf_number })
+
   if buf_ft == 'lua' then
     return '%#' .. highlight .. '#' .. icon('', 'lua', 0, 2) .. _VERSION
   elseif buf_ft == 'go' then
@@ -158,7 +162,8 @@ M.interpreter = function(condition)
       .. 'Python '
       .. python_version
   end
-  return ''
+  -- TODO: add icons
+  return utils.capitalizeFirstLetter(buf_ft)
 end
 
 ---@return string
