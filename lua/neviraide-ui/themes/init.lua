@@ -6,11 +6,7 @@ local neviraide_themes_path =
 
 M.get_theme_tb = function(type)
   local default_dir = 'neviraide-ui.themes.colorschemes.'
-  local hyprTheme_enabled = require('neviraide-ui').config.hyprTheme
-
   local default_path = default_dir .. g.neviraide_theme
-
-  if hyprTheme_enabled then default_dir = 'neviraide-ui.hyprland.themes' end
 
   local ok, default_theme = pcall(require, default_path)
 

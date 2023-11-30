@@ -2,6 +2,17 @@ local api = vim.api
 local usrcmd = api.nvim_create_user_command
 local util = require('neviraide-ui.utils')
 
+local ui_options = {
+  'borders',
+  'cursor_column',
+  'cursor_line',
+  'icons',
+  'indents',
+  'numbers',
+  'relative_numbers',
+  'transparency',
+}
+
 usrcmd('Dashboard', function()
   if vim.g.nvdash_displayed then
     require('neviraide-ui.buftabline').close_buffer()
@@ -107,17 +118,9 @@ end, {
         table.sort(themes)
         return themes
       else
-        return {
-          'borders',
-          'theme',
-          'numbers',
-          'icons',
-          'indents',
-          'relative_numbers',
-          'cursor_line',
-          'cursor_column',
-          'transparency',
-        }
+        if require('neviraide-ui').config.hyprTheme then return ui_options end
+        table.insert(ui_options, 'theme')
+        return ui_options
       end
     end
   end,
