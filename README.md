@@ -22,7 +22,7 @@ Lightweight &amp; performant ui plugin for NEVIRAIDE providing the following :
 - Standalone colorschemes
 - [Hyprland](https://github.com/RAprogramm/hyprdots) colorschemes
 
-![HyprThemes](./.screencasts/hyprland_themes_preview.mp4)
+https://github.com/RAprogramm/neviraide-ui.nvim/assets/70325462/87863d63-79b5-43b2-a03d-aa5063a157c5e550f38fbb4b466385978fb32be44da5a863e189
 
 - Dashboard (startup screen)
 - Statusline
