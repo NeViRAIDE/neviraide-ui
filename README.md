@@ -2,7 +2,7 @@
 
 Lightweight &amp; performant ui plugin for NEVIRAIDE providing the following :
 
-- Colorschemes
+- Standalone colorschemes and following hyprland themes
 - Dashboard (startup screen)
 - Statusline
 - Buffers and tabs line
@@ -28,11 +28,16 @@ Install neviraide-ui using your favorite plugin manager. For example, with [lazy
 ```lua
 require('lazy').load({
     plugins = {
-        {
-            'RAprogramm/neviraide-ui.nvim',
-            name = 'UI',
-            event = 'VeryLazy',
-        }
+      {
+        'RAprogramm/neviraide-ui.nvim',
+        name = 'UI',
+        event = 'VeryLazy',
+        opts = {
+          -- INFO: uncomment if you don't want to follow hyprland theme
+          -- hyprTheme = false,
+        },
+        config = function(_, opts) require('neviraide-ui').setup(opts) end,
+      },
     }
 })
 ```

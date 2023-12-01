@@ -1,7 +1,6 @@
 local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
 
 local highlights = {
-
   TblineFill = { bg = colors.black2 },
   BufTabDate = { fg = colors.grey_fg, bg = colors.black2, italic = true },
   TbLineBufOn = { fg = colors.white, bg = colors.black, bold = true },

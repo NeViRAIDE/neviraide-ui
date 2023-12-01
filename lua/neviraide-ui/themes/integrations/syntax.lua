@@ -73,7 +73,7 @@ local syntax = {
 
   Repeat = {
     fg = theme.base0A,
-    italic = true
+    italic = true,
   },
 
   Special = {

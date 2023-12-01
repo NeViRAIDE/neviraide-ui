@@ -12,26 +12,26 @@ M.base_30 = {
   grey_fg = '#4e4d5d',
   grey_fg2 = '#555464',
   light_grey = '#605f6f',
-  red = '#F38BA8',
+  red = '#f38ba8',
   baby_pink = '#ffa5c3',
-  pink = '#F5C2E7',
+  pink = '#f5c2e7',
   line = '#383747', -- for lines like vertsplit
-  green = '#ABE9B3',
+  green = '#a6e3a1',
   vibrant_green = '#b6f4be',
   nord_blue = '#8bc2f0',
-  blue = '#89B4FA',
-  yellow = '#FAE3B0',
+  blue = '#89b4fa',
+  yellow = '#f9e2af',
   sun = '#ffe9b6',
   purple = '#d0a9e5',
-  dark_purple = '#c7a0dc',
+  dark_purple = '#cba6f7',
   teal = '#B5E8E0',
-  orange = '#F8BD96',
+  orange = '#fab387',
   cyan = '#89DCEB',
   statusline_bg = '#232232',
   lightbg = '#2f2e3e',
   pmenu_bg = '#ABE9B3',
   folder_bg = '#89B4FA',
-  lavender = '#c7d1ff',
+  lavender = '#b4befe',
 }
 
 M.base_16 = {
@@ -43,7 +43,7 @@ M.base_16 = {
   base05 = '#bfc6d4',
   base06 = '#ccd3e1',
   base07 = '#D9E0EE',
-  base08 = '#F38BA8',
+  base08 = '#f5c2e7',
   base09 = '#F8BD96',
   base0A = '#FAE3B0',
   base0B = '#ABE9B3',
@@ -53,11 +53,6 @@ M.base_16 = {
   base0F = '#F38BA8',
 }
 
--- M.polish_hl = {
---   ['@variable'] = { fg = M.base_30.lavender },
---   ['@property'] = { fg = M.base_30.teal },
---   ['@variable.builtin'] = { fg = M.base_30.red },
--- }
 M.polish_hl = {
   treesitter = {
     ['@variable'] = { fg = M.base_30.lavender },

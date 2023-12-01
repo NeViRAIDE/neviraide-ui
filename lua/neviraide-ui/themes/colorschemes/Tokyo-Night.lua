@@ -1,6 +1,3 @@
--- Credits to original https://github.com/tiagovla/tokyonight.nvim
--- This is modified version of it
-
 local M = {}
 
 M.base_30 = {
