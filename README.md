@@ -1,19 +1,30 @@
-# User Interface for [NEVIRAIDE](https://github.com/RAprogramm/NEVIRAIDE)
+# <div align = center>User Interface for [NEVIRAIDE](https://github.com/RAprogramm/NEVIRAIDE)</div>
 
-## 📜 Table of Contents
+<!--toc:start-->
 
-1. [Features](#features)
-2. [Installation](#installation)
-3. [Dependencies](#dependencies)
-   - [ Optional dependencies](#optional-dependencies)
-4. [Overview](#overview)
-5. [Usage](#usage)
-   - [ Dashboard Command](#dashboard-command)
-   - [ UI Command](#ui-command)
-     - [ Examples](#examples)
-6. [Autocompletion](#autocompletion)
-7. [Themes](#themes)
-   - [Hyprland themes](#hyprland-themes)
+> # [📜 Table of Contents](#📜-table-of-contents)
+>
+> 1. [Features](#features)
+> 2. [Installation](#installation)
+> 3. [Dependencies](#dependencies)
+>
+> - 3.1 [Optional dependencies](#optional-dependencies)
+>   - 3.1.1 [Icons](#icons)
+>
+> 4. [Overview](#overview)
+> 5. [Usage](#usage)
+>
+> - 5.1 [Dashboard Command:](#dashboard-command)
+> - 5.2 [UI Command:](#ui-command)
+>   - 5.2.1 [Examples:](#examples)
+>
+> 6. [Autocompletion](#autocompletion)
+> 7. [Themes](#themes)
+>
+> - 7.1 [Hyprland themes](#hyprland-themes)
+
+<!--toc:end-->
+<hr>
 
 ## Features
 
@@ -154,8 +165,8 @@ The UI command also supports autocompletion, which means you can press <TAB> and
 [![Material-Sakura](https://placehold.co/130x30/f2e9e1/b4637a?text=Material-Sakura&font=Oswald)](#-Material-Sakura)
 [![Graphite-Mono](https://placehold.co/130x30/a6a6a6/262626?text=Graphite-Mono&font=Oswald)](#-Graphite-Mono)
 [![Cyberpunk-Edge](https://placehold.co/130x30/fada16/000000?text=Cyberpunk-Edge&font=Oswald)](#-Cyberpunk-Edge)
-[![Frosted-Glass](https://placehold.co/130x30/7ed6ff/1e4c84?text=Frosted-Glass&font=Oswald)](#-Frosted-Glass-by-T-crypt)
-[![Gruvbox-Retro](https://placehold.co/130x30/475437/B5CC97?text=Gruvbox-Retro&font=Oswald)](#Gruvbox-Retro-by-T-crypt)
+[![Frosted-Glass](https://placehold.co/130x30/7ed6ff/1e4c84?text=Frosted-Glass&font=Oswald)](#-Frosted-Glass)
+[![Gruvbox-Retro](https://placehold.co/130x30/475437/B5CC97?text=Gruvbox-Retro&font=Oswald)](#-Gruvbox-Retro)
 
 </td></tr></table></div><br><table><td><br>
 
@@ -223,6 +234,6 @@ The UI command also supports autocompletion, which means you can press <TAB> and
 
 <div align = right> <br><br>
 
-[<kbd> <br> 🡅 <br> </kbd>](#-design-by-t2)
+[<kbd> <br> 🡅 <br> </kbd>](#📜-table-of-contents)
 
 </div>
