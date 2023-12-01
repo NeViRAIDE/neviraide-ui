@@ -1,29 +1,34 @@
 # User Interface for [NEVIRAIDE](https://github.com/RAprogramm/NEVIRAIDE)
 
+## 📜 Table of Contents
+
+1. [Features](#features)
+2. [Installation](#installation)
+3. [Dependencies](#dependencies)
+   - [ Optional dependencies](#optional-dependencies)
+4. [Overview](#overview)
+5. [Usage](#usage)
+   - [ Dashboard Command](#dashboard-command)
+   - [ UI Command](#ui-command)
+     - [ Examples](#examples)
+6. [Autocompletion](#autocompletion)
+7. [Themes](#themes)
+   - [Hyprland themes](#hyprland-themes)
+
+## Features
+
 Lightweight &amp; performant ui plugin for NEVIRAIDE providing the following :
 
 - Standalone colorschemes
 - [Hyprland](https://github.com/RAprogramm/hyprdots) colorschemes
-  ![HyprThemes](./.screencasts/hyprland_themes_preview.mp4)
+
+![HyprThemes](./.screencasts/hyprland_themes_preview.mp4)
+
 - Dashboard (startup screen)
 - Statusline
 - Buffers and tabs line
 - Icons
 - Settings Changer Util
-
-## 📜 Table of Contents
-
-1. [📦 Installation](#installation)
-2. [🔧 Dependencies](#dependencies)
-   - [🌟 Optional dependencies](#optional-dependencies)
-3. [🔍 Overview](#overview)
-4. [🚀 Usage](#usage)
-   - [🖥 Dashboard Command](#dashboard-command)
-   - [🛠 UI Command](#ui-command)
-     - [📖 Examples](#examples)
-5. [🔤 Autocompletion](#autocompletion)
-6. [Themes](#themes)
-   - [Hyprland themes](#hyprland-themes)
 
 ## Installation
 
