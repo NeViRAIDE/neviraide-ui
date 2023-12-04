@@ -3,6 +3,7 @@ local api = vim.api
 local M = {}
 
 M.config = {
+  -- TODO: borders following hyprland
   hyprTheme = true,
 }
 

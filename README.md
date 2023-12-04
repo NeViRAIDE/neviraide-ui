@@ -33,10 +33,7 @@ Lightweight &amp; performant ui plugin for NEVIRAIDE providing the following :
 - Standalone colorschemes
 - [Hyprland](https://github.com/RAprogramm/hyprdots) colorschemes
 
-
 https://github.com/RAprogramm/neviraide-ui.nvim/assets/70325462/dc8a63ac-c632-41f4-beec-7e10602dcfae
-
-
 
 - Dashboard (startup screen)
 - Statusline
@@ -140,7 +137,7 @@ To enable line numbers:
 
 To change the theme:
 
-INFO: themes option not available if `hyprTheme = true` in config.
+> INFO: themes option not available if `hyprTheme = true` in config.
 
 ```vim
 :UI theme [theme_name]
