@@ -182,7 +182,7 @@ function M.check(opts)
       if check.handler then
         if check.enabled then
           local source = M.get_source(check.handler)
-          if source.plugin ~= 'neviraide-ui.nvim' then
+          if source.plugin ~= 'UI' then
             log.error(
               ([[`%s` has been overwritten by another plugin?
 

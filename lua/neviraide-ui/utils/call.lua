@@ -126,7 +126,7 @@ function M:notify(err)
   local msg = self:format(err, Config.options.debug)
   vim.schedule(function()
     if not pcall(Util.error, msg) then
-      vim.notify(msg, vim.log.levels.ERROR, { title = 'neviraide-ui.nvim' })
+      vim.notify(msg, vim.log.levels.ERROR, { title = 'NeviraideUI' })
     end
   end)
 end

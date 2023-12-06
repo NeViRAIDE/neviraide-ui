@@ -9,7 +9,7 @@ M.ns = vim.api.nvim_create_namespace('neviraide-ui')
 function M.defaults()
   ---@class NeviraideUIConfig
   local defaults = {
-
+    hyprTheme = true,
     cmdline = {
       enabled = true, -- enables the NeviraideUI cmdline UI
       view = 'cmdline_popup', -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
@@ -51,7 +51,7 @@ function M.defaults()
       -- This is a current Neovim limitation.
 
       -- BUG: disabling ui
-      enabled = false, -- enables the NeviraideUI messages UI
+      enabled = true, -- enables the NeviraideUI messages UI
       view = 'notify', -- default view for messages
       view_error = 'notify', -- view for errors
       view_warn = 'notify', -- view for warnings
@@ -124,24 +124,13 @@ function M.defaults()
       view = 'notify',
     },
     lsp = {
-      -- progress = {
-      --   enabled = false,
-      --   -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
-      --   -- See the section on formatting for more details on how to customize.
-      --   --- @type NeviraideUIFormat|string
-      --   format = 'lsp_progress',
-      --   --- @type NeviraideUIFormat|string
-      --   format_done = 'lsp_progress_done',
-      --   throttle = 1000 / 30, -- frequency to update lsp progress message
-      --   view = 'mini',
-      -- },
       override = {
         -- override the default lsp markdown formatter with NeviraideUI
-        ['vim.lsp.util.convert_input_to_markdown_lines'] = false,
+        ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
         -- override the lsp markdown formatter with NeviraideUI
-        ['vim.lsp.util.stylize_markdown'] = false,
+        ['vim.lsp.util.stylize_markdown'] = true,
         -- override cmp documentation with NeviraideUI (needs the other options to work)
-        ['cmp.entry.get_documentation'] = false,
+        ['cmp.entry.get_documentation'] = true,
       },
       hover = {
         enabled = true,
@@ -280,7 +269,7 @@ function M.setup(options)
 end
 
 function M.truncate_log()
-  local stat = vim.loop.fs_stat(M.options.log)
+  local stat = vim.uv.fs_stat(M.options.log)
   if stat and stat.size > M.options.log_max_size then
     io.open(M.options.log, 'w+'):close()
   end
@@ -297,11 +286,6 @@ function M.fix_legacy(opts)
       enabled = opts.lsp.signature.auto_open,
     }
   end
-  -- if opts.lsp_progress then
-  --   opts.lsp = opts.lsp or {}
-  --   opts.lsp.progress = opts.lsp_progress
-  --   opts.lsp_progress = nil
-  -- end
   if opts.history then
     opts.commands = opts.commands or {}
     opts.commands.history = opts.history

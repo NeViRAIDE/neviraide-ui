@@ -28,10 +28,6 @@ function M.setup()
     require('neviraide-ui.lsp.message').setup()
   end
 
-  -- if Config.options.lsp.progress.enabled then
-  --   require('neviraide-ui.lsp.progress').setup()
-  -- end
-
   local overrides = vim.tbl_filter(
     ---@param v boolean
     function(v) return v end,

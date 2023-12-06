@@ -7,13 +7,7 @@ local Config = require('neviraide-ui.config')
 
 local M = {}
 
--- local api = vim.api
 M.api = Api
-
--- M.config = {
---   -- TODO: borders following hyprland
---   hyprTheme = true,
--- }
 
 ---Setup configuration
 ---@param opts? NeviraideUIConfig
@@ -26,7 +20,7 @@ function M.setup(opts)
   local function load()
     require('neviraide-ui.utils').try(function()
       require('neviraide-ui.config').setup(opts)
-      -- require('neviraide-ui.commands').setup()
+      require('neviraide-ui.commands').setup()
       require('neviraide-ui.message.router').setup()
       M.enable()
     end)
@@ -46,9 +40,9 @@ end
 
 function M.disable()
   Config._running = false
-  -- if Config.options.notify.enabled then
-  --   require('neviraide-ui.source.notify').disable()
-  -- end
+  if Config.options.notify.enabled then
+    require('neviraide-ui.source.notify').disable()
+  end
   require('neviraide-ui.message.router').disable()
   require('neviraide-ui.ui').disable()
   require('neviraide-ui.utils.hacks').disable()
@@ -56,13 +50,13 @@ end
 
 M.deactivate = M.disable
 
--- function M.cmd(name) require('neviraide-ui.commands').cmd(name) end
+function M.cmd(name) require('neviraide-ui.commands').cmd(name) end
 
 function M.enable()
   Config._running = true
-  -- if Config.options.notify.enabled then
-  --   require('neviraide-ui.source.notify').enable()
-  -- end
+  if Config.options.notify.enabled then
+    require('neviraide-ui.source.notify').enable()
+  end
   require('neviraide-ui.utils.hacks').enable()
   require('neviraide-ui.ui').enable()
   require('neviraide-ui.message.router').enable()

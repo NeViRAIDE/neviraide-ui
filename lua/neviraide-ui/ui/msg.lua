@@ -3,7 +3,7 @@ local require = require('neviraide-ui.utils.lazy')
 local Manager = require('neviraide-ui.message.manager')
 local Message = require('neviraide-ui.message')
 local Hacks = require('neviraide-ui.utils.hacks')
-local State = require('neviraide-ui.state')
+local State = require('neviraide-ui.ui.state')
 local Cmdline = require('neviraide-ui.ui.cmdline')
 
 local M = {}
