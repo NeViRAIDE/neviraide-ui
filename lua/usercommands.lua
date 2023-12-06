@@ -118,7 +118,8 @@ end, {
         table.sort(themes)
         return themes
       else
-        if require('neviraide-ui').config.hyprTheme then return ui_options end
+          -- NOTE: add hypr to config
+        -- if require('neviraide-ui').config.hyprTheme then return ui_options end
         table.insert(ui_options, 'theme')
         return ui_options
       end
