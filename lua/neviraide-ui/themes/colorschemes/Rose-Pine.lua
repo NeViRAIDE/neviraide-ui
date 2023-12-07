@@ -4,6 +4,7 @@
 local M = {}
 
 M.base_30 = {
+  accent = '#eb6f92',
   black = '#191724', --  nvim bg
   darker_black = '#13111e',
   white = '#e0def4',

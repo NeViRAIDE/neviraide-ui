@@ -1,6 +1,7 @@
 local M = {}
 
 M.base_30 = {
+  accent = '#575279',
   white = '#4c4f69',
   darker_black = '#f2e9de',
   black = '#faf4ed',

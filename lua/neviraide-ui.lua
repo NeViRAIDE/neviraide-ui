@@ -15,8 +15,6 @@ function M.setup(opts)
   -- run some checks before setting up
   if not Health.check({ checkhealth = false, loaded = false }) then return end
 
-  -- M.config = vim.tbl_deep_extend('force', Config, opts or {})
-
   local function load()
     require('neviraide-ui.utils').try(function()
       require('neviraide-ui.config').setup(opts)
@@ -57,6 +55,16 @@ function M.enable()
   if Config.options.notify.enabled then
     require('neviraide-ui.source.notify').enable()
   end
+
+  local hyprEnabled = require('neviraide-ui.config').options.hyprTheme
+  if hyprEnabled then
+    local hyprTheme =
+      require('neviraide-ui.hyprland.utils').get_theme_from_hypr()
+
+    require('neviraide-ui.utils.change_theme').change_theme(hyprTheme)
+    -- require('neviraide.utils.reload_config').reload_config()
+  end
+
   require('neviraide-ui.utils.hacks').enable()
   require('neviraide-ui.ui').enable()
   require('neviraide-ui.message.router').enable()

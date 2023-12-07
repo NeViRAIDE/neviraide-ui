@@ -8,6 +8,7 @@ M.base_30 = {
   one_bg = '#2d2c3c', -- real bg of onedark
   one_bg2 = '#363545',
   one_bg3 = '#3e3d4d',
+  accent = '#CBA6F7',
   grey = '#474656',
   grey_fg = '#4e4d5d',
   grey_fg2 = '#555464',

@@ -23,7 +23,7 @@ local defaults = {
   LineNr = { fg = colors.grey },
 
   -- floating windows
-  FloatBorder = { fg = colors.blue },
+  FloatBorder = { fg = colors.accent },
   NormalFloat = { bg = 'none' },
 
   NvimInternalError = { fg = colors.red },
@@ -43,7 +43,7 @@ local defaults = {
   },
 
   Directory = {
-    fg = theme.base0D,
+    fg = theme.base04,
   },
 
   Error = {

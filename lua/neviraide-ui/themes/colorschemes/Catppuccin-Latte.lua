@@ -5,6 +5,7 @@ M.base_30 = {
   darker_black = '#dce0e8',
   black = '#eff1f5',
   black2 = '#ccd0da',
+  accent = '#8839EF',
   one_bg = '#bcc0cc',
   one_bg2 = '#acb0be',
   one_bg3 = '#9ca0b0',
