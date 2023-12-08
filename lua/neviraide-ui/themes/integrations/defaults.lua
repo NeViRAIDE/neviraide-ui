@@ -4,6 +4,8 @@ local theme = require('neviraide-ui.themes').get_theme_tb('base_16')
 local generate_color =
   require('neviraide-ui.themes.colors').change_hex_lightness
 
+local accent, dir = require('neviraide-ui.hyprland.utils').accent()
+
 local defaults = {
   MatchWord = {
     bg = colors.grey,
@@ -22,8 +24,8 @@ local defaults = {
   CursorLineNr = { fg = colors.white },
   LineNr = { fg = colors.grey },
 
-  -- floating windows
-  FloatBorder = { fg = colors.accent },
+  -- floating windowr
+  FloatBorder = { fg = accent },
   NormalFloat = { bg = 'none' },
 
   NvimInternalError = { fg = colors.red },
@@ -43,7 +45,7 @@ local defaults = {
   },
 
   Directory = {
-    fg = theme.base04,
+    fg = dir,
   },
 
   Error = {
