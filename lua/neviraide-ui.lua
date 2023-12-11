@@ -56,14 +56,8 @@ function M.enable()
     require('neviraide-ui.source.notify').enable()
   end
 
-  local hyprEnabled = require('neviraide-ui.config').options.hyprTheme
-  if hyprEnabled then
-    local hyprTheme =
-      require('neviraide-ui.hyprland.utils').get_theme_from_hypr()
-
-    require('neviraide-ui.utils.change_theme').change_theme(hyprTheme)
-    -- require('neviraide.utils.reload_config').reload_config()
-  end
+  local hyprTheme = require('neviraide-ui.hyprland.utils').get_theme_from_hypr()
+  require('neviraide-ui.utils.change_theme').change_theme(hyprTheme)
 
   require('neviraide-ui.utils.hacks').enable()
   require('neviraide-ui.ui').enable()

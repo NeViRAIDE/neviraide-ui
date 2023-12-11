@@ -320,40 +320,6 @@ function M.replace_word(old, new)
   end
 end
 
--- for local working with plugin
----@return table
-M.dirLookup = function()
-  local default_themes = {}
-
-  local path = vim.fn.stdpath('data')
-    .. '/lazy/UI/lua/neviraide-ui/themes/colorschemes'
-  if vim.fn.isdirectory(path) then
-    default_themes = vim.fn.readdir(path)
-    for index, theme in ipairs(default_themes) do
-      default_themes[index] = theme:match('(.+)%..+')
-    end
-
-    if #default_themes > 0 then return default_themes end
-  end
-
-  local list = {}
-  local p = io.popen(
-    'find "'
-      -- .. themes_dir
-      .. path
-      .. '" -type f -iname "*.lua" -execdir sh -c \'printf "%s\n" "${0%.*}"\' {} \';\''
-  )
-
-  if p ~= nil then
-    for file in p:lines() do
-      table.insert(list, file)
-    end
-    p:close()
-  end
-
-  return list
-end
-
 ---@param set string
 ---@return function
 M.settings = function(set)

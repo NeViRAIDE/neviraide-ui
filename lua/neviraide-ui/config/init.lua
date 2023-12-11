@@ -1,4 +1,5 @@
 local require = require('neviraide-ui.utils.lazy')
+local i = require('neviraide-ui.icons.utils').icon
 
 local Routes = require('neviraide-ui.config.routes')
 
@@ -9,7 +10,6 @@ M.ns = vim.api.nvim_create_namespace('neviraide-ui')
 function M.defaults()
   ---@class NeviraideUIConfig
   local defaults = {
-    hyprTheme = true,
     cmdline = {
       enabled = true, -- enables the NeviraideUI cmdline UI
       view = 'cmdline_popup', -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
@@ -21,27 +21,42 @@ function M.defaults()
         -- opts: any options passed to the view
         -- icon_hl_group: optional hl_group for the icon
         -- title: set to anything or empty string to hide
-        cmdline = { pattern = '^:', icon = '', lang = 'vim' },
+        cmdline = {
+          pattern = '^:',
+          icon = i('', 'vim') .. ' ',
+          lang = 'vim',
+        },
         search_down = {
           kind = 'search',
           pattern = '^/',
-          icon = ' ',
+          icon = i('', 'search') .. ' ' .. i('󰄼', 'chevron-down') .. ' ',
           lang = 'regex',
         },
         search_up = {
           kind = 'search',
           pattern = '^%?',
-          icon = ' ',
+          icon = i('', 'search') .. ' ' .. i('󰄿', 'chevron-up') .. ' ',
           lang = 'regex',
         },
-        filter = { pattern = '^:%s*!', icon = '$', lang = 'bash' },
+        filter = {
+          pattern = '^:%s*!',
+          icon = i('$', 'bash') .. ' ',
+          lang = 'bash',
+        },
         lua = {
           pattern = { '^:%s*lua%s+', '^:%s*lua%s*=%s*', '^:%s*=%s*' },
-          icon = '',
+          icon = i('', 'lua') .. ' ',
           lang = 'lua',
         },
-        help = { pattern = '^:%s*he?l?p?%s+', icon = '' },
-        calculator = { pattern = '^=', icon = '', lang = 'vimnormal' },
+        help = {
+          pattern = '^:%s*he?l?p?%s+',
+          icon = i('󰋖', 'question') .. ' ',
+        },
+        calculator = {
+          pattern = '^=',
+          icon = i('󱖦', 'number') .. ' ',
+          lang = 'vimnormal',
+        },
         input = {}, -- Used by input()
         -- lua = false, -- to disable a format, set to `false`
       },
@@ -50,7 +65,6 @@ function M.defaults()
       -- NOTE: If you enable messages, then the cmdline is enabled automatically.
       -- This is a current Neovim limitation.
 
-      -- BUG: disabling ui
       enabled = true, -- enables the NeviraideUI messages UI
       view = 'notify', -- default view for messages
       view_error = 'notify', -- view for errors

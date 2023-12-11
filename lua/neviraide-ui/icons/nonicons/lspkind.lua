@@ -1,5 +1,6 @@
 local i = require('neviraide-ui.icons.utils').icon_decoder
 
+---@class NeviraideUIPopupmenuItemKind
 return {
   Declaration = '󰙠 ',
   Delete = '󰩺 ',

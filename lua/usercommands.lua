@@ -1,3 +1,4 @@
+-- TODO: rewrite to commands.lua
 local api = vim.api
 local usrcmd = api.nvim_create_user_command
 local util = require('neviraide-ui.utils')
@@ -71,10 +72,6 @@ usrcmd('UI', function(opts)
       util.settings('transparency').disable()
     end
     require('neviraide.utils.reload_config').reload_transparency()
-  elseif opts.fargs[1] == 'theme' then
-    require('neviraide-ui.utils.change_theme').change_theme(opts.fargs[2])
-    -- FIX: not changing buftabline icons on refresh
-    require('neviraide.utils.reload_config').reload_config()
   elseif opts.fargs[1] == 'indents' then
     util.settings('indents').set_indents(tonumber(opts.fargs[2]))
   elseif opts.fargs[1] == 'icons' then
@@ -110,19 +107,7 @@ end, {
         return {}
       elseif current_arg == 'icons' then
         return { 'nonicons', 'devicons' }
-      elseif current_arg == 'theme' then
-        local themes = {}
-        for _, theme in pairs(util.dirLookup()) do
-          theme = theme:gsub('./', '')
-          table.insert(themes, theme)
-        end
-        table.sort(themes)
-        return themes
       else
-        if require('neviraide-ui.config').options.hyprTheme then
-          return ui_options
-        end
-        table.insert(ui_options, 'theme')
         return ui_options
       end
     end
