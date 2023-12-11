@@ -44,15 +44,10 @@ function M.open(uri)
 end
 
 function M.tag(buf, tag)
-  local ft =
-    vim.api.nvim_get_option_value('filetype', { buf = buf })
+  local ft = vim.api.nvim_get_option_value('filetype', { buf = buf })
 
   if ft == '' then
-    vim.api.nvim_set_option_value(
-      'filetype',
-      'neviraide-ui',
-      { buf = buf }
-    )
+    vim.api.nvim_set_option_value('filetype', 'neviraide-ui', { buf = buf })
   end
 
   if Config.options.debug and vim.api.nvim_buf_get_name(buf) == '' then
@@ -341,13 +336,11 @@ M.dirLookup = function()
     if #default_themes > 0 then return default_themes end
   end
 
-  local themes_dir = os.getenv('HOME')
-    .. '/GitHub/nvim_plugins/neviraide-ui.nvim/lua/neviraide-ui/themes/colorschemes'
-
   local list = {}
   local p = io.popen(
     'find "'
-      .. themes_dir
+      -- .. themes_dir
+      .. path
       .. '" -type f -iname "*.lua" -execdir sh -c \'printf "%s\n" "${0%.*}"\' {} \';\''
   )
 
