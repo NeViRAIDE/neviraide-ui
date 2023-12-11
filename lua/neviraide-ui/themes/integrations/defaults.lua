@@ -12,6 +12,8 @@ local defaults = {
     fg = colors.white,
   },
 
+  WinBarNC = { link = 'WinBar' },
+
   Pmenu = { bg = colors.one_bg },
   PmenuSbar = { bg = colors.one_bg },
   PmenuSel = { bg = colors.pmenu_bg, fg = colors.black, bold = true },

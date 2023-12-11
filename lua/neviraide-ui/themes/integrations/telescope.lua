@@ -20,7 +20,7 @@ local hlgroups = {
   },
 
   TelescopeNormal = { bg = colors.darker_black },
-
+ 
   TelescopePreviewTitle = {
     fg = colors.black,
     bg = colors.green,
@@ -50,15 +50,20 @@ local styles = {
   },
 
   bordered = {
-    TelescopeBorder = { fg = colors.one_bg3 },
-    TelescopePromptBorder = { fg = colors.one_bg3 },
-    TelescopePromptTitle = {
+    TelescopeBorder = { link = 'FloatBorder' },
+    TelescopePromptBorder = { link = 'FloatBorder' },
+    TelescopePromptTitle = { bg = colors.black, fg = colors.red, bold = true },
+    TelescopeResultsTitle = {
       bg = colors.black,
-      fg = colors.red,
+      fg = colors.green,
+      bold = true,
     },
-    TelescopeResultsTitle = { bg = colors.black, fg = colors.green },
-    TelescopePreviewTitle = { bg = colors.black, fg = colors.blue },
-    TelescopePromptPrefix = { bg = colors.black, fg = colors.red },
+    TelescopePreviewTitle = {
+      bg = colors.black,
+      fg = colors.blue,
+      bold = true,
+    },
+    TelescopePromptPrefix = { bg = colors.black, fg = colors.red, bold = true },
     TelescopeNormal = { bg = colors.black },
     TelescopePromptNormal = { bg = colors.black },
   },

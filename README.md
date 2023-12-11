@@ -2,48 +2,131 @@
 
 <!--toc:start-->
 
-> # [📜 Table of Contents](#📜-table-of-contents)
->
-> 1. [Features](#features)
-> 2. [Installation](#installation)
-> 3. [Dependencies](#dependencies)
->
-> - 3.1 [Optional dependencies](#optional-dependencies)
->   - 3.1.1 [Icons](#icons)
->
-> 4. [Overview](#overview)
-> 5. [Usage](#usage)
->
-> - 5.1 [Dashboard Command:](#dashboard-command)
-> - 5.2 [UI Command:](#ui-command)
->   - 5.2.1 [Examples:](#examples)
->
-> 6. [Autocompletion](#autocompletion)
-> 7. [Themes](#themes)
->
-> - 7.1 [Hyprland themes](#hyprland-themes)
+ <h2 id="table-of-contents" align="center">Table of Contents</h2>
+
+<ul>
+    <li>
+        <a href="#features">Features</a>
+    </li>
+    <li>
+        <a href="#installation">Installation</a>
+    </li>
+    <li>
+        <a href="#dependencies">Dependencies</a>
+        <ul>
+            <li>
+                <a href="#optional-dependencies">Optional dependencies</a>
+                <ul>
+                    <li>
+                        <a href="#icons">Icons</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="#overview">Overview</a>
+    </li>
+    <li>
+        <a href="#usage">Usage</a>
+        <ul>
+            <li>
+                <a href="#dashboard-command">Dashboard Command</a>
+            </li>
+            <li>
+                <a href="#ui-command">UI Command</a>
+                <ul>
+                    <li>
+                        <a href="#examples">Examples</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="#autocompletion">Autocompletion</a>
+    </li>
+    <li>
+        <a href="#themes">Themes</a>
+        <ul>
+            <li>
+                <a href="hyprland-themes">Hyprland themes</a>
+            </li>
+        </ul>
+    </li>
+</ul>
 
 <!--toc:end-->
 <hr>
 
 ## Features
 
-Lightweight &amp; performant ui plugin for NEVIRAIDE providing the following :
+> _Lightweight &amp; performant ui plugin for NEVIRAIDE providing:_
 
-- Standalone colorschemes
-- [Hyprland](https://github.com/RAprogramm/hyprdots) colorschemes
-
-https://github.com/RAprogramm/neviraide-ui.nvim/assets/70325462/dc8a63ac-c632-41f4-beec-7e10602dcfae
-
-- Dashboard (startup screen)
-- Statusline
-- Buffers and tabs line
-- Icons
-- Settings Changer Util
+<table>
+    <tr>
+        <th>Dashboard (startup screen)</th>
+    </tr>
+    <tr>
+        <td>
+            <img src="./.screenshots/dashboard.png">
+        </td>
+    </tr>
+    <tr>
+        <th>Statusline</th>
+    </tr>
+    <tr>
+        <td><img src="./.screenshots/statusline.png"></td>
+    </tr>
+    <tr>
+        <th>Buffers and tabs line</th>
+    </tr>
+    <tr>
+        <td><img src="./.screenshots/buffertabs.png"></td>
+    </tr>
+    <tr>
+        <th align="center">Standalone colorschemes</th>
+    </tr>
+    <tr>
+        <td>Chocolate</td>
+    </tr>
+    <tr>
+        <td>Dracula</td>
+    </tr>
+    <tr>
+        <td>Everforest</td>
+    </tr>
+    <tr>
+        <td>Gruvbox Light</td>
+    </tr>
+    <tr>
+        <td>Kanagawa</td>
+    </tr>
+    <tr>
+        <td>Nord</td>
+    </tr>
+    <tr>
+        <td>One Dark</td>
+    </tr>
+    <tr>
+        <td>Sweet Pastel</td>
+    </tr>
+    <tr>
+        <td>VSCode</td>
+    </tr>
+    <tr>
+        <th>
+            <a href="https://github.com/RAprogramm/hyprdots">Hyprland colorschemes</a>
+        </th>
+    </tr>
+    <tr>
+        <td>https://github.com/RAprogramm/neviraide-ui.nvim/assets/70325462/dc8a63ac-c632-41f4-beec-7e10602dcfae</td>
+    </tr>
+</table>
 
 ## Installation
 
-Install neviraide-ui using your favorite plugin manager. For example, with [lazy.nvim](https://github.com/folke/lazy.nvim):
+> _Install neviraide-ui using your favorite plugin manager. For example, with [lazy.nvim](https://github.com/folke/lazy.nvim):_
 
 ```lua
 require('lazy').load({
@@ -52,19 +135,27 @@ require('lazy').load({
         'RAprogramm/neviraide-ui.nvim',
         name = 'UI',
         event = 'VeryLazy',
-        opts = {
-          -- INFO: uncomment if you don't want to follow hyprland theme
-          -- hyprTheme = false,
-        },
+        opts = {},
         config = function(_, opts) require('neviraide-ui').setup(opts) end,
+        dependencies = {
+          {
+            'rcarriga/nvim-notify',
+            opts = function() return require('plugins.ui.notify.options') end,
+            init = function()
+              require('neviraide.utils').on_very_lazy(
+                function() vim.notify = require('notify') end
+              )
+            end,
+          },
+        },
       },
     }
 })
 ```
 
-Reload your Neovim configuration or restart Neovim.
-
-After this, neviraide-ui will be automatically downloaded, installed, and configured for you.
+> _Reload your Neovim configuration or restart Neovim._
+>
+> _After this, neviraide-ui will be automatically downloaded, installed, and configured for you._
 
 ## Dependencies
 
@@ -74,17 +165,17 @@ After this, neviraide-ui will be automatically downloaded, installed, and config
 
 - #### Icons
 
-For display [nonicons](https://github.com/yamatsum/nonicons) instead of [devicons](https://github.com/vorillaz/devicons) run in your terminal:
+> _For display [nonicons](https://github.com/yamatsum/nonicons) instead of [devicons](https://github.com/vorillaz/devicons) run in your terminal:_
 
 ```sh
 yay -S nonicons-git
 ```
 
-add this `symbol_map U+f101-U+f25c nonicons` to your kitty config.
+> _add this `symbol_map U+f101-U+f25c nonicons` to your kitty config._
 
 ## Overview
 
-The code establishes commands in Neovim to control various aspects of the neviraide-ui plugin. The commands available are:
+> _The code establishes commands in Neovim to control various aspects of the neviraide-ui plugin. The commands available are:_
 
 - `Dashboard`: Toggles between displaying and hiding the dashboard.
 
@@ -106,7 +197,7 @@ The code establishes commands in Neovim to control various aspects of the nevira
 :Dashboard
 ```
 
-Use this command to toggle the dashboard display on and off.
+> _Use this command to toggle the dashboard display on and off._
 
 ### UI Command:
 
@@ -114,12 +205,12 @@ Use this command to toggle the dashboard display on and off.
 :UI [sub-command] [argument]
 ```
 
-Sub-commands include:
-
-- borders with arguments like 'none', 'rounded', etc.
-- theme with available theme names as arguments.
-- numbers, relative_numbers, cursor_line, cursor_column, and transparency with arguments 'toggle', 'enable', or 'disable'.
-- indents with the indent size as an argument.
+> Sub-commands include:
+>
+> - borders with arguments like 'none', 'rounded', etc.
+> - theme with available theme names as arguments.
+> - numbers, relative_numbers, cursor_line, cursor_column, and transparency with arguments 'toggle', 'enable', or 'disable'.
+> - indents with the indent size as an argument.
 
 #### Examples:
 
@@ -151,7 +242,7 @@ To set the indent size to 4:
 
 ## Autocompletion
 
-The UI command also supports autocompletion, which means you can press <TAB> and get suggestions to complete it. The same applies to the arguments of each sub-command.
+> The UI command also supports autocompletion, which means you can press <TAB> and get suggestions to complete it. The same applies to the arguments of each sub-command.
 
 ## Themes
 
