@@ -11,16 +11,11 @@ function M.defaults()
   ---@class NeviraideUIConfig
   local defaults = {
     cmdline = {
-      enabled = true, -- enables the NeviraideUI cmdline UI
-      view = 'cmdline_popup', -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
-      opts = {}, -- global options for the cmdline. See section on views
+      enabled = true,
+      view = 'cmdline_popup',
+      opts = {},
       ---@type table<string, CmdlineFormat>
       format = {
-        -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
-        -- view: (default is cmdline view)
-        -- opts: any options passed to the view
-        -- icon_hl_group: optional hl_group for the icon
-        -- title: set to anything or empty string to hide
         cmdline = {
           pattern = '^:',
           icon = i('', 'vim') .. ' ',
@@ -38,13 +33,18 @@ function M.defaults()
           icon = i('', 'search') .. ' ' .. i('󰄿', 'chevron-up') .. ' ',
           lang = 'regex',
         },
-        filter = {
+        terminal = {
           pattern = '^:%s*!',
           icon = i('$', 'bash') .. ' ',
           lang = 'bash',
         },
+        highlight = {
+          pattern = { '^:%s*highlight%s+', '^:%s*hi%s+' },
+          icon = i('', 'paintbrush') .. ' ',
+          lang = 'vim',
+        },
         lua = {
-          pattern = { '^:%s*lua%s+', '^:%s*lua%s*=%s*', '^:%s*=%s*' },
+          pattern = { '^:%s*lua%s+' },
           icon = i('', 'lua') .. ' ',
           lang = 'lua',
         },
@@ -53,7 +53,7 @@ function M.defaults()
           icon = i('󰋖', 'question') .. ' ',
         },
         calculator = {
-          pattern = '^=',
+          pattern = '^:%s*=%s+',
           icon = i('󱖦', 'number') .. ' ',
           lang = 'vimnormal',
         },
@@ -210,12 +210,12 @@ function M.defaults()
     presets = {
       -- you can enable a preset by setting it to true, or a table that will override the preset config
       -- you can also add custom presets that you can enable/disable with enabled=true
-      bottom_search = true, -- use a classic bottom cmdline for search
-      command_palette = true, -- position the cmdline and popupmenu together
-      long_message_to_split = true, -- long messages will be sent to a split
-      inc_rename = false, -- enables an input dialog for inc-rename.nvim
-      lsp_doc_border = true, -- add a border to hover docs and signature help
-      cmdline_output_to_split = false, -- send the output of a command you executed in the cmdline to a split
+      -- bottom_search = true, -- use a classic bottom cmdline for search
+      -- command_palette = true, -- position the cmdline and popupmenu together
+      -- long_message_to_split = true, -- long messages will be sent to a split
+      -- inc_rename = false, -- enables an input dialog for inc-rename.nvim
+      -- lsp_doc_border = true, -- add a border to hover docs and signature help
+      -- cmdline_output_to_split = false, -- send the output of a command you executed in the cmdline to a split
     },
     throttle = 1000 / 30, -- how frequently does NeviraideUI need to check for ui updates? This has no effect when in blocking mode.
     ---@type NeviraideUIConfigViews
@@ -259,7 +259,7 @@ function M.setup(options)
 
   M.truncate_log()
 
-  require('neviraide-ui.config.preset').setup(options)
+  -- require('neviraide-ui.config.preset').setup(options)
 
   local routes = M.options.routes
   M.options = vim.tbl_deep_extend('force', M.options, options)

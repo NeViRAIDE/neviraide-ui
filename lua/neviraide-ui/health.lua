@@ -130,12 +130,12 @@ function M.check(opts)
   if Config.is_running() then
     ---@type {opt:string[], opt_str?:string, handler:fun(), handler_str:string}
     local checks = {
-      -- {
-      --   opt = 'notify',
-      --   enabled = Config.options.notify.enabled,
-      --   handler = vim.notify,
-      --   handler_str = 'vim.notify',
-      -- },
+      {
+        opt = 'notify',
+        enabled = Config.options.notify.enabled,
+        handler = vim.notify,
+        handler_str = 'vim.notify',
+      },
       {
         opt = 'lsp.hover',
         enabled = Config.options.lsp.hover.enabled,

@@ -58,6 +58,26 @@ M.defaults = {
   cmdline_popupmenu = {
     view = 'popupmenu',
     zindex = 200,
+    relative = 'editor',
+    position = {
+      row = '30%',
+      col = '50%',
+    },
+    size = {
+      width = 60,
+      height = 'auto',
+      max_height = 15,
+    },
+    border = {
+      style = border,
+      padding = { 0, 1 },
+    },
+    win_options = {
+      winhighlight = {
+        Normal = 'Normal',
+        FloatBorder = 'NeviraideUICmdlinePopupBorder',
+      },
+    },
   },
   virtualtext = {
     backend = 'virtualtext',
@@ -66,14 +86,13 @@ M.defaults = {
   },
   notify = {
     backend = 'notify',
-    fallback = 'mini',
     format = 'notify',
     replace = false,
     merge = false,
   },
   split = {
     backend = 'split',
-    enter = false,
+    enter = true,
     relative = 'editor',
     position = 'bottom',
     size = '20%',
@@ -177,7 +196,7 @@ M.defaults = {
     enter = false,
     zindex = 200,
     position = {
-      row = '50%',
+      row = '10%',
       col = '50%',
     },
     size = {

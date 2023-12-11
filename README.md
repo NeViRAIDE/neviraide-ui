@@ -290,28 +290,6 @@ To set the indent size to 4:
 
 </td></table>
 
-### Standalone themes
-
-<table><td><br>
-
-> #### **_<div align = right>// Chocolate</div>_**
-
-<!-- > ![Catppuccin-Mocha#1](./.screenshots/catppuccin-mocha.png) <br><br> -->
-
-<!-- <td>Chocolate</td> -->
-<!-- <td>Dracula</td> -->
-<!-- <td>Everforest</td> -->
-<!-- <td>Gruvbox Light</td> -->
-<!-- <td>Kanagawa</td> -->
-<!-- <td>Nord</td> -->
-<!-- <td>One Dark</td> -->
-<!-- <td>Sweet Pastel</td> -->
-<!-- <td>VSCode</td> -->
-
-<hr>
-    </td>
-</table>
-
 <div align = right> <br><br>
 
 [<kbd> <br> 🡅 <br> </kbd>](#table-of-contents)

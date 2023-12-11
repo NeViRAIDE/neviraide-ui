@@ -17,7 +17,7 @@ function M.setup(opts)
 
   local function load()
     require('neviraide-ui.utils').try(function()
-      require('neviraide-ui.config').setup(opts)
+      Config.setup(opts)
       require('neviraide-ui.commands').setup()
       require('neviraide-ui.message.router').setup()
       M.enable()
