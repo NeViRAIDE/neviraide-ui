@@ -26,6 +26,7 @@ usrcmd('UI', function(opts)
     print('This command required two arguments.')
     return
   end
+
   if opts.fargs[1] == 'borders' then
     require('neviraide-ui.utils.change_border.utils').set_borders(opts.fargs[2])
     require('neviraide.utils.reload_config').reload_borders()

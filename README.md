@@ -61,72 +61,37 @@
 
 ## Features
 
-> _Lightweight &amp; performant ui plugin for NEVIRAIDE providing:_
+Lightweight &amp; performant ui plugin for NEVIRAIDE providing:
 
-<table>
-    <tr>
-        <th>Dashboard (startup screen)</th>
-    </tr>
-    <tr>
-        <td>
-            <img src="./.screenshots/dashboard.png">
-        </td>
-    </tr>
-    <tr>
-        <th>Statusline</th>
-    </tr>
-    <tr>
-        <td><img src="./.screenshots/statusline.png"></td>
-    </tr>
-    <tr>
-        <th>Buffers and tabs line</th>
-    </tr>
-    <tr>
-        <td><img src="./.screenshots/buffertabs.png"></td>
-    </tr>
-    <tr>
-        <th align="center">Standalone colorschemes</th>
-    </tr>
-    <tr>
-        <td>Chocolate</td>
-    </tr>
-    <tr>
-        <td>Dracula</td>
-    </tr>
-    <tr>
-        <td>Everforest</td>
-    </tr>
-    <tr>
-        <td>Gruvbox Light</td>
-    </tr>
-    <tr>
-        <td>Kanagawa</td>
-    </tr>
-    <tr>
-        <td>Nord</td>
-    </tr>
-    <tr>
-        <td>One Dark</td>
-    </tr>
-    <tr>
-        <td>Sweet Pastel</td>
-    </tr>
-    <tr>
-        <td>VSCode</td>
-    </tr>
-    <tr>
-        <th>
-            <a href="https://github.com/RAprogramm/hyprdots">Hyprland colorschemes</a>
-        </th>
-    </tr>
-    <tr>
-        <td>https://github.com/RAprogramm/neviraide-ui.nvim/assets/70325462/dc8a63ac-c632-41f4-beec-7e10602dcfae</td>
-    </tr>
-</table>
+<table><td><br>
+
+> #### **_<div align="right">Dashboard (startup screen)</div>_**
+>
+> ![Dashboard](./.screenshots/dashboard.png)<br><br>
+
+<hr>
+
+> #### **_<div align="right">Statusline</div>_**
+>
+> ![Dashboard](./.screenshots/statusline.png)<br><br>
+
+<hr>
+
+> #### **_<div align="right">Buffers and tabs line</div>_**
+>
+> ![Dashboard](./.screenshots/buffertabs.png)<br><br>
+
+<hr>
+
+> #### **_<div align = right>Hyprland themes sync_**
+>
+> https://github.com/RAprogramm/neviraide-ui.nvim/assets/70325462/dc8a63ac-c632-41f4-beec-7e10602dcfae
+
+</td></table>
 
 ## Installation
 
-> _Install neviraide-ui using your favorite plugin manager. For example, with [lazy.nvim](https://github.com/folke/lazy.nvim):_
+_Install neviraide-ui using your favorite plugin manager. For example, with [lazy.nvim](https://github.com/folke/lazy.nvim):_
 
 ```lua
 require('lazy').load({
@@ -135,7 +100,9 @@ require('lazy').load({
         'RAprogramm/neviraide-ui.nvim',
         name = 'UI',
         event = 'VeryLazy',
-        opts = {},
+        opts = {
+            hyprTheme = true -- to sync NEVIRAIDE colorschemes with Hyprland
+        },
         config = function(_, opts) require('neviraide-ui').setup(opts) end,
         dependencies = {
           {
@@ -153,9 +120,9 @@ require('lazy').load({
 })
 ```
 
-> _Reload your Neovim configuration or restart Neovim._
->
-> _After this, neviraide-ui will be automatically downloaded, installed, and configured for you._
+_Reload your Neovim configuration or restart Neovim._
+
+_After this, neviraide-ui will be automatically downloaded, installed, and configured for you._
 
 ## Dependencies
 
@@ -163,14 +130,14 @@ require('lazy').load({
 
 ### Optional dependencies
 
-- #### Icons
-
+> - #### Icons
+>
 > _For display [nonicons](https://github.com/yamatsum/nonicons) instead of [devicons](https://github.com/vorillaz/devicons) run in your terminal:_
-
-```sh
-yay -S nonicons-git
-```
-
+>
+> ```sh
+> yay -S nonicons-git
+> ```
+>
 > _add this `symbol_map U+f101-U+f25c nonicons` to your kitty config._
 
 ## Overview
@@ -259,7 +226,7 @@ To set the indent size to 4:
 [![Frosted-Glass](https://placehold.co/130x30/7ed6ff/1e4c84?text=Frosted-Glass&font=Oswald)](#-Frosted-Glass)
 [![Gruvbox-Retro](https://placehold.co/130x30/475437/B5CC97?text=Gruvbox-Retro&font=Oswald)](#-Gruvbox-Retro)
 
-</td></tr></table></div><br><table><td><br>
+</div><br><table><td><br>
 
 > #### **_<div align = right>// Catppuccin-Mocha</div>_**
 >
@@ -323,8 +290,30 @@ To set the indent size to 4:
 
 </td></table>
 
+### Standalone themes
+
+<table><td><br>
+
+> #### **_<div align = right>// Chocolate</div>_**
+
+<!-- > ![Catppuccin-Mocha#1](./.screenshots/catppuccin-mocha.png) <br><br> -->
+
+<!-- <td>Chocolate</td> -->
+<!-- <td>Dracula</td> -->
+<!-- <td>Everforest</td> -->
+<!-- <td>Gruvbox Light</td> -->
+<!-- <td>Kanagawa</td> -->
+<!-- <td>Nord</td> -->
+<!-- <td>One Dark</td> -->
+<!-- <td>Sweet Pastel</td> -->
+<!-- <td>VSCode</td> -->
+
+<hr>
+    </td>
+</table>
+
 <div align = right> <br><br>
 
-[<kbd> <br> 🡅 <br> </kbd>](#📜-table-of-contents)
+[<kbd> <br> 🡅 <br> </kbd>](#table-of-contents)
 
 </div>

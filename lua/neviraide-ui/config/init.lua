@@ -9,7 +9,7 @@ M.ns = vim.api.nvim_create_namespace('neviraide-ui')
 function M.defaults()
   ---@class NeviraideUIConfig
   local defaults = {
-    hyprTheme = true,
+    hyprTheme = false,
     cmdline = {
       enabled = true, -- enables the NeviraideUI cmdline UI
       view = 'cmdline_popup', -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
