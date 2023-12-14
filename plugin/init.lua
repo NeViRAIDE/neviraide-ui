@@ -1,5 +1,3 @@
-require('neviraide-ui')
-
 vim.opt.statusline = '%!v:lua.require("neviraide-ui.statusline").run()'
 
 require('neviraide-ui.buftabline.lazyload')
@@ -20,3 +18,5 @@ require('neviraide-ui.override_vim_ui.input')
 require('neviraide-ui.override_vim_ui.select')
 
 require('neviraide-ui.themes').load_all_highlights()
+
+require('neviraide-ui').setup()

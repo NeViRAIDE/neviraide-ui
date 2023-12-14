@@ -13,11 +13,11 @@ M.api = Api
 ---@param opts? NeviraideUIConfig
 function M.setup(opts)
   -- run some checks before setting up
-  if not Health.check({ checkhealth = false, loaded = false }) then return end
+  if not Health.check({ checkhealth = true, loaded = true }) then return end
 
   local function load()
     require('neviraide-ui.utils').try(function()
-      Config.setup(opts)
+      require('neviraide-ui.config').setup(opts)
       require('neviraide-ui.commands').setup()
       require('neviraide-ui.message.router').setup()
       M.enable()

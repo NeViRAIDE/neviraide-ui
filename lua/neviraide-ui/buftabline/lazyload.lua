@@ -41,10 +41,7 @@ autocmd('NEVIRAIDE_newbuftab', { 'BufAdd', 'BufEnter', 'tabnew' }, {
 
       if
         #vim.api.nvim_buf_get_name(first_buf) == 0
-        and not vim.api.nvim_get_option_value(
-          'modified',
-          { scope = 'buf', buffer = first_buf }
-        )
+        and not vim.api.nvim_get_option_value('modified', { buf = first_buf })
       then
         table.remove(bufs, 1)
         vim.t.bufs = bufs
