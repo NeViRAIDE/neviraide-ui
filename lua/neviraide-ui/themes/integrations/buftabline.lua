@@ -1,14 +1,14 @@
 local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
 
 local highlights = {
-  TblineFill = { bg = colors.black2 },
-  BufTabDate = { fg = colors.grey_fg, bg = colors.black2, italic = true },
+  TblineFill = { bg = colors.darker_black },
+  BufTabDate = { fg = colors.grey_fg, bg = colors.darker_black, italic = true },
   TbLineBufOn = { fg = colors.white, bg = colors.black, bold = true },
-  TbLineBufOff = { fg = colors.light_grey, bg = colors.black2 },
+  TbLineBufOff = { fg = colors.light_grey, bg = colors.darker_black },
   TbLineBufOnModified = { fg = colors.green, bg = colors.black, italic = true },
-  TbLineBufOffModified = { fg = colors.red, bg = colors.black2, italic = true },
+  TbLineBufOffModified = { fg = colors.red, bg = colors.darker_black, italic = true },
   TbLineBufOnClose = { fg = colors.red, bg = colors.black },
-  TbLineBufOffClose = { fg = colors.light_grey, bg = colors.black2 },
+  TbLineBufOffClose = { fg = colors.light_grey, bg = colors.darker_black },
   TblineTabNewBtn = { fg = colors.white, bg = colors.one_bg3, bold = true },
   TbLineTabOn = { fg = colors.black, bg = colors.nord_blue, bold = true },
   TbLineTabOff = { fg = colors.white, bg = colors.one_bg2 },

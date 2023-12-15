@@ -16,6 +16,7 @@ local defaults = {
     fg = colors.white,
   },
 
+  WinBar = { bg = theme.base00 },
   WinBarNC = { link = 'WinBar' },
 
   Pmenu = { bg = colors.one_bg },

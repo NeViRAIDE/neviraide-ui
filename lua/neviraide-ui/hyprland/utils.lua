@@ -42,6 +42,7 @@ local M = {}
 
 M.accent = extract_colors
 
+-- TODO: push list of themes if no hyprdots
 function M.get_theme_from_hypr()
   local hypr_conf_path = os.getenv('HOME') .. '/.config/hypr/themes/theme.conf'
   local hypr_conf_file = io.open(hypr_conf_path, 'r')

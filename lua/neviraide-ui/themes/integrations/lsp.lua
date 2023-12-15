@@ -18,7 +18,11 @@ return {
   DiagnosticFloatingWarn = { fg = colors.yellow },
   DiagnosticFloatingInfo = { fg = colors.green },
 
-  LspSignatureActiveParameter = { fg = colors.black, bg = colors.green },
+  LspSignatureActiveParameter = {
+    fg = colors.green,
+    italic = true,
+    bold = true,
+  },
 
   LspCodeLens = { fg = 'Grey' },
   LspCodeLensSeparator = { link = 'Boolean' },

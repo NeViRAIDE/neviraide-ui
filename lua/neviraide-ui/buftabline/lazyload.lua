@@ -1,23 +1,32 @@
+-- Executes a Lua file stored in the 'buftabline' cache location set in Neovim's global variables.
 dofile(vim.g.neviraide_themes_cache .. 'buftabline')
 
+-- Requires a utility module for handling automatic commands (autocmd).
 local autocmd = require('neviraide.utils').autocmd
 
--- store listed buffers in tab local var
+-- Storing the list of all buffers in a tab-specific variable.
 vim.t.bufs = vim.api.nvim_list_bufs()
 
+-- Creating a table to store buffers that are listed.
 local listed_bufs = {}
 
+-- Looping through all buffers and adding listed buffers to the 'listed_bufs' table.
 for _, val in ipairs(vim.t.bufs) do
   if vim.bo[val].buflisted then table.insert(listed_bufs, val) end
 end
 
+-- Updating the tab-specific buffers list with only the listed buffers.
 vim.t.bufs = listed_bufs
 
--- autocmds for tabufline -> store bufnrs on bufadd, bufenter events
--- thx to https://github.com/ii14 & stores buffer per tab -> table
+-- Setting up autocmds to manage buffer lists on various buffer and tab events.
+-- Credits to https://github.com/ii14 for the implementation idea.
 autocmd('NEVIRAIDE_newbuftab', { 'BufAdd', 'BufEnter', 'tabnew' }, {
   callback = function(args)
     local bufs = vim.t.bufs
+    -- Initialize the buffer list if it doesn't exist.
+    -- Add the buffer to the list if it's not already present and meets certain conditions.
+    -- Conditions include being a listed buffer, being a valid buffer, and not being the current buffer.
+    -- Also handles the removal of unnamed and unmodified buffers from the list.
 
     if vim.t.bufs == nil then
       vim.t.bufs = vim.api.nvim_get_current_buf() == args.buf and {}
@@ -50,8 +59,11 @@ autocmd('NEVIRAIDE_newbuftab', { 'BufAdd', 'BufEnter', 'tabnew' }, {
   end,
 })
 
+-- Autocmd for handling buffer deletion.
+-- Removes the buffer from the tab-specific list when it's deleted.
 autocmd('NEVIRAIDE_bufdel', 'BufDelete', {
   callback = function(args)
+    -- Iterates through all tabs and their buffers, removing the deleted buffer.
     for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
       local bufs = vim.t[tab].bufs
       if bufs then
@@ -67,20 +79,29 @@ autocmd('NEVIRAIDE_bufdel', 'BufDelete', {
   end,
 })
 
-autocmd(
-  'NEVIRAIDE_buftabline',
-  { 'BufNew', 'BufNewFile', 'BufRead', 'TabEnter', 'TermOpen' },
-  {
-    pattern = '*',
-    callback = function()
-      if
-        #vim.fn.getbufinfo({ buflisted = 1 }) >= 2
-        or #vim.api.nvim_list_tabpages() >= 2
-      then
-        vim.opt.showtabline = 2
-        vim.opt.tabline = "%!v:lua.require('neviraide-ui.buftabline.modules')()"
-        vim.api.nvim_del_augroup_by_name('NEVIRAIDE_buftabline')
-      end
-    end,
-  }
-)
+-- Autocmd for setting up the buffer tabline.
+-- This autocmd is triggered on various events related to buffer and tab creation.
+autocmd('NEVIRAIDE_buftabline', {
+  'BufNew',
+  'BufNewFile',
+  'BufRead',
+  'TabEnter',
+  'TermOpen',
+  'BufDelete',
+  'BufWipeout',
+}, {
+  pattern = '*',
+  callback = function()
+    if
+      #vim.fn.getbufinfo({ buflisted = 1 }) < 2
+      and #vim.api.nvim_list_tabpages() < 2
+    then
+      -- Hide buftabline, if less than two buffers/tabs is open.
+      vim.opt.showtabline = 0
+    else
+      -- Show buftabline if more than two.
+      vim.opt.showtabline = 2
+      vim.opt.tabline = "%!v:lua.require('neviraide-ui.buftabline.modules')()"
+    end
+  end,
+})
