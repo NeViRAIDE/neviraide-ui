@@ -18,53 +18,49 @@ function M.defaults()
       format = {
         cmdline = {
           pattern = '^:',
-          icon = i('', 'vim') .. ' ',
+          icon = i('', 'vim', 0, 1),
           lang = 'vim',
         },
         search_down = {
           kind = 'search',
           pattern = '^/',
-          icon = i('', 'search') .. ' ' .. i('󰄼', 'chevron-down') .. ' ',
+          icon = i('', 'search') .. i('󰄼', 'chevron-down', 1, 1),
           lang = 'regex',
         },
         search_up = {
           kind = 'search',
           pattern = '^%?',
-          icon = i('', 'search') .. ' ' .. i('󰄿', 'chevron-up') .. ' ',
+          icon = i('', 'search') .. i('󰄿', 'chevron-up', 1, 1),
           lang = 'regex',
         },
         terminal = {
           pattern = '^:%s*!',
-          icon = i('$', 'bash') .. ' ',
+          icon = i('$', 'bash', 0, 1),
           lang = 'bash',
         },
         highlight = {
           pattern = { '^:%s*highlight%s+', '^:%s*hi%s+' },
-          icon = i('', 'paintbrush') .. ' ',
+          icon = i('', 'paintbrush', 0, 1),
           lang = 'vim',
         },
         lua = {
           pattern = { '^:%s*lua%s+' },
-          icon = i('', 'lua') .. ' ',
+          icon = i('', 'lua', 0, 1),
           lang = 'lua',
         },
         help = {
           pattern = '^:%s*he?l?p?%s+',
-          icon = i('󰋖', 'question') .. ' ',
+          icon = i('󰋖', 'question', 0, 1),
         },
         calculator = {
           pattern = '^:%s*=%s+',
-          icon = i('󱖦', 'number') .. ' ',
+          icon = i('󱖦', 'number', 0, 1),
           lang = 'vimnormal',
         },
         input = {}, -- Used by input()
-        -- lua = false, -- to disable a format, set to `false`
       },
     },
     messages = {
-      -- NOTE: If you enable messages, then the cmdline is enabled automatically.
-      -- This is a current Neovim limitation.
-
       enabled = true, -- enables the NeviraideUI messages UI
       view = 'notify', -- default view for messages
       view_error = 'notify', -- view for errors
@@ -154,7 +150,7 @@ function M.defaults()
         opts = {}, -- merged with defaults from documentation
       },
       signature = {
-        enabled = false,
+        enabled = true,
         auto_open = {
           enabled = true,
           trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
@@ -197,25 +193,11 @@ function M.defaults()
         ['{%S-}'] = '@parameter',
       },
     },
-    health = {
-      checker = false, -- Disable if you don't want health checks to run
-    },
     smart_move = {
       -- neviraide-ui tries to move out of the way of existing floating windows.
       enabled = true, -- you can disable this behaviour here
       -- add any filetypes here, that shouldn't trigger smart move.
       excluded_filetypes = { 'cmp_menu', 'cmp_docs', 'notify' },
-    },
-    ---@type NeviraideUIPresets
-    presets = {
-      -- you can enable a preset by setting it to true, or a table that will override the preset config
-      -- you can also add custom presets that you can enable/disable with enabled=true
-      -- bottom_search = true, -- use a classic bottom cmdline for search
-      -- command_palette = true, -- position the cmdline and popupmenu together
-      -- long_message_to_split = true, -- long messages will be sent to a split
-      -- inc_rename = false, -- enables an input dialog for inc-rename.nvim
-      -- lsp_doc_border = true, -- add a border to hover docs and signature help
-      -- cmdline_output_to_split = false, -- send the output of a command you executed in the cmdline to a split
     },
     throttle = 1000 / 30, -- how frequently does NeviraideUI need to check for ui updates? This has no effect when in blocking mode.
     ---@type NeviraideUIConfigViews
@@ -233,7 +215,7 @@ function M.defaults()
   return defaults
 end
 
---- @type NeviraideUIConfig
+---@type NeviraideUIConfig
 M.options = {}
 
 M._running = false
@@ -252,14 +234,10 @@ function M.setup(options)
     views = require('neviraide-ui.config.views').defaults,
     status = require('neviraide-ui.config.status').defaults,
     format = require('neviraide-ui.config.format').defaults,
-    popupmenu = {
-      kind_icons = require('neviraide-ui.config.icons').kinds,
-    },
+    popupmenu = { kind_icons = require('neviraide.utils').icons().lspkind },
   })
 
   M.truncate_log()
-
-  -- require('neviraide-ui.config.preset').setup(options)
 
   local routes = M.options.routes
   M.options = vim.tbl_deep_extend('force', M.options, options)

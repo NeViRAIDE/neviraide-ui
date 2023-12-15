@@ -1,49 +1,31 @@
+---Function for creating string of spaces.
+---@param spaces? integer number of spaces
+---@return string
+local function space(spaces) return string.rep(' ', spaces or 0) end
+
 local M = {}
 
----@param spaces integer
+---Function for decoding code of icon to the symbol.
+---@param icon_code integer icon code
 ---@return string
-local space = function(spaces) return string.rep(' ', spaces) end
+function M.icon_decoder(icon_code) return vim.fn.nr2char(tostring(icon_code)) end
 
----@param icon_code integer
+---Funtion for creating string with icon and spases before/after it.
+---@param handle_icon string icon symbol, if there is no in nonicons
+---@param nonicon_name string icon name in nonicons
+---@param space_before? integer number of spases before icon
+---@param space_after? integer number of spases after icon
 ---@return string
-M.icon_decoder = function(icon_code) return vim.fn.nr2char(tostring(icon_code)) end
+function M.icon(handle_icon, nonicon_name, space_before, space_after)
+  ---@type table
+  local nonicons = require('neviraide-ui.icons.nonicons')
 
----@param handle_icon string
----@param nonicon_name string
----@param space_before? integer
----@param space_after? integer
-M.icon = function(handle_icon, nonicon_name, space_before, space_after)
-  local nonicon = require('neviraide-ui.icons.nonicons')
+  local icon = vim.g.nonicons
+      and nonicons[nonicon_name]
+      and nonicons[nonicon_name].icon
+    or handle_icon
 
-  if not space_before then space_before = 0 end
-  if not space_after then space_after = 0 end
-
-  if vim.g.nonicons then
-    return space(space_before)
-      .. nonicon[nonicon_name].icon
-      .. space(space_after)
-  end
-  return space(space_before) .. handle_icon .. space(space_after)
+  return space(space_before) .. icon .. space(space_after)
 end
-
-M.palette = {
-  orange = '#d18616',
-  black = '#586069',
-  bright_black = '#959da5',
-  white = '#d1d5da',
-  bright_white = '#fafbfc',
-  red = '#ea4a5a',
-  bright_red = '#f97583',
-  green = '#34d058',
-  bright_green = '#85e89d',
-  yellow = '#ffea7f',
-  bright_yellow = '#ffea7f',
-  blue = '#2188ff',
-  bright_blue = '#79b8ff',
-  magenta = '#b392f0',
-  bright_magenta = '#b392f0',
-  cyan = '#39c5cf',
-  bright_cyan = '#56d4dd',
-}
 
 return M

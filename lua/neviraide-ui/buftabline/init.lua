@@ -25,11 +25,11 @@ M.tabuflineNext = function()
   local curbufIndex = M.getBufIndex(api.nvim_get_current_buf())
 
   if not curbufIndex then
-    -- if vim.t.bufs[1] ~= nil then
-    vim.cmd('b' .. vim.t.bufs[1])
-    return
-    -- end
-    -- vim.notify('No active buffers')
+    if vim.t.bufs[1] ~= nil then
+      vim.cmd('b' .. vim.t.bufs[1])
+      return
+    end
+    vim.notify('No active buffers')
   end
 
   vim.cmd(

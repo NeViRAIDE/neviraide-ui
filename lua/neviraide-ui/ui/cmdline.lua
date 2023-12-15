@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 local require = require('neviraide-ui.utils.lazy')
 
 local Message = require('neviraide-ui.message')

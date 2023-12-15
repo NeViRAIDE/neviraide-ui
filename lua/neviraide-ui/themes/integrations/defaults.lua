@@ -7,6 +7,10 @@ local generate_color =
 local accent, dir = require('neviraide-ui.hyprland.utils').accent()
 
 local defaults = {
+  ThemeAccent = {
+    fg = dir,
+  },
+
   MatchWord = {
     bg = colors.grey,
     fg = colors.white,

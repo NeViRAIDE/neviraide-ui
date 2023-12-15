@@ -11,12 +11,17 @@ return {
   DiagnosticHint = { fg = colors.purple },
   DiagnosticError = { fg = colors.red },
   DiagnosticWarn = { fg = colors.yellow },
-  DiagnosticInformation = { fg = colors.green },
+  DiagnosticInfo = { fg = colors.green },
+
+  DiagnosticFloatingHint = { fg = colors.purple },
+  DiagnosticFloatingError = { fg = colors.red },
+  DiagnosticFloatingWarn = { fg = colors.yellow },
+  DiagnosticFloatingInfo = { fg = colors.green },
+
   LspSignatureActiveParameter = { fg = colors.black, bg = colors.green },
 
   LspCodeLens = { fg = 'Grey' },
   LspCodeLensSeparator = { link = 'Boolean' },
 
-  RenamerTitle = { fg = colors.black, bg = colors.red },
-  RenamerBorder = { fg = colors.red },
+  LspInlayHint = { fg = theme.base03, italic = true },
 }

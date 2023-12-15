@@ -2,12 +2,8 @@ local require = require('neviraide-ui.utils.lazy')
 
 local Util = require('neviraide-ui.utils')
 
--- Build docs with:
--- lua require("neviraide-ui.config.highlights").docs()
-
 local M = {}
 
--- TODO: change highlights with themes
 M.defaults = {
   Cmdline = 'MsgArea', -- Normal for the classic cmdline area at the bottom"
   CmdlineIcon = 'DiagnosticSignInfo', -- Cmdline icon
@@ -20,7 +16,6 @@ M.defaults = {
   Confirm = 'Normal', -- Normal for the confirm view
   ConfirmBorder = 'DiagnosticSignInfo', -- Border for the confirm view
   Cursor = 'Cursor', -- Fake Cursor
-  Mini = 'MsgArea', -- Normal for mini view
   Popup = 'NormalFloat', -- Normal for popup views
   PopupBorder = 'FloatBorder', -- Border for popup views
   Popupmenu = 'Pmenu', -- Normal for the popupmenu
@@ -80,9 +75,10 @@ function M.add(hl_group, link)
 end
 
 function M.get_link(hl_group)
-  local ok, opts = pcall(vim.api.nvim_get_hl_by_name, hl_group, true)
-  -- local ok, opts = pcall(vim.api.nvim_get_hl, hl_group, true)
-  if opts then opts[vim.type_idx] = nil end
+  local hl_id = vim.api.nvim_get_hl_id_by_name(hl_group)
+  if not hl_id then return { link = hl_group, default = true } end
+
+  local ok, opts = pcall(vim.api.nvim_get_hl, hl_id, true)
   if not ok or vim.tbl_isempty(opts) then opts = { link = hl_group } end
   opts.default = true
   return opts

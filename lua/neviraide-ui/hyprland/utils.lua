@@ -6,12 +6,12 @@ local file_path = os.getenv('HOME') .. '/.config/waybar/themes/Wall-Dcol.css'
 ---@string main_fg_value The extracted main-fg color value.
 local main_fg_value
 
---- Function to read the file and extract the values of 'main-fg' and 'wb-act-bg'.
---- Opens the file for reading and reads line by line to find the color definitions.
+---Function to read the file and extract the values of 'main-fg' and 'wb-act-bg'.
+---Opens the file for reading and reads line by line to find the color definitions.
 ---@return string|nil main_fg_value The extracted main-fg color value, or nil if not found.
 ---@return string|nil wb_act_bg_value The extracted wb-act-bg color value, or nil if not found.
 local function extract_colors()
-  --- Open the file for reading
+  ---Open the file for reading
   -- @type file*
   local file = io.open(file_path, 'r')
   if not file then
