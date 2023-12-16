@@ -112,7 +112,6 @@ M.defaults = {
       cursorline = false,
     },
   },
-  -- FIX: accent color
   cmdline_popupmenu = {
     view = 'popupmenu',
     zindex = 200,

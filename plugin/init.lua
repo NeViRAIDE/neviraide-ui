@@ -1,7 +1,6 @@
 require('neviraide-ui').setup(require('neviraide-ui.config').options)
 
 require('neviraide-ui.buftabline.lazyload')
-require('usercommands')
 
 vim.defer_fn(function()
   local bufs = vim.api.nvim_list_bufs()
