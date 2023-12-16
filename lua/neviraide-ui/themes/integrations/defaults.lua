@@ -269,5 +269,6 @@ end
 
 vim.api.nvim_set_hl(0, 'NeviraideTerminalDarkerBG', { bg = accent.main_bg })
 vim.api.nvim_set_hl(0, 'NeviraideHelpDarkerBG', { bg = accent.main_bg })
+vim.api.nvim_set_hl(0, 'NeviraideTerminalWinbar', { bg = accent.main_bg })
 
 return defaults

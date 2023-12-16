@@ -33,6 +33,11 @@ autocmd('NeviraideTerminalDarkerBG', 'TermOpen', {
   callback = function()
     local current_win = vim.api.nvim_get_current_win()
     vim.api.nvim_set_option_value(
+      'winbar',
+      '%#NeviraideTerminalWinbar#',
+      { win = current_win }
+    )
+    vim.api.nvim_set_option_value(
       'winhighlight',
       'Normal:NeviraideTerminalDarkerBG',
       { win = current_win }

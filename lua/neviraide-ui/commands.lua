@@ -79,12 +79,27 @@ end
 
 function M.setup()
   M.commands = {
+    dashboard = function()
+      if vim.g.neviraide_dashboard_displayed then
+        require('neviraide-ui.buftabline').close_buffer()
+      else
+        require('neviraide-ui.dashboard').open()
+      end
+    end,
     debug = function() Options.debug = not Options.debug end,
     dismiss = function() Router.dismiss() end,
     log = function() vim.cmd.edit(Options.log) end,
     enable = function() require('neviraide-ui').enable() end,
     disable = function() require('neviraide-ui').disable() end,
     stats = function() Manager.add(Util.stats.message()) end,
+    cursorcolumn = function() Util.settings('cursorcolumn').toggle() end,
+    cursorline = function() Util.settings('cursorline').toggle() end,
+    numbers = function() Util.settings('numbers').toggle() end,
+    relativenumbers = function() Util.settings('relativenumbers').toggle() end,
+    transparency = function()
+      Util.settings('transparency').toggle()
+      require('neviraide.utils.reload_config').reload_transparency()
+    end,
     routes = function()
       local message = Message('neviraide-ui', 'debug')
       message:set(vim.inspect(Options.routes))
