@@ -5,17 +5,13 @@ local Util = require('neviraide-ui.utils')
 
 local Docs = require('neviraide-ui.lsp.docs')
 
-local Config = require('neviraide-ui.config')
-
 local M = {}
 
 function M.setup() vim.lsp.handlers['textDocument/hover'] = M.on_hover end
 
 function M.on_hover(_, result, ctx)
   if not (result and result.contents) then
-    if Config.options.lsp.hover.silent ~= true then
-      vim.notify('No information available')
-    end
+    vim.notify('No information available')
     return
   end
 
@@ -24,9 +20,7 @@ function M.on_hover(_, result, ctx)
   if not message:focus() then
     Format.format(message, result.contents, { ft = vim.bo[ctx.bufnr].filetype })
     if message:is_empty() then
-      if Config.options.lsp.hover.silent ~= true then
-        vim.notify('No information available')
-      end
+      vim.notify('No information available')
       return
     end
     Docs.show(message)

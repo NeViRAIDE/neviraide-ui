@@ -39,23 +39,7 @@ require('lazy').load({
     plugins = {
       {
         'RAprogramm/neviraide-ui.nvim',
-        name = 'UI',
         event = 'VeryLazy',
-        opts = {
-            hyprTheme = true -- to sync NEVIRAIDE colorschemes with Hyprland
-        },
-        config = function(_, opts) require('neviraide-ui').setup(opts) end,
-        dependencies = {
-          {
-            'rcarriga/nvim-notify',
-            opts = function() return require('plugins.ui.notify.options') end,
-            init = function()
-              require('neviraide.utils').on_very_lazy(
-                function() vim.notify = require('notify') end
-              )
-            end,
-          },
-        },
       },
     }
 })
@@ -135,8 +119,6 @@ To enable line numbers:
 ```
 
 To change the theme:
-
-> INFO: themes option not available if `hyprTheme = true` in config.
 
 ```vim
 :UI theme [theme_name]

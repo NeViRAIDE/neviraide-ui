@@ -17,7 +17,6 @@ end
 function M.enable()
   M.reset_augroup()
   M.fix_incsearch()
-  M.fix_input()
   M.fix_redraw()
   M.fix_cmp()
   M.fix_vim_sleuth()
@@ -135,53 +134,6 @@ function M.fix_redraw()
     vim.api.nvim_cmd = nvim_cmd
     vim.api.nvim_command = nvim_command
     vim.api.nvim_exec = nvim_exec
-  end)
-end
-
----@see https://github.com/neovim/neovim/issues/20311
-M.before_input = false
-function M.fix_input()
-  local function wrap(fn, skip)
-    return function(...)
-      if skip and skip(...) then return fn(...) end
-
-      -- make sure the cursor is drawn before blocking
-      M.draw_cursor()
-
-      local Manager = require('neviraide-ui.message.manager')
-
-      -- do any updates now before blocking
-      M.before_input = true
-      Router.update()
-
-      ---@type boolean, any
-      local ok, ret = pcall(fn, ...)
-
-      -- clear any message right after input
-      Manager.clear({ event = 'msg_show', kind = { 'echo', 'echomsg', '' } })
-
-      M.before_input = false
-      if ok then return ret end
-      error(ret)
-    end
-  end
-
-  local function skip(expr) return expr ~= nil end
-  local getchar = vim.fn.getchar
-  local getcharstr = vim.fn.getcharstr
-  local inputlist = vim.fn.inputlist
-  -- local confirm = vim.fn.confirm
-
-  vim.fn.getchar = wrap(vim.fn.getchar, skip)
-  vim.fn.getcharstr = wrap(vim.fn.getcharstr, skip)
-  vim.fn.inputlist = wrap(vim.fn.inputlist, nil)
-  -- vim.fn.confirm = wrap(vim.fn.confirm, nil)
-
-  table.insert(M._disable, function()
-    vim.fn.getchar = getchar
-    vim.fn.getcharstr = getcharstr
-    vim.fn.inputlist = inputlist
-    -- vim.fn.confirm = confirm
   end)
 end
 

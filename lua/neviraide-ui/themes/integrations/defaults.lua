@@ -4,11 +4,11 @@ local theme = require('neviraide-ui.themes').get_theme_tb('base_16')
 local generate_color =
   require('neviraide-ui.themes.colors').change_hex_lightness
 
-local accent, dir = require('neviraide-ui.hyprland.utils').accent()
+local accent = require('neviraide-ui.hyprland.utils').wb_colors
 
 local defaults = {
   ThemeAccent = {
-    fg = dir,
+    fg = accent.active_bg,
   },
 
   MatchWord = {
@@ -21,7 +21,7 @@ local defaults = {
 
   Pmenu = { bg = colors.one_bg },
   PmenuSbar = { bg = colors.one_bg },
-  PmenuSel = { bg = colors.pmenu_bg, fg = colors.black, bold = true },
+  PmenuSel = { bg = accent.active_bg, fg = accent.main_bg, bold = true },
   PmenuThumb = { bg = colors.grey },
 
   MatchParen = { link = 'MatchWord' },
@@ -32,7 +32,7 @@ local defaults = {
   LineNr = { fg = colors.grey },
 
   -- floating windowr
-  FloatBorder = { fg = accent },
+  FloatBorder = { fg = accent.main_fg },
   NormalFloat = { bg = 'none' },
 
   NvimInternalError = { fg = colors.red },
@@ -52,7 +52,7 @@ local defaults = {
   },
 
   Directory = {
-    fg = dir,
+    fg = accent.active_bg,
   },
 
   Error = {
@@ -266,5 +266,8 @@ then
   defaults.NormalFloat = { bg = colors.one_bg }
   defaults.NuiTitle = { bg = colors.green, fg = colors.black }
 end
+
+vim.api.nvim_set_hl(0, 'NeviraideTerminalDarkerBG', { bg = accent.main_bg })
+vim.api.nvim_set_hl(0, 'NeviraideHelpDarkerBG', { bg = accent.main_bg })
 
 return defaults

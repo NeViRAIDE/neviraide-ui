@@ -112,6 +112,7 @@ M.defaults = {
       cursorline = false,
     },
   },
+  -- FIX: accent color
   cmdline_popupmenu = {
     view = 'popupmenu',
     zindex = 200,
@@ -152,7 +153,7 @@ M.defaults = {
     enter = true,
     relative = 'editor',
     position = 'bottom',
-    size = '20%',
+    size = '30%',
     close = {
       keys = { 'q' },
     },

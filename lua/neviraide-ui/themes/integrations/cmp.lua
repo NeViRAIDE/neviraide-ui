@@ -1,11 +1,12 @@
 local base16 = require('neviraide-ui.themes').get_theme_tb('base_16')
 local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
+local accent = require('neviraide-ui.hyprland.utils').wb_colors
 
 local highlights = {
   CmpItemAbbr = { fg = colors.white },
   CmpItemAbbrMatch = { fg = colors.blue, bold = true },
-  CmpDoc = { bg = colors.darker_black },
-  CmpDocBorder = { fg = colors.darker_black, bg = colors.darker_black },
+  CmpDoc = { bg = accent.main_bg },
+  CmpDocBorder = { link = "ThemeAccent" },
   CmpPmenu = { link = 'Pmenu' },
   CmpSel = { link = 'PmenuSel' },
 }
@@ -46,7 +47,7 @@ local item_kinds = {
 highlights = vim.tbl_deep_extend(
   'force',
   highlights,
-  { CmpBorder = { fg = colors['gray_fg'] } } or {}
+  { CmpBorder = { link = 'ThemeAccent' } } or {}
 )
 highlights = vim.tbl_deep_extend('force', highlights, item_kinds)
 

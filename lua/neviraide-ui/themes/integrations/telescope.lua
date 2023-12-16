@@ -1,4 +1,5 @@
 local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
+local accent = require('neviraide-ui.hyprland.utils').wb_colors
 
 ---@return string
 local function telescope_style()
@@ -19,15 +20,15 @@ local hlgroups = {
     bg = colors.black2,
   },
 
-  TelescopeNormal = { bg = colors.darker_black },
- 
+  TelescopeNormal = { bg = accent.main_bg },
+
   TelescopePreviewTitle = {
     fg = colors.black,
     bg = colors.green,
   },
 
-  TelescopeSelection = { bg = colors.black2, fg = colors.white },
-  TelescopeSelectionCaret = { bg = colors.black2, fg = colors.red },
+  TelescopeSelection = { bg = accent.main_bg, fg = colors.white, bold = true },
+  TelescopeSelectionCaret = { bg = accent.main_bg, fg = colors.red },
   TelescopeResultsDiffAdd = { fg = colors.green },
   TelescopeResultsDiffChange = { fg = colors.yellow },
   TelescopeResultsDiffDelete = { fg = colors.red },
@@ -35,7 +36,7 @@ local hlgroups = {
 
 local styles = {
   borderless = {
-    TelescopeBorder = { fg = colors.darker_black, bg = colors.darker_black },
+    TelescopeBorder = { fg = accent.main_bg, bg = accent.main_bg },
     TelescopePromptTitle = {
       fg = colors.black,
       bg = colors.red,
@@ -43,8 +44,8 @@ local styles = {
     TelescopePromptBorder = { fg = colors.black2, bg = colors.black2 },
     TelescopePromptNormal = { fg = colors.white, bg = colors.black2 },
     TelescopeResultsTitle = {
-      fg = colors.darker_black,
-      bg = colors.darker_black,
+      fg = accent.main_bg,
+      bg = accent.main_bg,
     },
     TelescopePromptPrefix = { fg = colors.red, bg = colors.black2 },
   },

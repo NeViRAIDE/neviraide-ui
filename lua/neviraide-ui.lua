@@ -34,9 +34,7 @@ end
 
 function M.disable()
   Config._running = false
-  if Config.options.notify.enabled then
-    require('neviraide-ui.source.notify').disable()
-  end
+  require('neviraide-ui.source.notify').disable()
   require('neviraide-ui.message.router').disable()
   require('neviraide-ui.ui').disable()
   require('neviraide-ui.utils.hacks').disable()
@@ -48,9 +46,7 @@ function M.cmd(name) require('neviraide-ui.commands').cmd(name) end
 
 function M.enable()
   Config._running = true
-  if Config.options.notify.enabled then
-    require('neviraide-ui.source.notify').enable()
-  end
+  require('neviraide-ui.source.notify').enable()
 
   local hyprTheme = require('neviraide-ui.hyprland.utils').get_theme_from_hypr()
   require('neviraide-ui.utils.change_theme').change_theme(hyprTheme)

@@ -3,7 +3,7 @@ local require = require('neviraide-ui.utils.lazy')
 
 local Message = require('neviraide-ui.message')
 local Manager = require('neviraide-ui.message.manager')
-local Config = require('neviraide-ui.config')
+local Formats = require('neviraide-ui.config.cmdline').formats
 local NeviraideUIText = require('neviraide-ui.text')
 local Hacks = require('neviraide-ui.utils.hacks')
 local Object = require('nui.object')
@@ -70,14 +70,14 @@ end
 ---@return CmdlineFormat
 function Cmdline:get_format()
   if self.state.prompt and self.state.prompt ~= '' then
-    return Config.options.cmdline.format.input
+    return Formats.input
   end
   local line = self.state.firstc .. self:get()
 
   ---@type {offset:number, format: CmdlineFormat}[]
   local ret = {}
 
-  for _, format in pairs(Config.options.cmdline.format) do
+  for _, format in pairs(Formats) do
     local patterns = type(format.pattern) == 'table' and format.pattern
       or { format.pattern }
     ---@cast patterns string[]

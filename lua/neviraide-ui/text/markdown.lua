@@ -1,7 +1,6 @@
 local require = require('neviraide-ui.utils.lazy')
 
 local NeviraideUIText = require('neviraide-ui.text')
-local Config = require('neviraide-ui.config')
 
 ---@alias MarkdownBlock {line:string}
 ---@alias MarkdownCodeBlock {code:string[], lang:string}
@@ -136,7 +135,14 @@ end
 function M.get_highlights(line)
   ---@type NeviraideUIText[]
   local ret = {}
-  for pattern, hl_group in pairs(Config.options.markdown.highlights) do
+  for pattern, hl_group in pairs({
+    ['|%S-|'] = '@text.reference',
+    ['@%S+'] = '@parameter',
+    ['^%s*(Parameters:)'] = '@text.title',
+    ['^%s*(Return:)'] = '@text.title',
+    ['^%s*(See also:)'] = '@text.title',
+    ['{%S-}'] = '@parameter',
+  }) do
     local from = 1
     while from do
       ---@type number, string?
@@ -228,7 +234,10 @@ function M.keys(buf)
       local pos = vim.api.nvim_win_get_cursor(0)
       local col = pos[2] + 1
 
-      for pattern, handler in pairs(Config.options.markdown.hover) do
+      for pattern, handler in pairs({
+        ['|(%S-)|'] = vim.cmd.help, -- vim help links
+        ['%[.-%]%((%S-)%)'] = require('neviraide-ui.utils').open, -- markdown links
+      }) do
         local from = 1
         local to, url
         while from do

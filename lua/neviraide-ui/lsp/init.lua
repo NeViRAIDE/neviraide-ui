@@ -1,7 +1,5 @@
 local require = require('neviraide-ui.utils.lazy')
 
-local Config = require('neviraide-ui.config')
-
 local M = {}
 
 ---@alias LspEvent "lsp"
@@ -16,25 +14,10 @@ M.kinds = {
 }
 
 function M.setup()
-  if Config.options.lsp.hover.enabled then
-    require('neviraide-ui.lsp.hover').setup()
-  end
-
-  if Config.options.lsp.signature.enabled then
-    require('neviraide-ui.lsp.signature').setup()
-  end
-
-  if Config.options.lsp.message.enabled then
-    require('neviraide-ui.lsp.message').setup()
-  end
-
-  local overrides = vim.tbl_filter(
-    ---@param v boolean
-    function(v) return v end,
-    Config.options.lsp.override
-  )
-
-  if #overrides > 0 then require('neviraide-ui.override_vim_ui.lsp').setup() end
+  require('neviraide-ui.lsp.hover').setup()
+  require('neviraide-ui.lsp.signature').setup()
+  require('neviraide-ui.lsp.message').setup()
+  require('neviraide-ui.override_vim_ui.lsp').setup()
 end
 
 function M.scroll(delta) return require('neviraide-ui.lsp.docs').scroll(delta) end

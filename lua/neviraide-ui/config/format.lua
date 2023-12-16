@@ -1,3 +1,5 @@
+local i = require('neviraide-ui.icons.utils').icon
+
 local M = {}
 
 ---@type table<string, NeviraideUIFormat>
@@ -50,7 +52,11 @@ M.defaults = {
       error = 'NeviraideUIFormatLevelError',
       off = 'NeviraideUIFormatLevelOff',
     },
-    icons = { error = ' ', warn = ' ', info = ' ' },
+    icons = {
+      error = i('', 'x-circle', 0, 1),
+      warn = i('', 'alert', 0, 1),
+      info = i('', 'info', 0, 1),
+    },
   },
   ---@class NeviraideUIFormatOptions.text
   text = {

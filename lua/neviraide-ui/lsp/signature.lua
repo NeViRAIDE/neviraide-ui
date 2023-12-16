@@ -3,7 +3,6 @@ local require = require('neviraide-ui.utils.lazy')
 local NeviraideUIText = require('neviraide-ui.text')
 local Format = require('neviraide-ui.lsp.format')
 local Markdown = require('neviraide-ui.text.markdown')
-local Config = require('neviraide-ui.config')
 local Util = require('neviraide-ui.utils')
 local Docs = require('neviraide-ui.lsp.docs')
 
@@ -42,27 +41,25 @@ M.trigger_kind = {
 function M.setup()
   vim.lsp.handlers['textDocument/signatureHelp'] = M.on_signature
 
-  if Config.options.lsp.signature.auto_open.enabled then
-    -- attach to existing buffers
-    for _, client in ipairs(vim.lsp.get_clients()) do
-      for _, buf in ipairs(vim.lsp.get_buffers_by_client_id(client.id)) do
-        M.on_attach(buf, client)
-      end
+  -- attach to existing buffers
+  for _, client in ipairs(vim.lsp.get_clients()) do
+    for _, buf in ipairs(vim.lsp.get_buffers_by_client_id(client.id)) do
+      M.on_attach(buf, client)
     end
-
-    -- attach to new buffers
-    vim.api.nvim_create_autocmd('LspAttach', {
-      group = vim.api.nvim_create_augroup(
-        'neviraide_ui_lsp_signature',
-        { clear = true }
-      ),
-      callback = function(args)
-        if args.data ~= nil then
-          M.on_attach(args.buf, vim.lsp.get_client_by_id(args.data.client_id))
-        end
-      end,
-    })
   end
+
+  -- attach to new buffers
+  vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup(
+      'neviraide_ui_lsp_signature',
+      { clear = true }
+    ),
+    callback = function(args)
+      if args.data ~= nil then
+        M.on_attach(args.buf, vim.lsp.get_client_by_id(args.data.client_id))
+      end
+    end,
+  })
 end
 
 function M.get_char(buf)
@@ -107,48 +104,41 @@ function M.on_attach(buf, client)
       client.server_capabilities.signatureHelpProvider.triggerCharacters
     if chars and #chars > 0 then
       local callback = M.check(buf, chars, client.offset_encoding)
-      if Config.options.lsp.signature.auto_open.luasnip then
-        vim.api.nvim_create_autocmd('User', {
-          pattern = 'LuasnipInsertNodeEnter',
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'LuasnipInsertNodeEnter',
+        callback = callback,
+      })
+      vim.api.nvim_create_autocmd(
+        { 'TextChangedI', 'TextChangedP', 'InsertEnter' },
+        {
+          buffer = buf,
           callback = callback,
-        })
-      end
-      if Config.options.lsp.signature.auto_open.trigger then
-        vim.api.nvim_create_autocmd(
-          { 'TextChangedI', 'TextChangedP', 'InsertEnter' },
-          {
-            buffer = buf,
-            callback = callback,
-          }
-        )
-      end
+        }
+      )
     end
   end
 end
 
 function M.check(buf, chars, encoding)
   encoding = encoding or 'utf-16'
-  return Util.debounce(
-    Config.options.lsp.signature.auto_open.throttle,
-    function(_event)
-      if vim.api.nvim_get_current_buf() ~= buf then return end
+  return Util.debounce(50, function(_event)
+    if vim.api.nvim_get_current_buf() ~= buf then return end
 
-      if vim.tbl_contains(chars, M.get_char(buf)) then
-        local params = vim.lsp.util.make_position_params(0, encoding)
-        vim.lsp.buf_request(
-          buf,
-          'textDocument/signatureHelp',
-          params,
-          function(err, result, ctx)
-            M.on_signature(err, result, ctx, {
-              trigger = true,
-              stay = function() return vim.tbl_contains(chars, M.get_char(buf)) end,
-            })
-          end
-        )
-      end
+    if vim.tbl_contains(chars, M.get_char(buf)) then
+      local params = vim.lsp.util.make_position_params(0, encoding)
+      vim.lsp.buf_request(
+        buf,
+        'textDocument/signatureHelp',
+        params,
+        function(err, result, ctx)
+          M.on_signature(err, result, ctx, {
+            trigger = true,
+            stay = function() return vim.tbl_contains(chars, M.get_char(buf)) end,
+          })
+        end
+      )
     end
-  )
+  end)
 end
 
 ---@param help SignatureHelp

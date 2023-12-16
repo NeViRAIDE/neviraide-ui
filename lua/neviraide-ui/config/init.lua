@@ -1,5 +1,4 @@
 local require = require('neviraide-ui.utils.lazy')
-local i = require('neviraide-ui.icons.utils').icon
 
 local Routes = require('neviraide-ui.config.routes')
 
@@ -10,196 +9,21 @@ M.ns = vim.api.nvim_create_namespace('neviraide-ui')
 function M.defaults()
   ---@class NeviraideUIConfig
   local defaults = {
-    cmdline = {
-      enabled = true,
-      view = 'cmdline_popup',
-      opts = {},
-      ---@type table<string, CmdlineFormat>
-      format = {
-        cmdline = {
-          pattern = '^:',
-          icon = i('', 'vim', 0, 1),
-          lang = 'vim',
-        },
-        search_down = {
-          kind = 'search',
-          pattern = '^/',
-          icon = i('', 'search') .. i('󰄼', 'chevron-down', 1, 1),
-          lang = 'regex',
-        },
-        search_up = {
-          kind = 'search',
-          pattern = '^%?',
-          icon = i('', 'search') .. i('󰄿', 'chevron-up', 1, 1),
-          lang = 'regex',
-        },
-        terminal = {
-          pattern = '^:%s*!',
-          icon = i('$', 'bash', 0, 1),
-          lang = 'bash',
-        },
-        highlight = {
-          pattern = { '^:%s*highlight%s+', '^:%s*hi%s+' },
-          icon = i('', 'paintbrush', 0, 1),
-          lang = 'vim',
-        },
-        lua = {
-          pattern = { '^:%s*lua%s+' },
-          icon = i('', 'lua', 0, 1),
-          lang = 'lua',
-        },
-        help = {
-          pattern = '^:%s*he?l?p?%s+',
-          icon = i('󰋖', 'question', 0, 1),
-        },
-        calculator = {
-          pattern = '^:%s*=%s+',
-          icon = i('󱖦', 'number', 0, 1),
-          lang = 'vimnormal',
-        },
-        input = {}, -- Used by input()
-      },
-    },
-    messages = {
-      enabled = true, -- enables the NeviraideUI messages UI
-      view = 'notify', -- default view for messages
-      view_error = 'notify', -- view for errors
-      view_warn = 'notify', -- view for warnings
-      view_history = 'messages', -- view for :messages
-      view_search = 'virtualtext', -- view for search count messages. Set to `false` to disable
-    },
-    popupmenu = {
-      enabled = true, -- enables the NeviraideUI popupmenu UI
-      ---@type 'nui'|'cmp'
-      backend = 'nui', -- backend to use to show regular cmdline completions
-      ---@type NeviraideUIPopupmenuItemKind|false
-      -- Icons for completion item kinds (see defaults at neviraide-ui.config.icons.kinds)
-      kind_icons = {}, -- set to `false` to disable icons
-    },
-    -- default options for require('neviraide-ui').redirect
-    -- see the section on Command Redirection
+    cmdline = { enabled = true },
+    messages = { enabled = true },
+    popupmenu = { enabled = true, backend = 'nui' },
     ---@type NeviraideUIRouteConfig
     redirect = {
       view = 'popup',
       filter = { event = 'msg_show' },
     },
-    -- You can add any custom commands below that will be available with `:NeviraideUI command`
-    ---@type table<string, NeviraideUICommand>
-    commands = {
-      history = {
-        -- options for the message history that you get with `:NeviraideUI`
-        view = 'split',
-        opts = { enter = true, format = 'details' },
-        filter = {
-          any = {
-            { event = 'notify' },
-            { error = true },
-            { warning = true },
-            { event = 'msg_show', kind = { '' } },
-            { event = 'lsp', kind = 'message' },
-          },
-        },
-      },
-      -- :NeviraideUI last
-      last = {
-        view = 'popup',
-        opts = { enter = true, format = 'details' },
-        filter = {
-          any = {
-            { event = 'notify' },
-            { error = true },
-            { warning = true },
-            { event = 'msg_show', kind = { '' } },
-            { event = 'lsp', kind = 'message' },
-          },
-        },
-        filter_opts = { count = 1 },
-      },
-      -- :NeviraideUI errors
-      errors = {
-        -- options for the message history that you get with `:NeviraideUI`
-        view = 'popup',
-        opts = { enter = true, format = 'details' },
-        filter = { error = true },
-        filter_opts = { reverse = true },
-      },
-    },
-    notify = {
-      -- NeviraideUI can be used as `vim.notify` so you can route any notification like other messages
-      -- Notification messages have their level and other properties set.
-      -- event is always "notify" and kind can be any log level as a string
-      -- The default routes will forward notifications to nvim-notify
-      -- Benefit of using NeviraideUI for this is the routing and consistent history view
-      enabled = true,
-      view = 'notify',
-    },
-    lsp = {
-      override = {
-        -- override the default lsp markdown formatter with NeviraideUI
-        ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-        -- override the lsp markdown formatter with NeviraideUI
-        ['vim.lsp.util.stylize_markdown'] = true,
-        -- override cmp documentation with NeviraideUI (needs the other options to work)
-        ['cmp.entry.get_documentation'] = true,
-      },
-      hover = {
-        enabled = true,
-        silent = false, -- set to true to not show a message if hover is not available
-        view = nil, -- when nil, use defaults from documentation
-        ---@type NeviraideUIViewOptions
-        opts = {}, -- merged with defaults from documentation
-      },
-      signature = {
-        enabled = true,
-        auto_open = {
-          enabled = true,
-          trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
-          luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
-          throttle = 50, -- Debounce lsp signature help request by 50ms
-        },
-        view = nil, -- when nil, use defaults from documentation
-        ---@type NeviraideUIViewOptions
-        opts = {}, -- merged with defaults from documentation
-      },
-      message = {
-        -- Messages shown by lsp servers
-        enabled = true,
-        view = 'notify',
-        opts = {},
-      },
-      -- defaults for hover and signature help
-      documentation = {
-        view = 'hover',
-        ---@type NeviraideUIViewOptions
-        opts = {
-          replace = true,
-          render = 'plain',
-          format = { '{message}' },
-          win_options = { concealcursor = 'n', conceallevel = 3 },
-        },
-      },
-    },
-    markdown = {
-      hover = {
-        ['|(%S-)|'] = vim.cmd.help, -- vim help links
-        ['%[.-%]%((%S-)%)'] = require('neviraide-ui.utils').open, -- markdown links
-      },
-      highlights = {
-        ['|%S-|'] = '@text.reference',
-        ['@%S+'] = '@parameter',
-        ['^%s*(Parameters:)'] = '@text.title',
-        ['^%s*(Return:)'] = '@text.title',
-        ['^%s*(See also:)'] = '@text.title',
-        ['{%S-}'] = '@parameter',
-      },
-    },
+    notify = { view = 'notify' },
+    markdown = {},
     smart_move = {
-      -- neviraide-ui tries to move out of the way of existing floating windows.
-      enabled = true, -- you can disable this behaviour here
-      -- add any filetypes here, that shouldn't trigger smart move.
+      enabled = true,
       excluded_filetypes = { 'cmp_menu', 'cmp_docs', 'notify' },
     },
-    throttle = 1000 / 30, -- how frequently does NeviraideUI need to check for ui updates? This has no effect when in blocking mode.
+    throttle = 1000 / 30,
     ---@type NeviraideUIConfigViews
     views = {}, ---@see section on views
     ---@type NeviraideUIRouteConfig[]
@@ -223,8 +47,6 @@ function M.is_running() return M._running end
 
 function M.setup(options)
   options = options or {}
-
-  M.fix_legacy(options)
 
   if options.popupmenu and options.popupmenu.kind_icons == true then
     options.popupmenu.kind_icons = nil
@@ -264,24 +86,6 @@ function M.truncate_log()
   local stat = vim.uv.fs_stat(M.options.log)
   if stat and stat.size > M.options.log_max_size then
     io.open(M.options.log, 'w+'):close()
-  end
-end
-
----@param opts NeviraideUIConfig
-function M.fix_legacy(opts)
-  if
-    opts.lsp
-    and opts.lsp.signature
-    and type(opts.lsp.signature.auto_open) == 'boolean'
-  then
-    opts.lsp.signature.auto_open = {
-      enabled = opts.lsp.signature.auto_open,
-    }
-  end
-  if opts.history then
-    opts.commands = opts.commands or {}
-    opts.commands.history = opts.history
-    opts.history = nil
   end
 end
 
