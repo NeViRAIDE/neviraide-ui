@@ -1,4 +1,5 @@
--- FIX: working only 1 time
+-- TODO: realize settings nui popup
+
 local layout = require('neviraide-ui.settings_nui.layout')
 local popups = require('neviraide-ui.settings_nui.popups')
 local tree = require('neviraide-ui.settings_nui.tree')

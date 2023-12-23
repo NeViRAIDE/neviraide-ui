@@ -1,4 +1,11 @@
+---@alias StatusLineComponent fun(condition?: boolean):string
+
+-- TODO: add on click event for all components
+-- TODO: add run code component
+-- FIX: for checkhealth filetype
+
 local M = {}
+
 local i = require('neviraide-ui.icons.utils').icon
 local utils = require('neviraide-ui.utils')
 
@@ -119,10 +126,10 @@ M.separator = function(separator, size, condition)
   return ''
 end
 
----@return string
+---@type StatusLineComponent
 M.indent = function() return '%#Comment#%=' end
 
----@return string
+---@type StatusLineComponent
 M.mode = function()
   local m = vim.api.nvim_get_mode().mode
   local current_mode = '%#'
@@ -134,16 +141,24 @@ M.mode = function()
 end
 
 ---Filetype with version of the interpreter.
----@param condition? boolean
----@return string
+---@type StatusLineComponent
 M.interpreter = function(condition)
   local highlight = 'St_interpreter'
   -- local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
   local buf_number = vim.api.nvim_get_current_buf()
   local buf_ft = vim.api.nvim_get_option_value('filetype', { buf = buf_number })
 
+  -- PERF: check all for better speed
   if buf_ft == 'lua' then
     return '%#' .. highlight .. '#' .. i('', 'lua', 0, 2) .. _VERSION
+  -- elseif buf_ft == 'rust' then
+  --   local rust_version = vim.fn.execute(':!rustc -V')
+  --   return '%#'
+  --     .. highlight
+  --     .. '#'
+  --     .. i('', 'rust', 0, 2)
+  --     .. 'Rust '
+  --     .. rust_version:match('%d[^ ]*')
   elseif buf_ft == 'go' then
     local go_version = vim.fn.execute(':!go version')
     return '%#'
@@ -162,11 +177,11 @@ M.interpreter = function(condition)
       .. 'Python '
       .. python_version
   end
-  -- TODO: add icons
+  -- TODO: add icons for interpreter
   return utils.capitalizeFirstLetter(buf_ft)
 end
 
----@return string
+---@type StatusLineComponent
 M.LSP_status = function()
   if rawget(vim, 'lsp') then
     for _, client in ipairs(vim.lsp.get_clients()) do
@@ -185,7 +200,7 @@ M.LSP_status = function()
   return '%#Comment#'
 end
 
----@return string
+---@type StatusLineComponent
 M.LSP_Diagnostics = function()
   if not rawget(vim, 'lsp') then return '%#Comment#' end
 
@@ -218,7 +233,7 @@ M.LSP_Diagnostics = function()
   end
 end
 
----@return string
+---@type StatusLineComponent
 M.git = function()
   if not vim.b.gitsigns_head or vim.b.gitsigns_git_status then return '' end
 
@@ -251,7 +266,7 @@ M.git = function()
   end
 end
 
----@return string
+---@type StatusLineComponent
 M.location = function()
   local lines = vim.api.nvim_buf_line_count(0)
   local r, c = unpack(vim.api.nvim_win_get_cursor(0))
@@ -272,8 +287,7 @@ M.location = function()
     .. lines
 end
 
----@param condition boolean
----@return string
+---@type StatusLineComponent
 M.filesize = function(condition)
   local file = tostring(vim.fn.expand('%:p'))
   if file == nil or #file == 0 then return '' end
@@ -295,8 +309,7 @@ M.filesize = function(condition)
   return ''
 end
 
----@param condition? boolean
----@return string
+---@type StatusLineComponent
 M.fileformat = function(condition)
   local symbols = {
     unix = 'LF ',
@@ -307,8 +320,7 @@ M.fileformat = function(condition)
   return ''
 end
 
----@param condition? boolean
----@return string
+---@type StatusLineComponent
 M.encoding = function(condition)
   -- FIX: emty on .txt
   if condition then
@@ -317,14 +329,13 @@ M.encoding = function(condition)
   return ''
 end
 
----@param condition? boolean
----@return string
+---@type StatusLineComponent
 M.spaces = function(condition)
   if condition then return '%#St_spaces#' .. vim.o.tabstop .. ' spaces' end
   return ''
 end
 
----@return string
+---@type StatusLineComponent
 M.lazy = function()
   local ok, lazy = pcall(require, 'lazy.status')
   if ok then

@@ -1,3 +1,5 @@
+-- FIX: remove '~' symbol from neotree
+
 local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
 local theme = require('neviraide-ui.themes').get_theme_tb('base_16')
 
@@ -5,10 +7,21 @@ local generate_color =
   require('neviraide-ui.themes.colors').change_hex_lightness
 
 local accent = require('neviraide-ui.hyprland.utils').wb_colors
+-- TODO: make no borders or borders for themes
 
 local defaults = {
   ThemeAccent = {
     fg = accent.active_bg,
+  },
+  ThemeBG = {
+    bg = accent.main_bg,
+  },
+  ThemeFG = {
+    fg = accent.main_fg,
+  },
+  LineSeparator = {
+    fg = accent.main_bg,
+    bg = accent.main_bg,
   },
 
   MatchWord = {
@@ -36,7 +49,8 @@ local defaults = {
   NormalFloat = { bg = 'none' },
 
   NvimInternalError = { fg = colors.red },
-  WinSeparator = { fg = colors.line },
+  -- FIX: this color for terminals, and change fg color for sipmle windows
+  WinSeparator = { fg = theme.base00, bg = theme.base00 },
 
   Normal = {
     fg = theme.base05,

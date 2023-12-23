@@ -28,6 +28,7 @@ autocmd('NeviraideHelpDarkerBG', 'FileType', {
   end,
 })
 
+-- FIX: not change bg when out from darker window (help)
 autocmd('NeviraideTerminalDarkerBG', 'TermOpen', {
   pattern = '*',
   callback = function()
