@@ -55,12 +55,69 @@ M.defaults = {
       padding = { 0, 1 },
     },
   },
+
+  cmdline = {
+    backend = 'popup',
+    relative = 'editor',
+    position = {
+      row = '100%',
+      col = 0,
+    },
+    size = {
+      height = 'auto',
+      width = '100%',
+    },
+    border = {
+      style = border,
+    },
+    win_options = {
+      winhighlight = {
+        Normal = 'NeviraideUICmdline',
+        IncSearch = '',
+        CurSearch = '',
+        Search = '',
+      },
+    },
+  },
+  cmdline_popup = {
+    backend = 'popup',
+    relative = 'editor',
+    focusable = false,
+    enter = false,
+    zindex = 200,
+    position = {
+      row = 2,
+      col = '50%',
+    },
+    size = {
+      min_width = 60,
+      width = 'auto',
+      height = 'auto',
+    },
+    border = {
+      style = border,
+      padding = { 0, 1 },
+    },
+    win_options = {
+      winhighlight = {
+        Normal = 'NeviraideUICmdlinePopup',
+        FloatTitle = 'NeviraideUICmdlinePopupTitle',
+        FloatBorder = 'NeviraideUICmdlinePopupBorder',
+        IncSearch = '',
+        CurSearch = '',
+        Search = '',
+      },
+      winbar = '',
+      foldenable = false,
+      cursorline = false,
+    },
+  },
   cmdline_popupmenu = {
     view = 'popupmenu',
     zindex = 200,
     relative = 'editor',
     position = {
-      row = '30%',
+      row = 5,
       col = '50%',
     },
     size = {
@@ -95,7 +152,7 @@ M.defaults = {
     enter = true,
     relative = 'editor',
     position = 'bottom',
-    size = '20%',
+    size = '30%',
     close = {
       keys = { 'q' },
     },
@@ -164,62 +221,6 @@ M.defaults = {
     win_options = {
       wrap = true,
       linebreak = true,
-    },
-  },
-  cmdline = {
-    backend = 'popup',
-    relative = 'editor',
-    position = {
-      row = '100%',
-      col = 0,
-    },
-    size = {
-      height = 'auto',
-      width = '100%',
-    },
-    border = {
-      style = border,
-    },
-    win_options = {
-      winhighlight = {
-        Normal = 'NeviraideUICmdline',
-        IncSearch = '',
-        CurSearch = '',
-        Search = '',
-      },
-    },
-  },
-  cmdline_popup = {
-    backend = 'popup',
-    relative = 'editor',
-    focusable = false,
-    enter = false,
-    zindex = 200,
-    position = {
-      row = '10%',
-      col = '50%',
-    },
-    size = {
-      min_width = 60,
-      width = 'auto',
-      height = 'auto',
-    },
-    border = {
-      style = border,
-      padding = { 0, 1 },
-    },
-    win_options = {
-      winhighlight = {
-        Normal = 'NeviraideUICmdlinePopup',
-        FloatTitle = 'NeviraideUICmdlinePopupTitle',
-        FloatBorder = 'NeviraideUICmdlinePopupBorder',
-        IncSearch = '',
-        CurSearch = '',
-        Search = '',
-      },
-      winbar = '',
-      foldenable = false,
-      cursorline = false,
     },
   },
   confirm = {

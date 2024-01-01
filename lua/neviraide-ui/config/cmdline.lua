@@ -2,14 +2,59 @@ local require = require('neviraide-ui.utils.lazy')
 
 local Config = require('neviraide-ui.config')
 local Highlights = require('neviraide-ui.config.highlights')
+local i = require('neviraide-ui.icons.utils').icon
 
 local M = {}
 
+M.formats = {
+  cmdline = {
+    pattern = '^:',
+    icon = i('', 'vim', 0, 1),
+    lang = 'vim',
+  },
+  search_down = {
+    kind = 'search',
+    pattern = '^/',
+    icon = i('', 'search') .. i('󰄼', 'chevron-down', 1, 1),
+    lang = 'regex',
+  },
+  search_up = {
+    kind = 'search',
+    pattern = '^%?',
+    icon = i('', 'search') .. i('󰄿', 'chevron-up', 1, 1),
+    lang = 'regex',
+  },
+  terminal = {
+    pattern = '^:%s*!',
+    icon = i('$', 'bash', 0, 1),
+    lang = 'bash',
+  },
+  highlight = {
+    pattern = { '^:%s*highlight%s+', '^:%s*hi%s+' },
+    icon = i('', 'paintbrush', 0, 1),
+    lang = 'vim',
+  },
+  lua = {
+    pattern = { '^:%s*lua%s+' },
+    icon = i('', 'lua', 0, 1),
+    lang = 'lua',
+  },
+  help = {
+    pattern = '^:%s*he?l?p?%s+',
+    icon = i('󰋖', 'question', 0, 1),
+  },
+  calculator = {
+    pattern = '^:%s*=%s+',
+    icon = i('󱖦', 'number', 0, 1),
+    lang = 'vimnormal',
+  },
+  input = {},
+}
+
 function M.setup()
-  local formats = Config.options.cmdline.format
-  for name, format in pairs(formats) do
+  for name, format in pairs(M.formats) do
     if format == false then
-      formats[name] = nil
+      M.formats[name] = nil
     else
       local kind = format.kind or name
       local kind_cc = kind:sub(1, 1):upper() .. kind:sub(2)
@@ -24,7 +69,7 @@ function M.setup()
         conceal = format.conceal ~= false,
         kind = kind,
         icon_hl_group = 'NeviraideUI' .. hl_group_icon,
-        view = Config.options.cmdline.view,
+        view = 'cmdline_popup',
         lang = format.lang or format.ft,
         opts = {
           ---@diagnostic disable-next-line: undefined-field
@@ -39,8 +84,8 @@ function M.setup()
             },
           },
         },
-      }, { opts = vim.deepcopy(Config.options.cmdline.opts) }, format)
-      formats[name] = format
+      }, { opts = vim.deepcopy({}) }, format)
+      M.formats[name] = format
 
       table.insert(Config.options.routes, {
         view = format.view,

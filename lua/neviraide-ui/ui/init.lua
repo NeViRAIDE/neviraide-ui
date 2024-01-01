@@ -4,7 +4,6 @@ local Config = require('neviraide-ui.config')
 local Util = require('neviraide-ui.utils')
 local Router = require('neviraide-ui.message.router')
 local Manager = require('neviraide-ui.message.manager')
-local Hacks = require('neviraide-ui.util.hacks')
 
 ---@alias NeviraideUIEvent MsgEvent|CmdlineEvent|NotifyEvent|LspEvent
 ---@alias NeviraideUIKind MsgKind|NotifyLevel|LspKind
@@ -38,13 +37,11 @@ function M.setup()
   local options = {}
   for ext, widget in pairs(widgets) do
     -- only enable if configured and not enabeled in the GUI
-    if Config.options[ext].enabled and not ui_widgets[ext] then
+    if not ui_widgets[ext] then
       options['ext_' .. ext] = true
       M._handlers[widget] = _G.require('neviraide-ui.ui.' .. widget)
     else
-      if ui_widgets[ext] and Config.options.debug then
-        Util.warn('Disabling ext_' .. ext)
-      end
+      if ui_widgets[ext] then Util.warn('Disabling ext_' .. ext) end
       M._handlers[widget] = false
     end
   end

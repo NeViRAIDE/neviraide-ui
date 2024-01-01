@@ -1,6 +1,3 @@
--- credits to original theme https://rosepinetheme.com/
--- this is a modified version of it
-
 local M = {}
 
 M.base_30 = {

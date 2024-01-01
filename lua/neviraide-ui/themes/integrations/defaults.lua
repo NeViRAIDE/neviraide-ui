@@ -1,22 +1,40 @@
+-- FIX: remove '~' symbol from neotree
+
 local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
 local theme = require('neviraide-ui.themes').get_theme_tb('base_16')
 
 local generate_color =
   require('neviraide-ui.themes.colors').change_hex_lightness
 
-local accent, dir = require('neviraide-ui.hyprland.utils').accent()
+local accent = require('neviraide-ui.hyprland.utils').wb_colors
+-- TODO: make no borders or borders for themes
 
 local defaults = {
+  ThemeAccent = {
+    fg = accent.active_bg,
+  },
+  ThemeBG = {
+    bg = accent.main_bg,
+  },
+  ThemeFG = {
+    fg = accent.main_fg,
+  },
+  LineSeparator = {
+    fg = accent.main_bg,
+    bg = accent.main_bg,
+  },
+
   MatchWord = {
     bg = colors.grey,
     fg = colors.white,
   },
 
+  WinBar = { bg = theme.base00 },
   WinBarNC = { link = 'WinBar' },
 
   Pmenu = { bg = colors.one_bg },
   PmenuSbar = { bg = colors.one_bg },
-  PmenuSel = { bg = colors.pmenu_bg, fg = colors.black, bold = true },
+  PmenuSel = { bg = accent.active_bg, fg = accent.main_bg, bold = true },
   PmenuThumb = { bg = colors.grey },
 
   MatchParen = { link = 'MatchWord' },
@@ -27,11 +45,12 @@ local defaults = {
   LineNr = { fg = colors.grey },
 
   -- floating windowr
-  FloatBorder = { fg = accent },
+  FloatBorder = { fg = accent.main_fg },
   NormalFloat = { bg = 'none' },
 
   NvimInternalError = { fg = colors.red },
-  WinSeparator = { fg = colors.line },
+  -- FIX: this color for terminals, and change fg color for sipmle windows
+  WinSeparator = { fg = theme.base00, bg = theme.base00 },
 
   Normal = {
     fg = theme.base05,
@@ -47,7 +66,7 @@ local defaults = {
   },
 
   Directory = {
-    fg = dir,
+    fg = accent.active_bg,
   },
 
   Error = {
@@ -261,5 +280,9 @@ then
   defaults.NormalFloat = { bg = colors.one_bg }
   defaults.NuiTitle = { bg = colors.green, fg = colors.black }
 end
+
+vim.api.nvim_set_hl(0, 'NeviraideTerminalDarkerBG', { bg = accent.main_bg })
+vim.api.nvim_set_hl(0, 'NeviraideHelpDarkerBG', { bg = accent.main_bg })
+vim.api.nvim_set_hl(0, 'NeviraideTerminalWinbar', { bg = accent.main_bg })
 
 return defaults

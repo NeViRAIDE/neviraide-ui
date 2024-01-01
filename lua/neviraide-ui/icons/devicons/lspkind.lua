@@ -1,3 +1,4 @@
+---@class NeviraideUIPopupmenuItemKind
 return {
   Text = '󰉿 ',
   Constructor = '',

@@ -1,7 +1,5 @@
 local require = require('neviraide-ui.utils.lazy')
 
-local Config = require('neviraide-ui.config')
-
 local M = {}
 
 ---@param routes? NeviraideUIRouteConfig[]
@@ -24,22 +22,21 @@ function M.defaults()
 
   for _, kind in ipairs({ 'signature', 'hover' }) do
     table.insert(ret, {
-      view = Config.options.lsp[kind].view
-        or Config.options.lsp.documentation.view,
+      view = 'hover',
       filter = { event = 'lsp', kind = kind },
-      opts = vim.tbl_deep_extend(
-        'force',
-        {},
-        Config.options.lsp.documentation.opts,
-        Config.options.lsp[kind].opts or {}
-      ),
+      opts = vim.tbl_deep_extend('force', {}, {
+        replace = true,
+        render = 'plain',
+        format = { '{message}' },
+        win_options = { concealcursor = 'n', conceallevel = 3 },
+      } or {}),
     })
   end
 
   return vim.list_extend(ret, {
     {
-      view = Config.options.cmdline.view,
-      opts = Config.options.cmdline.opts,
+      view = 'cmdline_popup',
+      opts = {},
       filter = { event = 'cmdline' },
     },
     {
@@ -56,7 +53,7 @@ function M.defaults()
       },
     },
     {
-      view = Config.options.messages.view_history,
+      view = 'messages',
       filter = {
         any = {
           { event = 'msg_history_show' },
@@ -65,7 +62,7 @@ function M.defaults()
       },
     },
     {
-      view = Config.options.messages.view_search,
+      view =  'virtualtext',
       filter = {
         event = 'msg_show',
         kind = 'search_count',
@@ -81,7 +78,7 @@ function M.defaults()
       opts = { skip = true },
     },
     {
-      view = Config.options.messages.view,
+      view = 'notify',
       filter = {
         event = 'msg_show',
         kind = { '', 'echo', 'echomsg' },
@@ -89,35 +86,31 @@ function M.defaults()
       opts = { replace = true, merge = true, title = 'Messages' },
     },
     {
-      view = Config.options.messages.view_error,
+      view = 'notify',
       filter = { error = true },
       opts = { title = 'Error' },
     },
     {
-      view = Config.options.messages.view_warn,
+      view = 'notify',
       filter = { warning = true },
       opts = { title = 'Warning' },
     },
     {
-      view = Config.options.notify.view,
+      view = 'notify',
       filter = { event = 'notify' },
       opts = { title = 'Notify' },
     },
     {
-      view = Config.options.notify.view,
+      view = 'notify',
       filter = {
         event = 'neviraide-ui',
         kind = { 'stats', 'debug' },
       },
       opts = { lang = 'lua', replace = true, title = 'NeviraideUI' },
     },
-    -- {
-    --   view = Config.options.lsp.progress.view,
-    --   filter = { event = 'lsp', kind = 'progress' },
-    -- },
     {
-      view = Config.options.lsp.message.view,
-      opts = Config.options.lsp.message.opts,
+      view = 'notify',
+      opts = {},
       filter = { event = 'lsp', kind = 'message' },
     },
   })

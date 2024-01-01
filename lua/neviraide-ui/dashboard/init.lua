@@ -1,3 +1,5 @@
+-- FIX: show bufferline when dashboard opened if more than one window already opened
+
 local autocmd = require('neviraide.utils').autocmd
 local M = {}
 local api = vim.api
@@ -24,7 +26,7 @@ headerAscii[#headerAscii + 1] = emmptyLine
 
 autocmd('NEVIRAIDE_dashbufleave', 'BufLeave', {
   callback = function()
-    if vim.bo.ft == 'neviraide_dashboard' then
+    if vim.bo.ft == 'neviraideDashboard' then
       vim.g.neviraide_dashboard_displayed = false
     end
   end,

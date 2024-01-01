@@ -16,8 +16,6 @@ M.change_theme = function(theme)
     "theme = '" .. theme .. "'"
   )
   require('plenary.reload').reload_module('NEVIRAIDE')
-
-  -- vim.notify(theme, 2, { title = 'Theme' })
 end
 
 M.nui_change_theme = function()

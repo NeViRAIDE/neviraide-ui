@@ -1,9 +1,21 @@
+-- dofile(vim.g.neviraide_themes_cache .. 'notify')
+
+-- FIX: notification settings (minimum_width)
 local require = require('neviraide-ui.utils.lazy')
 
 local Util = require('neviraide-ui.utils')
 local View = require('neviraide-ui.view')
 local Manager = require('neviraide-ui.message.manager')
 local NuiText = require('nui.text')
+
+local i = require('neviraide-ui.icons.utils').icon
+
+---@param type 'height'|'width'
+---@return integer
+local function auto_size(type)
+  if type == 'height' then return math.floor(vim.o.lines * 0.75) end
+  return math.floor(vim.o.columns * 0.75)
+end
 
 ---@class NeviraideUINotifyOptions
 ---@field title string
@@ -12,11 +24,28 @@ local NuiText = require('nui.text')
 ---@field replace boolean Replace existing notification or create a new one
 ---@field render? notify.RenderFun|string
 ---@field timeout? integer
+---@field fps? integer
+---@field max_height? integer
+---@field max_width? integer
+---@field minimum_width? integer
+---@field icons? table
 local defaults = {
-  title = 'Notification',
+  timeout = 3000,
+  title = 'Notification23',
   merge = false,
   level = nil, -- vim.log.levels.INFO,
   replace = false,
+  icons = {
+    ERROR = i('', 'x-circle', 0, 1),
+    WARN = i('', 'alert', 0, 1),
+    INFO = i('', 'info', 0, 1),
+    DEBUG = i('', 'bug', 0, 1),
+    TRACE = i('', 'play', 0, 1),
+  },
+  fps = 60,
+  max_height = auto_size('height'),
+  max_width = auto_size('width'),
+  minimum_width = 10,
 }
 
 ---@class NotifyInstance
@@ -135,9 +164,23 @@ function NotifyView:_notify(msg)
     timeout = self._opts.timeout,
     replace = self._opts.replace and self.notif,
     keep = function() return Util.is_blocking() end,
-    on_open = function(win)
-      self:set_win_options(win)
-      if self._opts.merge then self.win = win end
+    on_open = function(win, record)
+      if vim.api.nvim_win_is_valid(win) then
+        vim.api.nvim_win_set_config(win, {
+          title = {
+            {
+              ' '
+                .. defaults.icons[record.level]
+                .. ' '
+                .. record.title[1]
+                .. ' ',
+              'Notify' .. record.level .. 'Title',
+            },
+          },
+          title_pos = 'center',
+          border = vim.g.borders,
+        })
+      end
     end,
     on_close = function()
       self.notif = nil
@@ -146,9 +189,20 @@ function NotifyView:_notify(msg)
       end
       self.win = nil
     end,
-    render = Util.protect(
-      self:notify_render(msg.messages, self._opts.render, msg.content)
-    ),
+    render = function(bufnr, notif, highlights)
+      local renderbase = require('notify.render.base')
+      local namespace = renderbase.namespace()
+      local length = string.len(notif.icon)
+
+      notif.message[1] = string.format(' %s ', notif.message[1])
+      vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, notif.message)
+
+      vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, length, {
+        hl_group = highlights.body,
+        end_line = #notif.message,
+        priority = 50,
+      })
+    end,
   }
 
   if msg.opts then

@@ -25,11 +25,11 @@ M.tabuflineNext = function()
   local curbufIndex = M.getBufIndex(api.nvim_get_current_buf())
 
   if not curbufIndex then
-    -- if vim.t.bufs[1] ~= nil then
-    vim.cmd('b' .. vim.t.bufs[1])
-    return
-    -- end
-    -- vim.notify('No active buffers')
+    if vim.t.bufs[1] ~= nil then
+      vim.cmd('b' .. vim.t.bufs[1])
+      return
+    end
+    vim.notify('No active buffers')
   end
 
   vim.cmd(
@@ -88,7 +88,7 @@ M.close_buffer = function(bufnr)
       vim.cmd('b' .. tmpbufnr .. ' | bw' .. bufnr)
       return
     else
-      vim.cmd('Dashboard')
+      vim.cmd('NeviraideUIDashboard')
     end
 
     if not (bufhidden == 'delete') then vim.cmd('confirm bd' .. bufnr) end
@@ -108,7 +108,7 @@ M.closeAllBufs = function(action)
   end
 
   -- TODO: catch error on cancel
-  if action ~= 'closeTab' then vim.cmd('Dashboard') end
+  if action ~= 'closeTab' then vim.cmd('NeviraideUIDashboard') end
 end
 
 -- closes all bufs except current one
