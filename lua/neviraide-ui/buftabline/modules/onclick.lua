@@ -1,6 +1,7 @@
 vim.cmd(
   "function! TbGoToBuf(bufnr,b,c,d) \n execute 'b'..a:bufnr \n endfunction"
 )
+-- TODO: rewrite to LUA
 
 vim.cmd([[
    function! TbKillBuf(bufnr,b,c,d) 

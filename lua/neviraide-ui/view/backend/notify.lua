@@ -159,10 +159,6 @@ function NotifyView:_notify(msg)
   local level = self._opts.level or msg.level
 
   local opts = {
-    -- fps = 60,
-    -- max_height = function() return math.floor(vim.o.lines * 0.75) end,
-    -- max_width = function() return math.floor(vim.o.columns * 0.75) end,
-    -- minimum_width = 10,
     title = msg.title or self._opts.title,
     animate = not Util.is_blocking(),
     timeout = self._opts.timeout,
@@ -186,10 +182,6 @@ function NotifyView:_notify(msg)
         })
       end
     end,
-    -- on_open = function(win)
-    --   self:set_win_options(win)
-    --   if self._opts.merge then self.win = win end
-    -- end,
     on_close = function()
       self.notif = nil
       for _, m in ipairs(msg.messages) do
@@ -197,9 +189,6 @@ function NotifyView:_notify(msg)
       end
       self.win = nil
     end,
-    -- render = Util.protect(
-    --   self:notify_render(msg.messages, self._opts.render, msg.content)
-    -- ),
     render = function(bufnr, notif, highlights)
       local renderbase = require('notify.render.base')
       local namespace = renderbase.namespace()
