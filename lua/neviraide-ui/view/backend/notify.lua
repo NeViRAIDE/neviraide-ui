@@ -1,6 +1,5 @@
 -- dofile(vim.g.neviraide_themes_cache .. 'notify')
 
--- FIX: notification settings (minimum_width)
 local require = require('neviraide-ui.utils.lazy')
 
 local Util = require('neviraide-ui.utils')
@@ -27,11 +26,10 @@ end
 ---@field fps? integer
 ---@field max_height? integer
 ---@field max_width? integer
----@field minimum_width? integer
 ---@field icons? table
 local defaults = {
   timeout = 3000,
-  title = 'Notification23',
+  title = 'NeviraideNotify',
   merge = false,
   level = nil, -- vim.log.levels.INFO,
   replace = false,
@@ -45,7 +43,6 @@ local defaults = {
   fps = 60,
   max_height = auto_size('height'),
   max_width = auto_size('width'),
-  minimum_width = 10,
 }
 
 ---@class NotifyInstance
@@ -138,17 +135,17 @@ function NotifyView:notify_render(messages, render, content)
     end
 
     -- resize notification
-    local win = vim.fn.bufwinid(buf)
-    if win ~= -1 then
-      ---@type number
-      local width = config.minimum_width()
-      for _, line in pairs(lines) do
-        width = math.max(width, vim.str_utfindex(line))
-      end
-      width = math.min(config.max_width() or 1000, width)
-      local height = math.min(config.max_height() or 1000, #lines)
-      Util.win_apply_config(win, { width = width, height = height })
-    end
+    -- local win = vim.fn.bufwinid(buf)
+    -- if win ~= -1 then
+    --   ---@type number
+    --   local width = config.minimum_width()
+    --   for _, line in pairs(lines) do
+    --     width = math.max(width, vim.str_utfindex(line))
+    --   end
+    --   width = math.min(config.max_width() or 1000, width)
+    --   local height = math.min(config.max_height() or 1000, #lines)
+    --   Util.win_apply_config(win, { width = width, height = height })
+    -- end
   end
 end
 

@@ -1,4 +1,4 @@
-local i = require('neviraide-ui.icons.utils').icon
+local icon = require('neviraide-ui.icons.utils').icon
 local utils = require('neviraide-ui.utils')
 local mode_color = require('neviraide-ui.statusline.utils').mode_color
 
@@ -88,11 +88,11 @@ M.LSP_status = function()
       then
         local long = '%#St_LspStatus#'
           .. '%@OpenLspInfo@'
-          .. i('', 'server', 1, 2)
+          .. icon('', 'server', 1, 2)
           .. client.name
         local short = '%#St_LspStatus#'
           .. '%@OpenLspInfo@'
-          .. i('', 'server', 1, 2)
+          .. icon('', 'server', 1, 2)
           .. 'LSP'
         return (vim.o.columns > 100 and long) or short
       end
@@ -114,16 +114,16 @@ M.LSP_Diagnostics = function()
     #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
 
   local err = (errors and errors > 0)
-      and ('%#St_lspError#' .. i('', 'x-circle', 0, 1) .. errors .. ' ')
+      and ('%#St_lspError#' .. icon('', 'x-circle', 0, 1) .. errors .. ' ')
     or ''
   local war = (warnings and warnings > 0)
-      and ('%#St_lspWarning#' .. i('', 'alert', 0, 1) .. warnings .. ' ')
+      and ('%#St_lspWarning#' .. icon('', 'alert', 0, 1) .. warnings .. ' ')
     or ''
   local hin = (hints and hints > 0)
-      and ('%#St_LspHints#' .. i('', 'light-bulb', 0, 1) .. hints)
+      and ('%#St_LspHints#' .. icon('', 'light-bulb', 0, 1) .. hints)
     or ''
   local inf = (info and info > 0)
-      and ('%#St_LspInfo#' .. i('', 'info', 0, 1) .. info .. ' ')
+      and ('%#St_LspInfo#' .. icon('', 'info', 0, 1) .. info .. ' ')
     or ''
 
   if err ~= '' or war ~= '' or inf ~= '' or hin ~= '' then
@@ -144,15 +144,15 @@ M.git = function()
   local git_status = vim.b.gitsigns_status_dict
 
   local added = (git_status.added and git_status.added ~= 0)
-      and (i('', 'diff-added', 1, 1) .. git_status.added)
+      and (icon('', 'diff-added', 1, 1) .. git_status.added)
     or ''
   local changed = (git_status.changed and git_status.changed ~= 0)
-      and (i('', 'diff-modified', 1, 1) .. git_status.changed)
+      and (icon('', 'diff-modified', 1, 1) .. git_status.changed)
     or ''
   local removed = (git_status.removed and git_status.removed ~= 0)
-      and (i('', 'diff-removed', 1, 1) .. git_status.removed)
+      and (icon('', 'diff-removed', 1, 1) .. git_status.removed)
     or ''
-  local branch_name = i('', 'git-branch', 0, 1) .. git_status.head .. ' '
+  local branch_name = icon('', 'git-branch', 0, 1) .. git_status.head .. ' '
 
   if added ~= '' or changed ~= '' or removed ~= '' then
     return '%@OpenDiff@'
@@ -180,13 +180,13 @@ M.location = function()
     or vim.bo.filetype == 'neviraideDashboard'
     or vim.bo.filetype == 'TelescopePrompt'
   then
-    return '%#St_Location#' .. i('Ln', 'rows', 1, 2) .. r .. '/' .. lines
+    return '%#St_Location#' .. icon('Ln', 'rows', 1, 2) .. r .. '/' .. lines
   end
   return '%#St_Location#'
-    .. i('Col', 'columns', 0, 2)
+    .. icon('Col', 'columns', 0, 2)
     .. c
     .. ','
-    .. i('Ln', 'rows', 1, 2)
+    .. icon('Ln', 'rows', 1, 2)
     .. r
     .. '/'
     .. lines
@@ -231,11 +231,11 @@ M.fileformat = function(condition)
 end
 
 M.encoding = function(condition)
-  -- FIX: emty on .txt
-  if condition then
+  local buf_enc = vim.opt.fileencoding._value
+  if condition and buf_enc ~= '' then
     return separator('|', 2, condition)
       .. '%#St_encoding#'
-      .. string.upper(vim.opt.fileencoding:get())
+      .. string.upper(buf_enc)
   end
   return ''
 end

@@ -67,6 +67,11 @@ end
 ---@param level number|string
 ---@param opts? table<string, any>
 function M.notify(msg, level, opts)
+  -- opts = vim.tbl_deep_extend('force', opts, {
+  --   minimum_width = 10,
+  -- })
+  local mw = { minimum_width = 10 }
+  if type(opts) == 'table' then table.insert(opts, mw) end
   return require('neviraide-ui.source.notify').notify(msg, level, opts)
 end
 

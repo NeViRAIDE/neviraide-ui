@@ -1,4 +1,4 @@
-local i = require('neviraide-ui.icons.utils').icon_decoder
+local i = require('neviraide-ui.icons.utils').decoder
 
 ---@class NeviraideUIPopupmenuItemKind
 return {

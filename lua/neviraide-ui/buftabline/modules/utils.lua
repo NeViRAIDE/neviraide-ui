@@ -124,13 +124,8 @@ M.add_fileInfo = function(name, bufnr)
     local maxname_len = 16
 
     name = (#name > maxname_len and string.sub(name, 1, 14) .. '..') or name
-    if bufnr == api.nvim_get_current_buf() then
-      name = (vim.bo[0].modified and '%#TbLineBufOnModified# ' .. name)
-        or ('%#TbLineBufOn# ' .. name)
-    else
-      name = (vim.bo[bufnr].modified and '%#TbLineBufOffModified# ' .. name)
-        or ('%#TbLineBufOff# ' .. name)
-    end
+    name = (api.nvim_get_current_buf() == bufnr and '%#TbLineBufOn# ' .. name)
+      or ('%#TbLineBufOff# ' .. name)
 
     return string.rep(' ', padding)
       .. icon
@@ -141,24 +136,26 @@ M.add_fileInfo = function(name, bufnr)
 end
 
 M.styleBufferTab = function(nr)
-  local modified = vim.api.nvim_get_option_value('modified', { buf = nr })
-  local current_buf = nr == vim.api.nvim_get_current_buf()
-
-  -- TODO: add nonicons
-  local close_btn = ' 󰅖 '
-  close_btn = '%' .. nr .. '@TbKillBuf@' .. close_btn .. '%X'
-
-  local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(nr), ':t')
+  local close_btn = '%' .. nr .. '@TbKillBuf@ 󰅖 %X'
+  local name = (#api.nvim_buf_get_name(nr) ~= 0)
+      and fn.fnamemodify(api.nvim_buf_get_name(nr), ':t')
     or ' No Name '
   name = '%' .. nr .. '@TbGoToBuf@' .. M.add_fileInfo(name, nr) .. '%X'
 
-  local close_hl = current_buf and 'TbLineBufOnClose' or 'TbLineBufOffClose'
-  local buf_hl = current_buf and 'TbLineBufOn' or 'TbLineBufOff'
-
-  close_btn = modified
-      and ('%' .. nr .. '@TbKillBuf@%#TbLineBufOnModified#  ')
-    or ('%#' .. close_hl .. '#' .. close_btn)
-  name = '%#' .. buf_hl .. '#' .. name .. close_btn
+  -- color close btn for focused / hidden  buffers
+  if nr == api.nvim_get_current_buf() then
+    close_btn = (
+      vim.bo[0].modified
+      and '%' .. nr .. '@TbKillBuf@%#TbLineBufOnModified#  '
+    ) or ('%#TbLineBufOnClose#' .. close_btn)
+    name = '%#TbLineBufOn#' .. name .. close_btn
+  else
+    close_btn = (
+      vim.bo[nr].modified
+      and '%' .. nr .. '@TbKillBuf@%#TbLineBufOffModified#  '
+    ) or ('%#TbLineBufOffClose#' .. close_btn)
+    name = '%#TbLineBufOff#' .. name .. close_btn
+  end
 
   return name
 end

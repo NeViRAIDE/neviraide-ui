@@ -1,25 +1,52 @@
-local icon = require('neviraide-ui.icons.utils').icon
+---@type DashButtonCreator
+local function btn(title, icon, nonicon, command)
+  return {
+    title,
+    require('neviraide-ui.icons.utils').icon(icon, nonicon),
+    command,
+  }
+end
 
+---@type DashboardButton
+local new_file = btn(
+  'Create new file',
+  '',
+  'file',
+  'lua require("neviraide-ui.utils.new_file")()'
+)
+
+---@type DashboardButton DashboardButtons
+local find_files = btn('Find file', '', 'search', 'Telescope find_files')
+---@type DashboardButton
+local recent_files = btn('Recent files', '', 'sync', 'Telescope oldfiles')
+---@type DashboardButton
+local find_word = btn('Find word', '', 'codescan', 'Telescope live_grep')
+---@type DashboardButton
+local todo_list = btn(
+  'TODO list',
+  '',
+  'tasklist',
+  'TodoTelescope theme=ivy initial_mode=normal previewer=false layout_config={bottom_pane={height=14}}'
+)
+---@type DashboardButton
+local check_health = btn('Check health', '', 'pulse', 'checkhealth')
+---@type DashboardButton
+local plugin_manager = btn('Plugin manager', '', 'plug', 'Lazy')
+---@type DashboardButton
+local configuration =
+  btn('Configuration', '', 'gear', 'e ~/.config/nvim/lua/NEVIRAIDE.lua')
+---@type DashboardButton
+local exit = btn('Exit', '', 'sign-out', 'qa')
+
+---@type DashboardButtons
 return {
-  {
-    'Create new file',
-    icon('', 'file'),
-    'lua require("neviraide-ui.utils.new_file")()',
-  },
-  { 'Find file', icon('', 'search'), 'Telescope find_files' },
-  { 'Recent files', icon('', 'sync'), 'Telescope oldfiles' },
-  { 'Find word', icon('','codescan'), 'Telescope live_grep' },
-  {
-    'TODO list',
-    icon('','tasklist'),
-    'TodoTelescope theme=ivy initial_mode=normal previewer=false layout_config={bottom_pane={height=14}}',
-  },
-  { 'Check health', icon('', 'heart'), 'checkhealth' },
-  { 'Plugin manager', icon('', 'plug'), 'Lazy' },
-  {
-    'Configuration',
-    icon('', 'gear'),
-    'e ~/.config/nvim/lua/NEVIRAIDE.lua',
-  },
-  { 'Exit', icon('', 'sign-out'), 'qa' },
+  new_file,
+  find_files,
+  recent_files,
+  find_word,
+  todo_list,
+  check_health,
+  plugin_manager,
+  configuration,
+  exit,
 }

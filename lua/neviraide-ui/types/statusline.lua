@@ -1,7 +1,13 @@
 ---@alias StatusLineComponent fun(condition?: boolean):string Module component for NeviraideStatusLine.
 ---@alias StatusLineSeparator fun(symbol: string, size: integer, condition?: boolean):string Symbol which separate StatusLineComponents.
 
----@class NeviraideStatusLine
+---@class StatusLineUtils<table>
+---@field ignored fun():boolean Hide component if filetype in the list.
+---@field buffer_not_empty fun():boolean Hide component if buffer is empty.
+---@field hide_in_width fun(size?: integer):boolean Hide component if window width less than <size> columns.
+---@field mode_color table<string, table<string, string>> Colors for Neovim Mode.
+
+---@class NeviraideStatusLine<table>
 ---@field encoding? StatusLineComponent File encoding.
 ---@field fileformat? StatusLineComponent File format.
 ---@field filesize? StatusLineComponent File size.

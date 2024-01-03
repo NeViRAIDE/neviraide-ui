@@ -1,3 +1,5 @@
+---@diagnostic disable: need-check-nil
+
 local api = vim.api
 local autocmd = require('neviraide.utils').autocmd
 
@@ -28,7 +30,28 @@ autocmd('NeviraideHelpDarkerBG', 'FileType', {
   end,
 })
 
--- FIX: not change bg when out from darker window (help)
+autocmd('NeviraideResetCursorLinehl', 'FileType', {
+  pattern = '*',
+  callback = function()
+    vim.api.nvim_set_option_value(
+      'winhighlight',
+      'CursorLine:CursorLine',
+      { win = vim.api.nvim_get_current_win()}
+    )
+  end,
+})
+autocmd('NeviraideDashActiveButton', 'FileType', {
+  pattern = 'neviraideDashboard',
+  callback = function()
+    vim.api.nvim_set_option_value(
+      'winhighlight',
+      'CursorLine:DashboardCursorLine',
+      { win = vim.api.nvim_get_current_win() }
+    )
+  end,
+})
+
+-- FIX: not change bg when out from darker window (help) - change to buf from win
 autocmd('NeviraideTerminalDarkerBG', 'TermOpen', {
   pattern = '*',
   callback = function()

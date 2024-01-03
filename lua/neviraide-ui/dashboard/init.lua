@@ -1,15 +1,16 @@
 -- FIX: show bufferline when dashboard opened if more than one window already opened
+-- TODO: separate file
 
 local autocmd = require('neviraide.utils').autocmd
 local M = {}
 local api = vim.api
 local fn = vim.fn
-local icon = require('neviraide-ui.icons.utils').icon
 
 dofile(vim.g.neviraide_themes_cache .. 'dashboard')
 
 local raw_height = 1
-local pointer = icon('', 'dot-fill', 0, 1)
+local pointer =
+  require('neviraide-ui.icons.utils').icon('', 'dot-fill', 0, 1)
 
 local buttons = require('neviraide-ui.dashboard.buttons')
 local headers = require('neviraide-ui.dashboard.ascii')
@@ -208,6 +209,8 @@ M.open = function()
   vim.keymap.set('n', '<Right>', '', { buffer = true })
   vim.keymap.set('n', '<Up>', '', { buffer = true })
   vim.keymap.set('n', '<Down>', '', { buffer = true })
+  vim.keymap.set('n', 'gg', '', { buffer = true })
+  vim.keymap.set('n', 'G', '', { buffer = true })
 
   vim.keymap.set('n', 'k', function()
     local cur = fn.line('.')

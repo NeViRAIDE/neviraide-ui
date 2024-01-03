@@ -7,15 +7,20 @@ return {
   },
 
   NeviraideDashboardButtons = {
-    fg = colors.orange,
+    fg = colors.grey_fg,
     bg = 'none',
-    bold = true,
   },
 
   NeviraideDashboardVimver = {
-    fg = colors.grey,
+    fg = colors.one_bg2,
     bg = 'none',
     italic = true,
     bold = false,
+  },
+
+  DashboardCursorLine = {
+    bold = true,
+    fg = colors.orange,
+    bg = 'none',
   },
 }
