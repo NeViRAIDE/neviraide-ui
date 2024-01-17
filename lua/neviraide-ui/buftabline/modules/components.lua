@@ -105,7 +105,7 @@ M.tablist = function()
         and result
           .. '%#TbLineTabCloseBtn#'
           .. '%@TbTabClose@'
-          .. icon('󰅙', 'x-circle', 0, 2)
+          .. '󰅙 '
           .. '%X'
       ) or result
     end

@@ -4,8 +4,8 @@ return function()
   local utils = require('neviraide-ui.override_vim_ui.utils')
 
   local text = {
-    top = ' Rename tab ',
-    top_align = 'center',
+    bottom = ' Rename tab ',
+    bottom_align = 'center',
   }
 
   local input = Input({
@@ -15,13 +15,13 @@ return function()
     win_options = utils.popup_bg(),
     relative = 'editor',
     buf_options = {
-      filetype = 'rename_tab',
+      filetype = 'renameTab',
     },
   }, {
     prompt = '',
     default_value = '',
     on_submit = function(value)
-        require('neviraide-ui.buftabline.modules.components').setTabTitle(value)
+      require('neviraide-ui.buftabline.modules.components').setTabTitle(value)
     end,
   })
   input:on(event.BufLeave, function() input:unmount() end)
