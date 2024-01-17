@@ -136,7 +136,11 @@ M.add_fileInfo = function(name, bufnr)
 end
 
 M.styleBufferTab = function(nr)
-  local close_btn = '%' .. nr .. '@TbKillBuf@ 󰅖 %X'
+  local close_btn = '%'
+    .. nr
+    .. '@TbKillBuf@'
+    .. icon_plug('󰅖', 'x', 0, 2)
+    .. '%X'
   local name = (#api.nvim_buf_get_name(nr) ~= 0)
       and fn.fnamemodify(api.nvim_buf_get_name(nr), ':t')
     or ' No Name '
@@ -146,13 +150,19 @@ M.styleBufferTab = function(nr)
   if nr == api.nvim_get_current_buf() then
     close_btn = (
       vim.bo[0].modified
-      and '%' .. nr .. '@TbKillBuf@%#TbLineBufOnModified#  '
+      and '%'
+        .. nr
+        .. '@TbKillBuf@%#TbLineBufOnModified#'
+        .. icon_plug('', 'pencil', 0, 2)
     ) or ('%#TbLineBufOnClose#' .. close_btn)
     name = '%#TbLineBufOn#' .. name .. close_btn
   else
     close_btn = (
       vim.bo[nr].modified
-      and '%' .. nr .. '@TbKillBuf@%#TbLineBufOffModified#  '
+      and '%'
+        .. nr
+        .. '@TbKillBuf@%#TbLineBufOffModified#'
+        .. icon_plug('', 'pencil', 1, 1)
     ) or ('%#TbLineBufOffClose#' .. close_btn)
     name = '%#TbLineBufOff#' .. name .. close_btn
   end

@@ -18,6 +18,7 @@ autocmd('NEVIRAIDE_lspprog', 'User', {
   callback = function() vim.cmd('redrawstatus') end,
 })
 
+-- FIX: set darder bg for help
 autocmd('NeviraideHelpDarkerBG', 'FileType', {
   pattern = 'help',
   callback = function()
@@ -36,7 +37,7 @@ autocmd('NeviraideResetCursorLinehl', 'FileType', {
     vim.api.nvim_set_option_value(
       'winhighlight',
       'CursorLine:CursorLine',
-      { win = vim.api.nvim_get_current_win()}
+      { win = vim.api.nvim_get_current_win() }
     )
   end,
 })

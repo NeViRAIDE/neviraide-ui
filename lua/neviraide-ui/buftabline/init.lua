@@ -107,7 +107,6 @@ M.closeAllBufs = function(action)
     M.close_buffer(buf)
   end
 
-  -- TODO: catch error on cancel
   if action ~= 'closeTab' then vim.cmd('NeviraideUIDashboard') end
 end
 

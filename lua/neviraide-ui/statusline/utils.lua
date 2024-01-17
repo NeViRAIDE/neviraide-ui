@@ -15,6 +15,7 @@ local M = {
       'nui',
       'colorschemes',
       'create',
+      'rename_tab',
       'nui_input',
       'nui_sm',
       'nofile',

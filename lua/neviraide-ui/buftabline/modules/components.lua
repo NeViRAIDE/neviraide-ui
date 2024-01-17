@@ -7,6 +7,15 @@ local M = {}
 
 vim.g.TbDatetimeToggled = 0
 
+M.toggle_datetime = function()
+  if vim.g.TbDatetimeToggled == 0 then
+    vim.g.TbDatetimeToggled = 1
+  else
+    vim.g.TbDatetimeToggled = 0
+  end
+  vim.cmd('redrawtabline')
+end
+
 -- Define a function to display the date and time in the status line
 ---@return string
 M.datetime = function()
@@ -14,7 +23,7 @@ M.datetime = function()
   local current_date = os.date('%A, %d %B %Y')
 
   return vim.g.TbDatetimeToggled == 1
-      and '%#BufTabDate#' .. '%@ToggleDatetime@' .. icon('', 'clock', 1, 2) .. current_time .. ',' .. icon(
+      and '%#BufTabDate#' .. '%@ToggleDatetime@' .. icon('', 'clock', 0, 2) .. current_time .. ',' .. icon(
         '',
         'calendar',
         1,
@@ -22,7 +31,7 @@ M.datetime = function()
       ) .. current_date .. ' %X'
     or '%#BufTabDate#'
       .. '%@ToggleDatetime@'
-      .. icon('', 'clock', 1, 2)
+      .. icon('', 'clock', 0, 2)
       .. current_time
       .. ' %X'
 end
@@ -63,25 +72,52 @@ end
 
 vim.g.TbTabsToggled = 0
 
+M.toggle_tabs = function()
+  if vim.g.TbTabsToggled == 0 then
+    vim.g.TbTabsToggled = 1
+  else
+    vim.g.TbTabsToggled = 0
+  end
+  vim.cmd('redrawtabline')
+end
+
+local tab_titles = {}
+
+M.setTabTitle = function(title)
+  local tab_number = vim.api.nvim_get_current_tabpage()
+  tab_titles[tab_number] = title
+  vim.cmd('redrawtabline')
+end
+
 M.tablist = function()
   local result, number_of_tabs = '', fn.tabpagenr('$')
 
   if number_of_tabs > 1 then
     for i = 1, number_of_tabs, 1 do
+      local tab_title = tab_titles[i] or tostring(i) -- Используйте название вкладки или номер, если название не установлено
       local tab_hl = ((i == fn.tabpagenr()) and '%#TbLineTabOn# ')
         or '%#TbLineTabOff# '
-      result = result .. ('%' .. i .. '@TbGotoTab@' .. tab_hl .. i .. ' ')
+      result = result
+        .. ('%' .. i .. '@TbGotoTab@' .. tab_hl .. tab_title .. ' ') -- Используйте tab_title вместо i
+      -- Остальной код остаётся без изменений
       result = (
         i == fn.tabpagenr()
-        and result .. '%#TbLineTabCloseBtn#' .. '%@TbTabClose@󰅙 %X'
+        and result
+          .. '%#TbLineTabCloseBtn#'
+          .. '%@TbTabClose@'
+          .. icon('󰅙', 'x-circle', 0, 2)
+          .. '%X'
       ) or result
     end
 
-    local new_tabtn = '%#TblineTabNewBtn#' .. '%@TbNewTab@  %X'
+    local new_tabtn = '%#TblineTabNewBtn#'
+      .. '%@TbNewTab@'
+      .. icon('', 'plus', 1, 1)
+      .. '%X'
     local tabstoggleBtn = '%@TbToggleTabs@ %#TBTabTitle# TABS %X'
 
     return vim.g.TbTabsToggled == 1
-        and tabstoggleBtn:gsub('()', { [36] = icon('󱎼', 'pin', 0, 1) })
+        and tabstoggleBtn:gsub('()', { [36] = icon('󱎼', 'pin', 0, 2) })
       or new_tabtn .. tabstoggleBtn .. result
   end
 
@@ -92,7 +128,6 @@ M.buttons = function()
   local CloseAllBufsBtn = '%@TbCloseAllBufs@%#TbLineCloseAllBufsBtn#'
     .. icon('', 'x', 1, 2)
     .. '%X'
-
   return CloseAllBufsBtn
 end
 

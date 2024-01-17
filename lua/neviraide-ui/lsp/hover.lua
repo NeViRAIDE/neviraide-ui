@@ -1,3 +1,4 @@
+-- TODO: add features to the top of hover window
 local require = require('neviraide-ui.utils.lazy')
 
 local Format = require('neviraide-ui.lsp.format')
