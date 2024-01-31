@@ -1,5 +1,3 @@
--- FIX: remove '~' symbol from neotree
-
 local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
 local theme = require('neviraide-ui.themes').get_theme_tb('base_16')
 
