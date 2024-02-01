@@ -1,12 +1,11 @@
 local M = {}
-local g = vim.g
 
 local neviraide_themes_path =
   vim.fn.fnamemodify(debug.getinfo(1, 'S').source:sub(2), ':p:h')
 
 M.get_theme_tb = function(type)
   local default_dir = 'neviraide-ui.themes.colorschemes.'
-  local default_path = default_dir .. g.neviraide_theme
+  local default_path = default_dir .. NEVIRAIDE().theme
 
   local ok, default_theme = pcall(require, default_path)
 
@@ -90,7 +89,7 @@ M.saveStr_to_cache = function(filename, tb)
 end
 
 M.compile = function()
-  if not vim.loop.fs_stat(vim.g.neviraide_themes_cache) then
+  if not vim.uv.fs_stat(vim.g.neviraide_themes_cache) then
     vim.fn.mkdir(vim.g.neviraide_themes_cache, 'p')
   end
 
