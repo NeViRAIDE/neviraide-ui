@@ -1,4 +1,4 @@
--- dofile(vim.g.neviraide_themes_cache .. 'notify')
+-- dofile(vim.g.ntc .. 'notify')
 
 local require = require('neviraide-ui.utils.lazy')
 

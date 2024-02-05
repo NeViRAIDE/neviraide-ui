@@ -3,7 +3,7 @@ local autocmd = require('nui.utils.autocmd')
 local event = require('nui.utils.autocmd').event
 
 local function reload_theme(name)
-  vim.g.neviraide_theme = name
+  vim.g.nt = name
   require('neviraide-ui.themes').load_all_highlights()
   vim.api.nvim_exec_autocmds('User', { pattern = 'NeviraideThemeReload' })
 end

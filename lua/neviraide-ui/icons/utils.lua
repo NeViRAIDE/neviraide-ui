@@ -8,7 +8,7 @@ local M = {
     ---@type Nonicons
     local nonicons = require('neviraide-ui.icons.nonicons')
 
-    local icon = vim.g.nonicons
+    local icon = vim.g.n
         and nonicons[nonicon_name]
         and nonicons[nonicon_name].icon
       or handle_icon

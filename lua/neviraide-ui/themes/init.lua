@@ -80,7 +80,7 @@ M.saveStr_to_cache = function(filename, tb)
     .. defaults_cond
     .. M.table_to_str(tb)
     .. 'end, true)'
-  local file = io.open(vim.g.neviraide_themes_cache .. filename, 'wb')
+  local file = io.open(vim.g.ntc .. filename, 'wb')
 
   if file then
     file:write(loadstring(lines)())
@@ -89,9 +89,7 @@ M.saveStr_to_cache = function(filename, tb)
 end
 
 M.compile = function()
-  if not vim.uv.fs_stat(vim.g.neviraide_themes_cache) then
-    vim.fn.mkdir(vim.g.neviraide_themes_cache, 'p')
-  end
+  if not vim.uv.fs_stat(vim.g.ntc) then vim.fn.mkdir(vim.g.ntc, 'p') end
 
   -- All integration modules, each file returns a table
   local hl_files = neviraide_themes_path .. '/integrations'
@@ -109,8 +107,8 @@ M.load_all_highlights = function()
   require('plenary.reload').reload_module('neviraide-ui.themes')
   M.compile()
 
-  for _, file in ipairs(vim.fn.readdir(vim.g.neviraide_themes_cache)) do
-    dofile(vim.g.neviraide_themes_cache .. file)
+  for _, file in ipairs(vim.fn.readdir(vim.g.ntc)) do
+    dofile(vim.g.ntc .. file)
   end
 end
 

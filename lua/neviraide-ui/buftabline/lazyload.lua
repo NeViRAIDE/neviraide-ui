@@ -1,5 +1,5 @@
 -- Executes a Lua file stored in the 'buftabline' cache location set in Neovim's global variables.
-dofile(vim.g.neviraide_themes_cache .. 'buftabline')
+dofile(vim.g.ntc .. 'buftabline')
 
 -- Requires a utility module for handling automatic commands (autocmd).
 local autocmd = require('neviraide.utils').autocmd
