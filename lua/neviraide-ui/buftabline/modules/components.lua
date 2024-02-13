@@ -94,12 +94,11 @@ M.tablist = function()
 
   if number_of_tabs > 1 then
     for i = 1, number_of_tabs, 1 do
-      local tab_title = tab_titles[i] or tostring(i) -- Используйте название вкладки или номер, если название не установлено
+      local tab_title = tab_titles[i] or tostring(i)
       local tab_hl = ((i == fn.tabpagenr()) and '%#TbLineTabOn# ')
         or '%#TbLineTabOff# '
       result = result
-        .. ('%' .. i .. '@TbGotoTab@' .. tab_hl .. tab_title .. ' ') -- Используйте tab_title вместо i
-      -- Остальной код остаётся без изменений
+        .. ('%' .. i .. '@TbGotoTab@' .. tab_hl .. tab_title .. ' ')
       result = (
         i == fn.tabpagenr()
         and result

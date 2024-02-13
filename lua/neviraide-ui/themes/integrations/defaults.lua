@@ -4,22 +4,17 @@ local theme = require('neviraide-ui.themes').get_theme_tb('base_16')
 local generate_color =
   require('neviraide-ui.themes.colors').change_hex_lightness
 
-local accent = require('neviraide-ui.hyprland.utils').wb_colors
+local kitty = require('neviraide-ui.hyprland.utils').colors.kitty
 -- TODO: make no borders or borders for themes
 
 local defaults = {
-  ThemeAccent = {
-    fg = accent.active_bg,
+  TermBG = {
+    bg = kitty.background,
   },
-  ThemeBG = {
-    bg = colors.black,
-  },
-  ThemeFG = {
-    fg = accent.main_fg,
-  },
+
   LineSeparator = {
-    fg = accent.main_bg,
-    bg = accent.main_bg,
+    bg = kitty.background,
+    fg = kitty.background,
   },
 
   MatchWord = {
@@ -27,12 +22,12 @@ local defaults = {
     fg = colors.white,
   },
 
-  WinBar = { bg = theme.base00 },
+  WinBar = { bg = kitty.background },
   WinBarNC = { link = 'WinBar' },
 
   Pmenu = { bg = colors.one_bg },
   PmenuSbar = { bg = colors.one_bg },
-  PmenuSel = { bg = accent.active_bg, fg = accent.main_bg, bold = true },
+  -- PmenuSel = { bg = accent.active_bg, fg = accent.foreground, bold = true },
   PmenuThumb = { bg = colors.grey },
 
   MatchParen = { link = 'MatchWord' },
@@ -43,12 +38,12 @@ local defaults = {
   LineNr = { fg = colors.grey },
 
   -- floating windowr
-  FloatBorder = { fg = accent.main_fg },
+  -- FloatBorder = { fg = accent.background },
   NormalFloat = { bg = 'none' },
 
   NvimInternalError = { fg = colors.red },
   -- FIX: this color for terminals, and change fg color for sipmle windows
-  WinSeparator = { fg = theme.base00, bg = theme.base00 },
+  WinSeparator = { fg = kitty.background, bg = kitty.background },
 
   Normal = {
     fg = theme.base05,
@@ -64,7 +59,7 @@ local defaults = {
   },
 
   Directory = {
-    fg = accent.active_bg,
+    -- fg = accent.active_bg,
   },
 
   Error = {
@@ -261,9 +256,10 @@ local defaults = {
   LazyReasonSource = { fg = colors.cyan },
   LazyReasonImport = { fg = colors.white },
   LazyProgressDone = { fg = colors.green },
-  NeviraideTerminalDarkerBG = { bg = colors.black },
-  NeviraideHelpDarkerBG = { bg = colors.black },
-  NeviraideTerminalWinbar = { bg = colors.black },
+
+  NeviraideTerminalDarkerBG = { bg = kitty.background },
+  NeviraideHelpDarkerBG = { bg = kitty.background },
+  NeviraideTerminalWinbar = { bg = kitty.background },
 }
 
 local merge_tb = require('neviraide-ui.themes').merge_tb
@@ -272,11 +268,7 @@ defaults = merge_tb(
   require('neviraide-ui.themes').load_highlight('statusline')
 )
 
-if
-  vim.g.borders == 'none'
-  or vim.g.borders == 'shadow'
-  or vim.g.borders == 'solid'
-then
+if vim.g.b == 'none' or vim.g.b == 'shadow' or vim.g.b == 'solid' then
   defaults.FloatBorder = { bg = colors.one_bg, fg = colors.one_bg }
   defaults.NormalFloat = { bg = colors.one_bg }
   defaults.NuiTitle = { bg = colors.green, fg = colors.black }

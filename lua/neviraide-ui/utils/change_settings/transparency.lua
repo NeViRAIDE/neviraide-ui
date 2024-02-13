@@ -4,10 +4,10 @@ local g = vim.g
 local write = require('neviraide-ui.utils').replace_word
 
 M.toggle = function()
-  g.transparency = not g.transparency
+  g.t = not g.t
 
   local old_data = 'transparency = ' .. tostring(NEVIRAIDE().transparency)
-  local new_data = 'transparency = ' .. tostring(g.transparency)
+  local new_data = 'transparency = ' .. tostring(g.t)
   write(old_data, new_data)
   require('plenary.reload').reload_module('NEVIRAIDE')
 
@@ -15,10 +15,10 @@ M.toggle = function()
 end
 
 M.enable = function()
-  g.transparency = true
+  g.t = true
 
   local old_data = 'transparency = ' .. tostring(NEVIRAIDE().transparency)
-  local new_data = 'transparency = ' .. tostring(g.transparency)
+  local new_data = 'transparency = ' .. tostring(g.t)
   write(old_data, new_data)
   require('plenary.reload').reload_module('NEVIRAIDE')
 
@@ -26,10 +26,10 @@ M.enable = function()
 end
 
 M.disable = function()
-  g.transparency = false
+  g.t = false
 
   local old_data = 'transparency = ' .. tostring(NEVIRAIDE().transparency)
-  local new_data = 'transparency = ' .. tostring(g.transparency)
+  local new_data = 'transparency = ' .. tostring(g.t)
   write(old_data, new_data)
   require('plenary.reload').reload_module('NEVIRAIDE')
 

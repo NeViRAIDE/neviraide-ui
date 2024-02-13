@@ -5,7 +5,8 @@ local neviraide_themes_path =
 
 M.get_theme_tb = function(type)
   local default_dir = 'neviraide-ui.themes.colorschemes.'
-  local default_path = default_dir .. NEVIRAIDE().theme
+  -- local default_path = default_dir .. NEVIRAIDE().theme
+  local default_path = default_dir .. vim.g.nt
 
   local ok, default_theme = pcall(require, default_path)
 

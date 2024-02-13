@@ -6,7 +6,8 @@ local statusline_theme = 'default'
 local statusline_bg = colors.statusline_bg
 local light_grey = colors.light_grey
 
-if NEVIRAIDE().transparency then statusline_bg = 'NONE' end
+-- if NEVIRAIDE().transparency then statusline_bg = 'NONE' end
+if vim.g.t then statusline_bg = 'NONE' end
 
 local Lsp_highlights = {
   St_lspError = { fg = colors.red, bg = 'none' },

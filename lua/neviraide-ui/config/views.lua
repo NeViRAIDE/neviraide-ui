@@ -3,7 +3,8 @@ local require = require('neviraide-ui.utils.lazy')
 local Util = require('neviraide-ui.utils')
 local Config = require('neviraide-ui.config')
 
-local border = NEVIRAIDE().border
+-- local border = NEVIRAIDE().border
+local border = vim.g.b
 
 local M = {}
 

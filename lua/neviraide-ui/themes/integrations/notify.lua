@@ -2,11 +2,7 @@ local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
 
 ---@return string
 local function style()
-  if
-    vim.g.borders == 'none'
-    or vim.g.borders == 'shadow'
-    or vim.g.borders == 'solid'
-  then
+  if vim.g.b == 'none' or vim.g.b == 'shadow' or vim.g.b == 'solid' then
     return 'borderless'
   end
   return 'bordered'

@@ -46,7 +46,7 @@ function M.cmd(name) require('neviraide-ui.commands').cmd(name) end
 
 function M.enable()
   Config._running = true
-  require('neviraide-ui.source.notify').enable()
+  -- require('neviraide-ui.source.notify').enable()
 
   local hyprTheme = require('neviraide-ui.hyprland.utils').get_theme_from_hypr()
   require('neviraide-ui.utils.change_theme').change_theme(hyprTheme)

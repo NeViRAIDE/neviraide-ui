@@ -2,54 +2,51 @@ local M = {}
 
 ---Define the file path by concatenating the home directory with the relative path.
 ---@type string file_path The path to the themes.css file.
-local file_path = os.getenv('HOME') .. '/.config/waybar/themes/theme.css'
+local kitty_path = os.getenv('HOME') .. '/.config/kitty/themes/theme.conf'
 
-M.wb_colors = {}
+M.colors = {
+  kitty = {},
+}
 
----Function to read the file and extract the values of 'main-fg' and 'wb-act-bg'.
+---Function to read the kitty conf file and extract the values .
 ---Opens the file for reading and reads line by line to find the color definitions.
----@return table
-local function extract_colors()
-  ---Open the file for reading
-  -- @type file*
-  local file = io.open(file_path, 'r')
-  if not file then
-    print('Failed to open file: ' .. file_path)
-    return {}
-  end
+local function extract_kitty_colors()
+  local theme_file = io.open(kitty_path, 'r')
+  if not theme_file then print('Failed to open file: ' .. kitty_path) end
 
-  for line in file:lines() do
-    --- Try to match the pattern for 'main-fg' color definition
-    ---@type string
-    local main_fg = line:match('@define%-color main%-fg (%S+);')
-    if main_fg then M.wb_colors.main_fg = main_fg end
-
-    --- Try to match the pattern for 'main-bg' color definition
-    ---@type string
-    local main_bg = line:match('@define%-color main%-bg (%S+);')
-    if main_bg then M.wb_colors.main_bg = main_bg end
-
-    --- Try to match the pattern for 'wb-act-bg' color definition
-    ---@type string
-    local active_bg = line:match('@define%-color wb%-act%-bg (%S+);')
-    if active_bg then M.wb_colors.active_bg = active_bg end
-
-    -- Break the loop if all values are found
-    if
-      M.wb_colors.main_fg
-      and M.wb_colors.main_bg
-      and M.wb_colors.active_bg
-    then
-      break
+  if theme_file then
+    for line in theme_file:lines() do
+      local color_name, color_value = line:match('^([%w%-_]+) #([%da-fA-F]+)')
+      if color_name and color_value then
+        -- Rename colors if needed
+        if color_name == 'color0' then color_name = 'black' end
+        if color_name == 'color1' then color_name = 'red' end
+        if color_name == 'color2' then color_name = 'blue' end
+        if color_name == 'color3' then color_name = 'yellow' end
+        if color_name == 'color4' then color_name = 'green' end
+        if color_name == 'color5' then color_name = 'magenta' end
+        if color_name == 'color6' then color_name = 'cyan' end
+        if color_name == 'color7' then color_name = 'white' end
+        if color_name == 'color8' then color_name = 'bright_black' end
+        if color_name == 'color9' then color_name = 'bright_red' end
+        if color_name == 'color10' then color_name = 'bright_blue' end
+        if color_name == 'color11' then color_name = 'bright_yellow' end
+        if color_name == 'color12' then color_name = 'bright_green' end
+        if color_name == 'color13' then color_name = 'bright_magenta' end
+        if color_name == 'color14' then color_name = 'bright_cyan' end
+        if color_name == 'color15' then color_name = 'bright_white' end
+        -- Add color to table M.colors
+        M.colors.kitty[color_name] = '#' .. color_value
+      end
     end
   end
 
-  file:close()
+  if theme_file then theme_file:close() end
+  print('colors from kitty extracted')
 end
 
-extract_colors()
+extract_kitty_colors()
 
--- TODO: push list of themes if no hyprdots
 function M.get_theme_from_hypr()
   local hypr_conf_path = os.getenv('HOME') .. '/.config/hypr/themes/theme.conf'
   local hypr_conf_file = io.open(hypr_conf_path, 'r')
@@ -75,7 +72,8 @@ function M.get_theme_from_hypr()
     return extracted_theme
   else
     print('Config file not found')
-    return nil
+    print('Setting theme from NEVIRAIDE conf')
+    return vim.g.nt
   end
 end
 
