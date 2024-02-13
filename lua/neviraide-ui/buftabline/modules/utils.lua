@@ -56,6 +56,7 @@ M.getDatetimeWidth = function(full)
     width = width + 1 -- Space at the end
   end
 
+  -- vim.cmd.redrawtabline()
   return width
 end
 
@@ -155,7 +156,11 @@ M.styleBufferTab = function(nr)
         .. '@TbKillBuf@%#TbLineBufOnModified#'
         .. icon_plug('', 'pencil', 0, 2)
     ) or ('%#TbLineBufOnClose#' .. close_btn)
-    name = '%#TbLineBufOn#' .. name .. close_btn
+    name = '%#TbSeparator#'
+      .. '%#TbLineBufOn#'
+      .. name
+      .. close_btn
+      .. '%#TbSeparator#'
   else
     close_btn = (
       vim.bo[nr].modified
@@ -164,6 +169,7 @@ M.styleBufferTab = function(nr)
         .. '@TbKillBuf@%#TbLineBufOffModified#'
         .. icon_plug('', 'pencil', 1, 1)
     ) or ('%#TbLineBufOffClose#' .. close_btn)
+
     name = '%#TbLineBufOff#' .. name .. close_btn
   end
 

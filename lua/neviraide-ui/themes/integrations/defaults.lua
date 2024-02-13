@@ -12,7 +12,7 @@ local defaults = {
     fg = accent.active_bg,
   },
   ThemeBG = {
-    bg = accent.main_bg,
+    bg = colors.black,
   },
   ThemeFG = {
     fg = accent.main_fg,
@@ -261,6 +261,9 @@ local defaults = {
   LazyReasonSource = { fg = colors.cyan },
   LazyReasonImport = { fg = colors.white },
   LazyProgressDone = { fg = colors.green },
+  NeviraideTerminalDarkerBG = { bg = colors.black },
+  NeviraideHelpDarkerBG = { bg = colors.black },
+  NeviraideTerminalWinbar = { bg = colors.black },
 }
 
 local merge_tb = require('neviraide-ui.themes').merge_tb
@@ -278,9 +281,5 @@ then
   defaults.NormalFloat = { bg = colors.one_bg }
   defaults.NuiTitle = { bg = colors.green, fg = colors.black }
 end
-
-vim.api.nvim_set_hl(0, 'NeviraideTerminalDarkerBG', { bg = accent.main_bg })
-vim.api.nvim_set_hl(0, 'NeviraideHelpDarkerBG', { bg = accent.main_bg })
-vim.api.nvim_set_hl(0, 'NeviraideTerminalWinbar', { bg = accent.main_bg })
 
 return defaults
