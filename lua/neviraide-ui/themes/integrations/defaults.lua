@@ -22,7 +22,7 @@ local defaults = {
     fg = colors.white,
   },
 
-  WinBar = { bg = kitty.background },
+  WinBar = { bg = colors.black },
   WinBarNC = { link = 'WinBar' },
 
   Pmenu = { bg = colors.one_bg },
