@@ -2,19 +2,19 @@ local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
 local kitty = require('neviraide-ui.hyprland.utils').colors.kitty
 
 local highlights = {
-  TblineFill = { bg = kitty.background },
-  BufTabDate = { fg = colors.grey_fg, bg = kitty.background, italic = true },
-  TbLineBufOn = { fg = colors.white, bg = colors.black, bold = true },
-  TbSeparator = { fg = colors.black, bg = kitty.background, bold = true },
-  TbLineBufOff = { fg = colors.light_grey, bg = kitty.background },
-  TbLineBufOnModified = { fg = colors.green, bg = colors.black, italic = true },
+  TblineFill = { bg = kitty.tab_bar_background },
+  BufTabDate = { fg = colors.grey_fg, bg = kitty.tab_bar_background, italic = true },
+  TbLineBufOn = { fg = colors.white, bg = kitty.active_tab_background, bold = true },
+  TbSeparator = { fg = kitty.active_tab_background, bg = kitty.tab_bar_background, bold = true },
+  TbLineBufOff = { fg = colors.light_grey, bg = kitty.tab_bar_background },
+  TbLineBufOnModified = { fg = colors.green, bg = kitty.active_tab_background, italic = true },
   TbLineBufOffModified = {
     fg = colors.red,
-    bg = kitty.background,
+    bg = kitty.tab_bar_background,
     italic = true,
   },
-  TbLineBufOnClose = { fg = colors.red, bg = colors.black },
-  TbLineBufOffClose = { fg = colors.light_grey, bg = kitty.background },
+  TbLineBufOnClose = { fg = colors.red, bg = kitty.active_tab_background },
+  TbLineBufOffClose = { fg = colors.light_grey, bg = kitty.tab_bar_background },
   TblineTabNewBtn = { fg = colors.white, bg = colors.black3, bold = true },
   TbLineTabOn = { fg = kitty.background, bg = colors.nord_blue, bold = true },
   TbLineTabOff = { fg = colors.white, bg = colors.black2 },

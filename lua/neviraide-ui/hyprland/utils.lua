@@ -16,7 +16,7 @@ local function extract_kitty_colors()
 
   if theme_file then
     for line in theme_file:lines() do
-      local color_name, color_value = line:match('^([%w%-_]+) #([%da-fA-F]+)')
+      local color_name, color_value = line:match('^([%w%-_]+)%s+#([%da-fA-F]+)')
       if color_name and color_value then
         -- Rename colors if needed
         if color_name == 'color0' then color_name = 'black' end
@@ -42,7 +42,7 @@ local function extract_kitty_colors()
   end
 
   if theme_file then theme_file:close() end
-  print('colors from kitty extracted')
+  print('Colors from kitty has been successfully extracted!')
 end
 
 extract_kitty_colors()

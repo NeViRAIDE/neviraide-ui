@@ -11,8 +11,10 @@ vim.defer_fn(function()
   end
 end, 0)
 
+print('loading ui')
 require('neviraide-ui.override_vim_ui.input')
 require('neviraide-ui.override_vim_ui.select')
+print('finished ui')
 
 require('autocommands')
 

@@ -10,7 +10,7 @@ local border_chars_list = {
 
 ---@param border 'none'|'single'|'double'|'rounded'|'solid'|'shadow'
 M.set_borders = function(border)
-  vim.g.border = border
+  vim.g.b = border
 
   ---@type string
   local chars
@@ -24,11 +24,11 @@ M.set_borders = function(border)
   end
 
   local old_data_chars = "borderchars = '"
-    .. tostring(NEVIRAIDE().borderchars)
+    .. tostring(NEVIRAIDE().ui.borderchars)
     .. "'"
   local new_data_chars = "borderchars = '" .. tostring(chars) .. "'"
 
-  local old_borders = "border = '" .. tostring(NEVIRAIDE().border) .. "'"
+  local old_borders = "border = '" .. tostring(NEVIRAIDE().ui.border) .. "'"
   local new_borders = "border = '" .. tostring(border) .. "'"
 
   require('neviraide-ui.utils').replace_word(old_borders, new_borders)

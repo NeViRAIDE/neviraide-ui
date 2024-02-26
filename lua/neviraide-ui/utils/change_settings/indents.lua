@@ -6,7 +6,7 @@ function M.set_indents(size)
   vim.o.tabstop = size
   vim.o.softtabstop = size
 
-  local old = 'indents = ' .. NEVIRAIDE().indents
+  local old = 'indents = ' .. NEVIRAIDE().ui.indents
   local new = 'indents = ' .. size
 
   require('neviraide-ui.utils').replace_word(old, new)

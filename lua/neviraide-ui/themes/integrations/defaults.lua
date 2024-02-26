@@ -9,7 +9,7 @@ local kitty = require('neviraide-ui.hyprland.utils').colors.kitty
 
 local defaults = {
   TermBG = {
-    bg = kitty.background,
+    bg = kitty.tab_bar_background,
   },
 
   LineSeparator = {
@@ -22,7 +22,7 @@ local defaults = {
     fg = colors.white,
   },
 
-  WinBar = { bg = colors.black },
+  WinBar = { bg = kitty.background },
   WinBarNC = { link = 'WinBar' },
 
   Pmenu = { bg = colors.one_bg },
@@ -257,9 +257,9 @@ local defaults = {
   LazyReasonImport = { fg = colors.white },
   LazyProgressDone = { fg = colors.green },
 
-  NeviraideTerminalDarkerBG = { bg = kitty.background },
-  NeviraideHelpDarkerBG = { bg = kitty.background },
-  NeviraideTerminalWinbar = { bg = kitty.background },
+  NeviraideTerminalDarkerBG = { bg = kitty.tab_bar_background },
+  NeviraideHelpDarkerBG = { bg = kitty.tab_bar_background },
+  NeviraideTerminalWinbar = { bg = kitty.tab_bar_background },
 }
 
 local merge_tb = require('neviraide-ui.themes').merge_tb
