@@ -42,7 +42,6 @@ local function extract_kitty_colors()
   end
 
   if theme_file then theme_file:close() end
-  print('Colors from kitty has been successfully extracted!')
 end
 
 extract_kitty_colors()

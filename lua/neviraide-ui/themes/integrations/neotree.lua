@@ -8,7 +8,7 @@ return {
   NeoTreeGitDirty = { fg = colors.red },
   NeoTreeIndentMarker = { fg = colors.grey_fg },
   NeoTreeNormal = { link = 'TermBG' },
-  NeoTreeNormalNC = { link = 'Term' },
+  NeoTreeNormalNC = { link = 'TermBG' },
   NeoTreeOpenedDirectoryName = { fg = colors.folder_bg },
   NeoTreeGitIgnored = { fg = colors.light_grey },
   NeoTreeWinSeparator = { link = 'LineSeparator' },

@@ -22,7 +22,6 @@ M.default = {
   StatusLine = { bg = statusline_bg },
   St_gitIcons = { fg = light_grey, bg = statusline_bg, bold = true },
   St_LspStatus = { fg = colors.grey_fg, bg = 'none' },
-  St_LspProgress = { fg = colors.green, bg = statusline_bg },
   St_LspStatus_Icon = { fg = colors.nord_blue, bg = 'none' },
   St_EmptySpace = { fg = colors.grey, bg = colors.lightbg },
   St_EmptySpace2 = { fg = colors.grey, bg = statusline_bg },
