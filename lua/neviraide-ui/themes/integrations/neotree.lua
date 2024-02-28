@@ -1,4 +1,5 @@
 local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
+local theme = require('neviraide-ui.themes').get_theme_tb('base_16')
 
 return {
   NeoTreeEmptyDirectoryName = { link = 'Directory' },
@@ -7,8 +8,8 @@ return {
   NeoTreeDirectoryName = { link = 'Directory' },
   NeoTreeGitDirty = { fg = colors.red },
   NeoTreeIndentMarker = { fg = colors.grey_fg },
-  NeoTreeNormal = { link = 'TermBG' },
-  NeoTreeNormalNC = { link = 'TermBG' },
+  NeoTreeNormal = { bg = theme.base00 },
+  NeoTreeNormalNC = { bg = theme.base00 },
   NeoTreeOpenedDirectoryName = { fg = colors.folder_bg },
   NeoTreeGitIgnored = { fg = colors.light_grey },
   NeoTreeWinSeparator = { link = 'LineSeparator' },

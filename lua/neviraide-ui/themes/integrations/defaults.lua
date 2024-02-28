@@ -34,7 +34,7 @@ local defaults = {
   CursorLineNr = { fg = colors.white },
   LineNr = { fg = colors.grey },
 
-  -- floating windowr
+  -- floating windows
   -- FloatBorder = { fg = accent.background },
   NormalFloat = { bg = 'none' },
 

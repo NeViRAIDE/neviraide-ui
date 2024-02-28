@@ -9,7 +9,7 @@ M.ns = vim.api.nvim_create_namespace('neviraide-ui')
 function M.defaults()
   ---@class NeviraideUIConfig
   local defaults = {
-    hyprdots = true,
+    hyprdots = false,
     cmdline = { enabled = true },
     messages = { enabled = true },
     popupmenu = { enabled = true, backend = 'nui' },
@@ -59,12 +59,6 @@ function M.setup(options)
     format = require('neviraide-ui.config.format').defaults,
     popupmenu = { kind_icons = require('neviraide.utils').icons().lspkind },
   })
-
-  if M.options.hyprdots then
-    print('hyprdots is enabled')
-  else
-    print('hyprdots not enabled')
-  end
 
   M.truncate_log()
 

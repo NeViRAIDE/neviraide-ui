@@ -3,6 +3,9 @@ local require = require('neviraide-ui.utils.lazy')
 local Api = require('neviraide-ui.api')
 local Config = require('neviraide-ui.config')
 
+local hyprTheme = require('neviraide-ui.hyprland.utils').get_theme_from_hypr()
+require('neviraide-ui.utils.change_settings.theme').change_theme(hyprTheme)
+
 local M = {}
 
 M.api = Api
@@ -10,6 +13,7 @@ M.api = Api
 ---Setup configuration
 ---@param opts? NeviraideUIConfig
 function M.setup(opts)
+  Config.options = vim.tbl_deep_extend('force', Config.options, opts or {})
   local function load()
     vim.opt.statusline = '%!v:lua.require("neviraide-ui.statusline").run()'
     require('neviraide-ui.utils').try(function()
@@ -44,14 +48,9 @@ M.deactivate = M.disable
 
 function M.cmd(name) require('neviraide-ui.commands').cmd(name) end
 
-print(vim.inspect(Config))
-
 function M.enable()
   Config._running = true
   require('neviraide-ui.source.notify').enable()
-
-  local hyprTheme = require('neviraide-ui.hyprland.utils').get_theme_from_hypr()
-  require('neviraide-ui.utils.change_settings.theme').change_theme(hyprTheme)
 
   require('neviraide-ui.utils.hacks').enable()
   require('neviraide-ui.ui').enable()

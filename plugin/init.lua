@@ -1,4 +1,4 @@
-require('neviraide-ui').setup(require('neviraide-ui.config').options)
+require('neviraide-ui')
 
 require('neviraide-ui.buftabline.lazyload')
 

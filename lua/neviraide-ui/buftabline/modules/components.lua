@@ -67,7 +67,7 @@ M.bufferlist = function()
   end
 
   vim.g.visibuffers = buffers
-  return table.concat(buffers) .. '%#TblineFill#' .. '%=' -- buffers + empty space
+  return table.concat(buffers) .. '%#BufTabLineFill#' .. '%=' -- buffers + empty space
 end
 
 vim.g.TbTabsToggled = 0

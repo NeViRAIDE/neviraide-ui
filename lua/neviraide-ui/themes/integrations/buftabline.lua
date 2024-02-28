@@ -2,7 +2,7 @@ local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
 local kitty = require('neviraide-ui.hyprland.utils').colors.kitty
 
 local highlights = {
-  TblineFill = { bg = kitty.tab_bar_background },
+  BufTabLineFill = { bg = kitty.tab_bar_background },
   BufTabDate = { fg = colors.grey_fg, bg = kitty.tab_bar_background, italic = true },
   TbLineBufOn = { fg = colors.white, bg = kitty.active_tab_background, bold = true },
   TbSeparator = { fg = kitty.active_tab_background, bg = kitty.tab_bar_background, bold = true },
@@ -30,7 +30,7 @@ local highlights = {
 
 local hlgroups_glassy = {
   'BufTabDate',
-  'TblineFill',
+  'BufTabLineFill',
   'TbLineBufOn',
   'TbLineBufOff',
   'TbLineBufOnClose',
