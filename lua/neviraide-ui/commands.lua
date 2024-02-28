@@ -1,73 +1,11 @@
-local require = require('neviraide-ui.utils.lazy')
-
-local View = require('neviraide-ui.view')
-local Manager = require('neviraide-ui.message.manager')
-local Options = require('neviraide-ui.config').options
 local Util = require('neviraide-ui.utils')
-local Message = require('neviraide-ui.message')
-local Router = require('neviraide-ui.message.router')
 
----@class NeviraideUICommand: NeviraideUIRouteConfig
----@field filter_opts NeviraideUIMessageOpts
-
-local commands = {
-  history = {
-    -- options for the message history that you get with `:NeviraideUI`
-    view = 'split',
-    opts = { enter = true, format = 'details' },
-    filter = {
-      any = {
-        { event = 'notify' },
-        { error = true },
-        { warning = true },
-        { event = 'msg_show', kind = { '' } },
-        { event = 'lsp', kind = 'message' },
-      },
-    },
-  },
-  -- :NeviraideUI last
-  last = {
-    view = 'popup',
-    opts = { enter = true, format = 'details' },
-    filter = {
-      any = {
-        { event = 'notify' },
-        { error = true },
-        { warning = true },
-        { event = 'msg_show', kind = { '' } },
-        { event = 'lsp', kind = 'message' },
-      },
-    },
-    filter_opts = { count = 1 },
-  },
-  -- :NeviraideUI errors
-  errors = {
-    view = 'popup',
-    opts = { enter = true, format = 'details' },
-    filter = { error = true },
-    filter_opts = { reverse = true },
-  },
-}
+local commands = {}
 
 local M = {}
 
 ---@type table<string, fun()>
 M.commands = {}
-
----@param command NeviraideUICommand
-function M.command(command)
-  return function()
-    local view = View.get_view(command.view, command.opts)
-    view:set(Manager.get(
-      command.filter,
-      vim.tbl_deep_extend('force', {
-        history = true,
-        sort = true,
-      }, command.filter_opts or {})
-    ))
-    view:display()
-  end
-end
 
 function M.cmd(cmd)
   if M.commands[cmd] then
@@ -86,12 +24,6 @@ function M.setup()
         require('neviraide-ui.dashboard').open()
       end
     end,
-    debug = function() Options.debug = not Options.debug end,
-    dismiss = function() Router.dismiss() end,
-    log = function() vim.cmd.edit(Options.log) end,
-    enable = function() require('neviraide-ui').enable() end,
-    disable = function() require('neviraide-ui').disable() end,
-    stats = function() Manager.add(Util.stats.message()) end,
     cursorcolumn = function() Util.settings('cursorcolumn').toggle() end,
     cursorline = function() Util.settings('cursorline').toggle() end,
     numbers = function() Util.settings('numbers').toggle() end,
@@ -99,23 +31,6 @@ function M.setup()
     transparency = function()
       Util.settings('transparency').toggle()
       require('neviraide.utils.reload_config').reload_transparency()
-    end,
-    routes = function()
-      local message = Message('neviraide-ui', 'debug')
-      message:set(vim.inspect(Options.routes))
-      Manager.add(message)
-    end,
-    config = function()
-      local message = Message('neviraide-ui', 'debug')
-      message:set(vim.inspect(Options))
-      Manager.add(message)
-    end,
-    viewstats = function()
-      local message = Message('neviraide-ui', 'debug')
-      message:set(
-        vim.inspect(require('neviraide-ui.message.router').view_stats())
-      )
-      Manager.add(message)
     end,
   }
 
