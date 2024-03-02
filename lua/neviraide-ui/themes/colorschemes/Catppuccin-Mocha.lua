@@ -1,9 +1,15 @@
+---@type Colorscheme
 local M = {}
 
-M.base_30 = {
+M.type = 'dark'
+M.borders = 'solid'
+
+M.colors = {
+  tab_bar_background = '#110e14',
   white = '#D9E0EE',
   darker_black = '#191828',
   black = '#1E1E2E', --  nvim bg
+  background = '#1E1E2E', --  nvim bg
   black2 = '#252434',
   one_bg = '#2d2c3c', -- real bg of onedark
   one_bg2 = '#363545',
@@ -35,33 +41,31 @@ M.base_30 = {
   lavender = '#b4befe',
 }
 
-M.base_16 = {
-  base00 = '#1E1E2E',
-  base01 = '#282737',
-  base02 = '#2f2e3e',
-  base03 = '#383747',
-  base04 = '#414050',
-  base05 = '#bfc6d4',
-  base06 = '#ccd3e1',
-  base07 = '#D9E0EE',
-  base08 = '#f5c2e7',
-  base09 = '#F8BD96',
-  base0A = '#FAE3B0',
-  base0B = '#ABE9B3',
-  base0C = '#89DCEB',
-  base0D = '#89B4FA',
-  base0E = '#CBA6F7',
-  base0F = '#F38BA8',
-}
+-- M.base_16 = {
+--   base00 = '#1E1E2E',
+--   base01 = '#282737',
+--   base02 = '#2f2e3e',
+--   base03 = '#383747',
+--   base04 = '#414050',
+--   base05 = '#bfc6d4',
+--   base06 = '#ccd3e1',
+--   base07 = '#D9E0EE',
+--   base08 = '#f5c2e7',
+--   base09 = '#F8BD96',
+--   base0A = '#FAE3B0',
+--   base0B = '#ABE9B3',
+--   base0C = '#89DCEB',
+--   base0D = '#89B4FA',
+--   base0E = '#CBA6F7',
+--   base0F = '#F38BA8',
+-- }
 
 M.polish_hl = {
   treesitter = {
-    ['@variable'] = { fg = M.base_30.lavender },
-    ['@property'] = { fg = M.base_30.teal },
-    ['@variable.builtin'] = { fg = M.base_30.red },
+    ['@variable'] = { fg = M.colors.lavender },
+    ['@property'] = { fg = M.colors.teal },
+    ['@variable.builtin'] = { fg = M.colors.red },
   },
 }
-
-M.type = 'dark'
 
 return M

@@ -1,30 +1,45 @@
-local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
-local kitty = require('neviraide-ui.hyprland.utils').colors.kitty
+local color = require('neviraide-ui.themes.colors').palette
 
 local highlights = {
-  BufTabLineFill = { bg = kitty.tab_bar_background },
-  BufTabDate = { fg = colors.grey_fg, bg = kitty.tab_bar_background, italic = true },
-  TbLineBufOn = { fg = colors.white, bg = kitty.active_tab_background, bold = true },
-  TbSeparator = { fg = kitty.active_tab_background, bg = kitty.tab_bar_background, bold = true },
-  TbLineBufOff = { fg = colors.light_grey, bg = kitty.tab_bar_background },
-  TbLineBufOnModified = { fg = colors.green, bg = kitty.active_tab_background, italic = true },
-  TbLineBufOffModified = {
-    fg = colors.red,
-    bg = kitty.tab_bar_background,
+  BufTabLineFill = { bg = color.tab_bar_background },
+  BufTabDate = {
+    fg = color.grey_fg,
+    bg = color.tab_bar_background,
     italic = true,
   },
-  TbLineBufOnClose = { fg = colors.red, bg = kitty.active_tab_background },
-  TbLineBufOffClose = { fg = colors.light_grey, bg = kitty.tab_bar_background },
-  TblineTabNewBtn = { fg = colors.white, bg = colors.black3, bold = true },
-  TbLineTabOn = { fg = kitty.background, bg = colors.nord_blue, bold = true },
-  TbLineTabOff = { fg = colors.white, bg = colors.black2 },
-  TbLineTabCloseBtn = { fg = kitty.background, bg = colors.nord_blue },
-  TBTabTitle = { fg = kitty.background, bg = colors.white },
-  TbLineThemeToggleBtn = { bold = true, fg = colors.white, bg = colors.black3 },
+  TbLineBufOn = {
+    fg = color.white,
+    bg = color.active_tab_background,
+    bold = true,
+  },
+  TbSeparator = {
+    fg = color.active_tab_background,
+    bg = color.tab_bar_background,
+    bold = true,
+  },
+  TbLineBufOff = { fg = color.light_grey, bg = color.tab_bar_background },
+  TbLineBufOnModified = {
+    fg = color.green,
+    bg = color.active_tab_background,
+    italic = true,
+  },
+  TbLineBufOffModified = {
+    fg = color.red,
+    bg = color.tab_bar_background,
+    italic = true,
+  },
+  TbLineBufOnClose = { fg = color.red, bg = color.active_tab_background },
+  TbLineBufOffClose = { fg = color.light_grey, bg = color.tab_bar_background },
+  TblineTabNewBtn = { fg = color.white, bg = color.black3, bold = true },
+  TbLineTabOn = { fg = color.background, bg = color.nord_blue, bold = true },
+  TbLineTabOff = { fg = color.white, bg = color.black2 },
+  TbLineTabCloseBtn = { fg = color.background, bg = color.nord_blue },
+  TBTabTitle = { fg = color.background, bg = color.white },
+  TbLineThemeToggleBtn = { bold = true, fg = color.white, bg = color.black3 },
   TbLineCloseAllBufsBtn = {
     bold = true,
-    bg = colors.red,
-    fg = kitty.background,
+    bg = color.red,
+    fg = color.background,
   },
 }
 

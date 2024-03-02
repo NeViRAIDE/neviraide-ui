@@ -1,5 +1,4 @@
-local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
-local accent = require('neviraide-ui.hyprland.utils').colors
+local color = require('neviraide-ui.themes.colors').palette
 
 ---@return string
 local function telescope_style()
@@ -10,63 +9,86 @@ local function telescope_style()
 end
 
 local hlgroups = {
-
-  TelescopePromptPrefix = {
-    fg = colors.red,
-    bg = colors.black2,
-  },
-
-  TelescopeNormal = { bg = accent.foreground },
-
-  TelescopePreviewTitle = {
-    fg = colors.black,
-    bg = colors.green,
-  },
-
+  -- TelescopeNormal = { bg = accent.foreground },
   TelescopeSelection = {
-    bg = accent.foreground,
-    fg = colors.white,
+    bg = color.one_bg3,
+    -- fg = color.blue,
     bold = true,
   },
-  TelescopeSelectionCaret = { bg = accent.foreground, fg = colors.red },
-  TelescopeResultsDiffAdd = { fg = colors.green },
-  TelescopeResultsDiffChange = { fg = colors.yellow },
-  TelescopeResultsDiffDelete = { fg = colors.red },
+  -- TelescopeSelectionCaret = { bg = accent.foreground, fg = color.red },
+  TelescopeResultsDiffAdd = { fg = color.green },
+  TelescopeResultsDiffChange = { fg = color.yellow },
+  TelescopeResultsDiffDelete = { fg = color.red },
 }
 
 local styles = {
   borderless = {
-    TelescopeBorder = { fg = accent.foreground, bg = accent.foreground },
-    TelescopePromptTitle = {
-      fg = colors.black,
-      bg = colors.red,
+    TelescopeNormal = { bg = color.tab_bar_background },
+    TelescopePreviewTitle = {
+      fg = color.tab_bar_background,
+      bg = color.green,
+      bold = true,
     },
-    TelescopePromptBorder = { fg = colors.black2, bg = colors.black2 },
-    TelescopePromptNormal = { fg = colors.white, bg = colors.black2 },
+    TelescopeBorder = {
+      fg = color.tab_bar_background,
+      bg = color.tab_bar_background,
+    },
+    TelescopeResultsNormal = {
+      bg = color.tab_bar_background,
+      -- fg = color.black,
+      -- bold = true,
+    },
     TelescopeResultsTitle = {
-      fg = accent.foreground,
-      bg = accent.foreground,
+      bg = color.blue,
+      fg = color.black,
+      bold = true,
     },
-    TelescopePromptPrefix = { fg = colors.red, bg = colors.black2 },
+    TelescopePromptTitle = {
+      fg = color.black,
+      bg = color.red,
+      bold = true,
+    },
+    TelescopePromptBorder = {
+      fg = color.grey,
+      bg = color.grey,
+    },
+    TelescopePromptPrefix = {
+      fg = color.red,
+      bg = color.grey,
+    },
+    TelescopePromptNormal = {
+      bg = color.grey,
+      fg = color.black,
+      bold = true,
+    },
+    TelescopePromptCounter = { bg = color.grey, fg = color.red },
   },
 
   bordered = {
     TelescopeBorder = { link = 'FloatBorder' },
     TelescopePromptBorder = { link = 'FloatBorder' },
-    TelescopePromptTitle = { bg = colors.black, fg = colors.red, bold = true },
+    TelescopePromptTitle = {
+      bg = color.background,
+      fg = color.red,
+      bold = true,
+    },
     TelescopeResultsTitle = {
-      bg = colors.black,
-      fg = colors.green,
+      bg = color.background,
+      fg = color.green,
       bold = true,
     },
     TelescopePreviewTitle = {
-      bg = colors.black,
-      fg = colors.blue,
+      bg = color.background,
+      fg = color.blue,
       bold = true,
     },
-    TelescopePromptPrefix = { bg = colors.black, fg = colors.red, bold = true },
-    TelescopeNormal = { bg = colors.black },
-    TelescopePromptNormal = { bg = colors.black },
+    TelescopePromptPrefix = {
+      bg = color.background,
+      fg = color.red,
+      bold = true,
+    },
+    TelescopeNormal = { bg = color.background },
+    TelescopePromptNormal = { bg = color.background },
   },
 }
 

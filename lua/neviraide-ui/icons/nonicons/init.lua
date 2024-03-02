@@ -1,4 +1,4 @@
-local hi = require('neviraide-ui.themes').get_theme_tb('base_30')
+local hi = require('neviraide-ui.themes').get_theme_tb('colors')
 local d = require('neviraide-ui.icons.utils').decoder
 
 ---@type Nonicons

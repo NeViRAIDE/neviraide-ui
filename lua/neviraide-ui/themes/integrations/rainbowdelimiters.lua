@@ -1,11 +1,11 @@
-local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
+local color = require('neviraide-ui.themes.colors').palette
 
 return {
-  RainbowDelimiterRed = { fg = colors.red },
-  RainbowDelimiterOrange = { fg = colors.orange },
-  RainbowDelimiterYellow = { fg = colors.yellow },
-  RainbowDelimiterGreen = { fg = colors.green },
-  RainbowDelimiterBlue = { fg = colors.blue },
-  RainbowDelimiterCyan = { fg = colors.cyan },
-  RainbowDelimiterViolet = { fg = colors.purple },
+  RainbowDelimiterRed = { fg = color.red },
+  RainbowDelimiterOrange = { fg = color.orange },
+  RainbowDelimiterYellow = { fg = color.yellow },
+  RainbowDelimiterGreen = { fg = color.green },
+  RainbowDelimiterBlue = { fg = color.blue },
+  RainbowDelimiterCyan = { fg = color.cyan },
+  RainbowDelimiterViolet = { fg = color.purple },
 }

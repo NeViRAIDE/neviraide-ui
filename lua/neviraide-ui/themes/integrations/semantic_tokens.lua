@@ -1,4 +1,4 @@
-local theme = require('neviraide-ui.themes').get_theme_tb('base_16')
+local color = require('neviraide-ui.themes.colors').palette
 
 return {
   ["@lsp.type.class"] = { link = "Structure" },
@@ -16,7 +16,7 @@ return {
   ["@lsp.type.type"] = { link = "@type" },
   ["@lsp.type.typeParamater"] = { link = "TypeDef" },
   ["@lsp.type.variable"] = { link = "@variable" },
-  ["@event"] = { fg = theme.base08 },
-  ["@modifier"] = { fg = theme.base08 },
-  ["@regexp"] = { fg = theme.base0F },
+  ["@event"] = { fg = color.bright_red },
+  ["@modifier"] = { fg = color.bright_red },
+  ["@regexp"] = { fg = color.red },
 }

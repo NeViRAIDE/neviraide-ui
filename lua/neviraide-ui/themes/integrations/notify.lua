@@ -1,4 +1,4 @@
-local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
+local color = require('neviraide-ui.themes.colors').palette
 
 ---@return string
 local function style()
@@ -13,79 +13,79 @@ local styles = {
     NotifyBackground = { link = 'NormalFloat' },
 
     NotifyERRORBorder = { link = 'NormalFloat' },
-    NotifyERRORIcon = { bg = colors.red, fg = colors.black },
-    NotifyERRORTitle = { bg = colors.red, fg = colors.black },
-    NotifyERRORBody = { bg = colors.one_bg },
+    NotifyERRORIcon = { bg = color.red, fg = color.black },
+    NotifyERRORTitle = { bg = color.red, fg = color.black },
+    NotifyERRORBody = { bg = color.one_bg },
 
     NotifyWARNBorder = { link = 'NormalFloat' },
-    NotifyWARNIcon = { bg = colors.orange, fg = colors.black },
-    NotifyWARNTitle = { bg = colors.orange, fg = colors.black },
-    NotifyWARNBody = { bg = colors.one_bg },
+    NotifyWARNIcon = { bg = color.orange, fg = color.black },
+    NotifyWARNTitle = { bg = color.orange, fg = color.black },
+    NotifyWARNBody = { bg = color.one_bg },
 
     NotifyINFOBorder = { link = 'NormalFloat' },
-    NotifyINFOIcon = { bg = colors.green, fg = colors.black },
-    NotifyINFOTitle = { bg = colors.green, fg = colors.black },
-    NotifyINFOBody = { bg = colors.one_bg },
+    NotifyINFOIcon = { bg = color.green, fg = color.black },
+    NotifyINFOTitle = { bg = color.green, fg = color.black },
+    NotifyINFOBody = { bg = color.one_bg },
 
     NotifyDEBUGBorder = { link = 'NormalFloat' },
-    NotifyDEBUGIcon = { bg = colors.grey, fg = colors.black },
-    NotifyDEBUGTitle = { bg = colors.grey, fg = colors.black },
-    NotifyDEBUGBody = { bg = colors.one_bg },
+    NotifyDEBUGIcon = { bg = color.grey, fg = color.black },
+    NotifyDEBUGTitle = { bg = color.grey, fg = color.black },
+    NotifyDEBUGBody = { bg = color.one_bg },
 
     NotifyTRACEBorder = { link = 'NormalFloat' },
-    NotifyTRACEIcon = { bg = colors.purple, fg = colors.black },
-    NotifyTRACETitle = { bg = colors.purple, fg = colors.black },
-    NotifyTRACEBody = { bg = colors.one_bg },
+    NotifyTRACEIcon = { bg = color.purple, fg = color.black },
+    NotifyTRACETitle = { bg = color.purple, fg = color.black },
+    NotifyTRACEBody = { bg = color.one_bg },
   },
 
   bordered = {
-    NotifyERRORBorder = { fg = colors.red },
-    NotifyERRORIcon = { fg = colors.red },
-    NotifyERRORTitle = { fg = colors.red },
+    NotifyERRORBorder = { fg = color.red },
+    NotifyERRORIcon = { fg = color.red },
+    NotifyERRORTitle = { fg = color.red },
     NotifyERRORBody = { bg = 'none' },
 
-    NotifyWARNBorder = { fg = colors.orange },
-    NotifyWARNIcon = { fg = colors.orange },
-    NotifyWARNTitle = { fg = colors.orange },
+    NotifyWARNBorder = { fg = color.orange },
+    NotifyWARNIcon = { fg = color.orange },
+    NotifyWARNTitle = { fg = color.orange },
     NotifyWARNBody = { bg = 'none' },
 
-    NotifyINFOBorder = { fg = colors.green },
-    NotifyINFOIcon = { fg = colors.green },
-    NotifyINFOTitle = { fg = colors.green },
+    NotifyINFOBorder = { fg = color.green },
+    NotifyINFOIcon = { fg = color.green },
+    NotifyINFOTitle = { fg = color.green },
     NotifyINFOBody = { bg = 'none' },
 
-    NotifyDEBUGBorder = { fg = colors.grey },
-    NotifyDEBUGIcon = { fg = colors.grey },
-    NotifyDEBUGTitle = { fg = colors.grey },
+    NotifyDEBUGBorder = { fg = color.grey },
+    NotifyDEBUGIcon = { fg = color.grey },
+    NotifyDEBUGTitle = { fg = color.grey },
     NotifyDEBUGBody = { bg = 'none' },
 
-    NotifyTRACEBorder = { fg = colors.purple },
-    NotifyTRACEIcon = { fg = colors.purple },
-    NotifyTRACETitle = { fg = colors.purple },
+    NotifyTRACEBorder = { fg = color.purple },
+    NotifyTRACEIcon = { fg = color.purple },
+    NotifyTRACETitle = { fg = color.purple },
     NotifyTRACEBody = { bg = 'none' },
   },
 }
 
 local hlgroups = {
-  NotifyERRORBorder = { fg = colors.red },
-  NotifyERRORIcon = { fg = colors.red },
-  NotifyERRORTitle = { fg = colors.red },
+  NotifyERRORBorder = { fg = color.red },
+  NotifyERRORIcon = { fg = color.red },
+  NotifyERRORTitle = { fg = color.red },
 
-  NotifyWARNBorder = { fg = colors.orange },
-  NotifyWARNIcon = { fg = colors.orange },
-  NotifyWARNTitle = { fg = colors.orange },
+  NotifyWARNBorder = { fg = color.orange },
+  NotifyWARNIcon = { fg = color.orange },
+  NotifyWARNTitle = { fg = color.orange },
 
-  NotifyINFOBorder = { fg = colors.green },
-  NotifyINFOIcon = { fg = colors.green },
-  NotifyINFOTitle = { fg = colors.green },
+  NotifyINFOBorder = { fg = color.green },
+  NotifyINFOIcon = { fg = color.green },
+  NotifyINFOTitle = { fg = color.green },
 
-  NotifyDEBUGBorder = { fg = colors.grey },
-  NotifyDEBUGIcon = { fg = colors.grey },
-  NotifyDEBUGTitle = { fg = colors.grey },
+  NotifyDEBUGBorder = { fg = color.grey },
+  NotifyDEBUGIcon = { fg = color.grey },
+  NotifyDEBUGTitle = { fg = color.grey },
 
-  NotifyTRACEBorder = { fg = colors.purple },
-  NotifyTRACEIcon = { fg = colors.purple },
-  NotifyTRACETitle = { fg = colors.purple },
+  NotifyTRACEBorder = { fg = color.purple },
+  NotifyTRACEIcon = { fg = color.purple },
+  NotifyTRACETitle = { fg = color.purple },
 }
 
 local result = vim.tbl_deep_extend('force', hlgroups, styles[style()])

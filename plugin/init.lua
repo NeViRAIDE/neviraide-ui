@@ -16,6 +16,6 @@ require('neviraide-ui.override_vim_ui.input')
 require('neviraide-ui.override_vim_ui.select')
 print('finished ui')
 
-require('autocommands')
+require('neviraide-ui.autocommands')
 
 require('neviraide-ui.themes').load_all_highlights()

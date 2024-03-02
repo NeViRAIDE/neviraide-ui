@@ -60,4 +60,7 @@ M.capitalizeFirstLetter = function(str)
   return str:sub(1, 1):upper() .. str:sub(2)
 end
 
+---@return boolean
+M.is_kitty_terminal = function() return os.getenv('TERM') == 'xterm-kitty' end
+
 return M

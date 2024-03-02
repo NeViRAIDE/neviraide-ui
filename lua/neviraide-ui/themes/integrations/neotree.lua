@@ -1,23 +1,25 @@
-local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
-local theme = require('neviraide-ui.themes').get_theme_tb('base_16')
+local color = require('neviraide-ui.themes.colors').palette
 
 return {
   NeoTreeEmptyDirectoryName = { link = 'Directory' },
-  NeoTreeEndOfBuffer = { link = 'TermBG' },
+  NeoTreeEndOfBuffer = { bg = color.tab_bar_background },
   NeoTreeDirectoryIcon = { link = 'Directory' },
   NeoTreeDirectoryName = { link = 'Directory' },
-  NeoTreeGitDirty = { fg = colors.red },
-  NeoTreeIndentMarker = { fg = colors.grey_fg },
-  NeoTreeNormal = { bg = theme.base00 },
-  NeoTreeNormalNC = { bg = theme.base00 },
-  NeoTreeOpenedDirectoryName = { fg = colors.folder_bg },
-  NeoTreeGitIgnored = { fg = colors.light_grey },
+  NeoTreeGitDirty = { fg = color.red },
+  NeoTreeIndentMarker = { fg = color.grey_fg },
+  NeoTreeNormal = {
+    bg = color.tab_bar_background,
+    fg = color.active_tab_foreground,
+  },
+  NeoTreeNormalNC = { link = 'NeoTreeNormal' },
+  NeoTreeOpenedDirectoryName = { fg = color.folder_bg },
+  NeoTreeGitIgnored = { fg = color.light_grey },
   NeoTreeWinSeparator = { link = 'LineSeparator' },
-  NeoTreeWindowPicker = { fg = colors.red, bg = colors.black2 },
-  NeoTreeCursorLine = { bg = colors.black2 },
+  NeoTreeWindowPicker = { fg = color.red, bg = color.black2 },
+  NeoTreeCursorLine = { bg = color.black2 },
   NeoTreeGitNew = { link = 'diffNewFile' },
   NeoTreeGitModified = { link = 'DiffModified' },
   NeoTreeGitDeleted = { link = 'DiffRemoved' },
-  NeoTreeSpecialFile = { fg = colors.yellow, bold = true },
-  NeoTreeRootDirectory = { fg = colors.red, bold = true },
+  NeoTreeSpecialFile = { fg = color.yellow, bold = true },
+  NeoTreeRootDirectory = { fg = color.red, bold = true },
 }

@@ -4,7 +4,8 @@ M.base_30 = {
   accent = '#A6A6A6',
   white = '#D8DEE9',
   darker_black = '#1a1a1a',
-  black = '#101010', --  nvim bg
+  -- black = '#101010', --  nvim bg
+  black = '#262626', --  nvim bg
   black2 = '#202020',
   one_bg = '#242424',
   one_bg2 = '#2e2e2e',
@@ -35,7 +36,8 @@ M.base_30 = {
 }
 
 M.base_16 = {
-  base00 = '#101010',
+  -- base00 = '#101010',
+  base00 = '#262626',
   base01 = '#1f1f1f',
   base02 = '#2e2e2e',
   base03 = '#383838',
@@ -58,6 +60,8 @@ M.polish_hl = {
     ['@punctuation.bracket'] = { fg = M.base_30.red },
   },
 }
+
+M.borders = 'single'
 
 M.type = 'dark'
 

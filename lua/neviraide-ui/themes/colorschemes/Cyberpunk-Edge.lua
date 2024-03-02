@@ -57,8 +57,13 @@ M.polish_hl = {
   treesitter = {
     ['@punctuation.bracket'] = { fg = M.base_30.red },
   },
+  defaults = {
+    FloatBorder = { fg = M.base_30.accent },
+  },
 }
 
 M.type = 'dark'
+
+M.borders = 'double'
 
 return M

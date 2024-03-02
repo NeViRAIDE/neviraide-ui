@@ -1,18 +1,18 @@
-local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
+local color = require('neviraide-ui.themes.colors').palette
 
 return {
   NeviraideDashboardAscii = {
     bg = 'none',
-    fg = colors.green,
+    fg = color.green,
   },
 
   NeviraideDashboardButtons = {
-    fg = colors.grey_fg,
+    fg = color.grey_fg,
     bg = 'none',
   },
 
   NeviraideDashboardVimver = {
-    fg = colors.one_bg2,
+    fg = color.one_bg2,
     bg = 'none',
     italic = true,
     bold = false,
@@ -20,7 +20,7 @@ return {
 
   DashboardCursorLine = {
     bold = true,
-    fg = colors.orange,
+    fg = color.orange,
     bg = 'none',
   },
 }
