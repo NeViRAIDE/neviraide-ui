@@ -1,12 +1,5 @@
 local color = require('neviraide-ui.themes.colors').palette
-
----@return string
-local function style()
-  if vim.g.b == 'none' or vim.g.b == 'shadow' or vim.g.b == 'solid' then
-    return 'borderless'
-  end
-  return 'bordered'
-end
+local type = require('neviraide-ui.utils').float_style
 
 local styles = {
   borderless = {
@@ -49,9 +42,9 @@ local styles = {
     NotifyWARNTitle = { fg = color.orange },
     NotifyWARNBody = { bg = 'none' },
 
-    NotifyINFOBorder = { fg = color.green },
-    NotifyINFOIcon = { fg = color.green },
-    NotifyINFOTitle = { fg = color.green },
+    NotifyINFOBorder = { fg = color.blue },
+    NotifyINFOIcon = { fg = color.blue },
+    NotifyINFOTitle = { fg = color.blue },
     NotifyINFOBody = { bg = 'none' },
 
     NotifyDEBUGBorder = { fg = color.grey },
@@ -75,9 +68,9 @@ local hlgroups = {
   NotifyWARNIcon = { fg = color.orange },
   NotifyWARNTitle = { fg = color.orange },
 
-  NotifyINFOBorder = { fg = color.green },
-  NotifyINFOIcon = { fg = color.green },
-  NotifyINFOTitle = { fg = color.green },
+  NotifyINFOBorder = { fg = color.blue },
+  NotifyINFOIcon = { fg = color.blue },
+  NotifyINFOTitle = { fg = color.blue },
 
   NotifyDEBUGBorder = { fg = color.grey },
   NotifyDEBUGIcon = { fg = color.grey },
@@ -88,6 +81,6 @@ local hlgroups = {
   NotifyTRACETitle = { fg = color.purple },
 }
 
-local result = vim.tbl_deep_extend('force', hlgroups, styles[style()])
+local result = vim.tbl_deep_extend('force', hlgroups, styles[type()])
 
 return result

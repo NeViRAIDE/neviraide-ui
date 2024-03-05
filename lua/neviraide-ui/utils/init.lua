@@ -31,6 +31,9 @@ function M.for_each(tbl, fn, sorter)
   end
 end
 
+---Replace string in NEVIRAIDE configuration file.
+---@param old string Current string in config.
+---@param new string Needed string in config.
 function M.replace_word(old, new)
   local neviraide_conf = vim.fn.stdpath('config') .. '/lua/' .. 'NEVIRAIDE.lua'
   local file = io.open(neviraide_conf, 'r')
@@ -60,7 +63,17 @@ M.capitalizeFirstLetter = function(str)
   return str:sub(1, 1):upper() .. str:sub(2)
 end
 
+---Checks is "kitty" current using terminal emulator
 ---@return boolean
 M.is_kitty_terminal = function() return os.getenv('TERM') == 'xterm-kitty' end
+
+---Checks global border variable and set float style
+---@return "'borderless'"|"'bordered'"
+M.float_style = function()
+  if vim.g.b == 'none' or vim.g.b == 'shadow' or vim.g.b == 'solid' then
+    return 'borderless'
+  end
+  return 'bordered'
+end
 
 return M

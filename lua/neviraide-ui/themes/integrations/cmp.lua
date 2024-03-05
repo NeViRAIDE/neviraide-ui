@@ -2,7 +2,7 @@ local color = require('neviraide-ui.themes.colors').palette
 
 local highlights = {
   CmpItemAbbr = { fg = color.white },
-  CmpItemAbbrMatch = { fg = color.blue, bold = true },
+  CmpItemAbbrMatch = { fg = color.green, bold = true },
   -- CmpDoc = { bg = accent.foreground },
   -- CmpDocBorder = { link = "ThemeAccent" },
   CmpPmenu = { link = 'Pmenu' },
@@ -12,25 +12,25 @@ local highlights = {
 local item_kinds = {
   -- cmp item kinds
   CmpItemKindConstant = { fg = color.yellow },
-  CmpItemKindFunction = { fg = color.blue },
+  CmpItemKindFunction = { fg = color.green },
   CmpItemKindIdentifier = { fg = color.bright_red },
   CmpItemKindField = { fg = color.bright_red },
   CmpItemKindVariable = { fg = color.magenta },
   CmpItemKindSnippet = { fg = color.red },
-  CmpItemKindText = { fg = color.green },
+  CmpItemKindText = { fg = color.blue },
   CmpItemKindStructure = { fg = color.magenta },
   CmpItemKindType = { fg = color.bright_yellow },
   CmpItemKindKeyword = { fg = color.white },
-  CmpItemKindMethod = { fg = color.blue },
-  CmpItemKindConstructor = { fg = color.blue },
+  CmpItemKindMethod = { fg = color.green },
+  CmpItemKindConstructor = { fg = color.green },
   CmpItemKindFolder = { fg = color.white },
   CmpItemKindModule = { fg = color.bright_yellow },
   CmpItemKindProperty = { fg = color.bright_red },
-  CmpItemKindEnum = { fg = color.blue },
+  CmpItemKindEnum = { fg = color.green },
   CmpItemKindUnit = { fg = color.magenta },
   CmpItemKindClass = { fg = color.teal },
   CmpItemKindFile = { fg = color.white },
-  CmpItemKindInterface = { fg = color.green },
+  CmpItemKindInterface = { fg = color.blue },
   CmpItemKindColor = { fg = color.white },
   CmpItemKindReference = { fg = color.white },
   CmpItemKindEnumMember = { fg = color.purple },
@@ -39,7 +39,7 @@ local item_kinds = {
   CmpItemKindEvent = { fg = color.yellow },
   CmpItemKindOperator = { fg = color.white },
   CmpItemKindTypeParameter = { fg = color.bright_red },
-  CmpItemKindCopilot = { fg = color.green },
+  CmpItemKindCopilot = { fg = color.blue },
 }
 
 highlights = vim.tbl_deep_extend(

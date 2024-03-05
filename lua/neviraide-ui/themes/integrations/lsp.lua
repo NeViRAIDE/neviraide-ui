@@ -9,15 +9,15 @@ return {
   DiagnosticHint = { fg = color.purple },
   DiagnosticError = { fg = color.red },
   DiagnosticWarn = { fg = color.yellow },
-  DiagnosticInfo = { fg = color.green },
+  DiagnosticInfo = { fg = color.blue },
 
   DiagnosticFloatingHint = { fg = color.purple },
   DiagnosticFloatingError = { fg = color.red },
   DiagnosticFloatingWarn = { fg = color.yellow },
-  DiagnosticFloatingInfo = { fg = color.green },
+  DiagnosticFloatingInfo = { fg = color.blue },
 
   LspSignatureActiveParameter = {
-    fg = color.green,
+    fg = color.blue,
     italic = true,
     bold = true,
   },

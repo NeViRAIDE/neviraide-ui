@@ -16,6 +16,17 @@ M.toggle_datetime = function()
   vim.cmd('redrawtabline')
 end
 
+-- TODO: timer component buftabline?
+M.timer = function()
+  local ok, pomo = pcall(require, 'pomo')
+  if not ok then return '' end
+
+  local timer = pomo.get_first_to_finish()
+  if timer == nil then return '' end
+
+  return '󰄉 ' .. tostring(timer)
+end
+
 -- Define a function to display the date and time in the status line
 ---@return string
 M.datetime = function()

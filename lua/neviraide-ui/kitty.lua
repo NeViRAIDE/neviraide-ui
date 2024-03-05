@@ -20,17 +20,17 @@ local function extract_kitty_colors()
         -- Rename colors if needed
         if color_name == 'color0' then color_name = 'black' end
         if color_name == 'color1' then color_name = 'red' end
-        if color_name == 'color2' then color_name = 'blue' end
+        if color_name == 'color2' then color_name = 'green' end
         if color_name == 'color3' then color_name = 'yellow' end
-        if color_name == 'color4' then color_name = 'green' end
+        if color_name == 'color4' then color_name = 'blue' end
         if color_name == 'color5' then color_name = 'magenta' end
         if color_name == 'color6' then color_name = 'cyan' end
         if color_name == 'color7' then color_name = 'white' end
         if color_name == 'color8' then color_name = 'bright_black' end
         if color_name == 'color9' then color_name = 'bright_red' end
-        if color_name == 'color10' then color_name = 'bright_blue' end
+        if color_name == 'color10' then color_name = 'bright_green' end
         if color_name == 'color11' then color_name = 'bright_yellow' end
-        if color_name == 'color12' then color_name = 'bright_green' end
+        if color_name == 'color12' then color_name = 'bright_blue' end
         if color_name == 'color13' then color_name = 'bright_magenta' end
         if color_name == 'color14' then color_name = 'bright_cyan' end
         if color_name == 'color15' then color_name = 'bright_white' end

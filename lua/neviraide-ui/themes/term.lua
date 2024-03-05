@@ -2,9 +2,9 @@ local color = require('neviraide-ui.themes.colors').palette
 
 vim.g.terminal_color_0 = color.black
 vim.g.terminal_color_1 = color.red
-vim.g.terminal_color_2 = color.blue
+vim.g.terminal_color_2 = color.green
 vim.g.terminal_color_3 = color.yellow
-vim.g.terminal_color_4 = color.green
+vim.g.terminal_color_4 = color.blue
 vim.g.terminal_color_5 = color.magenta
 vim.g.terminal_color_6 = color.cyan
 vim.g.terminal_color_7 = color.white

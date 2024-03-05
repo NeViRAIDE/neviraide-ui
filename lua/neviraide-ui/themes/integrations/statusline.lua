@@ -13,7 +13,7 @@ local Lsp_highlights = {
   St_lspError = { fg = color.red, bg = 'none' },
   St_lspWarning = { fg = color.yellow, bg = 'none' },
   St_LspHints = { fg = color.purple, bg = 'none' },
-  St_LspInfo = { fg = color.green, bg = 'none' },
+  St_LspInfo = { fg = color.blue, bg = 'none' },
 }
 
 local M = {}

@@ -43,21 +43,21 @@ local highlights = {
   },
 }
 
-local hlgroups_glassy = {
-  'BufTabDate',
-  'BufTabLineFill',
-  'TbLineBufOn',
-  'TbLineBufOff',
-  'TbLineBufOnClose',
-  'TbLineBufOffClose',
-  'TbLineBufOnModified',
-  'TbLineBufOffModified',
-}
+-- local hlgroups_glassy = {
+--   'BufTabDate',
+--   'BufTabLineFill',
+--   'TbLineBufOn',
+--   'TbLineBufOff',
+--   'TbLineBufOnClose',
+--   'TbLineBufOffClose',
+--   'TbLineBufOnModified',
+--   'TbLineBufOffModified',
+-- }
 
-if vim.g.transparency then
-  for _, val in ipairs(hlgroups_glassy) do
-    highlights[val].bg = 'NONE'
-  end
-end
+-- if vim.g.transparency then
+--   for _, val in ipairs(hlgroups_glassy) do
+--     highlights[val].bg = 'NONE'
+--   end
+-- end
 
 return highlights

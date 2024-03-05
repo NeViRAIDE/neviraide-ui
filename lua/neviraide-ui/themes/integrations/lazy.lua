@@ -5,7 +5,7 @@ local generate_color =
 return {
   -- lazy.nvim
   LazyH1 = {
-    bg = color.green,
+    bg = color.blue,
     fg = color.black,
   },
 
@@ -19,14 +19,14 @@ return {
     bold = true,
     underline = true,
   },
-
+  LazyNormal = { bg = color.tab_bar_background },
   LazyReasonPlugin = { fg = color.red },
   LazyValue = { fg = color.teal },
   LazyDir = { fg = color.white },
   LazyUrl = { fg = color.white },
-  LazyCommit = { fg = color.green },
+  LazyCommit = { fg = color.blue },
   LazyNoCond = { fg = color.red },
-  LazySpecial = { fg = color.blue },
+  LazySpecial = { fg = color.green },
   LazyReasonFt = { fg = color.purple },
   LazyOperator = { fg = color.white },
   LazyReasonKeys = { fg = color.teal },
@@ -38,5 +38,5 @@ return {
   LazyReasonCmd = { fg = color.sun },
   LazyReasonSource = { fg = color.cyan },
   LazyReasonImport = { fg = color.white },
-  LazyProgressDone = { fg = color.green },
+  LazyProgressDone = { fg = color.blue },
 }

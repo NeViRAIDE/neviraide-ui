@@ -1,22 +1,13 @@
 local color = require('neviraide-ui.themes.colors').palette
-
----@return string
-local function telescope_style()
-  if vim.g.b == 'none' or vim.g.b == 'shadow' or vim.g.b == 'solid' then
-    return 'borderless'
-  end
-  return 'bordered'
-end
+local type = require('neviraide-ui.utils').float_style
 
 local hlgroups = {
-  -- TelescopeNormal = { bg = accent.foreground },
   TelescopeSelection = {
     bg = color.one_bg3,
-    -- fg = color.blue,
     bold = true,
   },
-  -- TelescopeSelectionCaret = { bg = accent.foreground, fg = color.red },
-  TelescopeResultsDiffAdd = { fg = color.green },
+  TelescopeSelectionCaret = { fg = color.red },
+  TelescopeResultsDiffAdd = { fg = color.blue },
   TelescopeResultsDiffChange = { fg = color.yellow },
   TelescopeResultsDiffDelete = { fg = color.red },
 }
@@ -26,7 +17,7 @@ local styles = {
     TelescopeNormal = { bg = color.tab_bar_background },
     TelescopePreviewTitle = {
       fg = color.tab_bar_background,
-      bg = color.green,
+      bg = color.blue,
       bold = true,
     },
     TelescopeBorder = {
@@ -35,11 +26,10 @@ local styles = {
     },
     TelescopeResultsNormal = {
       bg = color.tab_bar_background,
-      -- fg = color.black,
-      -- bold = true,
+      fg = color.grey,
     },
     TelescopeResultsTitle = {
-      bg = color.blue,
+      bg = color.green,
       fg = color.black,
       bold = true,
     },
@@ -74,12 +64,12 @@ local styles = {
     },
     TelescopeResultsTitle = {
       bg = color.background,
-      fg = color.green,
+      fg = color.blue,
       bold = true,
     },
     TelescopePreviewTitle = {
       bg = color.background,
-      fg = color.blue,
+      fg = color.green,
       bold = true,
     },
     TelescopePromptPrefix = {
@@ -92,6 +82,6 @@ local styles = {
   },
 }
 
-local result = vim.tbl_deep_extend('force', hlgroups, styles[telescope_style()])
+local result = vim.tbl_deep_extend('force', hlgroups, styles[type()])
 
 return result

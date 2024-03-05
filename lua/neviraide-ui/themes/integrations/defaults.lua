@@ -32,7 +32,7 @@ local defaults = {
 
   -- floating windows
   -- FloatBorder = { fg = color.terminal.yellow },
-  -- NormalFloat = { bg = 'none' },
+  NormalFloat = { bg = 'none' },
 
   NvimInternalError = { fg = color.red },
   WinSeparator = {
@@ -95,11 +95,11 @@ local defaults = {
   },
 
   ModeMsg = {
-    fg = color.green,
+    fg = color.blue,
   },
 
   MoreMsg = {
-    fg = color.green,
+    fg = color.blue,
   },
 
   Question = {
@@ -211,7 +211,7 @@ local defaults = {
   },
 
   healthSuccess = {
-    bg = color.green,
+    bg = color.blue,
     fg = color.backgroung,
   },
 
@@ -232,7 +232,7 @@ if vim.g.b == 'none' or vim.g.b == 'shadow' or vim.g.b == 'solid' then
     fg = color.tab_bar_background,
   }
   defaults.NormalFloat = { bg = color.grey }
-  defaults.NuiTitle = { bg = color.green, fg = color.background, bold = true }
+  defaults.NuiTitle = { bg = color.blue, fg = color.background, bold = true }
 end
 
 return defaults
