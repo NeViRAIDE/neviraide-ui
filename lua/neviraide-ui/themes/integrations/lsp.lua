@@ -1,4 +1,5 @@
 local color = require('neviraide-ui.themes.colors').palette
+
 return {
   -- LSP References
   LspReferenceText = { bg = color.black, bold = true },
@@ -6,18 +7,18 @@ return {
   LspReferenceWrite = { bg = color.black, bold = true, underline = true },
 
   -- Lsp Diagnostics
-  DiagnosticHint = { fg = color.purple },
+  DiagnosticHint = { fg = color.magenta },
   DiagnosticError = { fg = color.red },
   DiagnosticWarn = { fg = color.yellow },
   DiagnosticInfo = { fg = color.blue },
 
-  DiagnosticFloatingHint = { fg = color.purple },
+  DiagnosticFloatingHint = { fg = color.magenta },
   DiagnosticFloatingError = { fg = color.red },
   DiagnosticFloatingWarn = { fg = color.yellow },
   DiagnosticFloatingInfo = { fg = color.blue },
 
   LspSignatureActiveParameter = {
-    fg = color.blue,
+    fg = color.green,
     italic = true,
     bold = true,
   },

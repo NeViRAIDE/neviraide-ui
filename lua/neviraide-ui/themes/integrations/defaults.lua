@@ -1,14 +1,10 @@
 local color = require('neviraide-ui.themes.colors').palette
 
 local defaults = {
-  TermBG = {
-    bg = color.tab_bar_background,
-  },
-
-  LineSeparator = {
-    bg = color.tab_bar_background,
-    fg = color.tab_bar_background,
-  },
+  -- LineSeparator = {
+  --   bg = color.tab_bar_background,
+  --   fg = color.tab_bar_background,
+  -- },
 
   MatchWord = {
     bg = color.grey,
@@ -32,11 +28,12 @@ local defaults = {
 
   -- floating windows
   -- FloatBorder = { fg = color.terminal.yellow },
-  NormalFloat = { bg = 'none' },
+  -- NormalFloat = { bg = 'none' },
 
   NvimInternalError = { fg = color.red },
+
   WinSeparator = {
-    fg = color.background,
+    fg = color.white,
     bg = color.background,
   },
 
@@ -226,13 +223,13 @@ local defaults = {
 --   require('neviraide-ui.themes').load_highlight('statusline')
 -- )
 
-if vim.g.b == 'none' or vim.g.b == 'shadow' or vim.g.b == 'solid' then
-  defaults.FloatBorder = {
-    bg = color.tab_bar_background,
-    fg = color.tab_bar_background,
-  }
-  defaults.NormalFloat = { bg = color.grey }
-  defaults.NuiTitle = { bg = color.blue, fg = color.background, bold = true }
-end
+-- if vim.g.b == 'none' or vim.g.b == 'shadow' or vim.g.b == 'solid' then
+--   defaults.FloatBorder = {
+--     bg = color.tab_bar_background,
+--     fg = color.tab_bar_background,
+--   }
+--   defaults.NormalFloat = { bg = color.grey }
+--   defaults.NuiTitle = { bg = color.blue, fg = color.background, bold = true }
+-- end
 
 return defaults

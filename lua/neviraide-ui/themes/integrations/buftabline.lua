@@ -1,6 +1,7 @@
 local color = require('neviraide-ui.themes.colors').palette
 
 local highlights = {
+  PomoTimer = { bg = 'red', fg = 'black' },
   BufTabLineFill = { bg = color.tab_bar_background },
   BufTabDate = {
     fg = color.grey_fg,

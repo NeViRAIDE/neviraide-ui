@@ -46,8 +46,6 @@
 ---@field indents integer
 ---Borders for all floating windows and popups.
 ---@field border BorderType
----Symbols for rendering border.
----@field borderchars BorderChars
 ---Render Nonicons instead of Devicons.
 ------
 ---Nonicons package must be installed in your system.

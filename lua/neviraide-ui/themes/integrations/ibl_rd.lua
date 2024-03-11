@@ -7,5 +7,5 @@ return {
   RainbowDelimiterGreen = { fg = color.green },
   RainbowDelimiterBlue = { fg = color.blue },
   RainbowDelimiterCyan = { fg = color.cyan },
-  RainbowDelimiterViolet = { fg = color.purple },
+  RainbowDelimiterViolet = { fg = color.magenta },
 }

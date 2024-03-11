@@ -24,7 +24,8 @@ M.timer = function()
   local timer = pomo.get_first_to_finish()
   if timer == nil then return '' end
 
-  return '󰄉 ' .. tostring(timer)
+  -- TODO: nonicons
+  return '%#PomoTimer#' .. ' 󰄉 ' .. tostring(timer) .. ' '
 end
 
 -- Define a function to display the date and time in the status line
