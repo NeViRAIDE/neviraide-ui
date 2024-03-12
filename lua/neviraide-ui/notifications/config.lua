@@ -1,6 +1,6 @@
 local ConfigModule = { Config = { Notify = {} } }
 
-ConfigModule.NS_NAME = 'NeviraideNotify'
+ConfigModule.NS_NAME = 'NeviraideUINotify'
 ConfigModule.NS_ID = vim.api.nvim_create_namespace('neviraideNotify')
 
 ConfigModule.config = {
@@ -14,24 +14,14 @@ ConfigModule.config = {
       return math.floor(cols / 3)
     end
   end,
-  components = { 'nvim', 'lsp' },
+  -- TODO: add all messages
+  components = { 'NeviraIDE', 'LSP', 'messages' },
   notify = {
     clear_time = 5000,
     min_level = vim.log.levels.INFO,
   },
-  component_name_recall = false,
-  debug = false,
   zindex = 50,
 }
-
-function ConfigModule.update(other)
-  ConfigModule.config =
-    vim.tbl_deep_extend('force', ConfigModule.config, other or {})
-end
-
-function ConfigModule.has_component(compname)
-  return vim.tbl_contains(ConfigModule.config.components, compname)
-end
 
 local function hl_group(name, options)
   local hl_name = ConfigModule.NS_NAME .. name
@@ -40,11 +30,19 @@ local function hl_group(name, options)
 end
 
 ConfigModule.HL_CONTENT_DIM =
-  hl_group('ContentDim', { link = 'Comment', default = true })
+  hl_group('ContentDim', { link = 'NotifyContentDim', default = true })
 ConfigModule.HL_CONTENT =
-  hl_group('Content', { link = 'Normal', default = true })
-ConfigModule.HL_TITLE = hl_group('Title', { link = 'Title', default = true })
-ConfigModule.HL_ICON = hl_group('Icon', { link = 'Title', default = true })
+  hl_group('Content', { link = 'NotifyContent', default = true })
+ConfigModule.HL_TITLE =
+  hl_group('Title', { link = 'NotifySource', default = true })
+ConfigModule.HL_ICON =
+  hl_group('Icon', { link = 'NotifySource', default = true })
+
+ConfigModule.HL_INFO = hl_group('Info', { link = 'NofifyINFO', default = true })
+ConfigModule.HL_WARNING =
+  hl_group('Warning', { link = 'NotifyWARN', default = true })
+ConfigModule.HL_ERROR =
+  hl_group('Error', { link = 'NotifyERROR', default = true })
 
 if vim.api.nvim_win_set_hl_ns then
   vim.api.nvim_set_hl(ConfigModule.NS_ID, 'NormalFloat', { bg = 'NONE' })

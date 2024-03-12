@@ -26,5 +26,5 @@ return {
   LspCodeLens = { fg = 'Grey' },
   LspCodeLensSeparator = { link = 'Boolean' },
 
-  LspInlayHint = { fg = color.one_bg2, italic = true },
+  LspInlayHint = { fg = color.grey, italic = true },
 }

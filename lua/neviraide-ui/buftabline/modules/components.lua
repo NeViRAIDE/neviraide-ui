@@ -16,7 +16,6 @@ M.toggle_datetime = function()
   vim.cmd('redrawtabline')
 end
 
--- TODO: timer component buftabline?
 M.timer = function()
   local ok, pomo = pcall(require, 'pomo')
   if not ok then return '' end
@@ -24,8 +23,13 @@ M.timer = function()
   local timer = pomo.get_first_to_finish()
   if timer == nil then return '' end
 
-  -- TODO: nonicons
-  return '%#PomoTimer#' .. ' 󰄉 ' .. tostring(timer) .. ' '
+  vim.defer_fn(function() vim.cmd('redrawtabline') end, 1000)
+
+  return '%#PomoTimer#'
+    .. icon('󰄉', 'stopwatch', 1, 1)
+    .. 'Timer '
+    .. tostring(timer)
+    .. ' '
 end
 
 -- Define a function to display the date and time in the status line
@@ -136,7 +140,7 @@ M.tablist = function()
 end
 
 M.buttons = function()
-  local CloseAllBufsBtn = '%@TbCloseAllBufs@%#TbLineCloseAllBufsBtn#'
+  local CloseAllBufsBtn = '%@TbCloseAllBufs@%#CloseAllBufsBtn#'
     .. icon('', 'x', 1, 2)
     .. '%X'
   return CloseAllBufsBtn

@@ -5,13 +5,13 @@ local generate_color =
 return {
   -- lazy.nvim
   LazyH1 = {
-    bg = color.blue,
-    fg = color.black,
+    bg = color.inactive_accent,
+    fg = color.second_background,
   },
 
   LazyButton = {
-    bg = color.one_bg,
-    fg = generate_color(color.light_grey, vim.o.bg == 'dark' and 10 or -20),
+    bg = color.grey,
+    fg = generate_color(color.grey, vim.o.bg == 'dark' and 10 or -20),
   },
 
   LazyH2 = {
@@ -19,7 +19,7 @@ return {
     bold = true,
     underline = true,
   },
-  LazyNormal = { bg = color.tab_bar_background },
+  LazyNormal = { bg = color.background },
   LazyReasonPlugin = { fg = color.red },
   LazyValue = { fg = color.teal },
   LazyDir = { fg = color.white },

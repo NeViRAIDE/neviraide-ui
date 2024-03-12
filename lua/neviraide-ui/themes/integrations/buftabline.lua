@@ -1,64 +1,53 @@
 local color = require('neviraide-ui.themes.colors').palette
 
 local highlights = {
-  PomoTimer = { bg = 'red', fg = 'black' },
-  BufTabLineFill = { bg = color.tab_bar_background },
+  PomoTimer = {
+    bg = color.inactive_accent,
+    fg = color.second_background,
+    bold = true,
+  },
+
+  BufTabLineFill = { bg = color.second_background },
   BufTabDate = {
-    fg = color.grey_fg,
-    bg = color.tab_bar_background,
+    fg = color.inactive_accent,
+    bg = color.second_background,
     italic = true,
   },
+
   TbLineBufOn = {
     fg = color.white,
-    bg = color.active_tab_background,
+    bg = color.background,
     bold = true,
   },
   TbSeparator = {
-    fg = color.active_tab_background,
-    bg = color.tab_bar_background,
+    fg = color.background,
+    bg = color.second_background,
     bold = true,
   },
-  TbLineBufOff = { fg = color.light_grey, bg = color.tab_bar_background },
+  TbLineBufOff = { fg = color.grey, bg = color.second_background },
   TbLineBufOnModified = {
     fg = color.green,
-    bg = color.active_tab_background,
+    bg = color.background,
     italic = true,
   },
   TbLineBufOffModified = {
     fg = color.red,
-    bg = color.tab_bar_background,
+    bg = color.second_background,
     italic = true,
   },
-  TbLineBufOnClose = { fg = color.red, bg = color.active_tab_background },
-  TbLineBufOffClose = { fg = color.light_grey, bg = color.tab_bar_background },
-  TblineTabNewBtn = { fg = color.white, bg = color.black3, bold = true },
+  TbLineBufOnClose = { fg = color.red, bg = color.background },
+  TbLineBufOffClose = { fg = color.grey, bg = color.second_background },
+  TblineTabNewBtn = { fg = color.white, bg = color.black, bold = true },
   TbLineTabOn = { fg = color.background, bg = color.nord_blue, bold = true },
-  TbLineTabOff = { fg = color.white, bg = color.black2 },
+  TbLineTabOff = { fg = color.white, bg = color.black },
   TbLineTabCloseBtn = { fg = color.background, bg = color.nord_blue },
   TBTabTitle = { fg = color.background, bg = color.white },
-  TbLineThemeToggleBtn = { bold = true, fg = color.white, bg = color.black3 },
-  TbLineCloseAllBufsBtn = {
+  TbLineThemeToggleBtn = { bold = true, fg = color.white, bg = color.black },
+  CloseAllBufsBtn = {
     bold = true,
     bg = color.red,
     fg = color.background,
   },
 }
-
--- local hlgroups_glassy = {
---   'BufTabDate',
---   'BufTabLineFill',
---   'TbLineBufOn',
---   'TbLineBufOff',
---   'TbLineBufOnClose',
---   'TbLineBufOffClose',
---   'TbLineBufOnModified',
---   'TbLineBufOffModified',
--- }
-
--- if vim.g.transparency then
---   for _, val in ipairs(hlgroups_glassy) do
---     highlights[val].bg = 'NONE'
---   end
--- end
 
 return highlights

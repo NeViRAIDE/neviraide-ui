@@ -1,10 +1,9 @@
 local color = require('neviraide-ui.themes.colors').palette
 
 local defaults = {
-  -- LineSeparator = {
-  --   bg = color.tab_bar_background,
-  --   fg = color.tab_bar_background,
-  -- },
+  LineSeparator = {
+    link = 'WinSeparator',
+  },
 
   MatchWord = {
     bg = color.grey,
@@ -14,27 +13,32 @@ local defaults = {
   WinBar = { bg = color.background },
   WinBarNC = { link = 'WinBar' },
 
-  Pmenu = { bg = color.one_bg },
-  PmenuSbar = { bg = color.one_bg },
-  -- PmenuSel = { bg = accent.active_bg, fg = accent.foreground, bold = true },
-  PmenuThumb = { bg = color.grey },
+  -- cmdline menu
+  Pmenu = { bg = color.second_background, fg = color.active_accent },
+  PmenuSbar = { bg = color.second_background },
+  PmenuSel = {
+    bg = color.inactive_accent,
+    fg = color.second_background,
+    bold = true,
+  },
+  PmenuThumb = { bg = color.red },
 
   MatchParen = { link = 'MatchWord' },
 
-  Comment = { fg = color.grey_fg, italic = true },
+  Comment = { fg = color.grey, italic = true },
 
   CursorLineNr = { fg = color.white },
   LineNr = { fg = color.grey },
 
   -- floating windows
-  -- FloatBorder = { fg = color.terminal.yellow },
-  -- NormalFloat = { bg = 'none' },
+  FloatBorder = { fg = color.inactive_accent },
+  NormalFloat = { bg = 'none' },
 
   NvimInternalError = { fg = color.red },
 
   WinSeparator = {
-    fg = color.white,
-    bg = color.background,
+    fg = color.second_background,
+    -- bg = color.second_background,
   },
 
   Normal = {
@@ -47,25 +51,26 @@ local defaults = {
   },
 
   Debug = {
-    fg = color.bright_red,
+    fg = color.pink,
   },
 
   Directory = {
-    fg = color.inactive_tab_foreground,
+    fg = color.inactive_accent,
+    bold = true,
   },
 
   Error = {
     fg = color.background,
-    bg = color.bright_red,
+    bg = color.pink,
   },
 
   ErrorMsg = {
-    fg = color.bright_red,
+    fg = color.pink,
     bg = color.background,
   },
 
   Exception = {
-    fg = color.bright_red,
+    fg = color.pink,
   },
 
   FoldColumn = {
@@ -88,7 +93,7 @@ local defaults = {
   },
 
   Macro = {
-    fg = color.bright_red,
+    fg = color.pink,
   },
 
   ModeMsg = {
@@ -119,7 +124,7 @@ local defaults = {
   },
 
   TooLong = {
-    fg = color.bright_red,
+    fg = color.pink,
   },
 
   UnderLined = {
@@ -127,24 +132,25 @@ local defaults = {
   },
 
   Visual = {
-    bg = color.one_bg,
+    bg = color.grey,
+    fg = color.black,
   },
 
   VisualNOS = {
-    fg = color.bright_red,
+    fg = color.pink,
   },
 
   WarningMsg = {
-    fg = color.bright_red,
+    fg = color.pink,
   },
 
   WildMenu = {
-    fg = color.bright_red,
+    fg = color.pink,
     bg = color.bright_yellow,
   },
 
   Title = {
-    fg = color.bright_blue,
+    fg = color.active_accent,
     sp = 'none',
   },
 
@@ -189,7 +195,7 @@ local defaults = {
   -- spell
   SpellBad = {
     undercurl = true,
-    sp = color.bright_red,
+    sp = color.pink,
   },
 
   SpellLocal = {
@@ -212,24 +218,17 @@ local defaults = {
     fg = color.backgroung,
   },
 
-  NeviraideTerminalDarkerBG = { bg = color.tab_bar_background },
-  NeviraideHelpDarkerBG = { bg = color.tab_bar_background },
-  NeviraideTerminalWinbar = { bg = color.tab_bar_background },
+  NeviraideTerminalDarkerBG = { bg = color.second_background },
+  NeviraideHelpDarkerBG = { bg = color.second_background },
+  NeviraideTerminalWinbar = { bg = color.second_background },
 }
 
--- local merge_tb = require('neviraide-ui.themes').merge_tb
--- defaults = merge_tb(
---   defaults,
---   require('neviraide-ui.themes').load_highlight('statusline')
--- )
+local merge_tb = require('neviraide-ui.themes').merge_tb
+defaults = merge_tb(
+  defaults,
+  require('neviraide-ui.themes').load_highlight('statusline')
+)
 
--- if vim.g.b == 'none' or vim.g.b == 'shadow' or vim.g.b == 'solid' then
---   defaults.FloatBorder = {
---     bg = color.tab_bar_background,
---     fg = color.tab_bar_background,
---   }
---   defaults.NormalFloat = { bg = color.grey }
---   defaults.NuiTitle = { bg = color.blue, fg = color.background, bold = true }
--- end
+defaults.NuiTitle = { bg = 'none', fg = color.active_accent, bold = true }
 
 return defaults

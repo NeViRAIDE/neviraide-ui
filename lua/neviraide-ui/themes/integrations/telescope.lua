@@ -2,49 +2,43 @@ local color = require('neviraide-ui.themes.colors').palette
 
 return {
   TelescopeSelection = {
-    bg = color.one_bg3,
+    bg = color.second_background,
     bold = true,
   },
-  TelescopeSelectionCaret = { fg = color.red },
-  TelescopeResultsDiffAdd = { fg = color.blue },
-  TelescopeResultsDiffChange = { fg = color.yellow },
-  TelescopeResultsDiffDelete = { fg = color.red },
-  TelescopeNormal = { bg = color.tab_bar_background },
+  TelescopeSelectionCaret = {
+    fg = color.active_accent,
+    bg = color.second_background,
+  },
+
   TelescopePreviewTitle = {
-    fg = color.tab_bar_background,
-    bg = color.blue,
+    fg = color.active_accent,
     bold = true,
   },
   TelescopeBorder = {
-    fg = color.tab_bar_background,
-    bg = color.tab_bar_background,
-  },
-  TelescopeResultsNormal = {
-    bg = color.tab_bar_background,
-    fg = color.grey,
+    fg = color.inactive_accent,
+    bg = 'none',
   },
   TelescopeResultsTitle = {
-    bg = color.green,
-    fg = color.black,
+    fg = color.active_accent,
     bold = true,
   },
   TelescopePromptTitle = {
-    fg = color.black,
-    bg = color.red,
+    fg = color.active_accent,
     bold = true,
   },
   TelescopePromptBorder = {
-    fg = color.grey,
-    bg = color.grey,
+    fg = color.inactive_accent,
+    bg = 'none',
   },
   TelescopePromptPrefix = {
-    fg = color.red,
-    bg = color.grey,
+    fg = color.active_accent,
+    bg = 'none',
   },
-  TelescopePromptNormal = {
-    bg = color.grey,
-    fg = color.black,
-    bold = true,
-  },
-  TelescopePromptCounter = { bg = color.grey, fg = color.red },
+  TelescopePromptCounter = { bg = 'none', fg = color.active_accent },
+  -- TelescopeResultsNormal = { fg = color.grey },
+  -- TelescopeNormal = { fg = color.grey },
+
+  TelescopeResultsDiffAdd = { fg = color.green },
+  TelescopeResultsDiffChange = { fg = color.blue },
+  TelescopeResultsDiffDelete = { fg = color.red },
 }

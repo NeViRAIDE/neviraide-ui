@@ -27,13 +27,22 @@ local function extract_kitty_colors()
         if color_name == 'color6' then color_name = 'cyan' end
         if color_name == 'color7' then color_name = 'white' end
         if color_name == 'color8' then color_name = 'bright_black' end
-        if color_name == 'color9' then color_name = 'bright_red' end
+        if color_name == 'color9' then color_name = 'pink' end
         if color_name == 'color10' then color_name = 'bright_green' end
         if color_name == 'color11' then color_name = 'bright_yellow' end
         if color_name == 'color12' then color_name = 'bright_blue' end
         if color_name == 'color13' then color_name = 'bright_magenta' end
         if color_name == 'color14' then color_name = 'bright_cyan' end
         if color_name == 'color15' then color_name = 'bright_white' end
+        if color_name == 'tab_bar_background' then
+          color_name = 'second_background'
+        end
+        if color_name == 'inactive_tab_foreground' then
+          color_name = 'inactive_accent'
+        end
+        if color_name == 'active_tab_foreground' then
+          color_name = 'active_accent'
+        end
         -- Add color to table M.colors
         M.colors.kitty[color_name] = '#' .. color_value
       end

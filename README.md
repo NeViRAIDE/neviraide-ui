@@ -1,5 +1,5 @@
 # <div align = center>User Interface for [NEVIRAIDE](https://github.com/RAprogramm/NEVIRAIDE)</div>
-
+ 
 ## Features
 
 Lightweight &amp; performant ui plugin for NEVIRAIDE providing:
@@ -37,10 +37,14 @@ _Install neviraide-ui using your favorite plugin manager. For example, with [laz
 ```lua
 require('lazy').load({
     plugins = {
-      {
-        'RAprogramm/neviraide-ui.nvim',
-        event = 'VeryLazy',
-      },
+        {
+            'RAprogramm/neviraide-ui.nvim',
+            event = 'VeryLazy',
+            opts = {
+                hyprdots = true, -- if you want to use sync NEVIRAIDE with hyprdots themes
+                notify = true -- if you want to use custom notifications
+            }
+        },
     }
 })
 ```

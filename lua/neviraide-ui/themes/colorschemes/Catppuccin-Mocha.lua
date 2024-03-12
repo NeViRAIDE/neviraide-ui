@@ -2,11 +2,18 @@
 local M = {}
 
 M.type = 'dark'
-M.borders = 'solid'
+M.borders = 'rounded'
 
 M.colors = {
-  tab_bar_background = '#110e14',
   background = '#1E1E2E', --  nvim bg
+  second_background = '#110e14',
+
+  foreground = '#D9E0EE',
+  active_accent = '#D9E0EE',
+  inactive_accent = '#43465A',
+
+  black = '#282737',
+  bright_black = '#43465A',
   grey = '#474656',
   white = '#D9E0EE',
   red = '#f38ba8',
@@ -20,17 +27,6 @@ M.colors = {
   bright_yellow = '#ffe9b6',
   bright_green = '#b6f4be',
   bright_magenta = '#d0a9e5',
-
-  darker_black = '#191828',
-  black = '#1E1E2E', --  nvim bg
-  black2 = '#252434',
-  one_bg = '#2d2c3c', -- real bg of onedark
-  one_bg2 = '#363545',
-  one_bg3 = '#3e3d4d',
-  grey_fg = '#4e4d5d',
-  grey_fg2 = '#555464',
-  light_grey = '#605f6f',
-  line = '#383747', -- for lines like vertsplit
 
   nord_blue = '#8bc2f0',
   baby_pink = '#ffa5c3',

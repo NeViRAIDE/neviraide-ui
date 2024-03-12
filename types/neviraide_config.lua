@@ -44,8 +44,6 @@
 ---Will make screen redrawing slower.
 ---@field cursor_column boolean
 ---@field indents integer
----Borders for all floating windows and popups.
----@field border BorderType
 ---Render Nonicons instead of Devicons.
 ------
 ---Nonicons package must be installed in your system.

@@ -26,17 +26,11 @@ function StatusModule._create_win()
     then
       StatusModule.buf_nr = api.nvim_create_buf(false, true)
     end
-    local border
-    if cfg.config.debug then
-      border = 'single'
-    else
-      border = 'none'
-    end
     local success, win_nr =
       pcall(api.nvim_open_win, StatusModule.buf_nr, false, {
         focusable = false,
         style = 'minimal',
-        border = border,
+        border = 'none',
         noautocmd = true,
         relative = 'editor',
         anchor = 'SE',
@@ -92,8 +86,6 @@ function StatusModule.redraw()
       inner_width = inner_width - (displayw(content.icon) + 1)
     end
 
-    if cfg.config.debug then vim.pretty_print(message_lines) end
-
     local tmp_lines = {}
     local maxlen = 0
 
@@ -124,8 +116,6 @@ function StatusModule.redraw()
 
     message_lines = tmp_lines
 
-    if cfg.config.debug then vim.pretty_print(message_lines) end
-
     for i, line in ipairs(message_lines) do
       local right_pad_len = maxlen - displayw(line)
 
@@ -154,8 +144,6 @@ function StatusModule.redraw()
         formatted = fmt_msg
       end
 
-      if cfg.config.debug then vim.pretty_print(formatted) end
-
       table.insert(lines, formatted)
       if i == 1 then
         table.insert(
@@ -178,10 +166,6 @@ function StatusModule.redraw()
         rname = compname
       elseif not is_tbl then
         rname = name
-      end
-
-      if cfg.config.component_name_recall and not is_tbl then
-        rname = string.format('%s:%s', compname, rname)
       end
 
       push_line(rname, msg)

@@ -7,17 +7,17 @@ return {
   ['git'] = { icon = d(61784), color = hi.grey_fg, name = 'GitLogo' },
   ['.gitattributes'] = {
     icon = d(61784),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'GitAttributes',
   },
   ['.gitconfig'] = {
     icon = d(61784),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'GitConfig',
   },
   ['.gitignore'] = {
     icon = d(61784),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'GitIgnore',
   },
   ['.gvimrc'] = {
@@ -37,7 +37,7 @@ return {
   },
   ['.zshrc'] = {
     icon = d(61911),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'Zshrc',
   },
   ['Dockerfile'] = {
@@ -57,7 +57,7 @@ return {
   },
   ['bash'] = {
     icon = d(61911),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'Bash',
   },
   ['c'] = {
@@ -77,7 +77,7 @@ return {
   },
   ['conf'] = {
     icon = d(61781),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'Conf',
   },
   ['cp'] = {
@@ -102,7 +102,7 @@ return {
   },
   ['db'] = {
     icon = d(61746),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'Db',
   },
   ['dockerfile'] = {
@@ -157,7 +157,7 @@ return {
   },
   ['json'] = {
     icon = d(61811),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'Json',
   },
   ['jsx'] = {
@@ -177,7 +177,7 @@ return {
   },
   ['makefile'] = {
     icon = d(61911),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'Makefile',
   },
   ['markdown'] = {
@@ -267,7 +267,7 @@ return {
   },
   ['rs'] = {
     icon = d(61881),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'Rs',
   },
   ['rss'] = {
@@ -282,12 +282,12 @@ return {
   },
   ['sh'] = {
     icon = d(61911),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'Sh',
   },
   ['sql'] = {
     icon = d(61746),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'Sql',
   },
   ['swift'] = {
@@ -297,7 +297,7 @@ return {
   },
   ['toml'] = {
     icon = d(61916),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'Toml',
   },
   ['ts'] = {
@@ -327,22 +327,22 @@ return {
   },
   ['yaml'] = {
     icon = d(61945),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'Yaml',
   },
   ['yml'] = {
     icon = d(61945),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'Yml',
   },
   ['zsh'] = {
     icon = d(61911),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'Zsh',
   },
   ['terminal'] = {
     icon = d(61911),
-    color = hi.one_bg3,
+    color = hi.grey,
     name = 'Terminal',
   },
   default_icon = { icon = '󰈚', name = 'Default' },

@@ -7,12 +7,12 @@ return {
   },
 
   NeviraideDashboardButtons = {
-    fg = color.grey_fg,
+    fg = color.grey,
     bg = 'none',
   },
 
   NeviraideDashboardVimver = {
-    fg = color.one_bg2,
+    fg = color.black,
     bg = 'none',
     italic = true,
     bold = false,
