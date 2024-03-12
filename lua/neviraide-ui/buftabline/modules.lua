@@ -8,6 +8,7 @@ return function()
     component.NeoTreeOverlay(),
     component.bufferlist(),
     component.datetime(),
+    component.timer(),
     component.tablist(),
     component.buttons(),
   }

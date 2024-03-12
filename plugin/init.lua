@@ -1,4 +1,4 @@
-require('neviraide-ui').setup(require('neviraide-ui.config').options)
+require('neviraide-ui')
 
 require('neviraide-ui.buftabline.lazyload')
 
@@ -16,6 +16,6 @@ require('neviraide-ui.override_vim_ui.input')
 require('neviraide-ui.override_vim_ui.select')
 print('finished ui')
 
-require('autocommands')
+require('neviraide-ui.autocommands')
 
 require('neviraide-ui.themes').load_all_highlights()

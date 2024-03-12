@@ -1,11 +1,11 @@
-local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
+local color = require('neviraide-ui.themes.colors').palette
 
 return {
-  MasonHeader = { bg = colors.red, fg = colors.black },
-  MasonHighlight = { fg = colors.blue },
-  MasonHighlightBlock = { fg = colors.black, bg = colors.green },
+  MasonHeader = { bg = color.red, fg = color.black },
+  MasonHighlight = { fg = color.green },
+  MasonHighlightBlock = { fg = color.black, bg = color.blue },
   MasonHighlightBlockBold = { link = 'MasonHighlightBlock' },
   MasonHeaderSecondary = { link = 'MasonHighlightBlock' },
-  MasonMuted = { fg = colors.light_grey },
-  MasonMutedBlock = { fg = colors.light_grey, bg = colors.one_bg },
+  MasonMuted = { fg = color.grey },
+  MasonMutedBlock = { fg = color.grey, bg = color.grey },
 }

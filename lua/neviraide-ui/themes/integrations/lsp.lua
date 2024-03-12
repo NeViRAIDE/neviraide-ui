@@ -1,25 +1,24 @@
-local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
-local theme = require('neviraide-ui.themes').get_theme_tb('base_16')
+local color = require('neviraide-ui.themes.colors').palette
 
 return {
   -- LSP References
-  LspReferenceText = { bg = theme.base01, bold = true },
-  LspReferenceRead = { bg = theme.base01, bold = true },
-  LspReferenceWrite = { bg = theme.base01, bold = true, underline = true },
+  LspReferenceText = { bg = color.black, bold = true },
+  LspReferenceRead = { bg = color.black, bold = true },
+  LspReferenceWrite = { bg = color.black, bold = true, underline = true },
 
   -- Lsp Diagnostics
-  DiagnosticHint = { fg = colors.purple },
-  DiagnosticError = { fg = colors.red },
-  DiagnosticWarn = { fg = colors.yellow },
-  DiagnosticInfo = { fg = colors.green },
+  DiagnosticHint = { fg = color.magenta },
+  DiagnosticError = { fg = color.red },
+  DiagnosticWarn = { fg = color.yellow },
+  DiagnosticInfo = { fg = color.blue },
 
-  DiagnosticFloatingHint = { fg = colors.purple },
-  DiagnosticFloatingError = { fg = colors.red },
-  DiagnosticFloatingWarn = { fg = colors.yellow },
-  DiagnosticFloatingInfo = { fg = colors.green },
+  DiagnosticFloatingHint = { fg = color.magenta },
+  DiagnosticFloatingError = { fg = color.red },
+  DiagnosticFloatingWarn = { fg = color.yellow },
+  DiagnosticFloatingInfo = { fg = color.blue },
 
   LspSignatureActiveParameter = {
-    fg = colors.green,
+    fg = color.green,
     italic = true,
     bold = true,
   },
@@ -27,5 +26,5 @@ return {
   LspCodeLens = { fg = 'Grey' },
   LspCodeLensSeparator = { link = 'Boolean' },
 
-  LspInlayHint = { fg = theme.base03, italic = true },
+  LspInlayHint = { fg = color.grey, italic = true },
 }

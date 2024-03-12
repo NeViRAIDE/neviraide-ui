@@ -1,50 +1,49 @@
-local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
-local theme = require('neviraide-ui.themes').get_theme_tb('base_16')
-
-local kitty = require('neviraide-ui.hyprland.utils').colors.kitty
--- TODO: make no borders or borders for themes
+local color = require('neviraide-ui.themes.colors').palette
 
 local defaults = {
-  TermBG = {
-    bg = kitty.tab_bar_background,
-  },
-
   LineSeparator = {
-    bg = kitty.background,
-    fg = kitty.background,
+    link = 'WinSeparator',
   },
 
   MatchWord = {
-    bg = colors.grey,
-    fg = colors.white,
+    bg = color.grey,
+    fg = color.white,
   },
 
-  WinBar = { bg = kitty.background },
+  WinBar = { bg = color.background },
   WinBarNC = { link = 'WinBar' },
 
-  Pmenu = { bg = colors.one_bg },
-  PmenuSbar = { bg = colors.one_bg },
-  -- PmenuSel = { bg = accent.active_bg, fg = accent.foreground, bold = true },
-  PmenuThumb = { bg = colors.grey },
+  -- cmdline menu
+  Pmenu = { bg = color.second_background, fg = color.active_accent },
+  PmenuSbar = { bg = color.second_background },
+  PmenuSel = {
+    bg = color.inactive_accent,
+    fg = color.second_background,
+    bold = true,
+  },
+  PmenuThumb = { bg = color.red },
 
   MatchParen = { link = 'MatchWord' },
 
-  Comment = { fg = colors.grey_fg, italic = true },
+  Comment = { fg = color.grey, italic = true },
 
-  CursorLineNr = { fg = colors.white },
-  LineNr = { fg = colors.grey },
+  CursorLineNr = { fg = color.white },
+  LineNr = { fg = color.grey },
 
-  -- floating windowr
-  -- FloatBorder = { fg = accent.background },
+  -- floating windows
+  FloatBorder = { fg = color.inactive_accent },
   NormalFloat = { bg = 'none' },
 
-  NvimInternalError = { fg = colors.red },
-  -- FIX: this color for terminals, and change fg color for sipmle windows
-  WinSeparator = { fg = kitty.background, bg = kitty.background },
+  NvimInternalError = { fg = color.red },
+
+  WinSeparator = {
+    fg = color.second_background,
+    -- bg = color.second_background,
+  },
 
   Normal = {
-    fg = theme.base05,
-    bg = theme.base00,
+    fg = color.white,
+    bg = color.background,
   },
 
   Bold = {
@@ -52,40 +51,41 @@ local defaults = {
   },
 
   Debug = {
-    fg = theme.base08,
+    fg = color.pink,
   },
 
   Directory = {
-    fg = kitty.inactive_tab_foreground,
+    fg = color.inactive_accent,
+    bold = true,
   },
 
   Error = {
-    fg = theme.base00,
-    bg = theme.base08,
+    fg = color.background,
+    bg = color.pink,
   },
 
   ErrorMsg = {
-    fg = theme.base08,
-    bg = theme.base00,
+    fg = color.pink,
+    bg = color.background,
   },
 
   Exception = {
-    fg = theme.base08,
+    fg = color.pink,
   },
 
   FoldColumn = {
-    fg = theme.base0C,
-    bg = theme.base01,
+    fg = color.cyan,
+    bg = color.black,
   },
 
   Folded = {
-    fg = theme.base03,
-    bg = theme.base01,
+    fg = color.bright_black,
+    bg = color.black,
   },
 
   IncSearch = {
-    fg = theme.base01,
-    bg = theme.base09,
+    fg = color.background,
+    bg = color.orange,
   },
 
   Italic = {
@@ -93,38 +93,38 @@ local defaults = {
   },
 
   Macro = {
-    fg = theme.base08,
+    fg = color.pink,
   },
 
   ModeMsg = {
-    fg = theme.base0B,
+    fg = color.blue,
   },
 
   MoreMsg = {
-    fg = theme.base0B,
+    fg = color.blue,
   },
 
   Question = {
-    fg = theme.base0D,
+    fg = color.bright_blue,
   },
 
   Search = {
-    fg = theme.base01,
-    bg = theme.base0A,
+    fg = color.black,
+    bg = color.bright_yellow,
   },
 
   Substitute = {
-    fg = theme.base01,
-    bg = theme.base0A,
+    fg = color.black,
+    bg = color.bright_yellow,
     sp = 'none',
   },
 
   SpecialKey = {
-    fg = theme.base03,
+    fg = color.bright_black,
   },
 
   TooLong = {
-    fg = theme.base08,
+    fg = color.pink,
   },
 
   UnderLined = {
@@ -132,24 +132,25 @@ local defaults = {
   },
 
   Visual = {
-    bg = theme.base02,
+    bg = color.grey,
+    fg = color.black,
   },
 
   VisualNOS = {
-    fg = theme.base08,
+    fg = color.pink,
   },
 
   WarningMsg = {
-    fg = theme.base08,
+    fg = color.pink,
   },
 
   WildMenu = {
-    fg = theme.base08,
-    bg = theme.base0A,
+    fg = color.pink,
+    bg = color.bright_yellow,
   },
 
   Title = {
-    fg = theme.base0D,
+    fg = color.active_accent,
     sp = 'none',
   },
 
@@ -158,68 +159,68 @@ local defaults = {
   },
 
   Cursor = {
-    fg = theme.base00,
-    bg = theme.base05,
+    fg = color.background,
+    bg = color.white,
   },
 
   NonText = {
-    fg = theme.base03,
+    fg = color.bright_black,
   },
 
   SignColumn = {
-    fg = theme.base03,
+    fg = color.bright_black,
     sp = 'NONE',
   },
 
   ColorColumn = {
-    bg = theme.base01,
+    bg = color.black,
     sp = 'none',
   },
 
   CursorColumn = {
-    bg = theme.base01,
+    bg = color.black,
     sp = 'none',
   },
 
   CursorLine = {
-    bg = theme.base01,
+    bg = color.black,
     sp = 'none',
   },
 
   QuickFixLine = {
-    bg = theme.base01,
+    bg = color.black,
     sp = 'none',
   },
 
   -- spell
   SpellBad = {
     undercurl = true,
-    sp = theme.base08,
+    sp = color.pink,
   },
 
   SpellLocal = {
     undercurl = true,
-    sp = theme.base0C,
+    sp = color.cyan,
   },
 
   SpellCap = {
     undercurl = true,
-    sp = theme.base0D,
+    sp = color.bright_blue,
   },
 
   SpellRare = {
     undercurl = true,
-    sp = theme.base0E,
+    sp = color.magenta,
   },
 
   healthSuccess = {
-    bg = colors.green,
-    fg = colors.black,
+    bg = color.blue,
+    fg = color.backgroung,
   },
 
-  NeviraideTerminalDarkerBG = { bg = kitty.tab_bar_background },
-  NeviraideHelpDarkerBG = { bg = kitty.tab_bar_background },
-  NeviraideTerminalWinbar = { bg = kitty.tab_bar_background },
+  NeviraideTerminalDarkerBG = { bg = color.second_background },
+  NeviraideHelpDarkerBG = { bg = color.second_background },
+  NeviraideTerminalWinbar = { bg = color.second_background },
 }
 
 local merge_tb = require('neviraide-ui.themes').merge_tb
@@ -228,10 +229,14 @@ defaults = merge_tb(
   require('neviraide-ui.themes').load_highlight('statusline')
 )
 
-if vim.g.b == 'none' or vim.g.b == 'shadow' or vim.g.b == 'solid' then
-  defaults.FloatBorder = { bg = colors.one_bg, fg = colors.one_bg }
-  defaults.NormalFloat = { bg = colors.one_bg }
-  defaults.NuiTitle = { bg = colors.green, fg = colors.black }
+defaults.NuiTitle = { bg = 'none', fg = color.active_accent, bold = true }
+
+if vim.g.b == 'none' or vim.g.b == 'solid' or vim.g.b == 'shadow' then
+  defaults.FloatBorder = { fg = color.second_background }
+  defaults.NormalFloat = { bg = color.second_background }
+  -- defaults.Title = { fg = color.black, bg = color.inactive_accent }
+  defaults.NuiTitle =
+    { bg = color.inactive_accent, fg = color.second_background, bold = true }
 end
 
 return defaults

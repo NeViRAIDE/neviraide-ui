@@ -1,10 +1,9 @@
-local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
+local color = require('neviraide-ui.themes.colors').palette
 
 return {
-  WhichKey = { fg = colors.blue, bold = true },
-  WhichKeyFloat = { link = 'NormalFloat' },
-  WhichKeySeparator = { fg = colors.light_grey },
-  WhichKeyDesc = { fg = colors.red },
-  WhichKeyGroup = { fg = colors.green },
-  WhichKeyValue = { fg = colors.green },
+  WhichKey = { fg = color.green, bold = true },
+  WhichKeySeparator = { fg = color.grey },
+  WhichKeyDesc = { fg = color.red },
+  WhichKeyGroup = { fg = color.blue },
+  WhichKeyValue = { fg = color.blue },
 }

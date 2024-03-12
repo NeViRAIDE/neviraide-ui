@@ -16,11 +16,29 @@ M.toggle_datetime = function()
   vim.cmd('redrawtabline')
 end
 
+M.timer = function()
+  local ok, pomo = pcall(require, 'pomo')
+  if not ok then return '' end
+
+  local timer = pomo.get_first_to_finish()
+  if timer == nil then return '' end
+
+  vim.defer_fn(function() vim.cmd('redrawtabline') end, 1000)
+
+  return '%#PomoTimer#'
+    .. icon('󰄉', 'stopwatch', 1, 1)
+    .. 'Timer '
+    .. tostring(timer)
+    .. ' '
+end
+
 -- Define a function to display the date and time in the status line
 ---@return string
 M.datetime = function()
   local current_time = os.date('%H:%M')
   local current_date = os.date('%A, %d %B %Y')
+
+  vim.defer_fn(function() vim.cmd('redrawtabline') end, 60000)
 
   return vim.g.TbDatetimeToggled == 1
       and '%#BufTabDate#' .. '%@ToggleDatetime@' .. icon('', 'clock', 0, 2) .. current_time .. ',' .. icon(
@@ -28,12 +46,12 @@ M.datetime = function()
         'calendar',
         1,
         2
-      ) .. current_date .. ' %X'
+      ) .. current_date .. ' '
     or '%#BufTabDate#'
       .. '%@ToggleDatetime@'
       .. icon('', 'clock', 0, 2)
       .. current_time
-      .. ' %X'
+      .. ' '
 end
 
 M.NeoTreeOverlay = function()
@@ -67,7 +85,7 @@ M.bufferlist = function()
   end
 
   vim.g.visibuffers = buffers
-  return table.concat(buffers) .. '%#TblineFill#' .. '%=' -- buffers + empty space
+  return table.concat(buffers) .. '%#BufTabLineFill#' .. '%=' -- buffers + empty space
 end
 
 vim.g.TbTabsToggled = 0
@@ -124,7 +142,7 @@ M.tablist = function()
 end
 
 M.buttons = function()
-  local CloseAllBufsBtn = '%@TbCloseAllBufs@%#TbLineCloseAllBufsBtn#'
+  local CloseAllBufsBtn = '%@TbCloseAllBufs@%#CloseAllBufsBtn#'
     .. icon('', 'x', 1, 2)
     .. '%X'
   return CloseAllBufsBtn

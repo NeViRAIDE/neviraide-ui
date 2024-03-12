@@ -1,38 +1,45 @@
-local M = {}
+---@class NeviraideColorschemeCore
+local M = {} -- Module table for exporting functions and variables
 
 local neviraide_themes_path =
   vim.fn.fnamemodify(debug.getinfo(1, 'S').source:sub(2), ':p:h')
 
+---Function to get the theme table (color scheme)
+---@return table Theme table
 M.get_theme_tb = function(type)
+  -- Retrieve default theme path
   local default_dir = 'neviraide-ui.themes.colorschemes.'
-  -- local default_path = default_dir .. NEVIRAIDE().theme
   local default_path = default_dir .. vim.g.nt
 
+  -- Attempt to load the theme
   local ok, default_theme = pcall(require, default_path)
 
+  -- If the theme is loaded successfully, return the requested type
   if ok then
     return default_theme[type]
   else
+    -- Otherwise, throw an error indicating that the theme does not exist
     error('No such theme!')
   end
 end
 
+---Function to merge multiple tables
+---@return table
 M.merge_tb = function(...) return vim.tbl_deep_extend('force', ...) end
 
-M.extend_default_hl = function(highlights)
+---Function to extend default highlighting with custom themes
+---@param highlights table
+---@param integration_name string
+M.extend_default_hl = function(highlights, integration_name)
   local polish_hl = M.get_theme_tb('polish_hl')
 
   -- polish themes
-  if polish_hl then
-    for key, value in pairs(polish_hl) do
-      if highlights[key] then
-        highlights[key] = M.merge_tb(highlights[key], value)
-      end
-    end
+  if polish_hl and polish_hl[integration_name] then
+    highlights = M.merge_tb(highlights, polish_hl[integration_name])
   end
 
   -- transparency
-  if vim.g.transparency then
+  if vim.g.t then
     local transparent = require('neviraide-ui.themes.transparent')
 
     for key, value in pairs(transparent) do
@@ -41,16 +48,21 @@ M.extend_default_hl = function(highlights)
       end
     end
   end
+
+  return highlights
 end
 
+---Function to load highlighting settings for a specific group
+---@param group string Name of the highlighting group
 ---@return table
 M.load_highlight = function(group)
-  group = require('neviraide-ui.themes.integrations.' .. group)
-  M.extend_default_hl(group)
-  return group
+  local highlights = require('neviraide-ui.themes.integrations.' .. group)
+  return M.extend_default_hl(highlights, group)
 end
 
--- convert table into string
+---Function to convert a table into a Lua code string
+---@param tb table Table to convert
+---@return string
 M.table_to_str = function(tb)
   local result = ''
 
@@ -73,9 +85,13 @@ M.table_to_str = function(tb)
   return result
 end
 
+---Function to save Lua code string to a cache file
+---@param filename string Name of the cache file
+---@param tb table Table to serialize and save
 M.saveStr_to_cache = function(filename, tb)
   local bg_opt = "vim.opt.bg='" .. M.get_theme_tb('type') .. "'"
-  local defaults_cond = filename == 'defaults' and bg_opt or ''
+  local borders = "vim.g.b='" .. M.get_theme_tb('borders') .. "'"
+  local defaults_cond = filename == 'defaults' and bg_opt and borders or ''
 
   local lines = 'return string.dump(function()'
     .. defaults_cond
@@ -89,6 +105,7 @@ M.saveStr_to_cache = function(filename, tb)
   end
 end
 
+---Function to compile all highlighting settings into cache files
 M.compile = function()
   if not vim.uv.fs_stat(vim.g.ntc) then vim.fn.mkdir(vim.g.ntc, 'p') end
 
@@ -96,14 +113,12 @@ M.compile = function()
   local hl_files = neviraide_themes_path .. '/integrations'
 
   for _, file in ipairs(vim.fn.readdir(hl_files)) do
-    -- skip caching some files
-    if file ~= 'statusline' or file ~= 'treesitter' then
-      local filename = vim.fn.fnamemodify(file, ':r')
-      M.saveStr_to_cache(filename, M.load_highlight(filename))
-    end
+    local filename = vim.fn.fnamemodify(file, ':r')
+    M.saveStr_to_cache(filename, M.load_highlight(filename))
   end
 end
 
+---Function to load all highlighting settings from cache files
 M.load_all_highlights = function()
   require('plenary.reload').reload_module('neviraide-ui.themes')
   M.compile()
@@ -111,6 +126,9 @@ M.load_all_highlights = function()
   for _, file in ipairs(vim.fn.readdir(vim.g.ntc)) do
     dofile(vim.g.ntc .. file)
   end
+
+  -- update blankline
+  pcall(function() require('ibl').update() end)
 end
 
 return M

@@ -1,43 +1,42 @@
-local colors = require('neviraide-ui.themes').get_theme_tb('base_30')
-local theme = require('neviraide-ui.themes').get_theme_tb('base_16')
+local color = require('neviraide-ui.themes.colors').palette
 local generate_color =
   require('neviraide-ui.themes.colors').change_hex_lightness
 
 return {
   -- lazy.nvim
   LazyH1 = {
-    bg = colors.green,
-    fg = colors.black,
+    bg = color.inactive_accent,
+    fg = color.second_background,
   },
 
   LazyButton = {
-    bg = colors.one_bg,
-    fg = generate_color(colors.light_grey, vim.o.bg == 'dark' and 10 or -20),
+    bg = color.grey,
+    fg = generate_color(color.grey, vim.o.bg == 'dark' and 10 or -20),
   },
 
   LazyH2 = {
-    fg = colors.red,
+    fg = color.red,
     bold = true,
     underline = true,
   },
-
-  LazyReasonPlugin = { fg = colors.red },
-  LazyValue = { fg = colors.teal },
-  LazyDir = { fg = theme.base05 },
-  LazyUrl = { fg = theme.base05 },
-  LazyCommit = { fg = colors.green },
-  LazyNoCond = { fg = colors.red },
-  LazySpecial = { fg = colors.blue },
-  LazyReasonFt = { fg = colors.purple },
-  LazyOperator = { fg = colors.white },
-  LazyReasonKeys = { fg = colors.teal },
-  LazyTaskOutput = { fg = colors.white },
-  LazyCommitIssue = { fg = colors.pink },
-  LazyReasonEvent = { fg = colors.yellow },
-  LazyReasonStart = { fg = colors.white },
-  LazyReasonRuntime = { fg = colors.nord_blue },
-  LazyReasonCmd = { fg = colors.sun },
-  LazyReasonSource = { fg = colors.cyan },
-  LazyReasonImport = { fg = colors.white },
-  LazyProgressDone = { fg = colors.green },
+  LazyNormal = { bg = color.background },
+  LazyReasonPlugin = { fg = color.red },
+  LazyValue = { fg = color.teal },
+  LazyDir = { fg = color.white },
+  LazyUrl = { fg = color.white },
+  LazyCommit = { fg = color.blue },
+  LazyNoCond = { fg = color.red },
+  LazySpecial = { fg = color.green },
+  LazyReasonFt = { fg = color.purple },
+  LazyOperator = { fg = color.white },
+  LazyReasonKeys = { fg = color.teal },
+  LazyTaskOutput = { fg = color.white },
+  LazyCommitIssue = { fg = color.pink },
+  LazyReasonEvent = { fg = color.yellow },
+  LazyReasonStart = { fg = color.white },
+  LazyReasonRuntime = { fg = color.nord_blue },
+  LazyReasonCmd = { fg = color.sun },
+  LazyReasonSource = { fg = color.cyan },
+  LazyReasonImport = { fg = color.white },
+  LazyProgressDone = { fg = color.blue },
 }
