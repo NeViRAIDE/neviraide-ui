@@ -231,4 +231,12 @@ defaults = merge_tb(
 
 defaults.NuiTitle = { bg = 'none', fg = color.active_accent, bold = true }
 
+if vim.g.b == 'none' or vim.g.b == 'solid' or vim.g.b == 'shadow' then
+  defaults.FloatBorder = { fg = color.second_background }
+  defaults.NormalFloat = { bg = color.second_background }
+  -- defaults.Title = { fg = color.black, bg = color.inactive_accent }
+  defaults.NuiTitle =
+    { bg = color.inactive_accent, fg = color.second_background, bold = true }
+end
+
 return defaults

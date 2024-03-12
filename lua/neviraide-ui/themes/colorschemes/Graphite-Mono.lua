@@ -12,13 +12,12 @@ M.colors = {
   inactive_accent = '#43465A',
 
   white = '#D8DEE9',
-  black = '#101010', --  nvim bg
+  black = '#101010',
   grey = '#424242',
-  light_grey = '#677777',
   red = '#ec8989',
   baby_pink = '#eca8a8',
   pink = '#da838b',
-  line = '#2e2e2e', -- for lines like vertsplit
+  line = '#2e2e2e',
   green = '#c9d36a',
   blue = '#8abae1',
   nord_blue = '#a5c6e1',
