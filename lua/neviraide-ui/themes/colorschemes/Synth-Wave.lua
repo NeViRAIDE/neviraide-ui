@@ -1,57 +1,34 @@
+---@type Colorscheme
 local M = {}
 
-M.base_30 = {
-  accent = '#3d59a1',
+M.type = 'dark'
+M.borders = 'shadow'
+
+M.colors = {
+  active_accent = '#3d59a1',
+  background = '#241B2F',
+  foreground = '#495495',
+  second_background = '#16161e',
+
   white = '#c0caf5',
-  darker_black = '#16161e',
   black = '#1a1b26', --  nvim bg
-  black2 = '#1f2336',
-  one_bg2 = '#414868',
-  one_bg3 = '#353b45',
-  light_grey = '#545c7e',
   baby_pink = '#DE8C92',
   pink = '#ff75a0',
-  vibrant_green = '#73daca',
   nord_blue = '#80a8fd',
   grey = '#403D4E',
-  grey_fg2 = '#403D4E',
-  one_bg = '#241B2F',
-  grey_fg = '#495495',
-  dark_purple = '#9d7cd8',
+  magenta = '#9d7cd8',
   teal = '#1abc9c',
-  statusline_bg = '#1d1e29',
-  lightbg = '#32333e',
-  pmenu_bg = '#2C2540',
-  folder_bg = '#7aa2f7',
 
   green = '#72f1b8',
   blue = '#03edf9',
   red = '#fe4450',
-  line = '#241B2F', -- for lines like vertsplit
-  purple = '#ff7edb',
   yellow = '#fede5d',
-  sun = '#f3e70f',
   orange = '#ff8b39',
   cyan = '#03edf9',
-}
 
-M.base_16 = {
-  base00 = '#262335',
-  base01 = '#2C2540',
-  base02 = '#3E3B4B',
-  base03 = '#444b6a',
-  base04 = '#787c99',
-  base05 = '#D884C7',
-  base06 = '#cbccd1',
-  base07 = '#d5d6db',
-  base08 = '#40ffff',
-  base09 = '#E55A5E',
-  base0A = '#0db9d7',
-  base0B = M.base_30.orange,
-  base0C = '#b4f9f8',
-  base0D = '#40ffff',
-  base0E = M.base_30.yellow,
-  base0F = '#f7768e',
+  bright_yellow = '#f3e70f',
+  bright_green = '#73daca',
+  bright_magenta = '#ff7edb',
 }
 
 M.polish_hl = {
@@ -74,7 +51,6 @@ M.polish_hl = {
   PmenuThumb = { fg = 'NONE', bg = '#ECEBED' },
   Search = { fg = 'Black', bg = '#FEDE5D' },
   SignColumn = { fg = '#888690', bg = 'NONE' },
-  SignColumn = { fg = '#ECEBED', bg = 'NONE' },
   SpecialKey = { fg = '#ECEBED', bg = '#2C2540' },
   StatusLine = { fg = '#ECEBED', bg = '#2C2540' },
   StatusLineNC = { fg = '#ECEBED', bg = '#2C2540' },
@@ -172,7 +148,5 @@ M.polish_hl = {
   markdownHeadingDelimiter = { link = 'Comment' },
   markdownRule = { link = 'Comment' },
 }
-
-M.type = 'dark'
 
 return M

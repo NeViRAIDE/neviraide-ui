@@ -5,15 +5,13 @@ M.type = 'dark'
 M.borders = 'rounded'
 
 M.colors = {
-  background = '#1E1E2E', --  nvim bg
+  background = '#1E1E2E',
   second_background = '#110e14',
-
   foreground = '#D9E0EE',
   active_accent = '#D9E0EE',
   inactive_accent = '#43465A',
 
   black = '#282737',
-  bright_black = '#43465A',
   grey = '#474656',
   white = '#D9E0EE',
   red = '#f38ba8',
@@ -23,6 +21,8 @@ M.colors = {
   cyan = '#89DCEB',
   blue = '#89b4fa',
   magenta = '#cba6f7',
+
+  bright_black = '#43465A',
   bright_red = '#f5c2e7',
   bright_yellow = '#ffe9b6',
   bright_green = '#b6f4be',
