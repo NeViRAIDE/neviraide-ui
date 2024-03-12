@@ -1,4 +1,6 @@
 local color = require('neviraide-ui.themes.colors').palette
+local generate_color =
+  require('neviraide-ui.themes.colors').change_hex_lightness
 
 local defaults = {
   LineSeparator = {
@@ -132,8 +134,9 @@ local defaults = {
   },
 
   Visual = {
-    bg = color.grey,
-    fg = color.black,
+    -- bg = color.grey,
+    -- fg = color.black,
+    bg = generate_color(color.grey, vim.o.bg == 'dark' and -10 or 10),
   },
 
   VisualNOS = {
@@ -183,7 +186,8 @@ local defaults = {
   },
 
   CursorLine = {
-    bg = color.black,
+    -- bg = color.black,
+    bg = generate_color(color.black, vim.o.bg == 'dark' and -10 or 10),
     sp = 'none',
   },
 

@@ -22,11 +22,11 @@ local function set_colors()
 end
 set_colors()
 
--- Convert a hex color value to RGB
--- @param hex: The hex color value
--- @return r: Red (0-255)
--- @return g: Green (0-255)
--- @return b: Blue (0-255)
+---Convert a hex color value to RGB
+---@param hex string: The hex color value
+---@return integer r: Red (0-255)
+---@return integer g: Green (0-255)
+---@return integer b: Blue (0-255)
 M.hex2rgb = function(hex)
   local hash = string.sub(hex, 1, 1) == '#'
   if string.len(hex) ~= (7 - (hash and 0 or 1)) then return nil end
@@ -37,11 +37,11 @@ M.hex2rgb = function(hex)
   return r, g, b
 end
 
--- Convert an RGB color value to hex
--- @param r: Red (0-255)
--- @param g: Green (0-255)
--- @param b: Blue (0-255)
--- @return The hexadecimal string representation of the color
+---Convert an RGB color value to hex
+---@param r integer Red (0-255)
+---@param g integer Green (0-255)
+---@param b integer Blue (0-255)
+---@return string HEX The hexadecimal string representation of the color
 M.rgb2hex = function(r, g, b)
   return string.format(
     '#%02x%02x%02x',
@@ -182,11 +182,11 @@ M.change_hex_saturation = function(hex, percent)
   return M.hsl2hex(h, s, l)
 end
 
--- Lighten or darken a color by a given percentage
--- @param hex The hex color value
--- @param percent The percentage to lighten or darken the color.
---                Negative values darken the color, positive values lighten it
--- @return The hex color value
+---Lighten or darken a color by a given percentage.
+---Negative values darken the color, positive values lighten it.
+---@param hex string The hex color value.
+---@param percent integer The percentage to lighten or darken the color.
+---@return string HEX The hex color value.
 M.change_hex_lightness = function(hex, percent)
   local h, s, l = M.hex2hsl(hex)
   l = l + (percent / 100)
