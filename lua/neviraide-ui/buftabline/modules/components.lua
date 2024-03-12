@@ -38,18 +38,20 @@ M.datetime = function()
   local current_time = os.date('%H:%M')
   local current_date = os.date('%A, %d %B %Y')
 
+  vim.defer_fn(function() vim.cmd('redrawtabline') end, 60000)
+
   return vim.g.TbDatetimeToggled == 1
       and '%#BufTabDate#' .. '%@ToggleDatetime@' .. icon('', 'clock', 0, 2) .. current_time .. ',' .. icon(
         '',
         'calendar',
         1,
         2
-      ) .. current_date .. ' %X'
+      ) .. current_date .. ' '
     or '%#BufTabDate#'
       .. '%@ToggleDatetime@'
       .. icon('', 'clock', 0, 2)
       .. current_time
-      .. ' %X'
+      .. ' '
 end
 
 M.NeoTreeOverlay = function()

@@ -95,6 +95,7 @@ autocmd('NEVIRAIDE_buftabline', {
     if
       #vim.fn.getbufinfo({ buflisted = 1 }) < 2
       and #vim.api.nvim_list_tabpages() < 2
+      and require('neviraide-ui.buftabline.modules.components').timer() == ''
     then
       -- Hide buftabline, if less than two buffers/tabs is open.
       vim.opt.showtabline = 0
