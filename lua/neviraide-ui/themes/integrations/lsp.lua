@@ -1,10 +1,22 @@
 local color = require('neviraide-ui.themes.colors').palette
+local generate_color =
+  require('neviraide-ui.themes.colors').change_hex_lightness
 
 return {
   -- LSP References
-  LspReferenceText = { bg = color.black, bold = true },
-  LspReferenceRead = { bg = color.black, bold = true },
-  LspReferenceWrite = { bg = color.black, bold = true, underline = true },
+  LspReferenceText = {
+    bg = generate_color(color.black, vim.o.bg == 'dark' and 0 or 45),
+    bold = true,
+  },
+  LspReferenceRead = {
+    bg = generate_color(color.black, vim.o.bg == 'dark' and 0 or 45),
+    bold = true,
+  },
+  LspReferenceWrite = {
+    bg = generate_color(color.black, vim.o.bg == 'dark' and 0 or 45),
+    bold = true,
+    underline = true,
+  },
 
   -- Lsp Diagnostics
   DiagnosticHint = { fg = color.magenta },

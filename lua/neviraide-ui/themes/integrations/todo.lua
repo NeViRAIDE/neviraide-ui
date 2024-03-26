@@ -1,12 +1,12 @@
 local color = require('neviraide-ui.themes.colors').palette
 
 return {
-  TodoBgFix = { fg = color.black, bg = color.red, bold = true },
-  TodoBgHack = { fg = color.black, bg = color.orange, bold = true },
-  TodoBgNote = { fg = color.black, bg = color.white, bold = true },
-  TodoBgPerf = { fg = color.black, bg = color.magenta, bold = true },
-  TodoBgTest = { fg = color.black, bg = color.magenta, bold = true },
-  TodoBgTodo = { fg = color.black, bg = color.yellow, bold = true },
+  TodoBgFix = { fg = color.background, bg = color.red, bold = true },
+  TodoBgHack = { fg = color.background, bg = color.orange, bold = true },
+  TodoBgNote = { fg = color.background, bg = color.white, bold = true },
+  TodoBgPerf = { fg = color.background, bg = color.magenta, bold = true },
+  TodoBgTest = { fg = color.background, bg = color.magenta, bold = true },
+  TodoBgTodo = { fg = color.background, bg = color.yellow, bold = true },
   TodoBgWarn = { fg = color.orange, bold = true },
   TodoFgFix = { fg = color.red },
   TodoFgHack = { fg = color.orange },

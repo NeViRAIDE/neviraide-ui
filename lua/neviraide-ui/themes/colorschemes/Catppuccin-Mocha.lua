@@ -14,6 +14,7 @@ M.colors = {
   black = '#282737',
   grey = '#474656',
   white = '#D9E0EE',
+
   red = '#f38ba8',
   orange = '#fab387',
   yellow = '#f9e2af',
@@ -27,6 +28,7 @@ M.colors = {
   bright_yellow = '#ffe9b6',
   bright_green = '#b6f4be',
   bright_magenta = '#d0a9e5',
+
 
   nord_blue = '#8bc2f0',
   baby_pink = '#ffa5c3',

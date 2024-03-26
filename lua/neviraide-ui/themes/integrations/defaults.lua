@@ -134,11 +134,8 @@ local defaults = {
   },
 
   Visual = {
-    -- bg = color.grey,
-    -- fg = color.black,
     bg = generate_color(color.grey, vim.o.bg == 'dark' and -10 or 10),
   },
-
   VisualNOS = {
     fg = color.pink,
   },
@@ -167,7 +164,7 @@ local defaults = {
   },
 
   NonText = {
-    fg = color.bright_black,
+    fg = generate_color(color.bright_black, vim.o.bg == 'dark' and 0 or 30),
   },
 
   SignColumn = {
@@ -180,14 +177,8 @@ local defaults = {
     sp = 'none',
   },
 
-  CursorColumn = {
-    bg = color.black,
-    sp = 'none',
-  },
-
   CursorLine = {
-    -- bg = color.black,
-    bg = generate_color(color.black, vim.o.bg == 'dark' and -10 or 10),
+    bg = generate_color(color.black, vim.o.bg == 'dark' and -10 or 50),
     sp = 'none',
   },
 
@@ -238,7 +229,6 @@ defaults.NuiTitle = { bg = 'none', fg = color.active_accent, bold = true }
 if vim.g.b == 'none' or vim.g.b == 'solid' or vim.g.b == 'shadow' then
   defaults.FloatBorder = { fg = color.second_background }
   defaults.NormalFloat = { bg = color.second_background }
-  -- defaults.Title = { fg = color.black, bg = color.inactive_accent }
   defaults.NuiTitle =
     { bg = color.inactive_accent, fg = color.second_background, bold = true }
 end

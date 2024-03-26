@@ -38,17 +38,6 @@ M.extend_default_hl = function(highlights, integration_name)
     highlights = M.merge_tb(highlights, polish_hl[integration_name])
   end
 
-  -- transparency
-  if vim.g.t then
-    local transparent = require('neviraide-ui.themes.transparent')
-
-    for key, value in pairs(transparent) do
-      if highlights[key] then
-        highlights[key] = M.merge_tb(highlights[key], value)
-      end
-    end
-  end
-
   return highlights
 end
 
@@ -126,9 +115,6 @@ M.load_all_highlights = function()
   for _, file in ipairs(vim.fn.readdir(vim.g.ntc)) do
     dofile(vim.g.ntc .. file)
   end
-
-  -- update blankline
-  pcall(function() require('ibl').update() end)
 end
 
 return M

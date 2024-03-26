@@ -3,15 +3,17 @@ local generate_color =
   require('neviraide-ui.themes.colors').change_hex_lightness
 
 return {
-  -- lazy.nvim
   LazyH1 = {
     bg = color.inactive_accent,
-    fg = color.second_background,
+    fg = generate_color(color.active_accent, vim.o.bg == 'dark' and 10 or 20),
   },
 
   LazyButton = {
-    bg = color.grey,
-    fg = generate_color(color.grey, vim.o.bg == 'dark' and 10 or -20),
+    fg = generate_color(color.active_accent, vim.o.bg == 'dark' and 10 or -20),
+  },
+  LazyButtonActive = {
+    bg = color.inactive_accent,
+    fg = generate_color(color.active_accent, vim.o.bg == 'dark' and 10 or 20),
   },
 
   LazyH2 = {

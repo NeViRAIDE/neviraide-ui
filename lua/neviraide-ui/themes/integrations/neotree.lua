@@ -1,4 +1,6 @@
 local color = require('neviraide-ui.themes.colors').palette
+local generate_color =
+  require('neviraide-ui.themes.colors').change_hex_lightness
 
 return {
   NeoTreeNormal = {
@@ -25,8 +27,12 @@ return {
   NeoTreeWindowPicker = { fg = color.red, bg = color.black },
 
   NeoTreeGitNew = { link = 'diffNewFile' },
-  NeoTreeGitModified = { link = 'DiffModified' },
-  NeoTreeGitDeleted = { link = 'DiffRemoved' },
+  NeoTreeGitModified = {
+    fg = generate_color(color.blue, vim.o.bg == 'dark' and 0 or 15),
+  },
+  NeoTreeGitDeleted = {
+    fg = generate_color(color.red, vim.o.bg == 'dark' and 0 or 15),
+  },
   NeoTreeGitIgnored = { fg = color.grey },
 
   NeoTreeSpecialFile = { fg = color.yellow, bold = true },

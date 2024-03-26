@@ -22,8 +22,6 @@
 ------
 ---Already configured Hyprland themes.
 ---@field theme HyprdotsThemes
----Transparency neviraide.
----@field transparency boolean
 ---Print the line number in front of each line.
 ---@field numbers_enabled boolean
 ---Show the line number relative to the line

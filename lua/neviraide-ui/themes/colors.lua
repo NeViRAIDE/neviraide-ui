@@ -3,21 +3,26 @@ local M = {}
 M.palette = {}
 
 local function set_colors()
+  ---@type table
   local theme_colors = require('neviraide-ui.themes').get_theme_tb('colors')
   local kitty_colors = require('neviraide-ui.kitty').colors.kitty
 
-  -- combine theme_colors and kitty_colors
-  for key, value in pairs(theme_colors) do
-    if kitty_colors[key] ~= nil then
-      M.palette[key] = kitty_colors[key]
-    else
-      M.palette[key] = value
+  if require('neviraide-ui').config.hyprdots then
+    -- combine theme_colors and kitty_colors
+    for key, value in pairs(theme_colors) do
+      if kitty_colors[key] ~= nil then
+        M.palette[key] = kitty_colors[key]
+      else
+        M.palette[key] = value
+      end
     end
-  end
 
-  -- add from kitty_colors, if not exist in theme_colors
-  for key, value in pairs(kitty_colors) do
-    if theme_colors[key] == nil then M.palette[key] = value end
+    -- add from kitty_colors, if not exist in theme_colors
+    for key, value in pairs(kitty_colors) do
+      if theme_colors[key] == nil then M.palette[key] = value end
+    end
+  else
+    M.palette = theme_colors
   end
 end
 set_colors()

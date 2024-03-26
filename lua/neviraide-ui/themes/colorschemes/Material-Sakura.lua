@@ -14,22 +14,25 @@ M.colors = {
   white = '#f2e9de',
   black = '#faf4ed',
   grey = '#8c8fa1',
+
   red = '#d20f39',
+  orange = '#d7827e',
+  yellow = '#ea9d34',
+  green = '#40a02b',
+  cyan = '#04a5e5',
+  blue = '#1e66f5',
+  magenta = '#907aa9',
+
+  teal = '#56949f',
+  nord_blue = '#8bc2f0',
+  lavender = '#7287fd',
   baby_pink = '#ffa5c3',
   pink = '#ea76cb',
-  green = '#40a02b',
-  nord_blue = '#8bc2f0',
-  blue = '#1e66f5',
-  yellow = '#ea9d34',
-  magenta = '#907aa9',
-  teal = '#56949f',
-  orange = '#d7827e',
-  cyan = '#04a5e5',
-  lavender = '#7287fd',
 
   bright_yellow = '#ffe9b6',
   bright_green = '#b6f4be',
   bright_magenta = '#d0a9e5',
+  bright_black = '#808080',
 }
 
 M.polish_hl = {

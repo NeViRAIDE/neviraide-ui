@@ -28,10 +28,6 @@ function M.setup()
     cursorline = function() Util.settings('cursorline').toggle() end,
     numbers = function() Util.settings('numbers').toggle() end,
     relativenumbers = function() Util.settings('relativenumbers').toggle() end,
-    transparency = function()
-      Util.settings('transparency').toggle()
-      require('neviraide.utils.reload_config').reload_transparency()
-    end,
   }
 
   for name, command in pairs(commands) do

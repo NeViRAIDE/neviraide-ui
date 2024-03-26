@@ -6,29 +6,32 @@ M.borders = 'shadow'
 
 M.colors = {
   active_accent = '#3d59a1',
+  inactive_accent = '#3d59a1',
   background = '#241B2F',
   foreground = '#495495',
   second_background = '#16161e',
 
   white = '#c0caf5',
-  black = '#1a1b26', --  nvim bg
+  black = '#1a1b26', 
+  grey = '#403D4E',
+
   baby_pink = '#DE8C92',
   pink = '#ff75a0',
   nord_blue = '#80a8fd',
-  grey = '#403D4E',
-  magenta = '#9d7cd8',
   teal = '#1abc9c',
 
-  green = '#72f1b8',
-  blue = '#03edf9',
   red = '#fe4450',
-  yellow = '#fede5d',
   orange = '#ff8b39',
+  yellow = '#fede5d',
+  green = '#72f1b8',
   cyan = '#03edf9',
+  blue = '#03edf9',
+  magenta = '#9d7cd8',
 
   bright_yellow = '#f3e70f',
   bright_green = '#73daca',
   bright_magenta = '#ff7edb',
+  bright_black = '#282834',
 }
 
 M.polish_hl = {

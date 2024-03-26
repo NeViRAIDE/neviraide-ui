@@ -241,7 +241,9 @@ M.encoding = function(condition)
 end
 
 M.spaces = function(condition)
-  if condition then return '%#St_spaces#' .. vim.o.tabstop .. ' spaces' end
+  if condition then
+    return '%#St_spaces#%@SetIndents@' .. vim.o.tabstop .. ' spaces'
+  end
   return ''
 end
 

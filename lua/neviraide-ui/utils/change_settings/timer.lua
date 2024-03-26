@@ -1,39 +1,28 @@
 local M = {}
 
-M.setIndents = function()
+M.startTimer = function()
   local Input = require('nui.input')
   local event = require('nui.utils.autocmd').event
   local utils = require('neviraide-ui.override_vim_ui.utils')
 
   local text = {
-    top = ' Set indents ',
+    top = ' Set timer ',
     top_align = 'center',
   }
 
   local input = Input({
-    position = { row = '90%', col = '50%' },
-    size = { width = 15 },
+    position = { row = '5%', col = '95%' },
+    size = { width = 20 },
     border = utils.nui_border(text),
     win_options = utils.popup_bg(),
     relative = 'editor',
     buf_options = {
-      filetype = 'indents',
+      filetype = 'timer',
     },
   }, {
     prompt = '',
     default_value = '',
-    on_submit = function(size)
-      vim.o.shiftwidth = tonumber(size)
-      vim.o.tabstop = tonumber(size)
-      vim.o.softtabstop = tonumber(size)
-
-      local old = 'indents = ' .. NEVIRAIDE().ui.indents
-      local new = 'indents = ' .. size
-
-      require('neviraide-ui.utils').replace_word(old, new)
-
-      require('plenary.reload').reload_module('NEVIRAIDE')
-    end,
+    on_submit = function(value) vim.fn.execute('TimerStart ' .. value) end,
   })
   input:on(event.BufLeave, function() input:unmount() end)
   input:map(

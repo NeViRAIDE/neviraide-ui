@@ -1,4 +1,8 @@
 local color = require('neviraide-ui.themes.colors').palette
+local generate_color =
+  require('neviraide-ui.themes.colors').change_hex_lightness
+
+local magenta = generate_color(color.magenta, vim.o.bg == 'dark' and 0 or -20)
 
 return {
   ['@variable'] = { fg = color.white },
@@ -8,13 +12,13 @@ return {
   ['@variable.member.key'] = { fg = color.pink },
 
   ['@module'] = { fg = color.pink },
-  -- ["@module.builtin"] = { fg = color.pink },
+  ['@module.builtin'] = { fg = color.pink },
 
   ['@constant'] = { fg = color.pink },
   ['@constant.builtin'] = { fg = color.yellow },
   ['@constant.macro'] = { fg = color.pink },
 
-  ['@string'] = { fg = color.green },
+  ['@string'] = { fg = vim.o.bg == 'dark' and color.green or '#000000' },
   ['@string.regex'] = { fg = color.cyan },
   ['@string.escape'] = { fg = color.cyan },
   ['@character'] = { fg = color.pink },
@@ -26,16 +30,16 @@ return {
   ['@error'] = { fg = color.pink },
 
   ['@keyword.exception'] = { fg = color.pink },
-  ['@keyword'] = { fg = color.magenta, italic = true },
-  ['@keyword.function'] = { fg = color.magenta },
-  ['@keyword.return'] = { fg = color.magenta, italic = true },
-  ['@keyword.operator'] = { fg = color.magenta },
+  ['@keyword'] = { fg = magenta, italic = true },
+  ['@keyword.function'] = { fg = magenta, italic = true },
+  ['@keyword.return'] = { fg = magenta, italic = true },
+  ['@keyword.operator'] = { fg = magenta },
   ['@keyword.import'] = { link = 'Include' },
-  ['@keyword.conditional'] = { fg = color.magenta },
-  ['@keyword.conditional.ternary'] = { fg = color.magenta },
+  ['@keyword.conditional'] = { fg = magenta, italic = true },
+  ['@keyword.conditional.ternary'] = { fg = magenta, italic = true },
   ['@keyword.repeat'] = { fg = color.bright_yellow },
   ['@keyword.storage'] = { fg = color.bright_yellow },
-  ['@keyword.directive.define'] = { fg = color.magenta },
+  ['@keyword.directive.define'] = { fg = magenta },
   ['@keyword.directive'] = { fg = color.bright_yellow },
 
   ['@function'] = { fg = color.blue },

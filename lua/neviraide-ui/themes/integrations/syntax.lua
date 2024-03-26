@@ -1,7 +1,11 @@
 local color = require('neviraide-ui.themes.colors').palette
+local generate_color =
+  require('neviraide-ui.themes.colors').change_hex_lightness
 
 local syntax = {
-  Boolean = { fg = color.yellow },
+  Boolean = {
+    fg = generate_color(color.yellow, vim.o.bg == 'dark' and 0 or -10),
+  },
   Character = { fg = color.pink },
   Conditional = { fg = color.magenta },
   Constant = { fg = color.pink },
@@ -11,8 +15,8 @@ local syntax = {
   Variable = { fg = color.white },
   Function = { fg = color.green },
   Identifier = { fg = color.pink, sp = 'none' },
-  Include = { fg = color.green },
-  Keyword = { fg = color.magenta },
+  Include = { fg = color.green, italic = true },
+  Keyword = { fg = color.magenta, italic = true },
   Label = { fg = color.bright_yellow },
   Number = { fg = color.yellow },
   Operator = { fg = color.white, sp = 'none' },
@@ -22,7 +26,7 @@ local syntax = {
   SpecialChar = { fg = color.red },
   Statement = { fg = color.pink },
   StorageClass = { fg = color.bright_yellow },
-  String = { fg = color.blue },
+  String = { fg = color.green },
   Structure = { fg = color.magenta },
   Tag = { fg = color.bright_yellow },
   Todo = { fg = color.bright_yellow, bg = color.black },

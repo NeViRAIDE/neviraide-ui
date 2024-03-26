@@ -81,7 +81,6 @@ _After this, neviraide-ui will be automatically downloaded, installed, and confi
   - `relative_numbers`: Toggles, enables, or disables relative line numbers.
   - `cursor_line`: Toggles, enables, or disables the cursor line.
   - `cursor_column`: Toggles, enables, or disables the cursor column.
-  - `transparency`: Toggles, enables, or disables the transparency.
   - `theme`: Changes the theme.
   - `indents`: Sets the indent size.
 
