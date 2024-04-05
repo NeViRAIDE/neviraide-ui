@@ -269,15 +269,27 @@ M.lazy = function()
   return ''
 end
 
--- TODO:  timer component statusline??
-M.timer = function()
-  local ok, pomo = pcall(require, 'pomo')
-  if not ok then return '' end
-
-  local timer = pomo.get_first_to_finish()
-  if timer == nil then return '' end
-
-  return '󰄉 ' .. tostring(timer)
+M.todos = function()
+  local ok, _ = pcall(require, 'todo-comments')
+  if ok then
+    local count = vim.g.todo_counter
+    if count ~= 0 or count ~= nil then
+      for _, client in ipairs(vim.lsp.get_clients()) do
+        if
+          client.attached_buffers[vim.api.nvim_get_current_buf()]
+          and client.name ~= 'null-ls'
+        then
+          return separator('|', 2, true)
+            .. '%@ShowTodoList@'
+            .. '%#Boolean#'
+            .. icon('', 'tasklist', 0, 2)
+            .. count
+        end
+      end
+      return ''
+    end
+  end
+  return ''
 end
 
 return M

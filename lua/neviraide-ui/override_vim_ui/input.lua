@@ -16,7 +16,7 @@ local function override_ui_input()
       size = { width = math.max(20, vim.api.nvim_strwidth(default_value)) },
       border = utils.nui_border(text),
       win_options = utils.popup_bg(),
-      buf_options = { filetype = 'nuiInput' },
+      buf_options = { filetype = 'input' },
     }, {
       default_value = default_value,
       on_close = function() on_done(nil) end,

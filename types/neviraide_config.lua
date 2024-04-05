@@ -1,6 +1,8 @@
 ---@class NeviraideConfig
+---Your language
+---@field language string
 ---Using programming languages.
----@field lang string[]
+---@field programming string[]
 ---Neviraide Git Signs.
 ---@field git NeviraideGit
 ---Neviraide User Inerface.

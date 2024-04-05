@@ -20,3 +20,4 @@
 ---@field LSP_Diagnostics? StatusLineComponent Count of errors, warnings, info and hints for current buffer.
 ---@field mode? StatusLineComponent Neovim mode with icon and highlighting.
 ---@field spaces? StatusLineComponent Number of spaces for indent.
+---@field todos? StatusLineComponent Number of todos in current workspace.

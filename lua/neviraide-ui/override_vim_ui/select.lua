@@ -17,7 +17,7 @@ local function override_ui_select()
       position = '50%',
       border = utils.nui_border(text),
       win_options = utils.popup_bg(),
-      buf_options = { filetype = 'nui_select' },
+      buf_options = { filetype = 'select' },
       zindex = 999,
     }
 

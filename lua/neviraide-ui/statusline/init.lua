@@ -19,6 +19,7 @@ M.run = function()
   local modules = {
     component.LSP_status() or '',
     validate_module(component.LSP_Diagnostics),
+    validate_module(component.todos),
     component.lazy(),
 
     component.indent(),
