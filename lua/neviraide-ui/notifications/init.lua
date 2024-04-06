@@ -9,6 +9,7 @@ local notify_msg_cache = {}
 
 local notify = async.void(function(msg, level, opts, no_cache)
   level = level or vim.log.levels.INFO
+  no_cache = no_cache or false
   opts = opts or {}
   if level >= config.config.notify.min_level then
     status.push(
@@ -49,7 +50,8 @@ local commands = {
         vim.fn.setqflist(list, 'r')
       else
         for _, msg in ipairs(notify_msg_cache) do
-          notify(msg.msg, msg.level, msg.opts, true)
+          print(msg.msg)
+          print(' ')
         end
       end
     end,
@@ -63,7 +65,9 @@ return {
       clear = true,
     })
 
-    vim.notify = function(msg, level, opts) notify(msg, level, opts) end
+    vim.notify = function(msg, level, opts, no_cache)
+      notify(msg, level, opts, no_cache)
+    end
 
     for cname, def in pairs(commands) do
       api.nvim_create_user_command(config.NS_NAME .. cname, def.func, def.opts)
