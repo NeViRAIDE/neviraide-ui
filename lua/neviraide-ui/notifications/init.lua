@@ -1,10 +1,13 @@
-local api = vim.api
+local async = require('plenary.async')
+
 local status = require('neviraide-ui.notifications.status')
 local config = require('neviraide-ui.notifications.config')
 
+local api = vim.api
+
 local notify_msg_cache = {}
 
-local function notify(msg, level, opts, no_cache)
+local notify = async.void(function(msg, level, opts, no_cache)
   level = level or vim.log.levels.INFO
   opts = opts or {}
   if level >= config.config.notify.min_level then
@@ -12,15 +15,18 @@ local function notify(msg, level, opts, no_cache)
       'NeviraIDE',
       { mandat = msg, title = opts.title, icon = opts.icon }
     )
+
     if not no_cache then
       table.insert(notify_msg_cache, { msg = msg, level = level, opts = opts })
     end
+
     local lifetime = config.config.notify.clear_time
     if lifetime > 0 then
-      vim.defer_fn(function() status.pop('NeviraIDE') end, lifetime)
+      async.util.sleep(lifetime)
+      status.pop('NeviraIDE')
     end
   end
-end
+end)
 
 local commands = {
   Clear = {
