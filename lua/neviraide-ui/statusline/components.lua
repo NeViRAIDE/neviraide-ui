@@ -71,7 +71,6 @@ M.interpreter = function(condition)
   --     .. 'Python '
   --     .. python_version
   -- end
-  -- TODO: add icons for interpreter
 
   if condition then
     return separator('|', 2, condition) .. utils.capitalizeFirstLetter(buf_ft)
