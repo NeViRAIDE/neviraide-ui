@@ -270,32 +270,28 @@ M.lazy = function()
 end
 
 M.todos = function()
-  local ok, _ = pcall(require, 'todo-comments')
-  if ok then
-    ---@type integer
-    local count = vim.g.todo_counter
+  ---@type integer
+  local count = vim.g.todo_counter
 
-    if count ~= 0 then
-      for _, client in ipairs(vim.lsp.get_clients()) do
-        if
-          client.attached_buffers[vim.api.nvim_get_current_buf()]
-          and client.name ~= 'null-ls'
-        then
-          return separator('|', 2, true)
-            .. '%@ShowTodoList@'
-            .. '%#Boolean#'
-            .. icon('', 'tasklist', 0, 2)
-            .. count
-        end
+  if count ~= 0 then
+    for _, client in ipairs(vim.lsp.get_clients()) do
+      if
+        client.attached_buffers[vim.api.nvim_get_current_buf()]
+        and client.name ~= 'null-ls'
+      then
+        return separator('|', 2, true)
+          .. '%@ShowTodoList@'
+          .. '%#Boolean#'
+          .. icon('', 'tasklist', 0, 2)
+          .. count
       end
-
-      return ' %@ShowTodoList@'
-        .. '%#Boolean#'
-        .. icon('', 'tasklist', 0, 2)
-        .. count
     end
-  end
 
+    return ' %@ShowTodoList@'
+      .. '%#Boolean#'
+      .. icon('', 'tasklist', 0, 2)
+      .. count
+  end
   return ''
 end
 
