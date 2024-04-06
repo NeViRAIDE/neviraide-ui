@@ -272,8 +272,10 @@ end
 M.todos = function()
   local ok, _ = pcall(require, 'todo-comments')
   if ok then
+    ---@type integer
     local count = vim.g.todo_counter
-    if count ~= 0 or count ~= nil then
+
+    if count ~= 0 then
       for _, client in ipairs(vim.lsp.get_clients()) do
         if
           client.attached_buffers[vim.api.nvim_get_current_buf()]
@@ -286,9 +288,14 @@ M.todos = function()
             .. count
         end
       end
-      return ''
+
+      return ' %@ShowTodoList@'
+        .. '%#Boolean#'
+        .. icon('', 'tasklist', 0, 2)
+        .. count
     end
   end
+
   return ''
 end
 
