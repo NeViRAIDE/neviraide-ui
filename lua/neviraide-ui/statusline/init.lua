@@ -25,14 +25,14 @@ M.run = function()
     component.indent(),
 
     component.location(),
-    component.fileformat(util.ignored() and util.hide_in_width(120)),
-    component.filesize(util.ignored() and util.hide_in_width()),
+    component.fileformat(not util.ignored() and util.hide_in_width(120)),
+    component.filesize(not util.ignored() and util.hide_in_width()),
 
     component.mode(),
 
-    component.spaces(util.ignored() and util.hide_in_width()),
-    component.interpreter(util.ignored() and util.hide_in_width()),
-    component.encoding(util.ignored() and util.hide_in_width(120)),
+    component.spaces(not util.ignored() and util.hide_in_width()),
+    component.interpreter(not util.ignored() and util.hide_in_width()),
+    component.encoding(not util.ignored() and util.hide_in_width(120)),
 
     component.indent(),
 

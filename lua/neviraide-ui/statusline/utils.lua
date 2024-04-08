@@ -2,35 +2,7 @@ local i = require('neviraide-ui.icons.utils').icon
 
 ---@type StatusLineUtils
 local M = {
-  ignored = function()
-    local list = {
-      'help',
-      'TelescopePrompt',
-      'neviraideDashboard',
-      'lazy',
-      'mason',
-      'lspinfo',
-      'neviraide-ui',
-      'neviraide_ui',
-      'nui',
-      'colorschemes',
-      'create',
-      'renameTab',
-      'nuiInput',
-      'nui_sm',
-      'nofile',
-      'neo-tree',
-      'neo-tree-popup',
-      'terminal',
-      'notify',
-      'neotest-output',
-      'neotest-summary',
-    }
-    for type in pairs(list) do
-      if vim.bo.filetype == list[type] then return false end
-    end
-    return true
-  end,
+  ignored = require('neviraide.utils.ignored').ignored,
 
   buffer_not_empty = function() return vim.fn.empty(vim.fn.expand('%:t')) ~= 1 end,
 

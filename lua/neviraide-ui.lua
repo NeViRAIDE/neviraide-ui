@@ -19,6 +19,15 @@ function M.setup(config)
 
   if M.config.hyprdots then
     require('neviraide-ui.utils.change_settings.theme').change_theme(hyprTheme)
+  else
+    require('which-key').register({
+      ['<leader>sC'] = {
+        function()
+          require('neviraide-ui.utils.change_settings.theme').choose_theme()
+        end,
+        'Colorscheme',
+      },
+    })
   end
 end
 

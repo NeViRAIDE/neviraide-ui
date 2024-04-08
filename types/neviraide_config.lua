@@ -18,12 +18,7 @@
 ---Terminal font size.
 ---@field size integer
 
----@class NeviraideUi
----**If hyprdots installed:**
----<WIN+SHIFT+T> - list of available hyprland themes.
-------
----Already configured Hyprland themes.
----@field theme HyprdotsThemes
+---@class NeviraideLineNumbers
 ---Print the line number in front of each line.
 ---@field numbers_enabled boolean
 ---Show the line number relative to the line
@@ -33,6 +28,20 @@
 ---commands (e.g. j k + -) with, without having
 ---to calculate it yourself.
 ---@field relative_numbers boolean
+---Auto toggle relative line numbers in Insert and Normal modes.
+---@field auto_switch_relative boolean
+
+---@class NeviraideUi
+---Using hyprdots on hyprland as DE.
+---@field hyprdots boolean
+---Custom minimalistic async `vim.notify`.
+---@field notify boolean
+---**If hyprdots installed:**
+---<WIN+SHIFT+T> - list of available hyprland themes.
+------
+---Already configured Hyprland themes.
+---@field theme HyprdotsThemes
+---@field line_numbers NeviraideLineNumbers
 ---Highlight the text line of the cursor with
 ---CursorLine. Useful to easily spot the cursor.
 ---Will make screen redrawing slower. When Visual
