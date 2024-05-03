@@ -1,49 +1,26 @@
 local M = {}
----Define the file path by concatenating the home directory with the relative path.
----@type string file_path The path to the themes.css file.
-local kitty_path = os.getenv('HOME') .. '/.config/kitty/themes/theme.conf'
+
+local path = require('neviraide-ui').config.kitty.theme_path
 
 M.colors = {
   kitty = {},
 }
 
+M.buftab_style = 'fade'
+
 ---Function to read the kitty conf file and extract the values .
 ---Opens the file for reading and reads line by line to find the color definitions.
 local function extract_kitty_colors()
-  local theme_file = io.open(kitty_path, 'r')
-  if not theme_file then print('Failed to open file: ' .. kitty_path) end
+  local theme_file = io.open(path, 'r')
+  if not theme_file then print('Failed to open file: ' .. path) end
 
   if theme_file then
     for line in theme_file:lines() do
       local color_name, color_value = line:match('^([%w%-_]+)%s+#([%da-fA-F]+)')
       if color_name and color_value then
-        -- Rename colors if needed
-        if color_name == 'color0' then color_name = 'black' end
-        if color_name == 'color1' then color_name = 'red' end
-        if color_name == 'color2' then color_name = 'green' end
-        if color_name == 'color3' then color_name = 'yellow' end
-        if color_name == 'color4' then color_name = 'blue' end
-        if color_name == 'color5' then color_name = 'magenta' end
-        if color_name == 'color6' then color_name = 'cyan' end
-        if color_name == 'color7' then color_name = 'white' end
-        if color_name == 'color8' then color_name = 'bright_black' end
-        if color_name == 'color9' then color_name = 'pink' end
-        if color_name == 'color10' then color_name = 'bright_green' end
-        if color_name == 'color11' then color_name = 'bright_yellow' end
-        if color_name == 'color12' then color_name = 'bright_blue' end
-        if color_name == 'color13' then color_name = 'bright_magenta' end
-        if color_name == 'color14' then color_name = 'bright_cyan' end
-        if color_name == 'color15' then color_name = 'bright_white' end
-        if color_name == 'tab_bar_background' then
-          color_name = 'second_background'
+        if color_name == 'active_tab_background' then
+          color_name = 'tab_background'
         end
-        if color_name == 'inactive_tab_foreground' then
-          color_name = 'inactive_accent'
-        end
-        if color_name == 'active_tab_foreground' then
-          color_name = 'active_accent'
-        end
-        -- Add color to table M.colors
         M.colors.kitty[color_name] = '#' .. color_value
       end
     end
@@ -53,5 +30,21 @@ local function extract_kitty_colors()
 end
 
 extract_kitty_colors()
+
+local function extract_tab_bar_style()
+  local theme_file = io.open(path, 'r')
+  if not theme_file then print('Failed to open file: ' .. path) end
+
+  if theme_file then
+    for line in theme_file:lines() do
+      local tab_bar_style = line:match('^tab_bar_style%s+([^%s]+)')
+      if tab_bar_style then M.buftab_style = tab_bar_style end
+    end
+  end
+
+  if theme_file then theme_file:close() end
+end
+
+extract_tab_bar_style()
 
 return M

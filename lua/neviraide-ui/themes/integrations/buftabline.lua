@@ -1,42 +1,107 @@
 local color = require('neviraide-ui.themes.colors').palette
 
+local gc = require('neviraide-ui.themes.colors').change_hex_lightness
+local darker_bg = gc(color.background, vim.o.bg == 'dark' and -3 or -15)
+
+local cg =
+  require('neviraide-ui.themes.colors').compute_gradient
+local fade = cg(color.tab_background, color.background, 5)
+
+local tab_styles = {
+  fade = {
+    TbSepFade1 = { fg = fade[2] },
+    TbSepFade2 = { fg = fade[3] },
+    TbSepFade3 = { fg = fade[4] },
+    TbLineBufOn = {
+      fg = color.background,
+      bg = color.tab_background,
+      bold = true,
+    },
+    TbLineBufOff = {
+      fg = color.tab_background,
+      bg = color.background,
+    },
+    BufTabLineFill = {
+      bg = color.background,
+    },
+    BufTabDate = {
+      fg = color.tab_background,
+      bg = color.background,
+      italic = true,
+    },
+    TbLineBufOnModified = {
+      fg = gc(color.green, 15),
+      bg = color.tab_background,
+      italic = true,
+    },
+    TbLineBufOffModified = {
+      fg = color.red,
+      bg = color.background,
+      italic = true,
+    },
+    TbLineBufOnClose = {
+      fg = gc(color.red, -15),
+      bg = color.tab_background,
+      bold = true,
+    },
+    TbLineBufOffClose = {
+      fg = color.grey,
+      bg = color.background,
+    },
+  },
+  slant = {
+    TbSepSlant = {
+      fg = color.background,
+      bg = darker_bg,
+      bold = true,
+    },
+    TbLineBufOn = {
+      fg = color.tab_background,
+      bg = color.background,
+      bold = true,
+    },
+    TbLineBufOff = {
+      fg = color.grey,
+      bg = color.tab_background,
+    },
+    BufTabLineFill = {
+      bg = color.tab_background,
+    },
+    BufTabDate = {
+      fg = color.inactive_accent,
+      bg = color.tab_background,
+      italic = true,
+    },
+    TbLineBufOnModified = {
+      fg = color.green,
+      bg = color.background,
+      italic = true,
+    },
+    TbLineBufOffModified = {
+      fg = color.red,
+      bg = darker_bg,
+      italic = true,
+    },
+    TbLineBufOnClose = { fg = color.red, bg = color.tab_background },
+    TbLineBufOffClose = {
+      fg = color.grey,
+      bg = color.background,
+    },
+  },
+}
+
 local highlights = {
   PomoTimer = {
     bg = color.inactive_accent,
-    fg = color.second_background,
+    fg = darker_bg,
     bold = true,
   },
 
-  BufTabLineFill = { bg = color.second_background },
-  BufTabDate = {
-    fg = color.inactive_accent,
-    bg = color.second_background,
-    italic = true,
-  },
-
-  TbLineBufOn = {
-    fg = color.white,
-    bg = color.background,
-    bold = true,
-  },
   TbSeparator = {
     fg = color.background,
-    bg = color.second_background,
+    bg = darker_bg,
     bold = true,
   },
-  TbLineBufOff = { fg = color.grey, bg = color.second_background },
-  TbLineBufOnModified = {
-    fg = color.green,
-    bg = color.background,
-    italic = true,
-  },
-  TbLineBufOffModified = {
-    fg = color.red,
-    bg = color.second_background,
-    italic = true,
-  },
-  TbLineBufOnClose = { fg = color.red, bg = color.background },
-  TbLineBufOffClose = { fg = color.grey, bg = color.second_background },
   TblineTabNewBtn = { fg = color.white, bg = color.black, bold = true },
   TbLineTabOn = { fg = color.background, bg = color.nord_blue, bold = true },
   TbLineTabOff = { fg = color.white, bg = color.black },
@@ -49,5 +114,13 @@ local highlights = {
     fg = color.background,
   },
 }
+
+local kitty_style = require('neviraide-ui').config.ui.buftab.style
+
+local current_style = tab_styles[kitty_style]
+
+if current_style then
+  highlights = vim.tbl_deep_extend('force', highlights, current_style)
+end
 
 return highlights

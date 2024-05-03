@@ -2,6 +2,7 @@ local api = vim.api
 local fn = vim.fn
 local utils = require('neviraide-ui.buftabline.modules.utils')
 local icon = require('neviraide-ui.icons.utils').icon
+local buftab_style = require('neviraide-ui').config.ui.buftab.style
 
 local M = {}
 
@@ -80,7 +81,8 @@ M.bufferlist = function()
       end
 
       has_current = (bufnr == current_buf and true) or has_current
-      table.insert(buffers, utils.styleBufferTab(bufnr))
+      -- TODO: make auto from config
+      table.insert(buffers, utils.styleBufferTab(bufnr, buftab_style))
     end
   end
 

@@ -4,8 +4,17 @@ local M = {}
 
 ---Default NeviraideUI configuration
 M.config = {
-  hyprdots = false,
-  notify = false,
+  kitty = {
+    enable = false,
+    theme_path = os.getenv('HOME') .. '/.config/kitty/theme.conf',
+  },
+  ui = {
+    hyde = false,
+    notify = false,
+    buftab = {
+      style = 'slant',
+    },
+  },
 }
 
 ---Setup configuration
@@ -15,9 +24,13 @@ function M.setup(config)
   vim.opt.statusline = '%!v:lua.require("neviraide-ui.statusline").run()'
   require('neviraide-ui.commands').setup()
 
-  if M.config.notify then require('neviraide-ui.notifications').setup() end
+  if M.config.ui.notify then require('neviraide-ui.notifications').setup() end
 
-  if M.config.hyprdots then
+  if M.config.kitty.enable then
+    M.config.ui.buftab.style = require('neviraide-ui.kitty').buftab_style
+  end
+
+  if M.config.ui.hyde then
     require('neviraide-ui.utils.change_settings.theme').change_theme(hyprTheme)
   else
     require('which-key').register({

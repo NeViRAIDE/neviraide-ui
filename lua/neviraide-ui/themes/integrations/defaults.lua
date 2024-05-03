@@ -44,7 +44,7 @@ local defaults = {
   },
 
   Normal = {
-    fg = color.white,
+    fg = color.foreground,
     bg = color.background,
   },
 
@@ -213,9 +213,15 @@ local defaults = {
     fg = color.backgroung,
   },
 
-  NeviraideTerminalDarkerBG = { bg = color.second_background },
-  NeviraideHelpDarkerBG = { bg = color.second_background },
-  NeviraideTerminalWinbar = { bg = color.second_background },
+  NeviraideTerminalDarkerBG = {
+    bg = generate_color(color.background, vim.o.bg == 'dark' and -3 or 15),
+  },
+  NeviraideHelpDarkerBG = {
+    bg = generate_color(color.background, vim.o.bg == 'dark' and -3 or 15),
+  },
+  NeviraideTerminalWinbar = {
+    bg = generate_color(color.background, vim.o.bg == 'dark' and -3 or 15),
+  },
 }
 
 local merge_tb = require('neviraide-ui.themes').merge_tb

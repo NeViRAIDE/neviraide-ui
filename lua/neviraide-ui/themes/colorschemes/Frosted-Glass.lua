@@ -7,6 +7,7 @@ M.borders = 'single'
 M.colors = {
   background = '#ffffff',
   foreground = '#262626',
+  tab_background = '#83886B',
   second_background = '#110e14',
   active_accent = '#4078f2',
   inactive_accent = '#43465A',

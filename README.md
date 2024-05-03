@@ -41,8 +41,10 @@ require('lazy').load({
             'RAprogramm/neviraide-ui.nvim',
             event = 'VeryLazy',
             opts = {
-                hyprdots = true, -- if you want to use sync NEVIRAIDE with hyprdots themes
-                notify = true -- if you want to use custom notifications
+                ui = {
+                    hyde = true, -- if you want to use sync NEVIRAIDE with hyde themes
+                    notify = true -- if you want to use custom notifications
+                }
             }
         },
     }

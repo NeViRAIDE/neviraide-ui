@@ -7,7 +7,7 @@ local function set_colors()
   local theme_colors = require('neviraide-ui.themes').get_theme_tb('colors')
   local kitty_colors = require('neviraide-ui.kitty').colors.kitty
 
-  if require('neviraide-ui').config.hyprdots then
+  if require('neviraide-ui').config.ui.hyde then
     -- combine theme_colors and kitty_colors
     for key, value in pairs(theme_colors) do
       if kitty_colors[key] ~= nil then
@@ -28,18 +28,18 @@ end
 set_colors()
 
 ---Convert a hex color value to RGB
----@param hex string: The hex color value
+---@param hex? string: The hex color value
 ---@return integer r: Red (0-255)
 ---@return integer g: Green (0-255)
 ---@return integer b: Blue (0-255)
 M.hex2rgb = function(hex)
-  local hash = string.sub(hex, 1, 1) == '#'
-  if string.len(hex) ~= (7 - (hash and 0 or 1)) then return nil end
-
-  local r = tonumber(hex:sub(2 - (hash and 0 or 1), 3 - (hash and 0 or 1)), 16)
-  local g = tonumber(hex:sub(4 - (hash and 0 or 1), 5 - (hash and 0 or 1)), 16)
-  local b = tonumber(hex:sub(6 - (hash and 0 or 1), 7 - (hash and 0 or 1)), 16)
-  return r, g, b
+  if hex then
+    local r = tonumber(hex:sub(2, 3), 16)
+    local g = tonumber(hex:sub(4, 5), 16)
+    local b = tonumber(hex:sub(6, 7), 16)
+    return r, g, b
+  end
+  return 00, 00, 00
 end
 
 ---Convert an RGB color value to hex
@@ -47,18 +47,11 @@ end
 ---@param g integer Green (0-255)
 ---@param b integer Blue (0-255)
 ---@return string HEX The hexadecimal string representation of the color
-M.rgb2hex = function(r, g, b)
-  return string.format(
-    '#%02x%02x%02x',
-    math.floor(r),
-    math.floor(g),
-    math.floor(b)
-  )
-end
+M.rgb2hex = function(r, g, b) return string.format('#%02x%02x%02x', r, g, b) end
 
 -- Helper function to convert a HSL color value to RGB
 -- Not to be used directly, use M.hsl2rgb instead
-M.hsl2rgb_helper = function(p, q, a)
+local hsl2rgb_helper = function(p, q, a)
   if a < 0 then a = a + 6 end
   if a >= 6 then a = a - 6 end
   if a < 1 then
@@ -90,9 +83,9 @@ M.hsl2rgb = function(h, s, l)
   end
 
   t1 = l * 2 - t2
-  r = M.hsl2rgb_helper(t1, t2, h + 2) * 255
-  g = M.hsl2rgb_helper(t1, t2, h) * 255
-  b = M.hsl2rgb_helper(t1, t2, h - 2) * 255
+  r = hsl2rgb_helper(t1, t2, h + 2) * 255
+  g = hsl2rgb_helper(t1, t2, h) * 255
+  b = hsl2rgb_helper(t1, t2, h - 2) * 255
 
   return r, g, b
 end
@@ -206,22 +199,18 @@ end
 -- @param steps The number of steps to compute
 -- @return A table of hex color values
 M.compute_gradient = function(hex1, hex2, steps)
-  local h1, s1, l1 = M.hex2hsl(hex1)
-  local h2, s2, l2 = M.hex2hsl(hex2)
-  local h, s, l
-  local h_step = (h2 - h1) / (steps - 1)
-  local s_step = (s2 - s1) / (steps - 1)
-  local l_step = (l2 - l1) / (steps - 1)
-  local gradient = {}
+  local r1, g1, b1 = M.hex2rgb(hex1)
+  local r2, g2, b2 = M.hex2rgb(hex2)
+  local gradients = {}
 
   for i = 0, steps - 1 do
-    h = h1 + (h_step * i)
-    s = s1 + (s_step * i)
-    l = l1 + (l_step * i)
-    gradient[i + 1] = M.hsl2hex(h, s, l)
+    local r = r1 + math.floor((r2 - r1) * i / (steps - 1))
+    local g = g1 + math.floor((g2 - g1) * i / (steps - 1))
+    local b = b1 + math.floor((b2 - b1) * i / (steps - 1))
+    gradients[i + 1] = M.rgb2hex(r, g, b)
   end
 
-  return gradient
+  return gradients
 end
 
 return M

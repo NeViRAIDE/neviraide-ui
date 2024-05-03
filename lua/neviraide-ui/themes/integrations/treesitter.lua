@@ -3,6 +3,8 @@ local generate_color =
   require('neviraide-ui.themes.colors').change_hex_lightness
 
 local magenta = generate_color(color.magenta, vim.o.bg == 'dark' and 0 or -20)
+-- TODO: change from pink to another
+color.pink = generate_color(color.pink, vim.o.bg == 'dark' and 10 or 0)
 
 return {
   ['@variable'] = { fg = color.white },

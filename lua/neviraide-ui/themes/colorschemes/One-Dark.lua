@@ -8,6 +8,7 @@ M.colors = {
   background = '#282c34',
   second_background = '#1b1f27',
   foreground = '#D9E0EE',
+  tab_background = '#83886B',
   active_accent = '#61afef',
   inactive_accent = '#519aba',
 

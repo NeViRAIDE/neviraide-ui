@@ -7,6 +7,7 @@ M.type = 'dark'
 M.colors = {
   background = '#242424',
   second_background = '#09161c',
+  tab_background = '#83886B',
   foreground = '#ffffff',
   active_accent = '#D9E0EE',
   inactive_accent = '#43465A',

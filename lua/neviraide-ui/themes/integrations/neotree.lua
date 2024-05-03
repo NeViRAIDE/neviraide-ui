@@ -2,17 +2,23 @@ local color = require('neviraide-ui.themes.colors').palette
 local generate_color =
   require('neviraide-ui.themes.colors').change_hex_lightness
 
+local darker_bg =
+  generate_color(color.background, vim.o.bg == 'dark' and -4 or -15)
+
 return {
   NeoTreeNormal = {
-    bg = color.second_background,
-    fg = color.active_accent,
+    bg = darker_bg,
+    fg = color.foreground,
   },
   NeoTreeNormalNC = { link = 'NeoTreeNormal' },
-  NeoTreeEndOfBuffer = { bg = color.second_background },
+  NeoTreeEndOfBuffer = {
+    bg = darker_bg,
+  },
   NeoTreeCursorLine = { bg = color.black },
 
   NeoTreeDirectoryIcon = { link = 'Directory' },
   NeoTreeDirectoryName = { link = 'Directory' },
+
   NeoTreeRootDirectory = { fg = color.red, bold = true },
   NeoTreeOpenedDirectoryName = { link = 'Directory' },
   NeoTreeEmptyDirectoryName = { link = 'Directory' },
@@ -21,8 +27,8 @@ return {
   NeoTreeIndentMarker = { fg = color.grey },
 
   NeoTreeWinSeparator = {
-    bg = color.second_background,
-    fg = color.second_background,
+    bg = darker_bg,
+    fg = darker_bg,
   },
   NeoTreeWindowPicker = { fg = color.red, bg = color.black },
 

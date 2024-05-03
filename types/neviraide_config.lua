@@ -32,15 +32,15 @@
 ---@field auto_switch_relative boolean
 
 ---@class NeviraideUi
----Using hyprdots on hyprland as DE.
----@field hyprdots boolean
+---Using hyde on hyprland as DE.
+---@field hyde boolean
 ---Custom minimalistic async `vim.notify`.
 ---@field notify boolean
----**If hyprdots installed:**
+---**If hyde installed:**
 ---<WIN+SHIFT+T> - list of available hyprland themes.
 ------
 ---Already configured Hyprland themes.
----@field theme HyprdotsThemes
+---@field theme HydeThemes
 ---@field line_numbers NeviraideLineNumbers
 ---Highlight the text line of the cursor with
 ---CursorLine. Useful to easily spot the cursor.

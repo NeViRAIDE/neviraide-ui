@@ -136,44 +136,60 @@ M.add_fileInfo = function(name, bufnr)
   end
 end
 
-M.styleBufferTab = function(nr)
-  local close_btn = '%'
-    .. nr
-    .. '@TbKillBuf@'
-    .. icon_plug('󰅖', 'x', 0, 2)
-    .. '%X'
+local styles = require('neviraide-ui.buftabline.modules.utils.styles').style
+
+M.styleBufferTab = function(nr, style)
+  local isActive = nr == api.nvim_get_current_buf()
+  local isModified = vim.bo[nr].modified -- Получаем состояние измененности буфера
+
+  local close_btn
+
+  if isActive then
+    if isModified then
+      close_btn = '%'
+        .. nr
+        .. '@TbKillBuf@'
+        .. '%#TbLineBufOnModified#' -- Стиль для измененного и активного буфера
+        .. icon_plug('', 'pencil', 0, 2) -- Измененная иконка для измененного файла
+        .. '%X'
+    else
+      close_btn = '%'
+        .. nr
+        .. '@TbKillBuf@'
+        .. '%#TbLineBufOnClose#'
+        .. icon_plug('󰅖', 'x', 0, 2)
+        .. '%X'
+    end
+  else
+    if isModified then
+      close_btn = '%'
+        .. nr
+        .. '@TbKillBuf@'
+        .. '%#TbLineBufOffModified#' -- Стиль для измененного и неактивного буфера
+        .. icon_plug('', 'pencil', 1, 1) -- Измененная иконка для измененного файла
+        .. '%X'
+    else
+      close_btn = '%'
+        .. nr
+        .. '@TbKillBuf@'
+        .. '%#TbLineBufOffClose#'
+        .. icon_plug('󰅖', 'x', 0, 2)
+        .. '%X'
+    end
+  end
+
   local name = (#api.nvim_buf_get_name(nr) ~= 0)
       and fn.fnamemodify(api.nvim_buf_get_name(nr), ':t')
     or ' No Name '
+
   name = '%' .. nr .. '@TbGoToBuf@' .. M.add_fileInfo(name, nr) .. '%X'
 
-  -- color close btn for focused / hidden  buffers
-  if nr == api.nvim_get_current_buf() then
-    close_btn = (
-      vim.bo[0].modified
-      and '%'
-        .. nr
-        .. '@TbKillBuf@%#TbLineBufOnModified#'
-        .. icon_plug('', 'pencil', 0, 2)
-    ) or ('%#TbLineBufOnClose#' .. close_btn)
-    name = '%#TbSeparator#'
-      .. '%#TbLineBufOn#'
-      .. name
-      .. close_btn
-      .. '%#TbSeparator#'
+  local active, inactive = styles(style, name, close_btn)
+  if isActive then
+    return active
   else
-    close_btn = (
-      vim.bo[nr].modified
-      and '%'
-        .. nr
-        .. '@TbKillBuf@%#TbLineBufOffModified#'
-        .. icon_plug('', 'pencil', 1, 1)
-    ) or ('%#TbLineBufOffClose#' .. close_btn)
-
-    name = '%#TbLineBufOff#' .. name .. close_btn
+    return inactive
   end
-
-  return name
 end
 
 return M
