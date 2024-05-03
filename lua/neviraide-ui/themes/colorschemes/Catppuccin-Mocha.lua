@@ -25,11 +25,10 @@ M.colors = {
   magenta = '#cba6f7',
 
   bright_black = '#43465A',
-  bright_red = '#f5c2e7',
+  pink = '#f5c2e7',
   bright_yellow = '#ffe9b6',
   bright_green = '#b6f4be',
   bright_magenta = '#d0a9e5',
-
 
   nord_blue = '#8bc2f0',
   baby_pink = '#ffa5c3',

@@ -33,13 +33,10 @@ set_colors()
 ---@return integer g: Green (0-255)
 ---@return integer b: Blue (0-255)
 M.hex2rgb = function(hex)
-  if hex then
-    local r = tonumber(hex:sub(2, 3), 16)
-    local g = tonumber(hex:sub(4, 5), 16)
-    local b = tonumber(hex:sub(6, 7), 16)
-    return r, g, b
-  end
-  return 00, 00, 00
+  local r = tonumber(hex:sub(2, 3), 16)
+  local g = tonumber(hex:sub(4, 5), 16)
+  local b = tonumber(hex:sub(6, 7), 16)
+  return r, g, b
 end
 
 ---Convert an RGB color value to hex

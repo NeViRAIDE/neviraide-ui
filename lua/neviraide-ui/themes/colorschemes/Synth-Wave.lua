@@ -13,7 +13,7 @@ M.colors = {
   second_background = '#16161e',
 
   white = '#c0caf5',
-  black = '#1a1b26', 
+  black = '#1a1b26',
   grey = '#403D4E',
 
   baby_pink = '#DE8C92',
