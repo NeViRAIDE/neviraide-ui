@@ -1,81 +1,114 @@
 local color = require('neviraide-ui.themes.colors').palette
-local generate_color =
-  require('neviraide-ui.themes.colors').change_hex_lightness
+-- local generate_color = require('neviraide-ui.themes.color').change_hex_lightness
 
-local magenta = generate_color(color.magenta, vim.o.bg == 'dark' and 0 or -20)
--- TODO: change from pink to another
-color.pink = generate_color(color.pink, vim.o.bg == 'dark' and 10 or 0)
+-- local magenta = generate_color(color.magenta, vim.o.bg == 'dark' and 0 or -20)
+-- color.pink = generate_color(color.pink, vim.o.bg == 'dark' and 10 or 0)
 
 return {
-  ['@variable'] = { fg = color.white },
-  ['@variable.builtin'] = { fg = color.yellow },
-  ['@variable.parameter'] = { fg = color.pink },
-  ['@variable.member'] = { fg = color.pink },
+  ['@error'] = { fg = color.bright_red },
+  ['@punctuation.delimiter'] = { fg = color.foreground },
+  ['@punctuation.bracket'] = { fg = color.foreground },
+  ['@markup.list'] = { fg = color.cyan },
+
+  ['@constant'] = { fg = color.magenta },
+  ['@constant.builtin'] = { fg = color.magenta },
+  ['@markup.link.label.symbol'] = { fg = color.magenta },
+
+  ['@constant.macro'] = { fg = color.cyan },
+  ['@string.regexp'] = { fg = color.red },
+  ['@string.escape'] = { fg = color.cyan },
+  ['@string.special.symbol'] = { fg = color.magenta },
+  ['@character'] = { fg = color.green },
+  ['@number'] = { fg = color.magenta },
+  ['@boolean'] = { fg = color.magenta },
+  ['@number.float'] = { fg = color.green },
+  ['@annotation'] = { fg = color.yellow },
+  ['@attribute'] = { fg = color.cyan },
+  ['@module'] = { fg = color.orange },
+
+  ['@function.builtin'] = { fg = color.cyan },
+  ['@function'] = { fg = color.green },
+  ['@function.macro'] = { fg = color.green },
+  ['@variable.parameter'] = { fg = color.orange },
+  ['@variable.parameter.reference'] = { fg = color.orange },
+  ['@function.method'] = { fg = color.green },
+  ['@variable.member'] = { fg = color.orange },
+  ['@property'] = { fg = color.magenta },
+  ['@constructor'] = { fg = color.cyan },
+
+  ['@keyword.conditional'] = { fg = color.pink },
+  ['@keyword.repeat'] = { fg = color.pink },
+  ['@label'] = { fg = color.cyan },
+
+  ['@keyword'] = { fg = color.pink },
+  ['@keyword.function'] = { fg = color.cyan },
+  ['@keyword.function.ruby'] = { fg = color.pink },
+  ['@keyword.operator'] = { fg = color.pink },
+  ['@operator'] = { fg = color.pink },
+  ['@keyword.exception'] = { fg = color.magenta },
+  ['@type'] = { fg = color.blue },
+  ['@type.builtin'] = { fg = color.cyan, italic = true },
+  ['@type.qualifier'] = { fg = color.pink },
+  ['@structure'] = { fg = color.magenta },
+  ['@keyword.include'] = { fg = color.pink },
+
+  ['@variable'] = { fg = color.foreground },
+  ['@variable.builtin'] = { fg = color.magenta },
+
+  ['@markup'] = { fg = color.orange },
+  ['@markup.strong'] = { fg = color.orange, bold = true }, -- bold
+  ['@markup.emphasis'] = { fg = color.yellow, italic = true }, -- italic
+  ['@markup.underline'] = { fg = color.orange },
+  ['@markup.heading'] = { fg = color.pink, bold = true }, -- title
+  ['@markup.raw'] = { fg = color.yellow }, -- inline code
+  ['@markup.link.url'] = { fg = color.yellow, italic = true }, -- urls
+  ['@markup.link'] = { fg = color.orange, bold = true },
+
+  ['@tag'] = { fg = color.cyan },
+  ['@tag.attribute'] = { fg = color.green },
+  ['@tag.delimiter'] = { fg = color.cyan },
+
+  -- Semantic
+  ['@class'] = { fg = color.cyan },
+  ['@struct'] = { fg = color.cyan },
+  ['@enum'] = { fg = color.cyan },
+  ['@enumMember'] = { fg = color.magenta },
+  ['@event'] = { fg = color.cyan },
+  ['@interface'] = { fg = color.cyan },
+  ['@modifier'] = { fg = color.cyan },
+  ['@regexp'] = { fg = color.yellow },
+  ['@typeParameter'] = { fg = color.cyan },
+  ['@decorator'] = { fg = color.cyan },
+
+  ------------------
   ['@variable.member.key'] = { fg = color.pink },
 
-  ['@module'] = { fg = color.pink },
   ['@module.builtin'] = { fg = color.pink },
-
-  ['@constant'] = { fg = color.pink },
-  ['@constant.builtin'] = { fg = color.yellow },
-  ['@constant.macro'] = { fg = color.pink },
 
   ['@string'] = { fg = vim.o.bg == 'dark' and color.green or '#000000' },
   ['@string.regex'] = { fg = color.cyan },
-  ['@string.escape'] = { fg = color.cyan },
-  ['@character'] = { fg = color.pink },
   -- ["@character.special"] = { fg = color.pink },
-  ['@number.float'] = { fg = color.yellow },
 
-  ['@annotation'] = { fg = color.red },
-  ['@attribute'] = { fg = color.bright_yellow },
-  ['@error'] = { fg = color.pink },
-
-  ['@keyword.exception'] = { fg = color.pink },
-  ['@keyword'] = { fg = magenta, italic = true },
-  ['@keyword.function'] = { fg = magenta, italic = true },
-  ['@keyword.return'] = { fg = magenta, italic = true },
-  ['@keyword.operator'] = { fg = magenta },
+  ['@keyword.return'] = { fg = color.magenta, italic = true },
   ['@keyword.import'] = { link = 'Include' },
-  ['@keyword.conditional'] = { fg = magenta, italic = true },
-  ['@keyword.conditional.ternary'] = { fg = magenta, italic = true },
-  ['@keyword.repeat'] = { fg = color.bright_yellow },
+  ['@keyword.conditional.ternary'] = { fg = color.magenta, italic = true },
   ['@keyword.storage'] = { fg = color.bright_yellow },
-  ['@keyword.directive.define'] = { fg = magenta },
+  ['@keyword.directive.define'] = { fg = color.magenta },
   ['@keyword.directive'] = { fg = color.bright_yellow },
 
-  ['@function'] = { fg = color.blue },
-  ['@function.builtin'] = { fg = color.blue },
-  ['@function.macro'] = { fg = color.pink },
   ['@function.call'] = { fg = color.blue },
-  ['@function.method'] = { fg = color.blue },
   ['@function.method.call'] = { fg = color.blue },
-  ['@constructor'] = { fg = color.cyan },
 
-  ['@operator'] = { fg = color.white },
   ['@reference'] = { fg = color.white },
-  ['@punctuation.bracket'] = { fg = color.red },
-  ['@punctuation.delimiter'] = { fg = color.red },
   ['@symbol'] = { fg = color.green },
-  ['@tag'] = { fg = color.bright_yellow },
-  ['@tag.attribute'] = { fg = color.pink },
-  ['@tag.delimiter'] = { fg = color.red },
   ['@text'] = { fg = color.white },
   ['@text.emphasis'] = { fg = color.yellow },
   ['@text.strike'] = { fg = color.red, strikethrough = true },
-  ['@type.builtin'] = { fg = color.bright_yellow },
   ['@definition'] = { sp = color.grey, underline = true },
   ['@scope'] = { bold = true },
-  ['@property'] = { fg = color.pink },
 
   -- markup
-  ['@markup.heading'] = { fg = color.blue },
-  ['@markup.raw'] = { fg = color.yellow },
-  ['@markup.link'] = { fg = color.pink },
-  ['@markup.link.url'] = { fg = color.yellow, underline = true },
   ['@markup.link.label'] = { fg = color.cyan },
-  ['@markup.list'] = { fg = color.pink },
-  ['@markup.strong'] = { bold = true },
   ['@markup.italic'] = { italic = true },
   ['@markup.strikethrough'] = { strikethrough = true },
   ['@markup.quote'] = { bg = color.black },
