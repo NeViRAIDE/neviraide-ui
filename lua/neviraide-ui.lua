@@ -7,6 +7,7 @@ M.config = {
   kitty = {
     enable = false,
     theme_path = os.getenv('HOME') .. '/.config/kitty/theme.conf',
+    conf_path = os.getenv('HOME') .. '/.config/kitty/kitty.conf',
   },
   ui = {
     hyde = false,
@@ -28,6 +29,9 @@ function M.setup(config)
 
   if M.config.kitty.enable then
     M.config.ui.buftab.style = require('neviraide-ui.kitty').buftab_style
+    if vim.g.n then
+      require('neviraide-ui.kitty').check_nonicons(M.config.kitty.conf_path)
+    end
   end
 
   if M.config.ui.hyde then

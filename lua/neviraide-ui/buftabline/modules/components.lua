@@ -81,7 +81,6 @@ M.bufferlist = function()
       end
 
       has_current = (bufnr == current_buf and true) or has_current
-      -- TODO: make auto from config
       table.insert(buffers, utils.styleBufferTab(bufnr, buftab_style))
     end
   end
