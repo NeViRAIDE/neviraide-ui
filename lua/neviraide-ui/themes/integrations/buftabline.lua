@@ -49,23 +49,24 @@ local tab_styles = {
       bg = color.background,
     },
   },
+
   slant = {
     TbSepSlant = {
       fg = color.background,
-      bg = darker_bg,
+      bg = color.second_background,
       bold = true,
     },
     TbLineBufOn = {
-      fg = color.tab_background,
+      fg = color.foreground,
       bg = color.background,
       bold = true,
     },
     TbLineBufOff = {
       fg = color.grey,
-      bg = color.tab_background,
+      bg = color.second_background,
     },
     BufTabLineFill = {
-      bg = color.tab_background,
+      bg = color.second_background,
     },
     BufTabDate = {
       fg = color.inactive_accent,
@@ -79,13 +80,13 @@ local tab_styles = {
     },
     TbLineBufOffModified = {
       fg = color.red,
-      bg = darker_bg,
+      bg = color.second_background,
       italic = true,
     },
     TbLineBufOnClose = { fg = color.red, bg = color.tab_background },
     TbLineBufOffClose = {
       fg = color.grey,
-      bg = color.background,
+      bg = color.second_background,
     },
   },
 }

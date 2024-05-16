@@ -8,8 +8,8 @@ M.colors = {
   background = '#282c34',
   second_background = '#1b1f27',
   foreground = '#D9E0EE',
-  tab_background = '#83886B',
-  active_accent = '#61afef',
+  tab_background = '#282c34',
+  active_accent = '#7eca9c',
   inactive_accent = '#519aba',
 
   white = '#abb2bf',
@@ -33,6 +33,14 @@ M.colors = {
   bright_green = '#7eca9c',
   bright_magenta = '#de98fd',
   bright_black = '#353535',
+}
+
+M.polish_hl = {
+  defaults = {
+    Visual = {
+      bg = M.colors.black,
+    },
+  },
 }
 
 return M
