@@ -14,14 +14,33 @@ local BLANK = 'blank'
 
 local function column_to_cell(bufnr, lnum, col)
   local lines = vim.api.nvim_buf_get_lines(bufnr, lnum, lnum + 1, false)
-
   if not vim.tbl_isempty(lines) then
     local line = lines[1]
     local sub = string.sub(line, 1, col)
     return vim.fn.strdisplaywidth(sub, 0)
   end
-
   return col
+end
+
+local function get_inlay_hint_offset(bufnr, lnum)
+  local offset = 0
+  for _, ns_id in pairs(vim.api.nvim_get_namespaces()) do
+    local extmarks = vim.api.nvim_buf_get_extmarks(
+      bufnr,
+      ns_id,
+      { lnum, 0 },
+      { lnum, -1 },
+      { details = true }
+    )
+    for _, extmark in ipairs(extmarks) do
+      if extmark[4].virt_text then
+        for _, text in ipairs(extmark[4].virt_text) do
+          offset = offset + vim.fn.strdisplaywidth(text[1])
+        end
+      end
+    end
+  end
+  return offset
 end
 
 M.setup = function()
@@ -66,13 +85,17 @@ M.setup = function()
 
         local stack = line_stacks[diagnostic.lnum]
         local real_col = column_to_cell(bufnr, diagnostic.lnum, diagnostic.col)
+        local inlay_offset = get_inlay_hint_offset(bufnr, diagnostic.lnum)
 
         if diagnostic.lnum ~= prev_lnum then
-          table.insert(stack, { SPACE, string.rep(' ', real_col) })
+          table.insert(
+            stack,
+            { SPACE, string.rep(' ', real_col + inlay_offset) }
+          )
         elseif diagnostic.col ~= prev_col then
           table.insert(
             stack,
-            { SPACE, string.rep(' ', real_col - prev_col - 1) }
+            { SPACE, string.rep(' ', real_col - prev_col - 1 + inlay_offset) }
           )
         else
           table.insert(stack, { OVERLAP, diagnostic.severity })
