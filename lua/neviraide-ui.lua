@@ -25,6 +25,9 @@ function M.setup(config)
   vim.opt.statusline = '%!v:lua.require("neviraide-ui.statusline").run()'
   require('neviraide-ui.commands').setup()
 
+  -- TODO: make following NEVIRAIDE config file
+  require('neviraide-ui.diagnostic').setup()
+
   if M.config.ui.notify then require('neviraide-ui.notifications').setup() end
 
   if M.config.kitty.enable then

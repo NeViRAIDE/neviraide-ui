@@ -1,15 +1,14 @@
 local color = require('neviraide-ui.themes.colors').palette
 
 return {
-  -- LSP Semantic (0.9+)
   ['@lsp.type.class'] = { fg = color.cyan },
   ['@lsp.type.enum'] = { fg = color.cyan },
-  ['@lsp.type.decorator'] = { fg = color.green },
+  ['@lsp.type.decorator'] = { fg = color.yellow },
   ['@lsp.type.enumMember'] = { fg = color.magenta },
-  ['@lsp.type.function'] = { fg = color.green },
+  ['@lsp.type.function'] = { fg = color.blue },
   ['@lsp.type.interface'] = { fg = color.cyan },
   ['@lsp.type.macro'] = { fg = color.cyan },
-  ['@lsp.type.method'] = { fg = color.green },
+  ['@lsp.type.method'] = { fg = color.blue },
   ['@lsp.type.namespace'] = { fg = color.orange },
   ['@lsp.type.parameter'] = { fg = color.orange },
   ['@lsp.type.property'] = { fg = color.magenta },
