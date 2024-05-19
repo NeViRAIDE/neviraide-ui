@@ -26,7 +26,7 @@ function M.setup(config)
   require('neviraide-ui.commands').setup()
 
   -- TODO: make following NEVIRAIDE config file
-  require('neviraide-ui.diagnostic').setup()
+  -- require('neviraide-ui.diagnostic').setup()
 
   if M.config.ui.notify then require('neviraide-ui.notifications').setup() end
 
