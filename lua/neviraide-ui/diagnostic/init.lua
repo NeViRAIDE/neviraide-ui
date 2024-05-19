@@ -22,24 +22,34 @@ local function column_to_cell(bufnr, lnum, col)
   return col
 end
 
-local function get_inlay_hint_offset(bufnr, lnum)
+local function get_inlay_hint_offset(bufnr, lnum, col)
   local offset = 0
+  local inlay_hints = {}
   for _, ns_id in pairs(vim.api.nvim_get_namespaces()) do
-    local extmarks = vim.api.nvim_buf_get_extmarks(
-      bufnr,
-      ns_id,
-      { lnum, 0 },
-      { lnum, -1 },
-      { details = true }
-    )
-    for _, extmark in ipairs(extmarks) do
-      if extmark[4].virt_text then
-        for _, text in ipairs(extmark[4].virt_text) do
-          offset = offset + vim.fn.strdisplaywidth(text[1])
+    if ns_id ~= vim.lsp.codelens.get_namespace() then
+      local extmarks = vim.api.nvim_buf_get_extmarks(
+        bufnr,
+        ns_id,
+        { lnum, 0 },
+        { lnum, col },
+        { details = true }
+      )
+      for _, extmark in ipairs(extmarks) do
+        if extmark[3] < col and extmark[4].virt_text then
+          for _, text in ipairs(extmark[4].virt_text) do
+            table.insert(inlay_hints, { text[1], extmark[3] })
+          end
         end
       end
     end
   end
+
+  table.sort(inlay_hints, function(a, b) return a[2] < b[2] end)
+
+  for _, hint in ipairs(inlay_hints) do
+    offset = offset + vim.fn.strdisplaywidth(hint[1])
+  end
+
   return offset
 end
 
@@ -85,17 +95,17 @@ M.setup = function()
 
         local stack = line_stacks[diagnostic.lnum]
         local real_col = column_to_cell(bufnr, diagnostic.lnum, diagnostic.col)
-        local inlay_offset = get_inlay_hint_offset(bufnr, diagnostic.lnum)
+        local inlay_offset =
+          get_inlay_hint_offset(bufnr, diagnostic.lnum, diagnostic.col)
+
+        local total_offset = real_col + inlay_offset
 
         if diagnostic.lnum ~= prev_lnum then
-          table.insert(
-            stack,
-            { SPACE, string.rep(' ', real_col + inlay_offset) }
-          )
+          table.insert(stack, { SPACE, string.rep(' ', total_offset) })
         elseif diagnostic.col ~= prev_col then
           table.insert(
             stack,
-            { SPACE, string.rep(' ', real_col - prev_col - 1 + inlay_offset) }
+            { SPACE, string.rep(' ', total_offset - prev_col - 1) }
           )
         else
           table.insert(stack, { OVERLAP, diagnostic.severity })
@@ -200,6 +210,17 @@ M.setup = function()
               end
             end
           end
+
+          -- Добавление отступов и линий для пустых строк
+          local virt_line_indent = '│'
+          local indent_line = {}
+          for _ = 1, lnum do
+            table.insert(
+              indent_line,
+              { virt_line_indent, 'IndentBlanklineChar' }
+            )
+          end
+          table.insert(virt_lines, indent_line)
 
           vim.api.nvim_buf_set_extmark(bufnr, virt_lines_ns, lnum, 0, {
             id = lnum + 1,
