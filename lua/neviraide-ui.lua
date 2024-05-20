@@ -22,11 +22,7 @@ M.config = {
 function M.setup(config)
   M.config = vim.tbl_deep_extend('force', M.config, config or {})
 
-  vim.opt.statusline = '%!v:lua.require("neviraide-ui.statusline").run()'
   require('neviraide-ui.commands').setup()
-
-  -- TODO: make following NEVIRAIDE config file
-  -- require('neviraide-ui.diagnostic').setup()
 
   if M.config.ui.notify then require('neviraide-ui.notifications').setup() end
 

@@ -19,9 +19,9 @@ function M.setup()
   M.commands = {
     dashboard = function()
       if vim.g.neviraide_dashboard_displayed then
-        require('neviraide-ui.buftabline').close_buffer()
+        require('nevitabs').close_buffer()
       else
-        require('neviraide-ui.dashboard').open()
+        require('harbinger').open()
       end
     end,
     cursorcolumn = function() Util.settings('cursorcolumn').toggle() end,

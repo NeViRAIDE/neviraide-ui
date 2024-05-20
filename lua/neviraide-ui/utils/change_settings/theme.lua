@@ -1,8 +1,9 @@
+-- TODO: move to chameleon
 local M = {}
 
 local function reload_theme(name)
   vim.g.nt = name
-  require('neviraide-ui.themes').load_all_highlights()
+  require('chameleon').load_all_highlights()
   vim.api.nvim_exec_autocmds('User', { pattern = 'NeviraideThemeReload' })
 end
 
@@ -64,7 +65,7 @@ M.choose_theme = function()
     -- on_close = function() print('Menu Closed!') end,
     on_submit = function(item)
       M.change_theme(item.text)
-      require('neviraide-ui.themes').load_all_highlights()
+      require('chameleon').load_all_highlights()
     end,
   })
 

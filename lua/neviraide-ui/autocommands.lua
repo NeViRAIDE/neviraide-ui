@@ -8,7 +8,7 @@ autocmd('NEVIRAIDE_dashresized', 'VimResized', {
     if vim.bo.filetype == 'neviraideDashboard' then
       vim.opt_local.modifiable = true
       api.nvim_buf_set_lines(0, 0, -1, false, { '' })
-      require('neviraide-ui.dashboard').open()
+      require('harbinger').open()
     end
   end,
 })
