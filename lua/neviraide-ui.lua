@@ -1,4 +1,4 @@
-local hyprTheme = require('neviraide-ui.hyprdots').get_theme_from_hypr()
+-- local hyprTheme = require('neviraide-ui.hyprdots').get_theme_from_hypr()
 
 local M = {}
 
@@ -10,7 +10,7 @@ M.config = {
     conf_path = os.getenv('HOME') .. '/.config/kitty/kitty.conf',
   },
   ui = {
-    hyde = false,
+    -- hyde = false,
     notify = false,
     buftab = {
       style = 'slant',
@@ -24,7 +24,7 @@ function M.setup(config)
 
   require('neviraide-ui.commands').setup()
 
-  if M.config.ui.notify then require('neviraide-ui.notifications').setup() end
+  -- if M.config.ui.notify then require('neviraide-ui.notifications').setup() end
 
   if M.config.kitty.enable then
     M.config.ui.buftab.style = require('neviraide-ui.kitty').buftab_style
@@ -33,18 +33,18 @@ function M.setup(config)
     end
   end
 
-  if M.config.ui.hyde then
-    require('neviraide-ui.utils.change_settings.theme').change_theme(hyprTheme)
-  else
-    require('which-key').register({
-      ['<leader>sC'] = {
-        function()
-          require('neviraide-ui.utils.change_settings.theme').choose_theme()
-        end,
-        'Colorscheme',
-      },
-    })
-  end
+  -- if M.config.ui.hyde then
+  --   require('neviraide-ui.utils.change_settings.theme').change_theme(hyprTheme)
+  -- else
+  --   require('which-key').register({
+  --     ['<leader>sC'] = {
+  --       function()
+  --         require('neviraide-ui.utils.change_settings.theme').choose_theme()
+  --       end,
+  --       'Colorscheme',
+  --     },
+  --   })
+  -- end
 end
 
 function M.cmd(name) require('neviraide-ui.commands').cmd(name) end

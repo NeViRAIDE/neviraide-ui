@@ -1,5 +1,0 @@
----@class Colorscheme
----@field type? ThemeType
----@field borders? BorderType
----@field colors? table
----@field polish_hl? table
