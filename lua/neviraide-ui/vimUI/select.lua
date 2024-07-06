@@ -1,6 +1,6 @@
 local Menu = require('nui.menu')
 local event = require('nui.utils.autocmd').event
-local utils = require('neviraide-ui.override_vim_ui.utils')
+local utils = require('neviraide-ui.vimUI.utils')
 
 local function override_ui_select()
   local UISelect = Menu:extend('UISelect')

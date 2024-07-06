@@ -1,7 +1,7 @@
 return function()
   local Input = require('nui.input')
   local event = require('nui.utils.autocmd').event
-  local utils = require('neviraide-ui.override_vim_ui.utils')
+  local utils = require('neviraide-ui.vimUI.utils')
 
   local text = {
     top = ' Create a new file ',
